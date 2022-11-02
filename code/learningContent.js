@@ -1,0 +1,436 @@
+/************************     הוראות חשובות      ***********************/
+
+/**
+ 
+ 1.   במידה וזאת פעם ראשונה שלכם ממלאים תוכן בלומדה, קראו את **קובץ הוורד** המצורף בתקייה
+ 2.   בעמוד זה יש למלא את הפרטים לגבי כל המידע והתוכן המבוקש
+ 3.   [amountOfQuestions במשתנה] לשים לב שבכל נושא צריך לכתוב את *כמות השאלות המקסימלית* שתלקח ממנו
+      **משתנה זה מתייחס רק לשאלות שיילקחו בשביל **המבחן
+ */
+
+
+/************************      הכנס כותרת ראשית שהיא שם הלומדה      ***********************/
+const TITLE = "לומדה עם ציון ";
+
+/****     הכנס כמות כוללת מקסימלית של שאלות למבחן. יש לשים לב לכמות השאלות הקיימות מהבהד - שלא כמות שלא קיימת   *******/
+const AMOUNT_EXAM_QUESTIONS = 10;
+
+/************************      הכנס כמות זמן התחלתית של המבחן      ***********************/
+const TIME_FOR_EXAM = "11:00";
+
+// אובייקט המכיל את כל המידע של הלומדה הכולל את התוכן, השאלות לכל נושא וכמות השאלות שיילקח מכל נושא למבחן
+
+// ~~~~~ Valid card types: youtube, video-and-text, pic-and-text, text ~~~~~
+const DATA = { 
+    // שם נושא
+    "הכנס שם של נושא": {
+        "icon":  "../assets/images/learning/Artboard 4.svg",
+        "amountOfQuestions": 2,
+        "questionsExam": [
+            {
+                type: "multiple",
+                question: "דוגמה לשאלה אמריקאית מתרגלת שיש לה 4 תשובות?",
+                ans1: "תשובה ראשונה ולא נכונה",
+                ans2: "תשובה שנייה נכונה!",
+                ans3: "תשובה שלישית ולא נכונה",
+                ans4: "תשובה רביעית לא נכונה",
+                correctAns: "ans2"
+            },
+            {
+                type: "binary",
+                sentence: "דוגמה לשאלה מתרגלת נכונה של נכון או לא נכון",
+                trueOrFalse: true
+            }
+        ],
+        "questionsPractice": [
+            {
+                type: "multiple",
+                question: "דוגמה לשאלה אמריקאית בוחנת שיש לה 4 תשובות?",
+                ans1: "תשובה ראשונה ולא נכונה",
+                ans2: "תשובה שנייה נכונה!",
+                ans3: "תשובה שלישית ולא נכונה",
+                ans4: "תשובה רביעית לא נכונה",
+                correctAns: "ans2"
+            },
+            {
+                type: "binary",
+                sentence: "דוגמה לשאלה בוחנת נכונה של נכון או לא נכון",
+                trueOrFalse: true
+            }
+        ],
+        "learningContent": {
+            "תת נושא 1": {
+                "כרטיסייה ראשונה מסוג טקסט": [ 
+                    {
+                        cardType: "youtube",
+                        youtube: "https://www.youtube.com/watch?v=b7QlX3yR2xs",
+                        content: "דוגמה לתוכן של כרטיסייה המחולקת לפי נושאים ותתי נושאים."
+                    },
+                ],
+                "כרטיסייה שנייה": [
+                    {
+                        cardType: "picAndText",
+                        pic: "../assets/images/pic.png",
+                        content: "דוגמה לכותרת לתמונה הראשונה",
+                    }
+                ],
+            },
+            "תת נושא 2": {
+                "כרטיסייה שלישית מסוג וידאו": [
+                    {
+                        cardType: "videoAndText",
+                        video: "../assets/images/פתיח.mp4",
+                        content: "סרטון מוסר שלא הבנתי למה הוא היה על המחשב של פלג... פטל.. שלג?"
+                    }
+                ],
+                "כרטיסייה רביעית": [
+                    {
+                        cardType: "text",
+                        content: "מלא מילים של נושא ספיציפי, שנראה לי שייצא יפה אבל בואו נגלה יחדיו!"
+                    }
+                ]
+            },
+            "תת נושא 3": {
+                "תת תת נושא 12": [
+                    {
+                        cardType: "videoAndText",
+                        video: "../assets/images/פתיח.mp4",
+                        content: "סרטון מוסר שלא הבנתי למה הוא היה על המחשב של פלג... פטל.. שלג?"
+                    }
+                ],
+            },
+            "תת נושא 5": {
+                "תת תת נושא 12": [
+                    {
+                        cardType: "videoAndText",
+                        video: "../assets/images/פתיח.mp4",
+                        content: "סרטון מוסר שלא הבנתי למה הוא היה על המחשב של פלג... פטל.. שלג?"
+                    }
+                ],
+            }
+        },
+    },
+    // שם נושא
+    "2שם של נושא": {
+        "icon":  "../assets/images/learning/Artboard 4.svg",
+        "amountOfQuestions": 2,
+        "questionsExam": [
+            {
+                type: "multiple",
+                question: "שאלהה שאלתית ששואלת מלא שאלות",
+                ans1: "תשובה כלשהית  נכונה",
+                ans2: "תשובה לא נכונה",
+                ans3: "תשובה לא נכונה מאוד",
+                ans4: "אל תלחצו! זה טעות",
+                correctAns: "ans1"
+            },
+            {
+                type: "binary",
+                sentence: "עוד שאלה לא נכונה על חתולים",
+                trueOrFalse: false
+            },
+            {
+                type: "multiple",
+                question: "שאלה על מכוניות",
+                ans1: "תשובה כלשהית לא נכונה",
+                ans2: "תשובה בכלל לא נכונה",
+                ans3: "תשובה לא נכונה מאוד",
+                ans4: "תלחצו עליי אני תשובה נכונה",
+                correctAns: "ans4"
+            },
+            {
+                type: "multiple",
+                question: "שאלה שאלתית על מכוניות וזה משפט ארוך",
+                ans1: "תשובה כלשהית לא נכונה",
+                ans2: "תשובה בכלל לא נכונה",
+                ans3: "תשובה לא נכונה תשובה ממש נכונה!",
+                ans4: "אל תלחצו עליי אני תשובה לא נכונה",
+                correctAns: "ans3"
+            },
+            {
+                type: "binary",
+                sentence: "עוד שאלה על מכוניות שנוסעות ממש ממש מהר והיא לא נכונה בכלל",
+                trueOrFalse: false
+            },
+            {
+                type: "binary",
+                sentence: "היי זאת תשובה לא נכונה",
+                trueOrFalse: false
+            },
+            {
+                type: "multiple",
+                question: "שאלהה שאלתית ששואלת מלא שאלות",
+                ans1: "תשובה כלשהית  נכונה",
+                ans2: "תשובה לא נכונה",
+                ans3: "תשובה לא נכונה מאוד",
+                ans4: "אל תלחצו! זה טעות",
+                correctAns: "ans1"
+            },
+            {
+                type: "binary",
+                sentence: "עוד שאלה לא נכונה על חתולים",
+                trueOrFalse: false
+            },
+            {
+                type: "multiple",
+                question: "שאלה על מכוניות",
+                ans1: "תשובה כלשהית לא נכונה",
+                ans2: "תשובה בכלל לא נכונה",
+                ans3: "תשובה לא נכונה מאוד",
+                ans4: "תלחצו עליי אני תשובה נכונה",
+                correctAns: "ans4"
+            },
+            {
+                type: "multiple",
+                question: "שאלה שאלתית על מכוניות וזה משפט ארוך",
+                ans1: "תשובה כלשהית לא נכונה",
+                ans2: "תשובה בכלל לא נכונה",
+                ans3: "תשובה לא נכונה תשובה ממש נכונה!",
+                ans4: "אל תלחצו עליי אני תשובה לא נכונה",
+                correctAns: "ans3"
+            },
+            {
+                type: "binary",
+                sentence: "עוד שאלה על מכוניות שנוסעות ממש ממש מהר והיא לא נכונה בכלל",
+                trueOrFalse: false
+            },
+            {
+                type: "binary",
+                sentence: "היי זאת תשובה לא נכונה",
+                trueOrFalse: false
+            }
+        ],
+        "questionsPractice": [
+            {
+                type: "multiple",
+                question: "שאלהה שאלתית ששואלת מלא שאלות",
+                ans1: "תשובה כלשהית  נכונה",
+                ans2: "תשובה לא נכונה",
+                ans3: "תשובה לא נכונה מאוד",
+                ans4: "אל תלחצו! זה טעות",
+                correctAns: "ans1"
+            },
+            {
+                type: "binary",
+                sentence: "עוד שאלה לא נכונה על חתולים",
+                trueOrFalse: false
+            },
+            {
+                type: "multiple",
+                question: "שאלה על מכוניות",
+                ans1: "תשובה כלשהית לא נכונה",
+                ans2: "תשובה בכלל לא נכונה",
+                ans3: "תשובה לא נכונה מאוד",
+                ans4: "תלחצו עליי אני תשובה נכונה",
+                correctAns: "ans4"
+            },
+            {
+                type: "multiple",
+                question: "שאלה שאלתית על מכוניות וזה משפט ארוך",
+                ans1: "תשובה כלשהית לא נכונה",
+                ans2: "תשובה בכלל לא נכונה",
+                ans3: "תשובה לא נכונה תשובה ממש נכונה!",
+                ans4: "אל תלחצו עליי אני תשובה לא נכונה",
+                correctAns: "ans3"
+            },
+            {
+                type: "binary",
+                sentence: "עוד שאלה על מכוניות שנוסעות ממש ממש מהר והיא לא נכונה בכלל",
+                trueOrFalse: false
+            },
+            {
+                type: "binary",
+                sentence: "היי זאת תשובה לא נכונה",
+                trueOrFalse: false
+            },
+            {
+                type: "multiple",
+                question: "שאלהה שאלתית ששואלת מלא שאלות",
+                ans1: "תשובה כלשהית  נכונה",
+                ans2: "תשובה לא נכונה",
+                ans3: "תשובה לא נכונה מאוד",
+                ans4: "אל תלחצו! זה טעות",
+                correctAns: "ans1"
+            },
+            {
+                type: "binary",
+                sentence: "עוד שאלה לא נכונה על חתולים",
+                trueOrFalse: false
+            },
+            {
+                type: "multiple",
+                question: "שאלה על מכוניות",
+                ans1: "תשובה כלשהית לא נכונה",
+                ans2: "תשובה בכלל לא נכונה",
+                ans3: "תשובה לא נכונה מאוד",
+                ans4: "תלחצו עליי אני תשובה נכונה",
+                correctAns: "ans4"
+            },
+            {
+                type: "multiple",
+                question: "שאלה שאלתית על מכוניות וזה משפט ארוך",
+                ans1: "תשובה כלשהית לא נכונה",
+                ans2: "תשובה בכלל לא נכונה",
+                ans3: "תשובה לא נכונה תשובה ממש נכונה!",
+                ans4: "אל תלחצו עליי אני תשובה לא נכונה",
+                correctAns: "ans3"
+            },
+            {
+                type: "binary",
+                sentence: "עוד שאלה על מכוניות שנוסעות ממש ממש מהר והיא לא נכונה בכלל",
+                trueOrFalse: false
+            },
+            {
+                type: "binary",
+                sentence: "היי זאת תשובה לא נכונה",
+                trueOrFalse: false
+            }
+        ],
+        "learningContent": {
+            // סוג הכרטיסייה
+            "textAndPic": {
+
+            }
+        },
+        
+    },
+    // שם נושא
+    "3שם של נושא": {
+        "icon":  "../assets/images/learning/Artboard 4.svg",
+        "amountOfQuestions": 0,
+        "questionsExam": [
+            {
+                type: "multiple",
+                question: "שאלהה שאלתית ששואלת מלא שאלות",
+                ans1: "תשובה כלשהית  נכונה",
+                ans2: "תשובה לא נכונה",
+                ans3: "תשובה לא נכונה מאוד",
+                ans4: "אל תלחצו! זה טעות",
+                correctAns: "ans1"
+            },
+            {
+                type: "binary",
+                sentence: "עוד שאלה לא נכונה על חתולים",
+                trueOrFalse: false
+            },
+            {
+                type: "multiple",
+                question: "שאלה על מכוניות",
+                ans1: "תשובה כלשהית לא נכונה",
+                ans2: "תשובה בכלל לא נכונה",
+                ans3: "תשובה לא נכונה מאוד",
+                ans4: "תלחצו עליי אני תשובה נכונה",
+                correctAns: "ans4"
+            },
+            {
+                type: "multiple",
+                question: "שאלה שאלתית על מכוניות וזה משפט ארוך",
+                ans1: "תשובה כלשהית לא נכונה",
+                ans2: "תשובה בכלל לא נכונה",
+                ans3: "תשובה לא נכונה תשובה ממש נכונה!",
+                ans4: "אל תלחצו עליי אני תשובה לא נכונה",
+                correctAns: "ans3"
+            },
+            {
+                type: "binary",
+                sentence: "עוד שאלה על מכוניות שנוסעות ממש ממש מהר והיא לא נכונה בכלל",
+                trueOrFalse: false
+            },
+            {
+                type: "binary",
+                sentence: "היי זאת תשובה לא נכונה",
+                trueOrFalse: false
+            }
+        ],
+        "questionsPractice": [
+            {
+                type: "multiple",
+                question: "שאלהה שאלתית ששואלת מלא שאלות",
+                ans1: "תשובה כלשהית  נכונה",
+                ans2: "תשובה לא נכונה",
+                ans3: "תשובה לא נכונה מאוד",
+                ans4: "אל תלחצו! זה טעות",
+                correctAns: "ans1"
+            },
+            {
+                type: "binary",
+                sentence: "עוד שאלה לא נכונה על חתולים",
+                trueOrFalse: false
+            },
+            {
+                type: "multiple",
+                question: "שאלה על מכוניות",
+                ans1: "תשובה כלשהית לא נכונה",
+                ans2: "תשובה בכלל לא נכונה",
+                ans3: "תשובה לא נכונה מאוד",
+                ans4: "תלחצו עליי אני תשובה נכונה",
+                correctAns: "ans4"
+            },
+            {
+                type: "multiple",
+                question: "שאלה שאלתית על מכוניות וזה משפט ארוך",
+                ans1: "תשובה כלשהית לא נכונה",
+                ans2: "תשובה בכלל לא נכונה",
+                ans3: "תשובה לא נכונה תשובה ממש נכונה!",
+                ans4: "אל תלחצו עליי אני תשובה לא נכונה",
+                correctAns: "ans3"
+            },
+            {
+                type: "binary",
+                sentence: "עוד שאלה על מכוניות שנוסעות ממש ממש מהר והיא לא נכונה בכלל",
+                trueOrFalse: false
+            },
+            {
+                type: "binary",
+                sentence: "היי זאת תשובה לא נכונה",
+                trueOrFalse: false
+            }
+        ],
+        "learningContent": {
+            // סוג הכרטיסייה
+            "textAndPic": {
+
+            }
+        },
+
+    }
+};
+
+
+
+/********************************************************************************************************/
+/********************************************************************************************************/
+/********************************************************************************************************/
+/*****  אובייקטים לפי סוג הכרטיסייה המכניסים את התוכן של כל כרטיסייה אל תוך הכרטיסייה  ********/
+
+/**
+ * # @type {{[index: string]: {init: (card: HTMLElement, json: any) => void}}}
+ */
+let CARD_TYPES = {};
+
+CARD_TYPES.text = {
+    init(card, json) {
+        card.querySelector(".content").innerHTML = json.content;
+    }
+}
+
+CARD_TYPES.picAndText = {
+    init(card, json) {
+        card.querySelector(".pic").src = json.pic;
+        card.querySelector(".content").innerHTML = json.content;
+    }
+}
+
+CARD_TYPES.videoAndText = {
+    init(card, json) {
+        card.querySelector(".video").src = json.video;
+        card.querySelector(".content").innerHTML = json.content;
+    }
+}
+
+CARD_TYPES.youtube = {
+    init(card, json) {
+        card.querySelector(".youtube").src = json.youtube;
+        card.querySelector(".content").innerHTML = json.content;
+    }
+}
