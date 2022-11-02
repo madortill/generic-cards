@@ -1,28 +1,16 @@
-/************************     הוראות חשובות      ***********************/
-
-/**
- 
- 1.   במידה וזאת פעם ראשונה שלכם ממלאים תוכן בלומדה, קראו את **קובץ הוורד** המצורף בתקייה
- 2.   בעמוד זה יש למלא את הפרטים לגבי כל המידע והתוכן המבוקש
- 3.   [amountOfQuestions במשתנה] לשים לב שבכל נושא צריך לכתוב את *כמות השאלות המקסימלית* שתלקח ממנו
-      **משתנה זה מתייחס רק לשאלות שיילקחו בשביל **המבחן
- */
-
-
-/************************      הכנס כותרת ראשית שהיא שם הלומדה      ***********************/
+// שם הלומדה
 const TITLE = "לומדה עם ציון ";
 
-/****     הכנס כמות כוללת מקסימלית של שאלות למבחן. יש לשים לב לכמות השאלות הקיימות מהבהד - שלא כמות שלא קיימת   *******/
+//  Max number of question in exam. Make sure it isn't more than the number of questions we have!
 const AMOUNT_EXAM_QUESTIONS = 10;
 
-/************************      הכנס כמות זמן התחלתית של המבחן      ***********************/
 const TIME_FOR_EXAM = "11:00";
 
-// אובייקט המכיל את כל המידע של הלומדה הכולל את התוכן, השאלות לכל נושא וכמות השאלות שיילקח מכל נושא למבחן
 
-// ~~~~~ Valid card types: youtube, video-and-text, pic-and-text, text ~~~~~
+/*              Edit notes:
+    1. Valid card types: youtube, video-and-text, pic-and-text, text
+    2. Title class: "sub-title" , list class: "list", place on the outer element <ol> or <ul> */
 const DATA = { 
-    // שם נושא
     "הכנס שם של נושא": {
         "icon":  "../assets/images/learning/Artboard 4.svg",
         "amountOfQuestions": 2,
@@ -110,9 +98,9 @@ const DATA = {
             }
         },
     },
-    // שם נושא
     "2שם של נושא": {
         "icon":  "../assets/images/learning/Artboard 4.svg",
+        // Max number of questions that will be in the exam from this subject
         "amountOfQuestions": 2,
         "questionsExam": [
             {
