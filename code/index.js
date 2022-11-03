@@ -2003,13 +2003,18 @@ function subjectLearningPage(subject) {
 
     // יוצר כרטיסייה חדשה
     function generateCard(json, title, index) {
+        if (!json[index].cardType) {
+            throw(new Error(`Missing card type in card: \n ${JSON.stringify(json[index])}`));
+        }
         // משכפל את הטמפלייט של הכרטיסייה
         let template = document.querySelector(`.page.learning.content .templates > .${getType(json[index].cardType)}`);
+        if (!template) {
+            throw(new Error(`Card type does not match any existing type. Error in card: \n ${JSON.stringify(json[index])}`));
+        }
         // יוצר אלמנט של קונטיינר לתוכן (כדי שתהיה גלילה יפה בתוך הכרטיסייה)
         let container = El("div", { cls: "content-container" });
         let card = El("div", { classes: ["card", getType(json[index].cardType)] }, container);
         container.append(template.content.cloneNode(true));
-
         let cardType = CARD_TYPES[json[index].cardType];
         cardType.init(card, json[index]);
         card.querySelector(".title").innerHTML = title;

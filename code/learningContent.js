@@ -51,7 +51,9 @@ const DATA = {
                 "כרטיסייה ראשונה מסוג טקסט": [ 
                     {
                         cardType: "youtube",
-                        youtube: "https://www.youtube.com/watch?v=b7QlX3yR2xs",
+                        // Make sure it is embed video!
+                        youtube: "https://www.youtube.com/embed/n0t9iFlGO20",
+                        //  https://www.youtube.com/embed/n0t9iFlGO20
                         content: "דוגמה לתוכן של כרטיסייה המחולקת לפי נושאים ותתי נושאים."
                     },
                 ],
@@ -418,7 +420,12 @@ CARD_TYPES.videoAndText = {
 
 CARD_TYPES.youtube = {
     init(card, json) {
+        if (!json.youtube.includes("embed")) {
+            throw new Error("Make sure all youtube links are ment to be embedded and not watched");
+            // change to throw
+        } else {
         card.querySelector(".youtube").src = json.youtube;
         card.querySelector(".content").innerHTML = json.content;
+        }
     }
 }
