@@ -61,7 +61,7 @@ const DATA = {
                     {
                         cardType: "picAndText",
                         pic: "../assets/images/pic.png",
-                        content: "דוגמה לכותרת לתמונה הראשונה",
+                        // content: "דוגמה לכותרת לתמונה הראשונה",
                     }
                 ],
             },
@@ -76,7 +76,7 @@ const DATA = {
                 "כרטיסייה רביעית": [
                     {
                         cardType: "text",
-                        content: "מלא מילים של נושא ספיציפי, שנראה לי שייצא יפה אבל בואו נגלה יחדיו!"
+                        content: "g"
                     }
                 ]
             },
@@ -400,6 +400,9 @@ let CARD_TYPES = {};
 
 CARD_TYPES.text = {
     init(card, json) {
+        if (!json.content) {
+            throw new Error(`Missing content in cardType text`);
+        }
         card.querySelector(".content").innerHTML = json.content;
     }
 }
@@ -408,6 +411,9 @@ CARD_TYPES.picAndText = {
     init(card, json) {
         card.querySelector(".pic").src = json.pic;
         card.querySelector(".content").innerHTML = json.content;
+        if (!json.content) {
+            card.querySelector(".content").remove();
+        }
     }
 }
 
@@ -415,6 +421,9 @@ CARD_TYPES.videoAndText = {
     init(card, json) {
         card.querySelector(".video").src = json.video;
         card.querySelector(".content").innerHTML = json.content;
+        if (!json.content) {
+            card.querySelector(".content").remove();
+        }
     }
 }
 
@@ -422,10 +431,12 @@ CARD_TYPES.youtube = {
     init(card, json) {
         if (!json.youtube.includes("embed")) {
             throw new Error("Make sure all youtube links are ment to be embedded and not watched");
-            // change to throw
         } else {
         card.querySelector(".youtube").src = json.youtube;
         card.querySelector(".content").innerHTML = json.content;
+            if (!json.content) {
+                card.querySelector(".content").remove();
+            }
         }
     }
 }
