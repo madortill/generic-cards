@@ -197,7 +197,7 @@ body {
 
 .page .progress-bar-right-answers,
 .page .progress-bar-time {
-  background-color: rgb(43, 232, 247);
+  background-color: #c23ac0;
   height: 2vmin;
   border-radius: 2rem;
   width: 0%;
