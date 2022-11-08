@@ -9,7 +9,16 @@ const TIME_FOR_EXAM = "11:00";
 
 /*              Edit notes:
     1. Valid card types: youtube, video-and-text, pic-and-text, text
-    2. Title class: "sub-title" , list class: "list", place on the outer element <ol> or <ul> */
+    2. Title class: "sub-title" , list class: "list", place on the outer element <ol> or <ul> 
+
+                        HOW TO CREATE NEW COLOR
+            search for the listed colors and switch to the desired ones
+    1. Primary color: #eda8ec
+    2. Secondary color: #c23ac0
+    3. Text color: #260129
+    4. Open image color: #e586d7;
+            */
+    
 const DATA = { 
     "הכנס שם של נושא": {
         "icon":  "../assets/images/learning/Artboard 4.svg",

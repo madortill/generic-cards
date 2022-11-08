@@ -34,11 +34,11 @@
       }
 
       .cls-6 {
-        stroke: #1c3f55;
+        stroke: #260129;
       }
 
       .cls-10, .cls-19, .cls-7 {
-        fill: #1c3f55;
+        fill: #260129;
       }
 
       .cls-7 {
@@ -51,7 +51,7 @@
       }
 
       .cls-8 {
-        fill: #1de8f7;
+        fill: #c23ac0;
       }
 
       .cls-9 {
@@ -94,7 +94,7 @@
       }
 
       .cls-16, .cls-17, .cls-18, .cls-20, .cls-22, .cls-23 {
-        stroke: #2be8f7;
+        stroke: #c23ac0;
       }
 
       .cls-16, .cls-17, .cls-18 {
@@ -106,7 +106,7 @@
       }
 
       .cls-17, .cls-21 {
-        fill: #2be8f7;
+        fill: #c23ac0;
       }
 
       .cls-18 {

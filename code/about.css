@@ -32,7 +32,7 @@
 .page.about .text {
   position: absolute;
   top: 2em;
-  color: rgb(28, 63, 85);
+  color: #260129;
   display: flex;
   flex-direction: column;
   margin-right: 5vw;

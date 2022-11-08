@@ -90,7 +90,7 @@ body {
 }
 
 .page .end-exam {
-  color: rgb(27, 62, 84);
+  color: #260129;
   width: 72vw;
   height: 114vw;
   background-repeat: no-repeat;
@@ -174,7 +174,7 @@ body {
   font-size: 6vmin;
   display: flex;
   justify-content: space-between;
-  color: rgb(28, 63, 85);
+  color: #260129;
   margin-bottom: 1%;
   align-items: center;
 }
@@ -220,7 +220,7 @@ body {
   width: 82%;
   right: 8%;
   top: 17%;
-  color: rgb(28, 63, 85);
+  color: #260129;
   font-size: 4.3vmin;
 }
 
@@ -230,7 +230,7 @@ body {
   width: 82%;
   right: 8%;
   top: 17%;
-  color: rgb(28, 63, 85);
+  color: #260129;
   font-size: 4.2vmin;
 }
 
@@ -267,7 +267,7 @@ body {
 
 /*לפני המבחן*/
 .page .exam-popup {
-  color: rgb(27, 62, 84);
+  color: #260129;
   width: 18em;
   height: 32em;
   background-repeat: no-repeat;
@@ -366,7 +366,7 @@ body {
 
 /* יציאה ממבחן או תרגול פופאפ */
 .page .exit-popup {
-  color: rgb(27, 62, 84);
+  color: #260129;
   width: 78vw;
   height: 65vw;
   background-repeat: no-repeat;
@@ -393,7 +393,7 @@ body {
 
 /* פוופאפ מעבר לתרגול בתוך עמוד הלמידה רק על נושא אחד */
 .page .before-practice-one-sub {
-  color: rgb(27, 62, 84);
+  color: #260129;
   width: 72vw;
   height: 94.5vw;
   background-repeat: no-repeat;

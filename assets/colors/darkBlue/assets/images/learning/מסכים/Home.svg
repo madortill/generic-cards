@@ -22,7 +22,7 @@
       }
 
       .cls-20, .cls-22, .cls-38, .cls-4 {
-        fill: #20c5f2;
+        fill: #eda8ec;
       }
 
       .cls-17, .cls-18, .cls-31, .cls-32, .cls-5 {
@@ -71,7 +71,7 @@
       }
 
       .cls-12 {
-        fill: #0facd1;
+        fill: #e586d7;
       }
 
       .cls-13, .cls-14, .cls-21, .cls-25, .cls-26, .cls-30 {
@@ -79,7 +79,7 @@
       }
 
       .cls-16, .cls-40 {
-        fill: #1de8f7;
+        fill: #c23ac0;
       }
 
       .cls-17, .cls-31 {
@@ -119,7 +119,7 @@
       }
 
       .cls-27, .cls-28, .cls-33, .cls-34, .cls-41, .cls-51 {
-        fill: #1c3f55;
+        fill: #260129;
       }
 
       .cls-27 {
@@ -127,7 +127,7 @@
       }
 
       .cls-29 {
-        fill: #27c5f2;
+        fill: #c23ac0;
       }
 
       .cls-33 {
@@ -168,7 +168,7 @@
       }
 
       .cls-42 {
-        fill: #2be8f7;
+        fill: #c23ac0;
       }
 
       .cls-43 {
@@ -176,7 +176,7 @@
       }
 
       .cls-45, .cls-46 {
-        stroke: #27c5f2;
+        stroke: #c23ac0;
         stroke-width: 25px;
       }
 
@@ -185,7 +185,7 @@
       }
 
       .cls-52 {
-        stroke: #1c3f55;
+        stroke: #260129;
       }
     </style>
     <clipPath id="clip-path">
@@ -195,8 +195,8 @@
       <rect id="Rectangle_54" data-name="Rectangle 54" class="cls-2" width="721" height="1187" transform="translate(176 433)"/>
     </clipPath>
     <linearGradient id="linear-gradient" x1="0.486" y1="0.835" x2="0.49" y2="1.343" gradientUnits="objectBoundingBox">
-      <stop offset="0" stop-color="#27c5f2" stop-opacity="0"/>
-      <stop offset="1" stop-color="#27c5f2"/>
+      <stop offset="0" stop-color="#c23ac0" stop-opacity="0"/>
+      <stop offset="1" stop-color="#c23ac0"/>
     </linearGradient>
     <clipPath id="clip-Home">
       <rect width="1080" height="3095"/>
