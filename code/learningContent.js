@@ -16,7 +16,7 @@ const TIME_FOR_EXAM = "11:00";
     1. Primary color: #eda8ec
     2. Secondary color: #c23ac0
     3. Text color: #260129
-    4. Open image color: #e586d7;
+    4. Open image + gradient color: #e586d7;
             */
     
 const DATA = { 
@@ -111,7 +111,7 @@ const DATA = {
     },
     "2שם של נושא": {
         "icon":  "../assets/images/learning/Artboard 4.svg",
-        // Max number of questions that will be in the exam from this subject
+      
         "amountOfQuestions": 2,
         "questionsExam": [
             {
