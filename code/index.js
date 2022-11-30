@@ -140,12 +140,12 @@ function learningSubjectsPage() {
                 let fullScreen = El("div", {cls: "full-screen"});
                 document.querySelector(".page.opening").before(fullScreen);
                 // מעבר לדף הבית
-                document.querySelector(".full-screen").addEventListener("click", ()=> {
+                document.querySelector(".full-screen").addEventListener("click", ()=> { 
                     document.querySelector(".full-screen").remove();
                     document.querySelector(".page.opening").classList.remove("active");
                     document.querySelector(".page.home").classList.remove("active");
                     document.querySelector(".page.learning.subjects").classList.add("active");
-                    learningSubjectsPage();
+                    learningSubjectsPage(); 
                 });
             }
         }
@@ -173,7 +173,7 @@ function createStudyCards(currentSubject) {
             ),
             El("div", { cls: "subject" }, currentSubject)
         );
-    document.querySelector(".page.learning.subjects .cards-container").append(card);
+    document.querySelector(".page.learning.subjects .cards-container").append(card); 
     card.addEventListener("click", () => {
         document.querySelector(".page.learning.subjects").classList.remove("active");
         document.querySelector(".page.learning.content").classList.add("active");
@@ -239,12 +239,12 @@ function beforePractice() {
     document.querySelector(".page.learning.subjects").append(popup);
 
     // מערך שבו רשום המיקום של הנושא לפי סדר ההופעה שלו בג'ייסון
-    selectedSubjects = [];
+    selectedSubjects = []; debugger
     // איפוס המערך של הנושאים הנבחרים
     for (let i = 0; i < SUBJECTS_TITLES.length; i++) {
         selectedSubjects[i] = false;
     }
-    let selectAll = document.querySelector(".page.learning.subjects .select-everything");
+    let selectAll = document.querySelector(".page.learning.subjects .select-everything"); 
     // מאזין לחיצה לכפתור בחירת כל הנושאים
     selectAll.addEventListener("click", (e) => {
         // אם הכפתור היה לחוץ 
@@ -266,23 +266,32 @@ function beforePractice() {
                 checkBox.classList.add("checked-subjects");
             });
             selectAll.classList.add("checked");
-            for (let i = 0; i < SUBJECTS_TITLES.length; i++) {
+            for (let i = 0; i < subjectsWithPractice.length; i++) {
                 selectedSubjects[i] = true;
             }
         }
         // במידה והמחלקה קיימת ויש ערך מסומן להתחלת התרגול - הכפתור תרגול יהיה לחיץ
-        let isChecked = document.querySelector(".page.learning.subjects .beforePractice-popup .checked-subjects");
+        let isChecked = document.querySelector(".page.learning.subjects .beforePractice-popup .checked-subjects"); 
         document.querySelector(".page.learning.subjects .practiceBTN-popup").classList.toggle("avalible", isChecked);
 
     });
 
-    // הוספת כל נושאי הלמידה האפשריים לתרגול
+    // יצירת מערך של נושאים עם תרגול
+    let subjectsWithPractice = [];
     for (let i = 0; i < SUBJECTS_TITLES.length; i++) {
+        let key = SUBJECTS_TITLES[i];
+        if (DATA[key].questionsExam && DATA[key].questionsExam.length !== 0) { debugger
+            subjectsWithPractice.push(SUBJECTS_TITLES[i]);
+            console.log(SUBJECTS_TITLES[i])
+        }
+    }
+    // הוספת כל נושאי הלמידה האפשריים לתרגול
+    for (let i = 0; i < subjectsWithPractice.length; i++) {
         // לעבור על הנושאים במערך הנושאים ולהביא את הכותרת של כל נושא
         let subject =
             El("div", { cls: "subject-popup" },
                 El("img", { attributes: { class: "checkPlace", src: "../assets/images/learning/choosePractice_popup/nonSelectSMALL.svg" } }),
-                El("div", { attributes: {} }, SUBJECTS_TITLES[i])
+                El("div", { attributes: {} }, subjectsWithPractice[i])
             );
         document.querySelector(".page.learning.subjects .subjects").append(subject);
 
@@ -348,7 +357,7 @@ function beforePractice() {
 
 function questionsToPractice() {
     let selectedQuestions = [];
-
+    console.log(SUBJECTS_TITLES);
     let subjects = SUBJECTS_TITLES.filter((_, i) => selectedSubjects[i]);
 
     // מקסימום כמות השאלות לכל נושא
@@ -1918,21 +1927,23 @@ function subjectLearningPage(subject) {
                     document.querySelector(".page.learning.content").classList.remove("active");
                     resetLearningPage();
                 }
-            }
+            } 
         });
     document.querySelector(".page.learning.content").append(backBtn);
 
-    // הוספת כפתור חזרה למסך הבית
-    let practiceBtn =
-        El("img", {
-            attributes: { class: "practice-btn", src: "../assets/images/general/practice_btn.svg" },
-            listeners: {
-                click: function () {
-                    practicePopup(subject);
+    // הוספת כפתור תרגול
+    if (DATA[subject].questionsPractice && DATA[subject].questionsPractice !== {} && DATA[subject].questionsPractice !== []) {
+        let practiceBtn =
+            El("img", {
+                attributes: { class: "practice-btn", src: "../assets/images/general/practice_btn.svg" },
+                listeners: {
+                    click: function () {
+                        practicePopup(subject);
+                    }
                 }
-            }
-        });
-    document.querySelector(".page.learning.content").append(practiceBtn);
+            });
+        document.querySelector(".page.learning.content").append(practiceBtn);
+    }
 
     // הוספת כותרת
     document.querySelector(".page.learning.content .title").innerHTML = subject;
