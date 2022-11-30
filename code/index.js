@@ -153,14 +153,32 @@ function learningSubjectsPage() {
     document.querySelector(".page.learning.subjects").append(backBtn);
 
 
-    // יוצר את הכרטיסיות של נושאי הלימוד
+    // יוצר את הכרטיסיות של נושאי הלימוד ומוודא שיש שאלות לתרגול ולמבחן
+    let isExamQuestions = false;
+    let isPracticeQuestions = false;
+    let numOfAvailableQuestions = 0;
     for (let subject of SUBJECTS_TITLES) {
-        createStudyCards(subject);
+        createStudyCards(subject); 
+        if (DATA[subject].questionsExam && DATA[subject].questionsExam.length > 0) {
+            isExamQuestions = true;
+        }
+        if (DATA[subject].questionsPractice && DATA[subject].questionsPractice.length > 0) {
+            isPracticeQuestions = true;
+        }
+        numOfAvailableQuestions += DATA[subject].amountOfQuestions;
     }
 
+if (isPracticeQuestions) {
     document.querySelector(".page.learning.subjects .practice-btn").addEventListener("click", beforePractice);
+} else {
+    document.querySelector(".page.learning.subjects .practice-btn").remove();
+}
 
+if (isExamQuestions && numOfAvailableQuestions !== 0) {
     document.querySelector(".page.learning.subjects .exam-btn").addEventListener("click", beforeExam);
+} else {
+    document.querySelector(".page.learning.subjects .exam-btn").remove();
+}
 
 }
 
@@ -239,7 +257,7 @@ function beforePractice() {
     document.querySelector(".page.learning.subjects").append(popup);
 
     // מערך שבו רשום המיקום של הנושא לפי סדר ההופעה שלו בג'ייסון
-    selectedSubjects = []; debugger
+    selectedSubjects = []; 
     // איפוס המערך של הנושאים הנבחרים
     for (let i = 0; i < SUBJECTS_TITLES.length; i++) {
         selectedSubjects[i] = false;
@@ -280,7 +298,7 @@ function beforePractice() {
     let subjectsWithPractice = [];
     for (let i = 0; i < SUBJECTS_TITLES.length; i++) {
         let key = SUBJECTS_TITLES[i];
-        if (DATA[key].questionsExam && DATA[key].questionsExam.length !== 0) { debugger
+        if (DATA[key].questionsExam && DATA[key].questionsExam.length !== 0) { 
             subjectsWithPractice.push(SUBJECTS_TITLES[i]);
             console.log(SUBJECTS_TITLES[i])
         }
@@ -1932,7 +1950,7 @@ function subjectLearningPage(subject) {
     document.querySelector(".page.learning.content").append(backBtn);
 
     // הוספת כפתור תרגול
-    if (DATA[subject].questionsPractice && DATA[subject].questionsPractice !== {} && DATA[subject].questionsPractice !== []) {
+    if (DATA[subject].questionsPractice && DATA[subject].questionsPractice.length !== 0) {
         let practiceBtn =
             El("img", {
                 attributes: { class: "practice-btn", src: "../assets/images/general/practice_btn.svg" },

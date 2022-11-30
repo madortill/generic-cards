@@ -19,6 +19,7 @@ const TIME_FOR_EXAM = "11:00";
     4. Open image + gradient color: #629191;
             */
     
+    /* amountOfQuestions - max number of questions from the subject that will appear in the test*/
 const DATA = { 
     "הכנס שם של נושא": {
         "icon":  "../assets/images/learning/Artboard 4.svg",
@@ -296,95 +297,9 @@ const DATA = {
     // שם נושא
     "3שם של נושא": {
         "icon":  "../assets/images/learning/Artboard 4.svg",
-        "amountOfQuestions": 0,
-        "questionsExam": [
-            // {
-            //     type: "multiple",
-            //     question: "שאלהה שאלתית ששואלת מלא שאלות",
-            //     ans1: "תשובה כלשהית  נכונה",
-            //     ans2: "תשובה לא נכונה",
-            //     ans3: "תשובה לא נכונה מאוד",
-            //     ans4: "אל תלחצו! זה טעות",
-            //     correctAns: "ans1"
-            // },
-            // {
-            //     type: "binary",
-            //     sentence: "עוד שאלה לא נכונה על חתולים",
-            //     trueOrFalse: false
-            // },
-            // {
-            //     type: "multiple",
-            //     question: "שאלה על מכוניות",
-            //     ans1: "תשובה כלשהית לא נכונה",
-            //     ans2: "תשובה בכלל לא נכונה",
-            //     ans3: "תשובה לא נכונה מאוד",
-            //     ans4: "תלחצו עליי אני תשובה נכונה",
-            //     correctAns: "ans4"
-            // },
-            // {
-            //     type: "multiple",
-            //     question: "שאלה שאלתית על מכוניות וזה משפט ארוך",
-            //     ans1: "תשובה כלשהית לא נכונה",
-            //     ans2: "תשובה בכלל לא נכונה",
-            //     ans3: "תשובה לא נכונה תשובה ממש נכונה!",
-            //     ans4: "אל תלחצו עליי אני תשובה לא נכונה",
-            //     correctAns: "ans3"
-            // },
-            // {
-            //     type: "binary",
-            //     sentence: "עוד שאלה על מכוניות שנוסעות ממש ממש מהר והיא לא נכונה בכלל",
-            //     trueOrFalse: false
-            // },
-            // {
-            //     type: "binary",
-            //     sentence: "היי זאת תשובה לא נכונה",
-            //     trueOrFalse: false
-            // }
-        ],
-        // "questionsPractice": [
-            // {
-            //     type: "multiple",
-            //     question: "שאלהה שאלתית ששואלת מלא שאלות",
-            //     ans1: "תשובה כלשהית  נכונה",
-            //     ans2: "תשובה לא נכונה",
-            //     ans3: "תשובה לא נכונה מאוד",
-            //     ans4: "אל תלחצו! זה טעות",
-            //     correctAns: "ans1"
-            // },
-            // {
-            //     type: "binary",
-            //     sentence: "עוד שאלה לא נכונה על חתולים",
-            //     trueOrFalse: false
-            // },
-            // {
-            //     type: "multiple",
-            //     question: "שאלה על מכוניות",
-            //     ans1: "תשובה כלשהית לא נכונה",
-            //     ans2: "תשובה בכלל לא נכונה",
-            //     ans3: "תשובה לא נכונה מאוד",
-            //     ans4: "תלחצו עליי אני תשובה נכונה",
-            //     correctAns: "ans4"
-            // },
-            // {
-            //     type: "multiple",
-            //     question: "שאלה שאלתית על מכוניות וזה משפט ארוך",
-            //     ans1: "תשובה כלשהית לא נכונה",
-            //     ans2: "תשובה בכלל לא נכונה",
-            //     ans3: "תשובה לא נכונה תשובה ממש נכונה!",
-            //     ans4: "אל תלחצו עליי אני תשובה לא נכונה",
-            //     correctAns: "ans3"
-            // },
-            // {
-            //     type: "binary",
-            //     sentence: "עוד שאלה על מכוניות שנוסעות ממש ממש מהר והיא לא נכונה בכלל",
-            //     trueOrFalse: false
-            // },
-            // {
-            //     type: "binary",
-            //     sentence: "היי זאת תשובה לא נכונה",
-            //     trueOrFalse: false
-            // }
-        // ],
+        "amountOfQuestions": 1,
+        "questionsExam": [],
+        "questionsPractice": [],
         "learningContent": {
             // סוג הכרטיסייה
             "textAndPic": {
