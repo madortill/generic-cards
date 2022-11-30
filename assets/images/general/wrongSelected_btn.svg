@@ -2,8 +2,8 @@
   <defs>
     <style>
       .cls-1 {
-        fill: #c23ac0;
-        stroke: #c23ac0;
+        fill: #67dfcb;
+        stroke: #67dfcb;
       }
 
       .cls-1, .cls-2 {
@@ -14,7 +14,7 @@
 
       .cls-2 {
         fill: none;
-        stroke: #260129;
+        stroke: #1f3e3e;
       }
     </style>
   </defs>
