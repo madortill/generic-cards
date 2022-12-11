@@ -257,7 +257,7 @@
 }
 
 .page.learning.content .sub-topics-container {
-  padding: 1em 0.2em;
+  padding: 1em;
   white-space: nowrap;
   scroll-snap-align: center;
   max-height: 1em;
@@ -387,10 +387,6 @@
   flex: 1;
 }
 
-.page.learning.content .list {
-  padding-right: 1em;
-}
-
 .page.learning.content .content {
   margin-bottom: 1em;
   text-align: right;
@@ -405,7 +401,11 @@
   max-width: 83vw;
   margin-right: 50%;
   transform: translate(50%);
-  margin-bottom: 1rem;
+  margin-bottom: 1em;
+}
+
+.page.learning.content .list {
+  padding-right: 1em;
 }
 
 .page.learning.content .card.next {

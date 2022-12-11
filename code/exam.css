@@ -243,14 +243,6 @@
   --color: rgb(44, 191, 55);
 }
 
-.page.exam .name-bg {
-  height: 2em;
-  width: 5em;
-  background-image: url("../assets/images/exam/name_bg.svg");
-  background-repeat: no-repeat;
-  box-sizing: 100% 100%;
-}
-
 .timeFocus {
   transition: all 1s ease-in-out;
   color: var(--color);
@@ -279,10 +271,10 @@
   margin-bottom: 11%;
 }
 
+
 .page.exam .done-exam-popup .title-popup{
   margin-top: 2.6em;
   margin-bottom: 0.3em;
-  width: 86%;
 }
 
 .page.exam .done-exam-popup .sub-title-popup {

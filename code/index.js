@@ -4,8 +4,6 @@ const AMOUNT_OF_TOTAL_QUESTIONS = 20;
 var blurAmount = "10px";
 //
 var selectedSubjects = [];
-var firstName;
-var lastName;
 
 // עמוד התרגול
 const CARD_NUMS = ["first", "second", "third"];
@@ -210,7 +208,7 @@ function beforePractice() {
                     El("div", {},
                         El("img", { attributes: { class: "icon2", src: "../assets/images/practice/beforePractice_popup/timer_icon.svg" } }),
                         El("div", { cls: "text" },
-                            El("b", {}, "דקה"),
+                            El("b", {}, " דקה"),
                             El("br", {}),
                             "לשאלה"
                         ),
@@ -357,11 +355,11 @@ function questionsToPractice() {
     for (let subject of subjects) {
         let subjectData = DATA[subject];
         // מספר השאלות לנושא
-        let subjectQuestions = subjectData.questionsPractice.length;
+        let subjectQuestions = subjectData.questions.length;
         // בוחר את מספר השאלות
         let questionCount = Math.min(subjectQuestions, Math.max(Math.floor(maxQuestionAmountForTopic), 1));
         // מסדר באופן רנדומלי את השאלות ממערך הנתונים
-        let shuffledQuestions = shuffle(subjectData.questionsPractice.slice());
+        let shuffledQuestions = shuffle(subjectData.questions.slice());
         // בוחר את האיקס שאלות הראשונות
         selectedQuestions.push(...shuffledQuestions.slice(0, questionCount));
         if (selectedQuestions.length === AMOUNT_OF_TOTAL_QUESTIONS) break;
@@ -993,121 +991,24 @@ function beforeExam() {
                     attributes: {
                         src: "../assets/images/general/ok_btn.svg", class: "start-btn"
                     }, listeners: {
-                        click: insertFullName_popup
+                        click: function () {
+                            // כפתור מעבר למבחן מהפופאפ
+                            document.querySelector(".page.learning.subjects .title").style.filter = "unset";
+                            document.querySelector(".page.learning.subjects .sub-title").style.filter = "unset";
+                            document.querySelector(".page.learning.subjects .cards-container").style.filter = "unset";
+                            document.querySelector(".page.learning.subjects .back-btn").style.filter = "unset";
+                            document.querySelector(".page.learning.subjects .buttons").style.filter = "unset";
+                            document.querySelector(".page.learning.subjects .dark").remove();
+                            document.querySelector(".page.learning.subjects").classList.remove("active");
+                            document.querySelector(".page.exam").classList.add("active");
+                            examPage();
+                        }
                     }
                 })
             )
         );
 
     document.querySelector(".page.learning.subjects").append(popup);
-}
-
-function examTime(){
-    // איפוס זמן המבחן לפי בחירת מומחה התוכן
-    EXAM_SECONDS = TIME_FOR_EXAM.slice(-2);
-    if (EXAM_SECONDS ===  "00")  {
-        EXAM_SECONDS = 0;
-        if (TIME_FOR_EXAM.length > 4) 
-            EXAM_MINUTS = Number(TIME_FOR_EXAM.slice(0,2));
-        else
-            EXAM_MINUTS = Number(TIME_FOR_EXAM.charAt(0));
-        examMinutes = EXAM_MINUTS - 1;
-        examSeconds = 59;
-    }
-    else if (EXAM_SECONDS.charAt(0) === "0") {
-        EXAM_SECONDS = Number(TIME_FOR_EXAM.slice(-1));
-        if (TIME_FOR_EXAM.length > 4) 
-            EXAM_MINUTS = Number(TIME_FOR_EXAM.slice(0,2));
-        else
-            EXAM_MINUTS = Number(TIME_FOR_EXAM.charAt(0));
-        examMinutes = EXAM_MINUTS;
-        examSeconds = EXAM_SECONDS;
-    }
-    else {
-        EXAM_SECONDS = Number(TIME_FOR_EXAM.slice(-2));
-        if (TIME_FOR_EXAM.length > 4) 
-            EXAM_MINUTS = Number(TIME_FOR_EXAM.slice(0,2));
-        else
-            EXAM_MINUTS = Number(TIME_FOR_EXAM.charAt(0));
-        examMinutes = EXAM_MINUTS;
-        examSeconds = EXAM_SECONDS;
-    }
-}
-
-function insertFullName_popup() {
-    let countValFirstName = 0;
-    let countValLastName = 0;
-
-    // מחיקת התוכן מהפופאפ
-    document.querySelector(".page.learning.subjects .instructions").innerHTML = "";
-    
-    // הוספת שינוי צורה לפופאפ
-    document.querySelector(".page.learning.subjects .exam-popup").classList.add("exam-popup-insert-name");
-
-    // הורדת מאזין לחיצה מהכפתור
-    document.querySelector(".page.learning.subjects .start-btn").removeEventListener("click", insertFullName_popup); 
-    
-    // הוספת כותרת פעולה למשתמש
-    let firstNameFillText = El("div", {cls: "text-fill-name"},"הכניסו שם פרטי");
-    document.querySelector(".page.learning.subjects .instructions").append(firstNameFillText);
-    
-    // הוספת מקום מילוי הטקסט
-    let inputSpaceFirst = El("input", {  
-        attributes: {
-            type: "text", class: "input-text", placeholder: "ישראל" 
-        }, listeners : {
-            input: () => {
-                countValFirstName = document.querySelector(".page .instructions :nth-child(2)").value.length;
-                 // רק במידה ומלאו את שדות המילוי יהיה ניתן לעבור למבחן
-                if (countValLastName > 1 && countValFirstName > 1) {
-                    firstName = document.querySelector(".page .instructions :nth-child(2)").value;
-                    lastName = document.querySelector(".page .instructions :nth-child(4)").value;
-                    document.querySelector(".page.learning.subjects .start-btn").classList.add("done"); 
-                    // console.log( `${firstName} ${lastName}`);
-                }
-            }
-        }
-    });
-    document.querySelector(".page.learning.subjects .instructions").append(inputSpaceFirst);
-    
-    // הוספת כותרת פעולה למשתמש
-    let lastNameFillText = El("div", {cls: "text-fill-name"},"הכניסו שם משפחה");
-    document.querySelector(".page.learning.subjects .instructions").append(lastNameFillText);
-    // הוספת מקום מילוי הטקסט
-    let inputSpaceLast = El("input", {  
-        attributes: {
-            type: "text", class: "input-text", placeholder: "ישראלי" 
-        }, listeners : {
-            input: () => {
-                countValLastName = document.querySelector(".page .instructions :nth-child(4)").value.length;
-                // רק במידה ומלאו את שדות המילוי יהיה ניתן לעבור למבחן
-                if (countValLastName > 1 && countValFirstName > 1) {
-                    firstName = document.querySelector(".page .instructions :nth-child(2)").value;
-                    lastName = document.querySelector(".page .instructions :nth-child(4)").value;
-                    document.querySelector(".page.learning.subjects .start-btn").classList.add("done"); 
-                }
-            }
-        }
-    });
-    document.querySelector(".page.learning.subjects .instructions").append(inputSpaceLast);
-
-    // מוסיף עיצוב  לפופאפ הפנימי
-    document.querySelector(".page.learning.subjects .instructions").classList.add("insert-name");
-    
-    document.querySelector(".page.learning.subjects .start-btn").classList.add("insert-name");
-    document.querySelector(".page.learning.subjects .start-btn").src = "../assets/images/general/toTheExam.svg";
-    document.querySelector(".page.learning.subjects .start-btn").addEventListener("click", () => {
-         // כפתור מעבר למבחן מהפופאפ
-        document.querySelector(".page.learning.subjects .title").style.filter = "unset";
-        document.querySelector(".page.learning.subjects .sub-title").style.filter = "unset";
-        document.querySelector(".page.learning.subjects .cards-container").style.filter = "unset";
-        document.querySelector(".page.learning.subjects .back-btn").style.filter = "unset";
-        document.querySelector(".page.learning.subjects .buttons").style.filter = "unset";
-        document.querySelector(".page.learning.subjects .dark").remove();
-        document.querySelector(".page.learning.subjects").classList.remove("active");
-        document.querySelector(".page.exam").classList.add("active");
-        examPage();
-    })
 }
 
 // הפונקציה מקבלת את העמוד הנוכחי ויוצאת מ
@@ -1182,6 +1083,28 @@ function exit(page) {
     document.querySelector(`.page.${page}`).append(popup);
 }
 
+
+// פונציה שמחזירה את השאלות הרצויות למבחן
+function questionsToExam() {
+    // מערך השאלות הסופי שישלח בסוף הפונקציה
+    let selectedQuestions = [];
+
+    // בוחר את השאלות מכל נושא
+    for (let subject of SUBJECTS_TITLES) {
+        let subjectData = DATA[subject];
+        // מספר השאלות לנושא
+        let subjectQuestions = subjectData.questions.length;
+        // בוחר את מספר השאלות
+        let questionCount = Math.min(subjectQuestions, subjectData.amountOfQuestions);
+        // מסדר באופן רנדומלי את השאלות ממערך הנתונים
+        let shuffledQuestions = shuffle(subjectData.questions.slice());
+        // בוחר את האיקס שאלות הראשונות
+        selectedQuestions.push(...shuffledQuestions.slice(0, questionCount));
+        if (selectedQuestions.length === AMOUNT_OF_TOTAL_QUESTIONS) break;
+    }
+    return selectedQuestions;
+}
+
 function donePopup() {
     let popup =
         El("div", { cls: "dark" },
@@ -1243,26 +1166,36 @@ function donePopup() {
     document.querySelector(`.page.exam`).append(popup);
 }
 
-
-// פונציה שמחזירה את השאלות הרצויות למבחן
-function questionsToExam() {
-    // מערך השאלות הסופי שישלח בסוף הפונקציה
-    let selectedQuestions = [];
-
-    // בוחר את השאלות מכל נושא
-    for (let subject of SUBJECTS_TITLES) {
-        let subjectData = DATA[subject];
-        // מספר השאלות לנושא
-        let subjectQuestions = subjectData.questionsExam.length;
-        // בוחר את מספר השאלות
-        let questionCount = Math.min(subjectQuestions, subjectData.amountOfQuestions);
-        // מסדר באופן רנדומלי את השאלות ממערך הנתונים
-        let shuffledQuestions = shuffle(subjectData.questionsExam.slice());
-        // בוחר את האיקס שאלות הראשונות
-        selectedQuestions.push(...shuffledQuestions.slice(0, questionCount));
-        if (selectedQuestions.length === AMOUNT_OF_TOTAL_QUESTIONS) break;
+function examTime(){
+    // איפוס זמן המבחן לפי בחירת מומחה התוכן
+    EXAM_SECONDS = TIME_FOR_EXAM.slice(-2);
+    if (EXAM_SECONDS ===  "00")  {
+        EXAM_SECONDS = 0;
+        if (TIME_FOR_EXAM.length > 4) 
+            EXAM_MINUTS = Number(TIME_FOR_EXAM.slice(0,2));
+        else
+            EXAM_MINUTS = Number(TIME_FOR_EXAM.charAt(0));
+        examMinutes = EXAM_MINUTS - 1;
+        examSeconds = 59;
     }
-    return selectedQuestions;
+    else if (EXAM_SECONDS.charAt(0) === "0") {
+        EXAM_SECONDS = Number(TIME_FOR_EXAM.slice(-1));
+        if (TIME_FOR_EXAM.length > 4) 
+            EXAM_MINUTS = Number(TIME_FOR_EXAM.slice(0,2));
+        else
+            EXAM_MINUTS = Number(TIME_FOR_EXAM.charAt(0));
+        examMinutes = EXAM_MINUTS;
+        examSeconds = EXAM_SECONDS;
+    }
+    else {
+        EXAM_SECONDS = Number(TIME_FOR_EXAM.slice(-2));
+        if (TIME_FOR_EXAM.length > 4) 
+            EXAM_MINUTS = Number(TIME_FOR_EXAM.slice(0,2));
+        else
+            EXAM_MINUTS = Number(TIME_FOR_EXAM.charAt(0));
+        examMinutes = EXAM_MINUTS;
+        examSeconds = EXAM_SECONDS;
+    }
 }
 
 // עמוד המבחן
@@ -1675,22 +1608,20 @@ function endExam(amountOfCorrectAnswers) {
     let examTotalTimeInSec = EXAM_MINUTS * 60 + 60; // לחישוב בבר
 
     // הטקסט לכותרות לפי ההצלחה של המשתמש
-    let name;
+    let isPassTitle;
+    let isPassSubTitle;
     let img;
-    let date;
-    let grade;
-
-    name = `${firstName} ${lastName}`;
-    date = new Date();
-    let todayDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
-    let currTime = date.getHours() + ":" + date.getMinutes();
-    grade = amountOfCorrectAnswers / QUESTIONS.length * 100; 
-
     // האם כמות התשובות הנכונות גדולה מחצי מהשאלות
-    if (amountOfCorrectAnswers > QUESTIONS.length / 2) 
+    if (amountOfCorrectAnswers > QUESTIONS.length / 2) {
+        isPassTitle = "כל הכבוד!";
+        isPassSubTitle = "עברת את המבחן בהצלחה";
         img = "../assets/images/general/finish_popup/check_icon.svg"
-    else 
-        img = "../assets/images/general/finish_popup/x_icon.svg"                  
+    }
+    else {
+        isPassTitle = "אוי... לא נורא";
+        isPassSubTitle = "בהצלחה בפעם הבאה...";
+        img = "../assets/images/general/finish_popup/x_icon.svg"
+    }
 
     let finishPopup =
         El("div", { cls: "dark" },
@@ -1698,10 +1629,10 @@ function endExam(amountOfCorrectAnswers) {
             El("div", { cls: "end-exam" },
                 El("img", { attributes: { src: "../assets/images/general/close_btn.svg", class: "close-btn" } }),
                 // כותרות
-                El("div", { cls: "title-popup" }, name),
+                El("div", { cls: "title-popup" }, isPassTitle),
                 El("div", { cls: "popup-sub-titles" },
-                    El("div", { cls: "text1-popup" }, "ציון: " + grade),
-                    El("div", { cls: "text2-popup" }, `${currTime} | ${todayDate}`),
+                    El("div", { cls: "text1-popup" }, isPassSubTitle),
+                    El("div", { cls: "text2-popup" }, "הנה כמה נתונים שיעזרו לך"),
                 ),
                 El("div", { cls: "instructions-practice" },
                     // בלוק 1
@@ -1783,7 +1714,7 @@ function endExam(amountOfCorrectAnswers) {
         showAnswersExam();
         //גילוי עיגול אדום או ירוק לפי התשובה על הניווט התחתון עם המספרים
         document.querySelector(".page.exam .questions-number").scrollLeft = document.querySelector(".page.exam .questions-number").offsetWidth;
-        // console.log(document.querySelector(".page.exam .questions-number").offsetWidth);
+        console.log(document.querySelector(".page.exam .questions-number").offsetWidth);
         showQuestionsValidity();
         //
         ifAnswer();
@@ -1972,7 +1903,7 @@ function subjectLearningPage(subject) {
         // מוסיפים את התת נושא לתפריט ניווט
         let menu = document.querySelector(".page.learning.content .container-subjects");
         menu.append(subTopic);
-        
+
         // מוסיף את כל הכרטיסיות של התת נושא
         let arrCards = subSubTopics.map(subSubTopic => {
             // גייסון של כל תתי תתי הנושא
@@ -2186,7 +2117,7 @@ function practicePopup(subject) {
                     // בלוק 1
                     El("div", { cls: "instruction-practice" },
                         El("div", { cls: "text" },
-                            El("b", {}, "2 דקות"),
+                            El("b", {}, "דקה"),
                             " לכל שאלה",
                         ),
                         El("img", { attributes: { src: "../assets/images/exam/beforeExam_popup/timer_icon.svg", class: "icon2" } }),

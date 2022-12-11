@@ -114,42 +114,25 @@ body {
 }
 
 .page.exam .exit-popup .title-popup {
-  margin-top: 2.5em;
-}
-
-.page.exam .end-exam .title-popup {
-  font-size: 6vmin;
-}
-
-.page.exam .title-popup {
-   height: 1.6em;
-   background-repeat: no-repeat;
-   background-size: 100% 100%;
-   border-radius: 1em;
-   width: 8.5em;
-   padding-top: 0.3em;
-}
-
-.page.exam .end-exam .title-popup {
-   background-image: url("../assets/images/exam/name_bg.svg");
+   margin-top: 2.5em;
 }
 
 .page .popup-sub-titles {
   display: flex;
   align-items: center;
   flex-direction: column;
-  text-align: center;    
-  height: 3em;
-  justify-content: space-around;
+  text-align: center;
 }
 
 .page .text1-popup {
   font-weight: 800;
   font-size: 1em;
+  width: 100%;
 }
 
 .page .text2-popup {
   font-size: 1em;
+  width: 100%;
 }
 
 .page .grey-line {
@@ -221,7 +204,7 @@ body {
   right: 8%;
   top: 17%;
   color: rgb(28, 63, 85);
-  font-size: 4.3vmin;
+  font-size: 4.2vmin;
 }
 
 .page.practice .question-text {
@@ -296,7 +279,6 @@ body {
   text-align: right;
 }
 
-
 .page .icon1 {
   width: 7vw;
 }
@@ -326,42 +308,6 @@ body {
   width: 28vw;
   margin-bottom: 2em;
   margin-top: 0.5em;
-}
-
-.page .start-btn.insert-name {
-  filter: grayscale(100%) brightness(71%);
-  opacity: 0.3;
-  pointer-events: none;
-  transition: filter 0.5s ease-in-out;
-}
-
-.page .start-btn.insert-name.done {
-  filter: grayscale(0%);
-  opacity: 1;
-  pointer-events: all;
-}
-
-.page .text-fill-name {
-  text-align: center;
-
-}
-.page .exam-popup-insert-name {
-  transition: all 0.4s ease-in-out;
-  height: 22em;
-  width: 16em;
-} 
-.page .input-text {
-  width: 11em;
-  height: 1.8em;
-  text-align: center;
-  font-family: Rubik;
-  border-radius: 8px;
-  font-size: inherit;
-  margin-top: -1em;
-}
-.page .instructions.insert-name{
-  align-items: center;
-  height: 10em;
 }
 
 /* יציאה ממבחן או תרגול פופאפ */
@@ -422,7 +368,7 @@ body {
   width: 100%;
 }
 
-/*  */
+
 .page .beforePractice-instruction-container {
   display: flex;
   justify-content: space-between;
