@@ -90,7 +90,7 @@ body {
 }
 
 .page .end-exam {
-  color: #1f3e3e;
+  color: rgb(27, 62, 84);
   width: 72vw;
   height: 114vw;
   background-repeat: no-repeat;
@@ -174,7 +174,7 @@ body {
   font-size: 6vmin;
   display: flex;
   justify-content: space-between;
-  color: #1f3e3e;
+  color: rgb(28, 63, 85);
   margin-bottom: 1%;
   align-items: center;
 }
@@ -197,7 +197,7 @@ body {
 
 .page .progress-bar-right-answers,
 .page .progress-bar-time {
-  background-color: #67dfcb;
+  background-color: rgb(43, 232, 247);
   height: 2vmin;
   border-radius: 2rem;
   width: 0%;
@@ -220,7 +220,7 @@ body {
   width: 82%;
   right: 8%;
   top: 17%;
-  color: #1f3e3e;
+  color: rgb(28, 63, 85);
   font-size: 4.3vmin;
 }
 
@@ -230,7 +230,7 @@ body {
   width: 82%;
   right: 8%;
   top: 17%;
-  color: #1f3e3e;
+  color: rgb(28, 63, 85);
   font-size: 4.2vmin;
 }
 
@@ -267,7 +267,7 @@ body {
 
 /*לפני המבחן*/
 .page .exam-popup {
-  color: #1f3e3e;
+  color: rgb(27, 62, 84);
   width: 18em;
   height: 32em;
   background-repeat: no-repeat;
@@ -366,7 +366,7 @@ body {
 
 /* יציאה ממבחן או תרגול פופאפ */
 .page .exit-popup {
-  color: #1f3e3e;
+  color: rgb(27, 62, 84);
   width: 78vw;
   height: 65vw;
   background-repeat: no-repeat;
@@ -393,7 +393,7 @@ body {
 
 /* פוופאפ מעבר לתרגול בתוך עמוד הלמידה רק על נושא אחד */
 .page .before-practice-one-sub {
-  color: #1f3e3e;
+  color: rgb(27, 62, 84);
   width: 72vw;
   height: 94.5vw;
   background-repeat: no-repeat;
@@ -426,7 +426,7 @@ body {
 .page .beforePractice-instruction-container {
   display: flex;
   justify-content: space-between;
-  width: 69%;
+  width: 77%;
   margin: 6vw 0;
   box-sizing: border-box;
   align-items: flex-end;
@@ -437,8 +437,35 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-width: 2.5em;
 }
 
 .italic {
   font-style: italic;
+}
+
+.img-questions {
+  width: 70px;
+  max-height: 47px;
+  position: absolute;
+  top: -48px;
+  left: 50%;
+  border-radius: 0.5em;
+  transform: translate(-50%,0);
+}
+
+
+.full-img {
+  width: 80%;
+}
+
+.container-full-img {
+  position: absolute;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.507);
+  z-index: 3;
 }

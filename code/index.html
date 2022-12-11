@@ -13,9 +13,11 @@
     <link rel="stylesheet" href="practice.css" type="text/css">
     <link rel="stylesheet" href="learning.css" type="text/css">
     <link rel="stylesheet" href="exam.css" type="text/css">
+    <link rel="stylesheet" href="lessons.css" type="text/css">
     
     <!-- javascript -->
     <script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript" src="lessons.js"></script>
     <script type="text/javascript" src="util.js"></script>
     <script type="text/javascript" src="learningContent.js"></script>
     <script type="text/javascript" src="animateDims.js"></script>
@@ -92,13 +94,21 @@
         <!-- עמוד נושאי הלימוד -->
         <div class="page learning subjects ">
             <div class="title"></div>
-            <div class="sub-title">בחרו נושא אותו תרצו ללמוד</div>
+            <div class="sub-title">בחרו נושא בו תרצו להתמקד</div>
             <div class="cards-container"></div>
             <div class="gradient"></div>
             <div class="buttons">
                 <img src="../assets/images/general/practice-btn-homePage.svg" alt="practice_btn" class="button practice-btn">
                 <img src="../assets/images/general/exam_btn.svg" alt="" class="button exam-btn">
             </div>
+        </div>
+
+         <!-- עמוד השיעורים בתוך נושא ספיציפי -->
+         <div class="page learning lessons">
+            <div class="title"></div>
+            <div class="sub-title">בחרו שיעור אותו תרצו ללמוד</div>
+            <div class="cards-container"></div>
+            <div class="gradient"></div>
         </div>
         
         <!-- עמוד תתי נושאי הלימוד -->
@@ -112,11 +122,37 @@
                     <div class="title"></div>
                     <div class="content"></div>
                 </template>
+                <!-- כרטיסייה עם כותרת ו2 תיבות טקסט -->
+                <template class="text-two-paragraphs">
+                    <div class="title"></div>
+                    <div class="content text1"></div>
+                    <div class="content text2"></div>
+                </template>
+                <!-- כרטיסייה עם כותרת ו3 תיבות טקסט -->
+                <template class="text-three-paragraphs">
+                    <div class="title"></div>
+                    <div class="content text1"></div>
+                    <div class="content text2"></div>
+                    <div class="content text3"></div>
+                </template>
                 <!-- כרטיסייה עם כותרת, תמונה וטקסט -->
                 <template class="pic-and-text">
                     <div class="title"></div>
                     <img class="pic"/>
                     <div class="content"></div>
+                </template>
+                <!-- כרטיסייה עם כותרת ושתי תמונות -->
+                <template class="two-pics">
+                    <div class="title"></div>
+                    <img class="pic pic1"/>
+                    <div class="content content1"></div>
+                    <img class="pic pic2"/>
+                    <div class="content content2"></div>
+                </template>
+                <!-- כרטיסייה עם כותרת וסרטון -->
+                <template class="video">
+                    <div class="title"></div>
+                    <video class="video" controls></video>
                 </template>
                 <!-- כרטיסייה עם כותרת, סרטון וטקסט -->
                 <template class="video-and-text">
@@ -124,11 +160,43 @@
                     <video class="video" controls></video>
                     <div class="content"></div>
                 </template>
-                 <!--  יוטיוב וידאו עם טקסט -->
+                <!-- כרטיסייה עם כותרת, תת כותרת ורשימה של שלושה בולטים-->
+                <template class="list3">
+                    <div class="title"></div>
+                    <div class="sub-title"></div>
+                    <ul class="list">
+                        <li class="li1"></li>
+                        <li class="li2"></li>
+                        <li class="li3"></li>
+                    </ul>
+                </template>
+                <!-- כרטיסייה עם כותרת, 3 תתי כותרות ו3 טקסטים -->
+                <template class="_3titles_3text">
+                    <div class="title"></div>
+                    <div class="sub-title sub-title1"></div>
+                    <div class="content content1"></div>
+                    <div class="sub-title sub-title2"></div>
+                    <div class="content content2"></div>
+                    <div class="sub-title sub-title3"></div>
+                    <div class="content content3"></div>
+                </template>
+                <!-- כרטיסייה עם כותרת, תמונה, 4 תתי כותרות ו4 טקסטים -->
+                <template class="pic_4titles_4text">
+                    <div class="title"></div>
+                    <img class="pic"/>
+                    <div class="sub-title sub-title1"></div>
+                    <div class="content content1"></div>
+                    <div class="sub-title sub-title2"></div>
+                    <div class="content content2"></div>
+                    <div class="sub-title sub-title3"></div>
+                    <div class="content content3"></div>
+                    <div class="sub-title sub-title4"></div>
+                    <div class="content content4"></div>
+                </template>
+                 <!-- יוטיוב וידאו -->
                 <template class="youtube">
                     <div class="title"></div>
                     <iframe width="100%" class="youtube" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    <div class="content"></div>
                 </template>
             </div>
         </div>
