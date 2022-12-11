@@ -415,7 +415,7 @@ function practicePage(event) {
     document.querySelector(".page.practice .sum-answers > .points").innerHTML = QUESTIONS.length;
 
     // אתחול 2 הכרטיסים הראשונים על המסך
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < Math.min(QUESTIONS.length, 2); i++) {
         // השאלה היא שאלת נכון לא נכון
         if (QUESTIONS[i].type === "binary") {
             createBinaryCard(i);
