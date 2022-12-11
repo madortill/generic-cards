@@ -1,0 +1,109 @@
+
+
+  .page.learning.lessons .title {
+    background-image: url(../assets/images/learning/home_header.svg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    color: rgb(28, 63, 85);
+    font-weight: 800;
+    text-align: center;
+    margin-top: 4vw;
+    font-size: 6.5vw;
+    height: 15vw;
+    width: 78vw;
+    padding-top: 9vw;
+    min-height: 11vw;
+    max-height: 11vw;
+    position: relative;
+  }
+
+  .page.learning.lessons .sub-title {
+    font-size: 5vmin;
+    margin-top: 0.3em;
+    text-align: center;
+  }
+  .page.learning.lessons .buttons {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    height: 12vw;
+    position: fixed;
+    bottom: 6vw;
+    z-index: 2;
+  }
+  
+  .page.learning.lessons .button {
+    display: flex;
+    justify-content: space-around;
+    height: 11vw;
+    z-index: 2;
+  }
+  
+  .page.learning.lessons .button:active {
+    transform: scale(0.95);
+  }
+
+  .page.learning.lessons .lessonCard {
+    background-image: url("../assets/images/learning/subject_btn.svg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: 12em;
+    width: 17em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 4.5vmin;
+  }
+  
+.page.learning.lessons .cards-container {
+    margin-top: 1em;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding-bottom: 8em;
+      overflow: auto;
+  }
+
+  .page.learning.lessons .subject {
+    color: hsl(203, 50%, 22%);
+    font-size: 1.4em;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    left: 0.17em;
+    width: 10.2em;
+    top: 4.3em;
+    text-align: center;
+    width: 10.8em;
+    font-size: 1.2em;
+  }
+
+.page.learning.lessons .buttons {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    height: 12vw;
+    position: fixed;
+    bottom: 6vw;
+    z-index: 2;
+  }
+  
+  .page.learning.lessons .button {
+    display: flex;
+    justify-content: space-around;
+    height: 11vw;
+    z-index: 2;
+  }
+  
+  .page.learning.lessons .button:active {
+    transform: scale(0.95);
+  }
+  
+  .page.learning.lessons .practice-btn {
+    width: 40vw;
+    position: absolute;
+    bottom: 4vw;
+    z-index: 1;
+    position: fixed;
+    box-shadow: 0px -11px 20px -15px  rgba(25, 155, 191, 0.432);
+  }
