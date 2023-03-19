@@ -8,7 +8,7 @@ const TIME_FOR_EXAM = "11:00";
 
 
 /*              Edit notes:
-    1. Valid card types: youtube, video-and-text, pic-and-text, text
+    1. Valid card types: youtube, video-and-text, pic-and-text, text, listNumbers, listDots
     2. Title class: "sub-title" , list class: "list", place on the outer element <ol> or <ul> 
 
                         HOW TO CREATE NEW COLOR
@@ -71,7 +71,7 @@ const DATA = {
                     {
                         cardType: "picAndText",
                         pic: "../assets/images/pic.png",
-                        // content: "דוגמה לכותרת לתמונה הראשונה",
+                        content: "דוגמה לכותרת לתמונה הראשונה",
                     }
                 ],
             },
@@ -343,7 +343,7 @@ CARD_TYPES.picAndText = {
 
 CARD_TYPES.videoAndText = {
     init(card, json) {
-        card.querySelector(".video").src = json.video;
+        card.querySelector(".   ").src = json.video;
         card.querySelector(".content").innerHTML = json.content;
         if (!json.content) {
             card.querySelector(".content").remove();
@@ -361,6 +361,21 @@ CARD_TYPES.youtube = {
             if (!json.content) {
                 card.querySelector(".content").remove();
             }
+        }
+    }
+}
+
+CARD_TYPES.listDots = {
+    init(card, json) {
+        for (let num = 1; num <= Number(json.numList); num++) {
+            card.querySelector(".list").innerHTML += `<li>${json["li"+num]}</li>`;
+        }
+    }
+}
+CARD_TYPES.listNumbers = {
+    init(card, json) {
+        for (let num = 1; num <= Number(json.numList); num++) {
+            card.querySelector(".list").innerHTML += `<li>${json["li"+num]}</li>`;
         }
     }
 }
