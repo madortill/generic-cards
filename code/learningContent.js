@@ -343,7 +343,7 @@ CARD_TYPES.picAndText = {
 
 CARD_TYPES.videoAndText = {
     init(card, json) {
-        card.querySelector(".   ").src = json.video;
+        card.querySelector(".video").src = json.video;
         card.querySelector(".content").innerHTML = json.content;
         if (!json.content) {
             card.querySelector(".content").remove();
