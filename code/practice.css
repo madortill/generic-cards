@@ -150,7 +150,7 @@
 /* popup*/
 
 .page.practice .end-practice {
-  color: #1f3e3e;
+  color: var(--text-color);
   width: 72vw;
   height: 127vw;
   background-repeat: no-repeat;
@@ -210,7 +210,7 @@
   font-size: 6vmin;
   display: flex;
   justify-content: space-between;
-  color: #1f3e3e;
+  color: var(--text-color);
   margin-bottom: 1%;
   align-items: center;
 }
@@ -233,7 +233,7 @@
 
 .page.practice .progress-bar-right-answers,
 .page.practice .progress-bar-time {
-  background-color: #67dfcb;
+  background-color: var(--secondary-color);
   height: 2vmin;
   border-radius: 2rem;
   width: 0%;
@@ -243,7 +243,7 @@
 .page.practice .curr-question{
   display: flex;
   font-weight: 500; 
-  color: #1f3e3e;
+  color: var(--text-color);
   font-size: 0.9em;
 }
 @keyframes line-expand {

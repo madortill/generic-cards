@@ -8,7 +8,8 @@ const TIME_FOR_EXAM = "11:00";
 
 
 /*              Edit notes:
-    1. Valid card types: youtube, video-and-text, pic-and-text, text, listNumbers, listDots
+    1. Valid card types: youtube, video-and-text, pic-and-text, text, listNumbers, listDots, freeForm
+        *freeForm - write html with content key or write the tag name as key and the content as value
     2. Title class: "sub-title" , list class: "list", place on the outer element <ol> or <ul> 
 
                         HOW TO CREATE NEW COLOR
@@ -21,7 +22,7 @@ const TIME_FOR_EXAM = "11:00";
     
     /* amountOfQuestions - max number of questions from the subject that will appear in the test*/
 const DATA = { 
-    "הכנס שם של נושא": {
+    "נושא 1:": {
         "icon":  "../assets/images/learning/Artboard 4.svg",
         "amountOfQuestions": 2,
         "questionsExam": [
@@ -74,6 +75,18 @@ const DATA = {
                         content: "דוגמה לכותרת לתמונה הראשונה",
                     }
                 ],
+                "כרטיסייה 3": [
+                    {
+                        cardType: "freeForm",
+                        content: "<ol><li>1</li></ol>",
+                    }
+                ],
+                "כרטיסייה 4": [
+                    {
+                        cardType: "freeForm",
+                        strong: "hello",
+                    }
+                ],
             },
             "תת נושא 2": {
                 "כרטיסייה שלישית מסוג וידאו": [
@@ -101,6 +114,15 @@ const DATA = {
             },
             "תת נושא 5": {
                 "תת תת נושא 12": [
+                    {
+                        cardType: "videoAndText",
+                        video: "../assets/images/פתיח.mp4",
+                        content: "סרטון מוסר שלא הבנתי למה הוא היה על המחשב של פלג... פטל.. שלג?"
+                    }
+                ],
+            },
+            "תת-נושא חדש": {
+                "היי": [
                     {
                         cardType: "videoAndText",
                         video: "../assets/images/פתיח.mp4",
@@ -353,6 +375,7 @@ CARD_TYPES.videoAndText = {
 
 CARD_TYPES.youtube = {
     init(card, json) {
+        console.log(card);
         if (!json.youtube.includes("embed")) {
             throw new Error("Make sure all youtube links are ment to be embedded and not watched");
         } else {
@@ -376,6 +399,20 @@ CARD_TYPES.listNumbers = {
     init(card, json) {
         for (let num = 1; num <= Number(json.numList); num++) {
             card.querySelector(".list").innerHTML += `<li>${json["li"+num]}</li>`;
+        }
+    }
+}
+
+CARD_TYPES.freeForm = {
+    init(card, json) {
+        if (json.content) {
+            card.querySelector(".content").innerHTML += json.content
+        } else {
+            for (key in json) {
+                if (key !== "cardType") {
+                    card.querySelector(".content").innerHTML += `<${key}>${json[key]}</${key}>`
+                }
+            }
         }
     }
 }
