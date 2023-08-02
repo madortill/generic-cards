@@ -129,7 +129,7 @@ function learningSubjectsPage() {
     //  הוספת כפתור חזרה למסך נושאי הלמידה
     let backBtn =
     El("img", {
-        attributes: { class: "back-btn", src: "../assets/images/general/back_btn.svg" },
+        attributes: { class: "back-btn", src: "../assets/images/general/backBtnGeneral.svg" },
         listeners: {
             click: function () {
                 document.querySelector(".page.learning.subjects  .cards-container").innerHTML = "";
@@ -226,7 +226,7 @@ function beforePractice() {
                 ),
                 El("div", { cls: "beforePractice-instruction-container" },
                     El("div", {},
-                        El("img", { attributes: { class: "icon2", src: "../assets/images/practice/beforePractice_popup/timer_icon.svg" } }),
+                        El("img", { attributes: { class: "icon2", src: "../assets/images/general/finish_popup/timer_icon.svg" } }),
                         El("div", { cls: "text" },
                             El("b", {}, "דקה"),
                             El("br", {}),
@@ -460,7 +460,7 @@ function practicePage(event) {
     //  הוספת כפתור חזרה למסך הבית
     let backBtn =
         El("img", {
-            attributes: { class: "back-btn", src: "../assets/images/general/back_btn.svg" },
+            attributes: { class: "back-btn", src: "../assets/images/general/backBtnGeneral.svg" },
             listeners: {
                 click: function () {
                     document.querySelector(".page.practice").classList.remove("active");
@@ -526,7 +526,7 @@ function createMultipleCard(i = 2) {
                 )
             ),
             El("div", { cls: "next-btn" },
-                El("img", { attributes: { src: "../assets/images/practice/nextQuestion_btn.svg" } }),
+                El("img", { attributes: { src: "../assets/images/practice/nextQuestionBtnArrows.svg" } }),
                 El("div", {cls: "curr-question"},
                     El("div", {cls:"curr-ques-text"}), 
                     "/",
@@ -558,7 +558,7 @@ function createBinaryCard(i = 2) {
                 ),
             ),
             El("div", { cls: "next-btn" },
-                El("img", { attributes: { src: "../assets/images/practice/nextQuestion_btn.svg" } }),
+                El("img", { attributes: { src: "../assets/images/practice/nextQuestionBtnArrows.svg" } }),
                 El("div", {cls: "curr-question"},
                     El("div", {cls:"curr-ques-text"}), 
                     "/",
@@ -981,7 +981,7 @@ function beforeExam() {
                             "מוגבל לכ-",
                             El("b", {}, `${EXAM_MINUTS} דקות`)
                         ),
-                        El("img", { attributes: { src: "../assets/images/exam/beforeExam_popup/timer_icon.svg", class: "icon2" } }),
+                        El("img", { attributes: { src: "../assets/images/general/finish_popup/timer_icon.svg", class: "icon2" } }),
                     ),
                     El("div", { cls: "grey-line" }),
                     // בלוק 3
@@ -1002,7 +1002,7 @@ function beforeExam() {
                             El("br", {}),
                             "למעבר בין שאלות"
                         ),
-                        El("img", { attributes: { src: "../assets/images/exam/beforeExam_popup/slide_icon.svg", class: "icon4" } }),
+                        El("img", { attributes: { src: "../assets/images/practice/beforePractice_popup/slide_icon.svg", class: "icon4" } }),
                     ),
                     El("div", { cls: "grey-line" }),
                     // בלוק 5
@@ -1305,7 +1305,7 @@ function examPage() {
     // הוספת כפתור חזרה למסך הבית
     let backBtn =
         El("img", {
-            attributes: { class: "back-btn", src: "../assets/images/general/back_btn.svg" },
+            attributes: { class: "back-btn", src: "../assets/images/general/backBtnGeneral.svg" },
             listeners: {
                 click: function () {
                     if (!document.querySelector(".page.exam .back-btn").parentElement.classList.contains("done"))
@@ -1413,7 +1413,7 @@ function createQuestionExam() {
         El("div", { cls: "next-back-btn" },
             El("div", {cls:"arrows"},
                 El("img", { attributes: { src: "../assets/images/exam/next_btn.svg" }, cls: "next" }),
-                El("img", { attributes: { src: "../assets/images/exam/back_btn.svg" }, cls: "back" })
+                El("img", { attributes: { src: "../assets/images/exam/backBtnExam.svg" }, cls: "back" })
             )
         );
     if (currentQuestionExam === QUESTIONS.length - 1)
@@ -1725,7 +1725,10 @@ function endExam(amountOfCorrectAnswers) {
             El("div", { cls: "end-exam" },
                 El("img", { attributes: { src: "../assets/images/general/close_btn.svg", class: "close-btn" } }),
                 // כותרות
-                El("div", { cls: "title-popup" }, name),
+                El("div", { cls: "title-popup" }, name, 
+                    // El("svg", {cls: "image-bg"}, 
+                    //     El("use", {attributes: {href: "../assets/images/exam/name_bg.svg", style: "--color_fill: #ffffff"}}))
+                    ),
                 El("div", { cls: "popup-sub-titles" },
                     El("div", { cls: "text1-popup" }, "ציון: " + grade),
                     El("div", { cls: "text2-popup" }, `${currTime} | ${todayDate}`),
@@ -1938,7 +1941,7 @@ function subjectLearningPage(subject) {
     // הוספת כפתור חזרה למסך הבית
     let backBtn =
         El("img", {
-            attributes: { class: "back-btn", src: "../assets/images/general/back_btn.svg" },
+            attributes: { class: "back-btn", src: "../assets/images/general/backBtnGeneral.svg" },
             listeners: {
                 click: function () {
                     document.querySelector(".page.learning.subjects").classList.add("active");
@@ -2051,7 +2054,7 @@ function subjectLearningPage(subject) {
             let buttons =
                 El("div", { cls: "next-back-btn" },
                     El("img", { attributes: { src: "../assets/images/exam/next_btn.svg" }, cls: "next", listeners: { click: changeCard.bind(card, "next", json, index) } }),
-                    El("img", { attributes: { src: "../assets/images/exam/back_btn.svg" }, cls: "back", listeners: { click: changeCard.bind(card, "back", json, index) } })
+                    El("img", { attributes: { src: "../assets/images/exam/backBtnExam.svg" }, cls: "back", listeners: { click: changeCard.bind(card, "back", json, index) } })
                 );
             if (index === 0)
                 buttons.classList.add("first");
@@ -2223,7 +2226,7 @@ function practicePopup(subject) {
                             El("b", {}, "2 דקות"),
                             " לכל שאלה",
                         ),
-                        El("img", { attributes: { src: "../assets/images/exam/beforeExam_popup/timer_icon.svg", class: "icon2" } }),
+                        El("img", { attributes: { src: "../assets/images/general/finish_popup/timer_icon.svg", class: "icon2" } }),
                     ),
                     El("div", { cls: "grey-line" }),
                     // בלוק 2
