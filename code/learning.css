@@ -31,9 +31,6 @@
 }
 
 .page.learning.subjects .learningCard {
-  background-image: url("../assets/images/learning/subject_btn.svg");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
   height: 12em;
   width: 17em;
   display: flex;
@@ -147,12 +144,12 @@
   align-items: center;
 }
 
-.page.learning.subjects .subject-popup>img {
+.page.learning.subjects .subject-popup>div.check-place {
   width: 4vw;
   margin: 4% 0 5% 2%;
 }
 
-.page.learning.subjects .subject-popup>div {
+.page.learning.subjects .subject-popup>div:not(.check-place) {
   font-size: 1em;
   width: 100%;
 }
@@ -165,12 +162,12 @@
   font-weight: 800;
 }
 
-.page.learning.subjects .select-everything>img {
+.page.learning.subjects .select-everything>:is(img, div.check-place) {
   height: 6vw;
   margin: 3% 0 3% 2%;
 }
 
-.page.learning.subjects .select-everything>div {
+.page.learning.subjects .select-everything>div:not(.check-place) {
   width: 100%;
 }
 
@@ -318,9 +315,6 @@
   display: flex;
   flex-direction: column;
   position: absolute;
-  background-image: url("../assets/images/learning/learning.svg");
-  background-repeat: no-repeat;
-  background-size: cover;
   height: 100%;
   max-width: unset;
   width: 100%;
