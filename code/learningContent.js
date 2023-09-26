@@ -133,6 +133,11 @@
                         cardType: "videoAndText",
                         video: "../assets/images/פתיח.mp4",
                         content: "סרטון מוסר שלא הבנתי למה הוא היה על המחשב של פלג... פטל.. שלג?"
+                    },
+                    {
+                        cardType: "videoAndText",
+                        video: "../assets/images/פתיח.mp4",
+                        content: "סרטון מוסר שלא הבנתי למה הוא היה על המחשב של פלג... פטל.. שלג?"
                     }
                 ],
             }
@@ -381,7 +386,6 @@ CARD_TYPES.videoAndText = {
 
 CARD_TYPES.youtube = {
     init(card, json) {
-        console.log(card);
         if (!json.youtube.includes("embed")) {
             throw new Error("Make sure all youtube links are ment to be embedded and not watched");
         } else {
@@ -423,3 +427,4 @@ CARD_TYPES.freeForm = {
     }
 }
 
+console.error('Add two pics option! (Because it\'s missing and I didn\'t have time to implement it');

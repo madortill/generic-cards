@@ -13,15 +13,25 @@
     <link rel="stylesheet" href="about.css" type="text/css">
     <link rel="stylesheet" href="practice.css" type="text/css">
     <link rel="stylesheet" href="learning.css" type="text/css">
-    <link rel="stylesheet" href="exam.css" type="text/css">
+    <!-- <link rel="stylesheet" href="exam.css" type="text/css"> -->
     <link rel="stylesheet" href="inlineSvgsStyles.css" type="text/css">
 
     <!-- javascript -->
+    <!-- Optimize loading time: startScript is loaded first and calls for function in index.js -->
+    <!-- startScript handles first transition and about functionallity -->
     <script type="text/javascript" src="learningContent.js"></script>
-    <script type="text/javascript" src="/assets/svgList.js"></script>
-    <script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript" src="startScript.js" defer></script>
+    <script type="text/javascript" src="/assets/svgList.js" defer></script>
+    <script type="text/javascript" src="index.js" defer></script>
     <script type="text/javascript" src="util.js"></script>
     <script type="text/javascript" src="animateDims.js"></script>
+    <script>
+        // reset CSS variables
+        document.documentElement.style.setProperty('--primary-color', THEME.primaryColor);
+        document.documentElement.style.setProperty('--secondary-color', THEME.secondaryColor);
+        document.documentElement.style.setProperty('--text-color', THEME.textColor);
+        document.documentElement.style.setProperty('--gradient-color', THEME.gradient);
+    </script>
 
     <title>לומדת קלפים מותאמת עם ציון</title>
 </head>
@@ -112,11 +122,11 @@
         <div class="page opening active">
             <div class="opaning-overlay">
                 <div class="expand">
-                    <img class="sub-title" src="../assets/images/opening/Balmas_txt.svg" />
+                    <img class="sub-title" alt='כיתוב בלמ"ס' src="../assets/images/opening/Balmas_txt.svg" />
                 </div>
                 <div class="title">חכו בסבלנות...</div>
                 <div class="expand container-scrolling_icon"></div>
-                <div class="sub-title">לחצו על המסך להמשך</div>
+                <div class="sub-title" id="next-text">לחצו על המסך להמשך</div>
             </div>
         </div>
 

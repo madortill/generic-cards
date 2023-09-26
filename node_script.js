@@ -30,7 +30,7 @@ const makeFileNameVariable = (fileName) => {
 }
 
 const returnFileContent = (filePath, file) => {
-  fileContent = fs.readFileSync(filePath, 'utf-8')
+  let fileContent = fs.readFileSync(filePath, 'utf-8')
   fileContent = fileContent.toString();
   // add id
   fileContent = fileContent.replace('svg', `svg id='${makeFileNameVariable(file)}' `)

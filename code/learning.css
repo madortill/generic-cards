@@ -405,6 +405,7 @@
 .page.learning.content .card.next {
   transform: rotateZ(4deg);
   opacity: 0.5;
+  z-index: -1;
 }
 
 .page.learning.content .next-back-btn {
