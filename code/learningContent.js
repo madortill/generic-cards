@@ -1,16 +1,9 @@
-// שם הלומדה
-const TITLE = "לומדה עם ציון ";
 
-//  Max number of question in exam. Make sure it isn't more than the number of questions we have!
-const AMOUNT_EXAM_QUESTIONS = 10;
-
-const TIME_FOR_EXAM = "11:00";
-
-
-/*              Edit notes:
+/*  Edit notes:
     1. Valid card types: youtube, video-and-text, pic-and-text, text, listNumbers, listDots, freeForm
         *freeForm - write html with content key or write the tag name as key and the content as value
-    2. Title class: "sub-title" , list class: "list", place on the outer element <ol> or <ul> 
+    2. amountOfQuestions - max number of questions from the subject that will appear in the test
+    3. Title class: "sub-title" , list class: "list", place on the outer element <ol> or <ul> 
 
                         HOW TO CREATE NEW COLOR
             search for the listed colors and switch to the desired ones
@@ -18,319 +11,31 @@ const TIME_FOR_EXAM = "11:00";
     2. Secondary color: #67dfcb;
     3. Text color: #1f3e3e
     4. Open image + gradient color: #629191;
-            */
-    
-    /* amountOfQuestions - max number of questions from the subject that will appear in the test*/
-const DATA = { 
-    "נושא 1:": {
-        "icon":  "../assets/images/learning/Artboard 4.svg",
-        "amountOfQuestions": 2,
-        "questionsExam": [
-            {
-                type: "multiple",
-                question: "דוגמה לשאלה אמריקאית מתרגלת שיש לה 4 תשובות?",
-                ans1: "תשובה ראשונה ולא נכונה",
-                ans2: "תשובה שנייה נכונה!",
-                ans3: "תשובה שלישית ולא נכונה",
-                ans4: "תשובה רביעית לא נכונה",
-                correctAns: "ans2"
-            },
-            {
-                type: "binary",
-                sentence: "דוגמה לשאלה מתרגלת נכונה של נכון או לא נכון",
-                trueOrFalse: true
-            }
-        ],
-        "questionsPractice": [
-            {
-                type: "multiple",
-                question: "דוגמה לשאלה אמריקאית בוחנת שיש לה 4 תשובות?",
-                ans1: "תשובה ראשונה ולא נכונה",
-                ans2: "תשובה שנייה נכונה!",
-                ans3: "תשובה שלישית ולא נכונה",
-                ans4: "תשובה רביעית לא נכונה",
-                correctAns: "ans2"
-            },
-            {
-                type: "binary",
-                sentence: "דוגמה לשאלה בוחנת נכונה של נכון או לא נכון",
-                trueOrFalse: true
-            }
-        ],
-        "learningContent": {
-            "תת נושא 1": {
-                "כרטיסייה ראשונה מסוג טקסט": [ 
-                    {
-                        cardType: "youtube",
-                        // Make sure it is embed video!
-                        youtube: "https://www.youtube.com/embed/n0t9iFlGO20",
-                        //  https://www.youtube.com/embed/n0t9iFlGO20
-                        content: "דוגמה לתוכן של כרטיסייה המחולקת לפי נושאים ותתי נושאים."
-                    },
-                ],
-                "כרטיסייה שנייה": [
-                    {
-                        cardType: "picAndText",
-                        pic: "../assets/images/pic.png",
-                        content: "דוגמה לכותרת לתמונה הראשונה",
-                    }
-                ],
-                "כרטיסייה 3": [
-                    {
-                        cardType: "freeForm",
-                        content: "<ol><li>1</li></ol>",
-                    }
-                ],
-                "כרטיסייה 4": [
-                    {
-                        cardType: "freeForm",
-                        strong: "hello",
-                    }
-                ],
-            },
-            "תת נושא 2": {
-                "כרטיסייה שלישית מסוג וידאו": [
-                    {
-                        cardType: "videoAndText",
-                        video: "../assets/images/פתיח.mp4",
-                        content: "סרטון מוסר שלא הבנתי למה הוא היה על המחשב של פלג... פטל.. שלג?"
-                    }
-                ],
-                "כרטיסייה רביעית": [
-                    {
-                        cardType: "text",
-                        content: "g"
-                    }
-                ]
-            },
-            "תת נושא 3": {
-                "תת תת נושא 12": [
-                    {
-                        cardType: "videoAndText",
-                        video: "../assets/images/פתיח.mp4",
-                        content: "סרטון מוסר שלא הבנתי למה הוא היה על המחשב של פלג... פטל.. שלג?"
-                    }
-                ],
-            },
-            "תת נושא 5": {
-                "תת תת נושא 12": [
-                    {
-                        cardType: "videoAndText",
-                        video: "../assets/images/פתיח.mp4",
-                        content: "סרטון מוסר שלא הבנתי למה הוא היה על המחשב של פלג... פטל.. שלג?"
-                    }
-                ],
-            },
-            "תת-נושא חדש": {
-                "היי": [
-                    {
-                        cardType: "videoAndText",
-                        video: "../assets/images/פתיח.mp4",
-                        content: "סרטון מוסר שלא הבנתי למה הוא היה על המחשב של פלג... פטל.. שלג?"
-                    }
-                ],
-            }
-        },
-    },
-    "2שם של נושא": {
-        "icon":  "../assets/images/learning/Artboard 4.svg",
-      
-        "amountOfQuestions": 2,
-        "questionsExam": [
-            {
-                type: "multiple",
-                question: "שאלהה שאלתית ששואלת מלא שאלות",
-                ans1: "תשובה כלשהית  נכונה",
-                ans2: "תשובה לא נכונה",
-                ans3: "תשובה לא נכונה מאוד",
-                ans4: "אל תלחצו! זה טעות",
-                correctAns: "ans1"
-            },
-            {
-                type: "binary",
-                sentence: "עוד שאלה לא נכונה על חתולים",
-                trueOrFalse: false
-            },
-            {
-                type: "multiple",
-                question: "שאלה על מכוניות",
-                ans1: "תשובה כלשהית לא נכונה",
-                ans2: "תשובה בכלל לא נכונה",
-                ans3: "תשובה לא נכונה מאוד",
-                ans4: "תלחצו עליי אני תשובה נכונה",
-                correctAns: "ans4"
-            },
-            {
-                type: "multiple",
-                question: "שאלה שאלתית על מכוניות וזה משפט ארוך",
-                ans1: "תשובה כלשהית לא נכונה",
-                ans2: "תשובה בכלל לא נכונה",
-                ans3: "תשובה לא נכונה תשובה ממש נכונה!",
-                ans4: "אל תלחצו עליי אני תשובה לא נכונה",
-                correctAns: "ans3"
-            },
-            {
-                type: "binary",
-                sentence: "עוד שאלה על מכוניות שנוסעות ממש ממש מהר והיא לא נכונה בכלל",
-                trueOrFalse: false
-            },
-            {
-                type: "binary",
-                sentence: "היי זאת תשובה לא נכונה",
-                trueOrFalse: false
-            },
-            {
-                type: "multiple",
-                question: "שאלהה שאלתית ששואלת מלא שאלות",
-                ans1: "תשובה כלשהית  נכונה",
-                ans2: "תשובה לא נכונה",
-                ans3: "תשובה לא נכונה מאוד",
-                ans4: "אל תלחצו! זה טעות",
-                correctAns: "ans1"
-            },
-            {
-                type: "binary",
-                sentence: "עוד שאלה לא נכונה על חתולים",
-                trueOrFalse: false
-            },
-            {
-                type: "multiple",
-                question: "שאלה על מכוניות",
-                ans1: "תשובה כלשהית לא נכונה",
-                ans2: "תשובה בכלל לא נכונה",
-                ans3: "תשובה לא נכונה מאוד",
-                ans4: "תלחצו עליי אני תשובה נכונה",
-                correctAns: "ans4"
-            },
-            {
-                type: "multiple",
-                question: "שאלה שאלתית על מכוניות וזה משפט ארוך",
-                ans1: "תשובה כלשהית לא נכונה",
-                ans2: "תשובה בכלל לא נכונה",
-                ans3: "תשובה לא נכונה תשובה ממש נכונה!",
-                ans4: "אל תלחצו עליי אני תשובה לא נכונה",
-                correctAns: "ans3"
-            },
-            {
-                type: "binary",
-                sentence: "עוד שאלה על מכוניות שנוסעות ממש ממש מהר והיא לא נכונה בכלל",
-                trueOrFalse: false
-            },
-            {
-                type: "binary",
-                sentence: "היי זאת תשובה לא נכונה",
-                trueOrFalse: false
-            }
-        ],
-        "questionsPractice": [
-            {
-                type: "multiple",
-                question: "שאלהה שאלתית ששואלת מלא שאלות",
-                ans1: "תשובה כלשהית  נכונה",
-                ans2: "תשובה לא נכונה",
-                ans3: "תשובה לא נכונה מאוד",
-                ans4: "אל תלחצו! זה טעות",
-                correctAns: "ans1"
-            },
-            {
-                type: "binary",
-                sentence: "עוד שאלה לא נכונה על חתולים",
-                trueOrFalse: false
-            },
-            {
-                type: "multiple",
-                question: "שאלה על מכוניות",
-                ans1: "תשובה כלשהית לא נכונה",
-                ans2: "תשובה בכלל לא נכונה",
-                ans3: "תשובה לא נכונה מאוד",
-                ans4: "תלחצו עליי אני תשובה נכונה",
-                correctAns: "ans4"
-            },
-            {
-                type: "multiple",
-                question: "שאלה שאלתית על מכוניות וזה משפט ארוך",
-                ans1: "תשובה כלשהית לא נכונה",
-                ans2: "תשובה בכלל לא נכונה",
-                ans3: "תשובה לא נכונה תשובה ממש נכונה!",
-                ans4: "אל תלחצו עליי אני תשובה לא נכונה",
-                correctAns: "ans3"
-            },
-            {
-                type: "binary",
-                sentence: "עוד שאלה על מכוניות שנוסעות ממש ממש מהר והיא לא נכונה בכלל",
-                trueOrFalse: false
-            },
-            {
-                type: "binary",
-                sentence: "היי זאת תשובה לא נכונה",
-                trueOrFalse: false
-            },
-            {
-                type: "multiple",
-                question: "שאלהה שאלתית ששואלת מלא שאלות",
-                ans1: "תשובה כלשהית  נכונה",
-                ans2: "תשובה לא נכונה",
-                ans3: "תשובה לא נכונה מאוד",
-                ans4: "אל תלחצו! זה טעות",
-                correctAns: "ans1"
-            },
-            {
-                type: "binary",
-                sentence: "עוד שאלה לא נכונה על חתולים",
-                trueOrFalse: false
-            },
-            {
-                type: "multiple",
-                question: "שאלה על מכוניות",
-                ans1: "תשובה כלשהית לא נכונה",
-                ans2: "תשובה בכלל לא נכונה",
-                ans3: "תשובה לא נכונה מאוד",
-                ans4: "תלחצו עליי אני תשובה נכונה",
-                correctAns: "ans4"
-            },
-            {
-                type: "multiple",
-                question: "שאלה שאלתית על מכוניות וזה משפט ארוך",
-                ans1: "תשובה כלשהית לא נכונה",
-                ans2: "תשובה בכלל לא נכונה",
-                ans3: "תשובה לא נכונה תשובה ממש נכונה!",
-                ans4: "אל תלחצו עליי אני תשובה לא נכונה",
-                correctAns: "ans3"
-            },
-            {
-                type: "binary",
-                sentence: "עוד שאלה על מכוניות שנוסעות ממש ממש מהר והיא לא נכונה בכלל",
-                trueOrFalse: false
-            },
-            {
-                type: "binary",
-                sentence: "היי זאת תשובה לא נכונה",
-                trueOrFalse: false
-            }
-        ],
-        "learningContent": {
-            // סוג הכרטיסייה
-            "textAndPic": {
+*/
 
-            }
-        },
-        
-    },
-    // שם נושא
-    "3שם של נושא": {
-        "icon":  "../assets/images/learning/Artboard 4.svg",
-        "amountOfQuestions": 1,
-        "questionsExam": [],
-        "questionsPractice": [],
-        "learningContent": {
-            // סוג הכרטיסייה
-            "textAndPic": {
+let THEME;
+let DATA;
+let TITLE;
 
-            }
-        },
+fetch('../data.json')
+.then((response) => {
+        console.log('json received');
+        response.json()
+            .then((result) => { 
+                THEME = result.THEME;
+                TITLE = result.TITLE;
+                DATA = result.DATA;
+                afterLoaded();
+             })
+            .catch((err) => { console.log(err) });
+    })
+    .catch((err) => { console.log(err) });
 
-    }
-};
+
+//  Max number of question in exam. Make sure it isn't more than the number of questions we have!
+const AMOUNT_EXAM_QUESTIONS = 0;
+const TIME_FOR_EXAM = "10:00";
+
 
 
 
@@ -379,8 +84,8 @@ CARD_TYPES.youtube = {
         if (!json.youtube.includes("embed")) {
             throw new Error("Make sure all youtube links are ment to be embedded and not watched");
         } else {
-        card.querySelector(".youtube").src = json.youtube;
-        card.querySelector(".content").innerHTML = json.content;
+            card.querySelector(".youtube").src = json.youtube;
+            card.querySelector(".content").innerHTML = json.content;
             if (!json.content) {
                 card.querySelector(".content").remove();
             }
@@ -391,14 +96,14 @@ CARD_TYPES.youtube = {
 CARD_TYPES.listDots = {
     init(card, json) {
         for (let num = 1; num <= Number(json.numList); num++) {
-            card.querySelector(".list").innerHTML += `<li>${json["li"+num]}</li>`;
+            card.querySelector(".list").innerHTML += `<li>${json["li" + num]}</li>`;
         }
     }
 }
 CARD_TYPES.listNumbers = {
     init(card, json) {
         for (let num = 1; num <= Number(json.numList); num++) {
-            card.querySelector(".list").innerHTML += `<li>${json["li"+num]}</li>`;
+            card.querySelector(".list").innerHTML += `<li>${json["li" + num]}</li>`;
         }
     }
 }

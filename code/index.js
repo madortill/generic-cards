@@ -43,29 +43,30 @@ var midElement;
 var examAnswers = [];
 
 // פונקציית הטעינה של כל הלומדה
-window.addEventListener("load", function () {
-    SUBJECTS_TITLES = Object.keys(DATA);
+const afterLoaded = () => {
+    console.log('run');
+        SUBJECTS_TITLES = Object.keys(DATA);
+        
+        // כותרת ראשית ללומדה
+        addTitle();
+        // כותרת נושא הלומדה
+        function addTitle() {
+            document.querySelector(".page.opening .title").innerHTML = TITLE;
+            document.querySelector(".page.learning .title").innerHTML = TITLE;
+        }
+        
+        
+        let fullScreen = El("div", {cls: "full-screen"});
+        document.querySelector(".page.opening").before(fullScreen);
+        fullScreen.addEventListener("click", homePage);
+        
+        // מעבר בין עמוד הבית לעמוד הלמידה
+        let scrollingIcon = El("img", {attributes: {class:"scrolling_icon", src: "../assets/images/opening/scrolling_icon.svg"}});
+        document.querySelector(".page.opening .container-scrolling_icon").append(scrollingIcon); 
+        // הפעלה של האנימציה בלחיצה
+        document.querySelector(".page.opening  .expand").style.transition = "all 1s ease";
+}
 
-    // כותרת ראשית ללומדה
-    addTitle();
-    // כותרת נושא הלומדה
-    function addTitle() {
-        document.querySelector(".page.opening .title").innerHTML = TITLE;
-        document.querySelector(".page.learning .title").innerHTML = TITLE;
-    }
-
-
-    let fullScreen = El("div", {cls: "full-screen"});
-    document.querySelector(".page.opening").before(fullScreen);
-    fullScreen.addEventListener("click", homePage);
-
-    // מעבר בין עמוד הבית לעמוד הלמידה
-    let scrollingIcon = El("img", {attributes: {class:"scrolling_icon", src: "../assets/images/opening/scrolling_icon.svg"}});
-    document.querySelector(".page.opening .container-scrolling_icon").append(scrollingIcon); 
-    // הפעלה של האנימציה בלחיצה
-    document.querySelector(".page.opening  .expand").style.transition = "all 1s ease";
-
-});
 
 // מעבר לדף הבית
 /**

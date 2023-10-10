@@ -1,0 +1,32 @@
+{
+    "TITLE": "לומדה",
+    "AMOUNT_EXAM_QUESTIONS": 0,
+    "TIME_FOR_EXAM ": "00:00",
+    "DATA": {
+        "נושא 1": {
+            "icon": "../assets/images/learning/Artboard 4.svg",
+            "amountOfQuestions": {},
+            "questionsExam": {},
+            "questionsPractice": {},
+            "learningContent": {
+                "תת נושא 1": {
+                    "כותרת קטנה": [
+                        {
+                            "cardType": "text",
+                            "content": "טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "THEME": {
+        "name": "ballet-pink",
+        "hebrawName": "ורוד-בלט",
+        "primaryColor": "#f97394",
+        "secondaryColor": "#ffb3c6",
+        "textColor": "#3a1820",
+        "gradient": "#ff8fab",
+        "buttonsColor": "#3a1820"
+    }
+}
