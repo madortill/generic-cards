@@ -151,7 +151,17 @@ function learningSubjectsPage() {
             }
         }
     });
+
+    let search =
+    El("img", {
+        attributes: { class: "search", src: "../assets/images/general/search.svg" },
+        listeners: {
+            click: onClickSearch
+        }
+    });
+
     document.querySelector(".page.learning.subjects").append(backBtn);
+    document.querySelector(".page.learning.subjects").append(search);
 
 
     // יוצר את הכרטיסיות של נושאי הלימוד ומוודא שיש שאלות לתרגול ולמבחן
@@ -182,6 +192,53 @@ if (isExamQuestions && numOfAvailableQuestions !== 0) {
 }
 
 }
+
+/* onClickSearch
+--------------------------------------------------------------
+Description: Adds search box and listener to input */
+const onClickSearch = () => {
+    // מראה את תיבת החיפוש
+    document.querySelector('.searchBoxHolder').classList.remove("hidden");
+    document.querySelector('.searchBox').classList.remove("hidden");
+    // מעלים כותרת וכפתורים ומשנה גל
+    // הופך את המסך לשחור
+    document.querySelector('.searchScreen').classList.add("darkScreen");
+
+    document.querySelector('.darkScreen').addEventListener("click", () => {
+        // מעלים מסך חיפוש
+        document.querySelector('.searchBoxHolder').classList.add("hidden");
+        document.querySelector('.searchBox').classList.add("hidden");
+        document.querySelector('.dropDown').classList.add("hidden");
+        document.querySelector('.searchScreen').classList.remove("darkScreen");
+    });
+    document.querySelector('.searchBox').addEventListener('input', onSearch);
+}
+
+/* onSearch
+--------------------------------------------------------------
+Description: check for search match and creat dropdown accordingly */
+const onSearch = () => {
+    document.querySelector('.dropDown').style.pointerEvents = "all";
+    // Saves user input in a variable and resets the dropdown html.
+    let strUserInput = document.querySelector('.searchBox').value;
+    document.querySelector('.dropDown').innerHTML = "";
+    document.querySelector('.dropDown').style.zIndex = "2";
+    document.querySelector('.dropDown').classList.remove("hidden");
+    // Goes over the object to check for a search match.
+    for (let key of Object.keys(objMedInfo)){
+        //Push the current match to it.
+        if(key.includes(strUserInput) && strUserInput !== ""){
+            let div = document.createElement("div");
+            div.innerHTML = key;
+            div.classList.add("dropDownItem");
+            div.dataset.item = key;
+            div.addEventListener("click", goToSubj);
+            document.querySelector('.dropDown').append(div);
+        }
+    }
+    bSearchScreen = true
+}
+
 
 // יצירת קלפים ללמידה
 function createStudyCards(currentSubject) {
