@@ -44,9 +44,7 @@ var examAnswers = [];
 
 // פונקציית הטעינה של כל הלומדה
 const afterLoaded = () => {
-    console.log('run');
         SUBJECTS_TITLES = Object.keys(DATA);
-        
         // כותרת ראשית ללומדה
         addTitle();
         // כותרת נושא הלומדה
@@ -204,14 +202,22 @@ const onClickSearch = () => {
     // הופך את המסך לשחור
     document.querySelector('.searchScreen').classList.add("darkScreen");
 
-    document.querySelector('.darkScreen').addEventListener("click", () => {
+    document.querySelector('.darkScreen').addEventListener("click", hideSearchScreen);
+    document.querySelector('.searchBox').addEventListener('input', onSearch);
+}
+
+/* hideSearchScreen
+--------------------------------------------------------------
+Description:  */
+const hideSearchScreen = (event) => {
+    if (event.target.classList.contains('darkScreen') || event.target.classList.contains('dropDownItem')) {
         // מעלים מסך חיפוש
+        document.querySelector('.darkScreen').removeEventListener("click", hideSearchScreen);
         document.querySelector('.searchBoxHolder').classList.add("hidden");
         document.querySelector('.searchBox').classList.add("hidden");
         document.querySelector('.dropDown').classList.add("hidden");
         document.querySelector('.searchScreen').classList.remove("darkScreen");
-    });
-    document.querySelector('.searchBox').addEventListener('input', onSearch);
+    }
 }
 
 /* onSearch
@@ -225,20 +231,57 @@ const onSearch = () => {
     document.querySelector('.dropDown').style.zIndex = "2";
     document.querySelector('.dropDown').classList.remove("hidden");
     // Goes over the object to check for a search match.
-    for (let key of Object.keys(objMedInfo)){
-        //Push the current match to it.
-        if(key.includes(strUserInput) && strUserInput !== ""){
-            let div = document.createElement("div");
-            div.innerHTML = key;
-            div.classList.add("dropDownItem");
-            div.dataset.item = key;
-            div.addEventListener("click", goToSubj);
-            document.querySelector('.dropDown').append(div);
+    for (const subject of Object.keys(DATA)){
+        for(const subSubject of Object.keys(DATA[subject].learningContent)){
+            for(const key of Object.keys(DATA[subject]['learningContent'][subSubject])){
+                //Push the current match to it.
+                if(key.includes(strUserInput) && strUserInput !== "" && key !== "description"){
+                    let div = document.createElement("div");
+                    div.innerHTML = key;
+                    div.classList.add("dropDownItem");
+                    div.dataset.subject = subject,
+                    div.dataset.subSubject = subSubject,
+                    div.dataset.topic = key,
+                div.addEventListener("click", goToSubj);
+                document.querySelector('.dropDown').append(div);
+                }
+            }
         }
     }
-    bSearchScreen = true
 }
 
+/* goToSubject
+--------------------------------------------------------------
+Description: temp */
+const goToSubj = (event) => {
+    let subject = event.currentTarget.dataset.subject;
+    let subSubject = event.currentTarget.dataset.subSubject
+    let topic = event.currentTarget.dataset.topic
+    hideSearchScreen(event);
+    document.querySelector(".page.learning.subjects").classList.remove("active");
+    document.querySelector(".page.learning.content").classList.add("active");
+    subjectLearningPage(subject);
+
+    // ----- go for sub-subject ----------------
+    let placeInArr = Object.keys(DATA[subject].learningContent).indexOf(subSubject);
+    console.log(document.querySelector(`.sub-topics-container[data-subsubject="${subSubject}"]`));
+    subTopicList = document.querySelectorAll(`.sub-topics-container`);
+    let counter = 0;
+
+    const _clickSub = () => {
+        console.log('click');
+        if (counter < placeInArr) {
+            console.log(document.querySelector(`.sub-topics-container[data-subsubject="${subSubject}"]`), placeInArr)
+            document.querySelector(`.sub-topics-container[data-subsubject="${subSubject}"]`).click();
+            counter++;
+        } else {
+            return(clearInterval(interval));
+        }
+    }
+
+    const interval = setInterval(_clickSub, 100 * placeInArr);
+
+}
 
 // יצירת קלפים ללמידה
 function createStudyCards(currentSubject) {
@@ -2006,9 +2049,8 @@ function subjectLearningPage(subject) {
             } 
         });
     document.querySelector(".page.learning.content").append(backBtn);
-
     // הוספת כפתור תרגול
-    if (DATA[subject].questionsPractice && DATA[subject].questionsPractice.length !== 0) {
+    if (DATA[subject].amountOfQuestions !== 0 && DATA[subject].questionsPractice && Object.keys(DATA[subject].questionsPractice).length !== 0) {
         let practiceBtn =
             El("img", {
                 attributes: { class: "practice-btn", src: "../assets/images/general/practice_btn.svg" },
@@ -2040,10 +2082,10 @@ function subjectLearningPage(subject) {
 
         // יוצר תת נושא ואת כל תת תת הנושאים
         let subTopic =
-            El("div", { cls: "sub-topics-container" },
+            El("div", { cls: "sub-topics-container", attributes: {"data-subSubject": sub}  },
                 El("div", { cls: "sub-topic" },
                     El("img", { attributes: { class: "arrow", src: "../assets/images/learning/openArrow_icon.svg" } }),
-                    El("div", { cls: "sub-title" }, sub),
+                    El("div", { cls: "sub-title",}, sub),
                 ),
                 // יוצר מערך של אלמנטים ומעביר כל אלמנט בנפרד מחוץ למערך (...=)
                 ...subSubTopics.map(
@@ -2154,10 +2196,10 @@ function subjectLearningPage(subject) {
 
     // מאזין לגלילה של התתי נושאים, הופך את הנושאים שלא ממורכזים לבעלי שקיפות
     document.querySelector(".page.learning.content .container-subjects").addEventListener("scroll", function () {
+        console.log('scroll')
         let midPage = window.innerWidth / 2;
         let smallestDifference = 1000;
         let count = 0;
-
         for (let sub of this.children) {
             let pos = sub.getBoundingClientRect();
             let _positonX = pos.x ? pos.x : 70;
@@ -2165,7 +2207,7 @@ function subjectLearningPage(subject) {
             // בדיקה מה האלמנט שנמצא כרגע במרכז המסך
             if (Math.abs(midPage - positionX) < smallestDifference) {
                 let el = document.querySelector(".sub-topics-container.open");
-
+                // סוגר את רשימת תתי הנושאים אם היא פתוחה
                 if (el !== null && el !== this) {
                     el.classList.remove("open");
                     animateDims(el, true, "height");
@@ -2175,9 +2217,9 @@ function subjectLearningPage(subject) {
                 midElPlace = count;
             }
             count++;
-            sub.style.opacity = "0.6";
+            sub.classList.add("opacity");
         }
-        midElement.style.opacity = "";
+        midElement.classList.remove("opacity");
 
         let cardGroup = document.querySelectorAll(".page.learning.content .card-group");
 

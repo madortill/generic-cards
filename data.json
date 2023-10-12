@@ -1,32 +1,66 @@
 {
-    "TITLE": "לומדה",
+    "TITLE": "שגכש",
     "AMOUNT_EXAM_QUESTIONS": 0,
     "TIME_FOR_EXAM ": "00:00",
     "DATA": {
-        "נושא 1": {
-            "icon": "../assets/images/learning/Artboard 4.svg",
+        "1": {
             "amountOfQuestions": {},
             "questionsExam": {},
             "questionsPractice": {},
             "learningContent": {
-                "תת נושא 1": {
-                    "כותרת קטנה": [
+                "בלה": {
+                    "אחת": [
+                        {
+                            "cardType": "youtube",
+                            "content": "דגכשד",
+                            "youtube": "https://www.youtube-nocookie.com/embed/hMPK2vNXr-E"
+                        }
+                    ],
+                    "שתיים": [
                         {
                             "cardType": "text",
-                            "content": "טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט"
+                            "content": "שדג"
+                        }
+                    ]
+                },
+                "תת נושא 2": {
+                    "שלוש": [
+                        {
+                            "cardType": "text",
+                            "content": "שדגכ"
+                        }
+                    ]
+                },
+                "תת נושא 3": {
+                    "ארבע": [
+                        {
+                            "cardType": "text",
+                            "content": "שדגכ"
+                        },
+                        {
+                            "cardType": "text",
+                            "content": "2"
+                        }
+                    ]
+                },
+                "תת נושא 4": {
+                    "חמש": [
+                        {
+                            "cardType": "text",
+                            "content": "שדגכ"
                         }
                     ]
                 }
-            }
+            },
+            "icon": "../assets/images/learning/Artboard 4.svg"
         }
     },
     "THEME": {
-        "name": "ballet-pink",
-        "hebrawName": "ורוד-בלט",
-        "primaryColor": "#f97394",
-        "secondaryColor": "#ffb3c6",
-        "textColor": "#3a1820",
-        "gradient": "#ff8fab",
-        "buttonsColor": "#3a1820"
+        "name": "lightBlue",
+        "primaryColor": "#20c5f2",
+        "secondaryColor": "#1de8f7",
+        "textColor": "#1c3f55",
+        "gradient": "#27c5f2",
+        "buttonsColor": "#1c3f55"
     }
 }

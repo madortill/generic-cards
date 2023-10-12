@@ -72,6 +72,17 @@ body {
   transform: scale(0.95);
 }
 
+.page .search {
+  width: 7vw;
+  left: 3vw;
+  top: 2vw;
+  position: fixed;
+}
+
+.page .search:active {
+  transform: scale(0.95);
+}
+
 /* איקס סגירה להודעות קופצות */
 .close-btn {
   position: absolute;

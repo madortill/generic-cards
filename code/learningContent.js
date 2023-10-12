@@ -19,7 +19,6 @@ let TITLE;
 
 fetch('../data.json')
 .then((response) => {
-        console.log('json received');
         response.json()
             .then((result) => { 
                 THEME = result.THEME;
@@ -80,7 +79,6 @@ CARD_TYPES.videoAndText = {
 
 CARD_TYPES.youtube = {
     init(card, json) {
-        console.log(card);
         if (!json.youtube.includes("embed")) {
             throw new Error("Make sure all youtube links are ment to be embedded and not watched");
         } else {

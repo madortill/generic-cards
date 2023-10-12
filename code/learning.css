@@ -272,6 +272,10 @@
 .page.learning.content .sub-topics-container.open {
   max-height: 100vh;
 }
+
+.opacity {
+  opacity: 0.6;
+}
 /* 
 .page.learning.content .container-subjects::before {
   display: block;
