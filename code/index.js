@@ -198,6 +198,7 @@ const onClickSearch = () => {
     // מראה את תיבת החיפוש
     document.querySelector('.searchBoxHolder').classList.remove("hidden");
     document.querySelector('.searchBox').classList.remove("hidden");
+    document.querySelector('.searchBox').focus();
     // מעלים כותרת וכפתורים ומשנה גל
     // הופך את המסך לשחור
     document.querySelector('.searchScreen').classList.add("darkScreen");
@@ -210,11 +211,12 @@ const onClickSearch = () => {
 --------------------------------------------------------------
 Description:  */
 const hideSearchScreen = (event) => {
-    if (event.target.classList.contains('darkScreen') || event.target.classList.contains('dropDownItem')) {
+    if (event.target.classList.contains('darkScreen') || event.target.classList.contains('hide-search')) {
         // מעלים מסך חיפוש
         document.querySelector('.darkScreen').removeEventListener("click", hideSearchScreen);
         document.querySelector('.searchBoxHolder').classList.add("hidden");
         document.querySelector('.searchBox').classList.add("hidden");
+        document.querySelector('.searchBox').value = '';
         document.querySelector('.dropDown').classList.add("hidden");
         document.querySelector('.searchScreen').classList.remove("darkScreen");
     }
@@ -237,8 +239,8 @@ const onSearch = () => {
                 //Push the current match to it.
                 if(key.includes(strUserInput) && strUserInput !== "" && key !== "description"){
                     let div = document.createElement("div");
-                    div.innerHTML = key;
-                    div.classList.add("dropDownItem");
+                    div.innerHTML = `<p class='search-topic hide-search'> ${key} </p> <p class='search-subject hide-search'>נושא: ${subject}</p>`;
+                    div.classList.add("dropDownItem", "hide-search");
                     div.dataset.subject = subject,
                     div.dataset.subSubject = subSubject,
                     div.dataset.topic = key,
@@ -252,7 +254,7 @@ const onSearch = () => {
 
 /* goToSubject
 --------------------------------------------------------------
-Description: temp */
+Description: go to the clicked card form search */
 const goToSubj = (event) => {
     let subject = event.currentTarget.dataset.subject;
     let subSubject = event.currentTarget.dataset.subSubject
@@ -262,9 +264,8 @@ const goToSubj = (event) => {
     document.querySelector(".page.learning.content").classList.add("active");
     subjectLearningPage(subject);
 
-    // ----- go for sub-subject ----------------
+    // ****** go for sub-subject ******
     let placeInArr = Object.keys(DATA[subject].learningContent).indexOf(subSubject);
-    console.log(document.querySelector(`.sub-topics-container[data-subsubject="${subSubject}"]`));
     subTopicList = document.querySelectorAll(`.sub-topics-container`);
     let counter = 0;
 
@@ -275,7 +276,9 @@ const goToSubj = (event) => {
             document.querySelector(`.sub-topics-container[data-subsubject="${subSubject}"]`).click();
             counter++;
         } else {
-            return(clearInterval(interval));
+            clearInterval(interval);
+            // ****** scroll to relevant card ******
+            setTimeout(() => {document.querySelector(`.card[data-topic='${topic}']`).scrollIntoView({behavior: "smooth"})}, 150 * placeInArr);
         }
     }
 
@@ -2142,7 +2145,7 @@ function subjectLearningPage(subject) {
         }
         // יוצר אלמנט של קונטיינר לתוכן (כדי שתהיה גלילה יפה בתוך הכרטיסייה)
         let container = El("div", { cls: "content-container" });
-        let card = El("div", { classes: ["card", getType(json[index].cardType)] }, container);
+        let card = El("div", { classes: ["card", getType(json[index].cardType)], attributes: {"data-topic": title} }, container);
         container.append(template.content.cloneNode(true));
         let cardType = CARD_TYPES[json[index].cardType]; 
         cardType.init(card, json[index]);

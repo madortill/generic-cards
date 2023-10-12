@@ -19,7 +19,6 @@
     box-sizing: border-box;
 }
 
-
 .searchBox {
     width: 52vw;
     border-radius: 10vw;
@@ -33,6 +32,10 @@
     z-index: 2;
     outline: none;
     font-size: 1.1em;
+}
+
+.searchBox:focus {
+   outline: 3px black solid; 
 }
 
 .bg-img {
@@ -61,11 +64,20 @@
     background-color: #f4f4f4;
     color: var(--text-color);
     box-sizing: border-box;
-    display: flex;
+    /* display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
+    text-align: center;
     font-size: 1.1em;
     /* margin-bottom: 1.5vh; */
+}
+
+.dropDownItem p {
+    margin: 0;
+}
+
+.dropDownItem :first-child {
+    margin-top: 1%;
 }
 
 .darkScreen {
@@ -79,4 +91,12 @@
 
 .hidden {
     display: none;
+}
+
+.search-subject {
+    font-size: 0.8em;
+}
+
+.search-topic {
+    font-weight: 600;
 }

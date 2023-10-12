@@ -53,6 +53,81 @@
                 }
             },
             "icon": "../assets/images/learning/Artboard 4.svg"
+        },
+        "2": {
+            "amountOfQuestions": {},
+            "questionsExam": {},
+            "questionsPractice": {},
+            "learningContent": {
+                "בלה": {
+                    "אחת": [
+                        {
+                            "cardType": "youtube",
+                            "content": "דגכשד",
+                            "youtube": "https://www.youtube-nocookie.com/embed/hMPK2vNXr-E"
+                        }
+                    ],
+                    "שתיים": [
+                        {
+                            "cardType": "text",
+                            "content": "שדג"
+                        }
+                    ]
+                },
+                "תת נושא 2": {
+                    "שלוש": [
+                        {
+                            "cardType": "text",
+                            "content": "שדגכ"
+                        }
+                    ],
+                    "time": [
+                        {
+                            "cardType": "text",
+                            "content": "שדגכ"
+                        }
+                    ],
+                    "time1": [
+                        {
+                            "cardType": "text",
+                            "content": "שדגכ"
+                        }
+                    ],
+                    "time2": [
+                        {
+                            "cardType": "text",
+                            "content": "שדגכ"
+                        }
+                    ],
+                    "time3": [
+                        {
+                            "cardType": "text",
+                            "content": "שדגכ"
+                        }
+                    ]
+                },
+                "תת נושא 3": {
+                    "ארבע": [
+                        {
+                            "cardType": "text",
+                            "content": "שדגכ"
+                        },
+                        {
+                            "cardType": "text",
+                            "content": "2"
+                        }
+                    ]
+                },
+                "תת נושא 4": {
+                    "חמש": [
+                        {
+                            "cardType": "text",
+                            "content": "שדגכ"
+                        }
+                    ]
+                }
+            },
+            "icon": "../assets/images/learning/Artboard 4.svg"
         }
     },
     "THEME": {
