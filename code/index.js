@@ -270,9 +270,8 @@ const goToSubj = (event) => {
     let counter = 0;
 
     const _clickSub = () => {
-        console.log('click');
+
         if (counter < placeInArr) {
-            console.log(document.querySelector(`.sub-topics-container[data-subsubject="${subSubject}"]`), placeInArr)
             document.querySelector(`.sub-topics-container[data-subsubject="${subSubject}"]`).click();
             counter++;
         } else {
@@ -404,7 +403,6 @@ function beforePractice() {
         let key = SUBJECTS_TITLES[i];
         if (DATA[key].questionsExam && DATA[key].questionsExam.length !== 0) { 
             subjectsWithPractice.push(SUBJECTS_TITLES[i]);
-            console.log(SUBJECTS_TITLES[i])
         }
     }
     // הוספת כל נושאי הלמידה האפשריים לתרגול
@@ -479,7 +477,6 @@ function beforePractice() {
 
 function questionsToPractice() {
     let selectedQuestions = [];
-    console.log(SUBJECTS_TITLES);
     let subjects = SUBJECTS_TITLES.filter((_, i) => selectedSubjects[i]);
 
     // מקסימום כמות השאלות לכל נושא
@@ -1194,7 +1191,6 @@ function insertFullName_popup() {
                     firstName = document.querySelector(".page .instructions :nth-child(2)").value;
                     lastName = document.querySelector(".page .instructions :nth-child(4)").value;
                     document.querySelector(".page.learning.subjects .start-btn").classList.add("done"); 
-                    // console.log( `${firstName} ${lastName}`);
                 }
             }
         }
@@ -1914,7 +1910,6 @@ function endExam(amountOfCorrectAnswers) {
         showAnswersExam();
         //גילוי עיגול אדום או ירוק לפי התשובה על הניווט התחתון עם המספרים
         document.querySelector(".page.exam .questions-number").scrollLeft = document.querySelector(".page.exam .questions-number").offsetWidth;
-        // console.log(document.querySelector(".page.exam .questions-number").offsetWidth);
         showQuestionsValidity();
         //
         ifAnswer();
@@ -2199,7 +2194,6 @@ function subjectLearningPage(subject) {
 
     // מאזין לגלילה של התתי נושאים, הופך את הנושאים שלא ממורכזים לבעלי שקיפות
     document.querySelector(".page.learning.content .container-subjects").addEventListener("scroll", function () {
-        console.log('scroll')
         let midPage = window.innerWidth / 2;
         let smallestDifference = 1000;
         let count = 0;
