@@ -1,1 +1,1 @@
-לומדת כרטיסיות גנרית - קורא את המידע מתוך קובץ JSON שנמצא ב root
+Reads info form <data.json> in the root folder (generic-cards)
