@@ -7,10 +7,10 @@
 
                         HOW TO CREATE NEW COLOR
             search for the listed colors and switch to the desired ones
-    1. Primary color: #1aa3a3;
-    2. Secondary color: #67dfcb;
-    3. Text color: #1f3e3e
-    4. Open image + gradient color: #629191;
+    1. primaryColor: #1aa3a3;
+    2. secondaryColor: #67dfcb;
+    3. textColor: #1f3e3e
+    4. gradient: #629191;
 */
 
 let THEME;
