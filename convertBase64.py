@@ -2,12 +2,20 @@ import io
 import json
 import base64
 import re
+import os
 
 currImg = 0
 
-jsonFile = io.open("./data.json", mode="r", encoding="utf-8")
-jsonData = json.loads(jsonFile.read())
-jsonFile.close()
+#  import the data
+if (not os.path.exists("./data.json")):
+    raise Exception("./data.json does not exist")
+elif (os.path.getsize("./data.json") < 105000000):
+    jsonFile = io.open("./data.json", mode="r", encoding="utf-8")
+    jsonData = json.loads(jsonFile.read())
+    jsonFile.close()
+else:
+    raise Exception("data.json is too big to process")
+
 
 def convertBase64 (base64str, picOrvideo):
     print('convertBase64')
@@ -29,7 +37,16 @@ def findPic(json):
         print('index ' + str(index))
         if (index == 'pic' or index == 'video'):
             filepath = convertBase64(json[index], index)
+            json[index] = str(filepath).replace('\\', '/')
         elif (type(json[index]) == list or type(json[index]) == dict):
             findPic(json[index])
 
+
+
 findPic(jsonData["DATA"])
+print(jsonData)
+
+# # export processedData
+with io.open("./data.json", mode="w", encoding="utf-8") as jsonFile:
+    stringified = json.dumps(jsonData, ensure_ascii=False)
+    jsonFile.write(stringified)
