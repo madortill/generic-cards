@@ -28,6 +28,7 @@ colorConverter = {}
 for key in currentColors: 
     colorConverter[currentColors[key]] = newColors[key]
 
+print('colorConverter:')
 print(colorConverter)
 
 def replaceColorsInFile (path):
@@ -51,9 +52,15 @@ def getAllSvgs (dir):
 
 # replace colors
 getAllSvgs('assets\images')
+# generalStyle and processData are in different directory, so we call them manually
 replaceColorsInFile('code\generalStyle.css')
 replaceColorsInFile('code\processData.js')
+
+
 
 #  TO DO
 # determine currect color by CSS and not js?
 # convert base64 to files
+#upload to git
+#open new-repo url and copy name to clip-board
+# run shell command / pythonGit
