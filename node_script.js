@@ -61,7 +61,7 @@ const changeClassNames = (data, file) => {
   } else if (data.match(/(?<=[.(=")])cls-(?=[0-9])/g)) {
     return (data.replace(/(?<=[.(=")])cls-(?=[0-9])/g, makeFileNameVariable(file)));
   } else {
-    return fileContent
+    return data
   }
 }
 
