@@ -22,7 +22,7 @@
       }
 
       .cls-20, .cls-22, .cls-38, .cls-4 {
-        fill: #1aa3a3;
+        fill: var( --primary-color);
       }
 
       .cls-17, .cls-18, .cls-31, .cls-32, .cls-5 {

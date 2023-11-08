@@ -39,14 +39,6 @@
   justify-content: center;
 }
 
-.page.exam .timer {
-  background-image: url("../assets/images/exam/timer.svg");
-}
-
-.page.exam .questionNumber {
-  background-image: url("../assets/images/exam/questionNumber.svg");
-}
-
 .page.exam .questionNumber,
 .page.exam .timer {
   background-size: 100% 100%;

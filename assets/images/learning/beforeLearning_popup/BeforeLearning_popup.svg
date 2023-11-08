@@ -27,7 +27,7 @@
       }
 
       .cls-4 {
-        fill: #67dfcb;
+        fill: var(--secondary-color);
       }
 
       .cls-5 {

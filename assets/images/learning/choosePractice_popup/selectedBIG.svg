@@ -2,8 +2,8 @@
   <defs>
     <style>
       .cls-1 {
-        fill: #67dfcb;
-        stroke: #67dfcb;
+        fill: var(--secondary-color);
+        stroke: var(--secondary-color);
         stroke-width: 5px;
       }
 

@@ -5,7 +5,7 @@
 <style type="text/css">
 	.st0{fill:#FFFFFF;stroke:#DBDBDB;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;}
 	.st1{enable-background:new    ;}
-	.st2{fill:#1f3e3e;}
+	.st2{fill:var(--text-color);}
 </style>
 <g id="Group_503" transform="translate(25 3)">
 	<path id="Rectangle_48" class="st0" d="M1,0h218c12.7,0,23,10.3,23,23v49.7c0,12.7-10.3,23-23,23H1c-12.7,0-23-10.3-23-23V23

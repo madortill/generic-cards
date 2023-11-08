@@ -5,7 +5,7 @@
 <style type="text/css">
 	.st0{fill:#FFFFFF;}
 	.st1{enable-background:new    ;}
-	.st2{fill:#1f3e3e;}
+	.st2{fill:var(--text-color);}
 </style>
 <g id="Group_509" transform="translate(-509.167 -124.528)">
 	<g id="Group_33" transform="translate(-9.095 46.473)">
