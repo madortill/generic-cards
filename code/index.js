@@ -294,6 +294,7 @@ function createStudyCards(currentSubject) {
             ),
             El("div", { cls: "subject" }, currentSubject)
         );
+    card.innerHTML +=  "<svg data-src ='../assets/images/learning/subject_btn.svg' class='background-image'></svg>"    
     document.querySelector(".page.learning.subjects .cards-container").append(card); 
     card.addEventListener("click", () => {
         document.querySelector(".page.learning.subjects").classList.remove("active");
@@ -312,11 +313,7 @@ function beforePractice() {
     let popup =
         El("div", { cls: "dark" },
             El("div", { cls: "beforePractice-popup" },
-                El("svg", {
-                    attributes: {
-                        "data-src": "../assets/images/general/close_btn.svg", class: "close-btn"
-                    }
-                }),
+                El("div", { cls:'background-image beforePractice-popup'}),
                 // כותרת
                 El("div", { cls: "title-popup" }, 
                     El("svg", {attributes: {"data-src": '../assets/images/exam/name_bg.svg', class: "background-image"}}),
@@ -359,6 +356,7 @@ function beforePractice() {
                 El("svg", { attributes: { class: "practiceBTN-popup", "data-src": "../assets/images/learning/choosePractice_popup/choosePractice_btn.svg" } })
             )
         );
+    popup.querySelector(".background-image.beforePractice-popup").innerHTML += "<svg data-src ='../assets/images/general/close_btn.svg' class='background-image'></svg>"
     document.querySelector(".page.learning.subjects").append(popup);
 
     // מערך שבו רשום המיקום של הנושא לפי סדר ההופעה שלו בג'ייסון
@@ -2143,7 +2141,7 @@ function subjectLearningPage(subject) {
         // יוצר אלמנט של קונטיינר לתוכן (כדי שתהיה גלילה יפה בתוך הכרטיסייה)
         let container = El("div", { cls: "content-container" });
         let card = El("div", { classes: ["card", getType(json[index].cardType)], attributes: {"data-topic": title} });
-        card.append(El("svg", {attributes: {"data-src": '../assets/images/learning/learning.svg', class: "background-image"}}));
+        card.innerHTML = "<svg data-src='../assets/images/learning/learning.svg', class='background-image'></svg>"
         card.append(container);
         container.append(template.content.cloneNode(true));
         let cardType = CARD_TYPES[json[index].cardType]; 

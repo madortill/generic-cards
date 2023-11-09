@@ -1,5 +1,5 @@
 ../assets/images/learning/Artboard 4.svg
-../assets/images/learning/learning.svg
+
 ../assets/images/learning/subject_btn.svg
 ../assets/images/practice/card.svg
 ../assets/images/practice/nextQuestionBtnArrows.svg
