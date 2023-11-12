@@ -14,7 +14,7 @@ const getAllSvgs = (dir) => {
             //   { flag: 'a+' },
             //   () => {});
             fs.writeFile(`svgName.json`, 
-              `"${makeFileNameVariable(file)}Svg": "<svg class='background-image' data-src='../${dir}/${file}'></svg>", \n`,
+              `"${makeFileNameVariable(file)}Svg": "'<svg class='background-image' data-src='../${dir}/${file}'></svg>'", \n`,
               { flag: 'a+' },
               () => {});
           }
@@ -52,7 +52,7 @@ const isDynamic = (filePath, file) => {
 // clear svgNames
 fs.writeFileSync(`svgName.json`, '{')
 getAllSvgs("assets");
-fs.appendFile(`assets/svgName.json`, 
+fs.appendFile(`svgName.json`, 
 `}`, function (err) {
   if (err) throw err;
   console.log('Saved!');
