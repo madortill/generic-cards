@@ -1,7 +1,7 @@
 import json
 import io
 
-svgName = open("svgName.json", "r")
+svgName = io.open("svgName.json", mode="r", encoding='utf-8')
 fileConverter = json.loads(svgName.read())
 svgName.close()
 
@@ -16,7 +16,7 @@ def replaceColorsInFile (path):
     file.close()
 
     for key in fileConverter:
-        data = data.replace(key, fileConverter[key])
+        data = data.replace(f' {key}', fileConverter[key])
     file = io.open(path, mode="w", encoding='utf-8')
     file.write(data)
     file.close()

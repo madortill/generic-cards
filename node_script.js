@@ -14,7 +14,7 @@ const getAllSvgs = (dir) => {
             //   { flag: 'a+' },
             //   () => {});
             fs.writeFile(`svgName.json`, 
-              `"${makeFileNameVariable(file)}Svg": "'<svg class='background-image' data-src='../${dir}/${file}'></svg>'", \n`,
+              `"${makeFileNameVariable(file)}Svg": "\\"<svg class='background-image' data-src='../${dir}/${file}'></svg>\\"", \n`,
               { flag: 'a+' },
               () => {});
           }
@@ -68,9 +68,8 @@ console.log('files added: ' + fileCount);
 
 /* duplicated:
   "nextQuestion_btnSvg": "<svg class='background-image' data-src='../assets/images/practice/nextQuestion_btn.svg'></svg>",
-  "back_btnSvg": "<svg class='background-image' data-src='../assets/images/practice/missQuestion_popup/back_btn.svg'></svg>",
+  
   "timer_iconSvg": "<svg class='background-image' data-src='../assets/images/practice/beforePractice_popup/timer_icon.svg'></svg>", 
   "slide_iconSvg": "<svg class='background-image' data-src='../assets/images/practice/beforePractice_popup/slide_icon.svg'></svg>", 
   "timer_iconSvg": "<svg class='background-image' data-src='../assets/images/general/finish_popup/timer_icon.svg'></svg>", 
-  "back_btnSvg": "<svg class='background-image' data-src='../assets/images/general/back_btn.svg'></svg>", 
 */
