@@ -23,10 +23,13 @@ body {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   overflow: hidden;
+}
+
+:root {
   --primary-color: #6c1aa3;
-  --secondary-color: #df67d1;
+  --secondary-color: rgb(103, 163, 223);
   --text-color: #3e1f3e;
-  --gradient-color: #916279;
+  --gradient-color: #fffcfd;
 }
 
 *:has(svg.background-image) {

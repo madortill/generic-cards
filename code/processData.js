@@ -17,18 +17,34 @@ let THEME;
 let DATA;
 let TITLE;
 
-fetch('../data.json')
+//  Get json of data
+let url = new URL(window.location.href)
+let dataPath = url.searchParams.get('path')
+
+fetch(`../data/${dataPath}.json`)
 .then((response) => {
         response.json()
             .then((result) => { 
                 THEME = result.THEME;
                 TITLE = result.TITLE;
                 DATA = result.DATA;
+                //  determine colors
+                changeColors();
+
                 afterLoaded();
              })
             .catch((err) => { console.log(err) });
     })
     .catch((err) => { console.log(err) });
+
+const changeColors = () => {
+    let rootEl = document.querySelector(":root");
+    rootEl.style.setProperty("--primary-color", THEME.primaryColor);
+    rootEl.style.setProperty("--secondary-color", THEME.secondaryColor);
+    rootEl.style.setProperty("--text-color", THEME.textColor);
+    rootEl.style.setProperty("--gradient-color", THEME.gradient);
+    rootEl.style.setProperty("--buttons-color", THEME.buttonsColor);
+}
 
 
 //  Max number of question in exam. Make sure it isn't more than the number of questions we have!
@@ -38,10 +54,7 @@ const TIME_FOR_EXAM = "10:00";
 
 
 
-/********************************************************************************************************/
-/********************************************************************************************************/
-/********************************************************************************************************/
-/*****  אובייקטים לפי סוג הכרטיסייה המכניסים את התוכן של כל כרטיסייה אל תוך הכרטיסייה  ********/
+/* אובייקטים לפי סוג הכרטיסייה המכניסים את התוכן של כל כרטיסייה אל תוך הכרטיסייה */
 
 /**
  * # @type {{[index: string]: {init: (card: HTMLElement, json: any) => void}}}

@@ -51,7 +51,7 @@ const isDynamic = (filePath, file) => {
 
 // clear svgNames
 fs.writeFileSync(`svgName.json`, '{')
-getAllSvgs("assets");
+getAllSvgs("../assets");
 fs.appendFile(`svgName.json`, 
 `}`, function (err) {
   if (err) throw err;

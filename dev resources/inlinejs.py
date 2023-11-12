@@ -21,7 +21,7 @@ def replaceColorsInFile (path):
     file.write(data)
     file.close()
 
-replaceColorsInFile('code\index.js')
+replaceColorsInFile('..\code\index.js')
 #  TO DO
 #upload to git
 # run shell command / pythonGit

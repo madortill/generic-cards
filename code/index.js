@@ -117,6 +117,101 @@ document.querySelector(".page.about .back-btn").addEventListener("click", () => 
 });
 }
 
+
+/* onClickSearch
+--------------------------------------------------------------
+Description: Adds search box and listener to input */
+const onClickSearch = () => {
+    // מראה את תיבת החיפוש
+    document.querySelector('.searchBoxHolder').classList.remove("hidden");
+    document.querySelector('.searchBox').classList.remove("hidden");
+    document.querySelector('.searchBox').focus();
+    // מעלים כותרת וכפתורים ומשנה גל
+    // הופך את המסך לשחור
+    document.querySelector('.searchScreen').classList.add("darkScreen");
+
+    document.querySelector('.darkScreen').addEventListener("click", hideSearchScreen);
+    document.querySelector('.searchBox').addEventListener('input', onSearch);
+}
+
+/* hideSearchScreen
+--------------------------------------------------------------
+Description:  */
+const hideSearchScreen = (event) => {
+    if (event.target.classList.contains('darkScreen') || event.target.classList.contains('hide-search')) {
+        // מעלים מסך חיפוש
+        document.querySelector('.darkScreen').removeEventListener("click", hideSearchScreen);
+        document.querySelector('.searchBoxHolder').classList.add("hidden");
+        document.querySelector('.searchBox').classList.add("hidden");
+        document.querySelector('.searchBox').value = '';
+        document.querySelector('.dropDown').classList.add("hidden");
+        document.querySelector('.searchScreen').classList.remove("darkScreen");
+    }
+}
+
+/* onSearch
+--------------------------------------------------------------
+Description: check for search match and creat dropdown accordingly */
+const onSearch = () => {
+    document.querySelector('.dropDown').style.pointerEvents = "all";
+    // Saves user input in a variable and resets the dropdown html.
+    let strUserInput = document.querySelector('.searchBox').value;
+    document.querySelector('.dropDown').innerHTML = "";
+    document.querySelector('.dropDown').style.zIndex = "2";
+    document.querySelector('.dropDown').classList.remove("hidden");
+    // Goes over the object to check for a search match.
+    for (const subject of Object.keys(DATA)){
+        for(const subSubject of Object.keys(DATA[subject].learningContent)){
+            for(const key of Object.keys(DATA[subject]['learningContent'][subSubject])){
+                //Push the current match to it.
+                if(key.includes(strUserInput) && strUserInput !== "" && key !== "description"){
+                    let div = document.createElement("div");
+                    div.innerHTML = `<p class='search-topic hide-search'> ${key} </p> <p class='search-subject hide-search'>נושא: ${subject}</p>`;
+                    div.classList.add("dropDownItem", "hide-search");
+                    div.dataset.subject = subject,
+                    div.dataset.subSubject = subSubject,
+                    div.dataset.topic = key,
+                div.addEventListener("click", goToSubj);
+                document.querySelector('.dropDown').append(div);
+                }
+            }
+        }
+    }
+}
+
+/* goToSubject
+--------------------------------------------------------------
+Description: go to the clicked card form search */
+const goToSubj = (event) => {
+    let subject = event.currentTarget.dataset.subject;
+    let subSubject = event.currentTarget.dataset.subSubject
+    let topic = event.currentTarget.dataset.topic
+    hideSearchScreen(event);
+    document.querySelector(".page.learning.subjects").classList.remove("active");
+    document.querySelector(".page.learning.content").classList.add("active");
+    subjectLearningPage(subject);
+
+    // ****** go for sub-subject ******
+    let placeInArr = Object.keys(DATA[subject].learningContent).indexOf(subSubject);
+    subTopicList = document.querySelectorAll(`.sub-topics-container`);
+    let counter = 0;
+
+    const _clickSub = () => {
+
+        if (counter < placeInArr) {
+            document.querySelector(`.sub-topics-container[data-subsubject="${subSubject}"]`).click();
+            counter++;
+        } else {
+            clearInterval(interval);
+            // ****** scroll to relevant card ******
+            setTimeout(() => {document.querySelector(`.card[data-topic='${topic}']`).scrollIntoView({behavior: "smooth"})}, 150 * placeInArr);
+        }
+    }
+
+    const interval = setInterval(_clickSub, 100 * placeInArr);
+
+}
+
 // -------------------------------------------------------------------------------------
 // אתחול עמוד הנושאים ללמידה
 function learningSubjectsPage() {
@@ -148,6 +243,16 @@ function learningSubjectsPage() {
         }
     });
     backBtn.innerHTML =  "<svg data-src='../assets/images/general/back_btn.svg'></svg>";
+    
+    let search =
+    El("img", {
+        attributes: { class: "search", src: "../assets/images/general/search.svg" },
+        listeners: {
+            click: onClickSearch
+        }
+    });
+    
+    document.querySelector(".page.learning.subjects").append(search);
     document.querySelector(".page.learning.subjects").append(backBtn);
 
 
@@ -185,7 +290,7 @@ function createStudyCards(currentSubject) {
     let iconType = DATA[currentSubject].icon.includes("<svg") ? 'div' : 'img';
     let card =
         El("div", { cls: "learningCard" });
-    card.innerHTML ="<svg class='background-image' data-src='../assets/images/learning/subject_btn.svg'></svg>";
+    card.innerHTML ="<svg class='background-image learning-card-svg' data-src='../assets/images/learning/subject_btn.svg'></svg>";
     card.append(
         El(iconType, { attributes: { src: DATA[currentSubject].icon, class: "icon" } },),
             El("div", { cls: "subject" }, currentSubject))

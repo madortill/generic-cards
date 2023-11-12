@@ -3,7 +3,7 @@
 	<defs>
 		<style>
 			.a{
-                fill: var(--secondary-color);}
+                fill: #0000000;}
             .b{fill:none;stroke:#f2f2f2;stroke-miterlimit:10;stroke-width:12.1164px;}
             .c{fill:#f2f2f2;}
 		</style>
