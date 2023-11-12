@@ -46,7 +46,7 @@ def findPic(json):
 findPic(jsonData["DATA"])
 print(jsonData)
 
-# # export processedData
+# export processedData
 with io.open("./data/data.json", mode="w", encoding="utf-8") as jsonFile:
     stringified = json.dumps(jsonData, ensure_ascii=False)
     jsonFile.write(stringified)

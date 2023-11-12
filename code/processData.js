@@ -21,6 +21,10 @@ let TITLE;
 let url = new URL(window.location.href)
 let dataPath = url.searchParams.get('path')
 
+if (!dataPath) {
+    location.href = "./404.html";
+}
+
 fetch(`../data/${dataPath}.json`)
 .then((response) => {
         response.json()
@@ -33,9 +37,15 @@ fetch(`../data/${dataPath}.json`)
 
                 afterLoaded();
              })
-            .catch((err) => { console.log(err) });
+            .catch((err) => {
+                sessionStorage.setItem('dataFetchingErr', err.toString()); 
+                location.href = "./404.html";
+             });
     })
-    .catch((err) => { console.log(err) });
+    .catch((err) => { 
+        sessionStorage.setItem('dataFetchingErr', err.toString()); 
+        location.href = "./404.html";
+     });
 
 const changeColors = () => {
     let rootEl = document.querySelector(":root");
