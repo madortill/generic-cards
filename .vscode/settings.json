@@ -3,5 +3,7 @@
     "workbench.colorCustomizations": {
         // "editor.background": "#3a0e3b", 
       },
-      "editor.stickyScroll.enabled": true
+      "editor.stickyScroll.enabled": true,
+      "python.analysis.autoImportCompletions": true,
+      "python.analysis.typeCheckingMode": "off"
 }

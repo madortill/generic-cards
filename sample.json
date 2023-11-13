@@ -1,0 +1,38 @@
+{
+    "TITLE": "כימיה כללית",
+    "AMOUNT_EXAM_QUESTIONS": 0,
+    "TIME_FOR_EXAM ": "00:00",
+    "DATA": {
+        "מבנה וקישור": {
+            "amountOfQuestions": 0,
+            "learningContent": {
+                "חומרים מולקולריים": {
+                    "מים": [
+                        {
+                            "cardType": "picAndText",
+                            "content": "מים מורכבים משני אטומי מימן שמחוברים לאטום חמצן",
+                            "pic": "../data/67641/pic0.jpeg"
+                        }
+                    ],
+                    "סתם סרטון לא קשור": [
+                        {
+                            "cardType": "videoAndText",
+                            "content": "",
+                            "video": "../data/67641/video1.mp4"
+                        }
+                    ]
+                }
+            },
+            "icon": "../assets/images/learning/Artboard 4.svg"
+        }
+    },
+    "THEME": {
+        "name": "ballet-pink",
+        "hebrawName": "ורוד-בלט",
+        "primaryColor": "#f97394",
+        "secondaryColor": "#ffb3c6",
+        "textColor": "#3a1820",
+        "gradient": "#ff8fab",
+        "buttonsColor": "#3a1820"
+    }
+}

@@ -4,6 +4,7 @@ import os
 import time
 import base64
 import re
+import ctypes
 
 '''                  convert files from base64 
 ------------------------------------------------------------------------'''
@@ -28,8 +29,8 @@ def convertBase64 (base64str, picOrvideo):
     fileExtension = re.search(r"(?<=data:.{5}/).*(?=;)", base64str).group(0)
     newBase64str = re.sub(r'data:.*/.*;base64', '', base64str[0: 30]) +  base64str[30::]
     contentToWrite = base64.urlsafe_b64decode(newBase64str)
-    filepath = "./" + str(picOrvideo) + str(currImg) + '.' + str(fileExtension)
-    filepathFromCode = os.path.join("../data", str(unique_id), str(picOrvideo) + str(currImg) + '.' + str(fileExtension))
+    filepath = ".\\" + str(picOrvideo) + str(currImg) + '.' + str(fileExtension)
+    filepathFromCode = os.path.join("..\\data", str(unique_id), str(picOrvideo) + str(currImg) + '.' + str(fileExtension))
     print(filepathFromCode)
     imgFile =  open(filepath, 'wb')
     imgFile.write(contentToWrite)
@@ -47,6 +48,7 @@ def findPic(json):
         elif (type(json[index]) == list or type(json[index]) == dict):
             findPic(json[index])
 
+
 '''                  change names to unique_ids  
 ------------------------------------------------------------------------'''
 idList = []
@@ -63,15 +65,18 @@ def findData(path):
     else:
         raise Exception('no file named data.json exists in ' + str(os.getcwd()))
 
+
 def startConversion (unique_id): 
     jsonData = importData(unique_id)
-    findPic(jsonData["DATA"])
+    if "DATA" in jsonData:
+        findPic(jsonData["DATA"])
+    else:
+        raise Exception('make sure there is a data key in data.json!')
     
     # export data after base64 conversion
-    with io.open(f"./data/{unique_id}/{unique_id}.json", mode="w", encoding="utf-8") as jsonFile:
+    with io.open(f"./{unique_id}.json", mode="w", encoding="utf-8") as jsonFile:
         stringified = json.dumps(jsonData, ensure_ascii=False)
         jsonFile.write(stringified)
-
 
 
 '''                  start running code 
@@ -79,8 +84,8 @@ def startConversion (unique_id):
 allDataFiles = findData('.')
     
 
+unique_id = str(int(time.time()))[5:] #converting to int to round the float, then converting to str
 for file in allDataFiles:
-    unique_id = str(int(time.time()))[5:] #converting to int to round the float, then converting to str
     print(unique_id)
     #  check if dir exists and if not, creates new one
     if not os.path.exists(os.path.join(".\\data\\", str(unique_id))): 
@@ -92,6 +97,7 @@ for file in allDataFiles:
     os.rename(file, newName)
     
     # convert to base 64
+    print('change dir')
     os.chdir(f'.\\data\\{unique_id}')
     startConversion(unique_id)
     os.chdir('../..')
@@ -99,12 +105,15 @@ for file in allDataFiles:
 
     idList.append(unique_id)
     # add id to list of all jsons
-    with open("data/jsonIds.json", "r") as jsonFile:
+    with open("data/id-list.json", "r") as jsonFile:
         data = json.load(jsonFile)
 
     data.append(unique_id)
 
-    with open("data/jsonIds.json", "w") as jsonFile:
+    with open("data/id-list.json", "w") as jsonFile:
         json.dump(data, jsonFile)
 
+    # popup
+    ctypes.windll.user32.MessageBoxW(0, f"link: madortill.github.io/generic-cards-lomdot/?path={unique_id}", "New lomda created!", 0)
 
+    unique_id = str(int(unique_id) + 1)
