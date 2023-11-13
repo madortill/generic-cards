@@ -25,7 +25,7 @@ if (!dataPath) {
     location.href = "./404.html";
 }
 
-fetch(`../data/${dataPath}.json`)
+fetch(`../data/${dataPath}/${dataPath}.json`)
 .then((response) => {
         response.json()
             .then((result) => { 
