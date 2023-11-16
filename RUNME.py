@@ -5,6 +5,24 @@ import time
 import base64
 import re
 import ctypes
+import subprocess
+
+'''                  alert function 
+------------------------------------------------------------------------'''
+MB_ICONSTOP = MB_ICONERROR = MB_ICONHAND = 0x10
+MB_ICONINFORMATION = MB_ICONASTERISK = 0x40
+MB_DEFAULT_DESKTOP_ONLY = 0x20000
+MB_RIGHT = 0x80000
+MB_RTLREADING = 0x100000
+MB_TOPMOST = 0x40000
+
+
+def msgBox(title, text, style='info'):
+    styleCodes = MB_RTLREADING | MB_RIGHT | MB_ICONASTERISK
+    if style == 'error':
+        styleCodes = MB_ICONERROR | MB_RTLREADING | MB_RIGHT | MB_TOPMOST
+    
+    return ctypes.windll.user32.MessageBoxW(None, text, title, styleCodes)
 
 '''                  convert files from base64 
 ------------------------------------------------------------------------'''
@@ -24,14 +42,12 @@ def importData (unique_id):
         raise Exception(f"{unique_id}.json is too big to process")
 
 def convertBase64 (base64str, picOrvideo):
-    print('convertBase64')
     global currImg 
     fileExtension = re.search(r"(?<=data:.{5}/).*(?=;)", base64str).group(0)
     newBase64str = re.sub(r'data:.*/.*;base64', '', base64str[0: 30]) +  base64str[30::]
     contentToWrite = base64.urlsafe_b64decode(newBase64str)
     filepath = ".\\" + str(picOrvideo) + str(currImg) + '.' + str(fileExtension)
     filepathFromCode = os.path.join("..\\data", str(unique_id), str(picOrvideo) + str(currImg) + '.' + str(fileExtension))
-    print(filepathFromCode)
     imgFile =  open(filepath, 'wb')
     imgFile.write(contentToWrite)
     imgFile.close()
@@ -63,6 +79,7 @@ def findData(path):
     if len(result) > 0:
         return result
     else:
+        msgBox('אופס!', 'לא מצאנו אף קובץ שקוראים לו data.json. \n יכול להיות ששמתם אותו במקום אחר?', 'error')
         raise Exception('no file named data.json exists in ' + str(os.getcwd()))
 
 
@@ -86,10 +103,9 @@ allDataFiles = findData('.')
 
 unique_id = str(int(time.time()))[5:] #converting to int to round the float, then converting to str
 for file in allDataFiles:
-    print(unique_id)
+    print('unique_id ' + unique_id)
     #  check if dir exists and if not, creates new one
     if not os.path.exists(os.path.join(".\\data\\", str(unique_id))): 
-        print(os.path.join(".\\data\\", str(unique_id)))
         os.makedirs(os.path.join(".\\data\\", str(unique_id)))
     
     # rename and move the file to id directory inside ./data/
@@ -97,7 +113,6 @@ for file in allDataFiles:
     os.rename(file, newName)
     
     # convert to base 64
-    print('change dir')
     os.chdir(f'.\\data\\{unique_id}')
     startConversion(unique_id)
     os.chdir('../..')
@@ -105,15 +120,25 @@ for file in allDataFiles:
 
     idList.append(unique_id)
     # add id to list of all jsons
-    with open("data/id-list.json", "r") as jsonFile:
+    with open("./data/id-list.json", "r") as jsonFile:
         data = json.load(jsonFile)
 
     data.append(unique_id)
 
-    with open("data/id-list.json", "w") as jsonFile:
+    with open("./data/id-list.json", "w") as jsonFile:
         json.dump(data, jsonFile)
 
-    # popup
-    ctypes.windll.user32.MessageBoxW(0, f"link: madortill.github.io/generic-cards-lomdot/?path={unique_id}", "New lomda created!", 0)
 
-    unique_id = str(int(unique_id) + 1)
+# run powershell code (upload to git + copy to clip board) and show results
+p = subprocess.run(["powershell.exe", "./copy.ps1", unique_id], capture_output=True)
+error = p.stderr.decode('utf-8')
+if error:
+    message = 'הייתה בעיה בהעלאה לגיט. \n יש לעשות את ההעלאה באופן ידני. \n הסתכלו בטרמינל.'
+    if re.search(r'^fatal: (.+)', error) != None:
+        message = 'הייתה בעיה בהעלאה לגיטהאב. \n יש לעשות את ההעלאה באופן ידני. הבעיה היא: \n' + re.search(r'^fatal: (.+)', error)[1]
+    print(error)
+    msgBox('אוי! משהו השתבש.', message , 'error')
+    input = input('press anything to continue')
+else:
+    print('powershell output: \n' + p.stdout.decode('utf-8'))  
+    msgBox('לומדה חדשה נוצרה!', f'לחצו "אישור" כדי להעתיק את הקישור הבא ללוח: madortill.github.io/generic-cards-lomdot/code/?path={unique_id}', 'info')
