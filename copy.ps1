@@ -21,11 +21,12 @@ function Invoke-Utility {
   if ($LASTEXITCODE) { Throw "$exe indicated failure (exit code $LASTEXITCODE; full command: $Args)." }
 }
 
+Set-Alias iu Invoke-Utility
 
 Set-Clipboard -Value "madortill.github.io/$currRepo/code/?path=$unique_id"
-git add "/data/$unique_id"
+iu git add "./data/$unique_id/"
 git commit -m "adding data number $unique_id"
-git push origin main
+#iu git push origin main
 # iu git add "/data/$unique_id"
 # iu git commit -m "adding data number {unique_id}"
 # iu git push origin main
