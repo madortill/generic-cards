@@ -26,8 +26,6 @@ Set-Alias iu Invoke-Utility
 Set-Clipboard -Value "madortill.github.io/$currRepo/code/?path=$unique_id"
 iu git add "./data/$unique_id/"
 git commit -m "adding data number $unique_id"
-#iu git push origin main
-# iu git add "/data/$unique_id"
-# iu git commit -m "adding data number {unique_id}"
-# iu git push origin main
-echo 'success'
+iu git push
+echo ''
+echo 'success!'
