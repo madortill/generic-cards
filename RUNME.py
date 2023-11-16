@@ -138,7 +138,7 @@ if error:
         message = 'הייתה בעיה בהעלאה לגיטהאב. \n יש לעשות את ההעלאה באופן ידני. הבעיה היא: \n' + re.search(r'^fatal: (.+)', error)[1]
     print(error)
     msgBox('אוי! משהו השתבש.', message , 'error')
-    input = input('press anything to continue')
+    input = input('press enter to continue')
     msgBox('הקישור ללומדה', f"הקישור הועתק ללוח: \n madortill.github.io/generic-cards-lomdot/code/?path={unique_id}" , 'info')
 else:
     print('powershell output: \n' + p.stdout.decode('utf-8'))  
