@@ -9,7 +9,7 @@
       }
 
       .cls-1, .cls-2 {
-        stroke: #67dfcb;
+        stroke: var(--secondary-color);
       }
 
       .cls-2 {

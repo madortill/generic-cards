@@ -2,7 +2,7 @@
   <defs>
     <style>
       .cls-1 {
-        fill: #1f3e3e;
+        fill: var(--text-color);
       }
 
       .cls-2 {

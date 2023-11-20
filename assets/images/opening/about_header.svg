@@ -7,7 +7,7 @@
 	.st1{fill:none;stroke:#708FA0;stroke-width:7;stroke-linecap:round;stroke-linejoin:round;}
 	.st2{fill:#FFFFFF;}
 	.st3{enable-background:new    ;}
-	.st4{fill:#1f3e3e;}
+	.st4{fill:var(--text-color);}
 </style>
 <g id="Group_47" transform="translate(-385.167 -75.4)">
 	<g id="Group_33" transform="translate(-9.095 46.473)">

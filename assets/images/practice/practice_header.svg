@@ -6,7 +6,7 @@
 	.st0{fill:none;stroke:#708FA0;stroke-width:7;stroke-linecap:round;stroke-miterlimit:10;}
 	.st1{fill:#FFFFFF;}
 	.st2{enable-background:new    ;}
-	.st3{fill:#1f3e3e;}
+	.st3{fill:var(--text-color);}
 </style>
 <g id="Group_303" transform="translate(2276.096 1133.878)">
 	<g id="Group_330" transform="translate(234.518)">

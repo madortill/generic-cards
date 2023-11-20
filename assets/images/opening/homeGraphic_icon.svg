@@ -3,16 +3,16 @@
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 940.7 885.9" style="enable-background:new 0 0 940.7 885.9;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:#629191;}
+	.st0{fill:var(--gradient-color);}
 	.st1{fill:none;stroke:#708FA0;stroke-width:4;stroke-miterlimit:10;}
 	.st2{fill:none;stroke:#708FA0;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;}
 	.st3{fill:#FFFFFF;}
-	.st4{fill:#67dfcb;}
+	.st4{fill:var(--secondary-color);}
 	.st5{opacity:0.1;fill:none;stroke:#EF4230;stroke-width:5;stroke-miterlimit:10;enable-background:new    ;}
 	.st6{opacity:0.1;fill:none;stroke:#26A6E0;stroke-width:5;stroke-miterlimit:10;enable-background:new    ;}
-	.st7{opacity:0.15;fill:#1aa3a3;enable-background:new    ;}
+	.st7{opacity:0.15;fill:var( --primary-color);enable-background:new    ;}
 	.st8{fill:none;stroke:#708FA0;stroke-width:4;stroke-linecap:round;stroke-miterlimit:10;}
-	.st9{opacity:0.2;fill:#1aa3a3;enable-background:new    ;}
+	.st9{opacity:0.2;fill:var( --primary-color);enable-background:new    ;}
 </style>
 <g id="גרפיקה" transform="translate(-69.648 -516.034)">
 	<g id="Group_10">

@@ -1,0 +1,7 @@
+../assets/images/learning/Artboard 4.svg
+
+../assets/images/learning/subject_btn.svg
+../assets/images/practice/card.svg
+../assets/images/practice/nextQuestionBtnArrows.svg
+../assets/images/practice/questionLog.svg
+../assets/images/practice/timerPractice.svg

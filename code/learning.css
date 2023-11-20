@@ -31,6 +31,9 @@
 }
 
 .page.learning.subjects .learningCard {
+  /* background-image: url("../assets/images/learning/subject_btn.svg"); */
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   height: 12em;
   width: 17em;
   display: flex;
@@ -269,6 +272,10 @@
 .page.learning.content .sub-topics-container.open {
   max-height: 100vh;
 }
+
+.opacity {
+  opacity: 0.6;
+}
 /* 
 .page.learning.content .container-subjects::before {
   display: block;
@@ -315,6 +322,9 @@
   display: flex;
   flex-direction: column;
   position: absolute;
+
+  background-repeat: no-repeat;
+  background-size: cover;
   height: 100%;
   max-width: unset;
   width: 100%;

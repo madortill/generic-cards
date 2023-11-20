@@ -14,7 +14,7 @@
 
       .cls-2 {
         fill: none;
-        stroke: #1f3e3e;
+        stroke: var(--text-color);
       }
     </style>
   </defs>

@@ -1,5 +1,7 @@
 // מוודא טעינה
 let isIndexLoaded = false;
+// מוודא טעינה
+let isIndexLoaded = false;
 // כללי
 var SUBJECTS_TITLES;
 const AMOUNT_OF_TOTAL_QUESTIONS = 20;
@@ -44,17 +46,174 @@ var midElement;
 /** @type {(boolean|number)[]} */
 var examAnswers = [];
 
-// window.addEventListener("load", function () {
-    // שמירת הנושאים
-    SUBJECTS_TITLES = Object.keys(DATA);
-    isIndexLoaded = true;
-// });
 
-// -------------------------------------------------------------------------------------
-// -------------------------------------------------------------------------------------
-// -------------------------------------------------------------------------------------
-// -------------------------------------------------------------------------------------
-// -------------------------------------------------------------------------------------
+// פונקציית הטעינה של כל הלומדה
+const afterLoaded = () => {
+    SUBJECTS_TITLES = Object.keys(DATA);
+    // כותרת ראשית ללומדה
+    addTitle();
+    // כותרת נושא הלומדה
+    function addTitle() {
+        document.querySelector(".page.opening .title").innerHTML = TITLE;
+        document.querySelector(".page.learning .title").innerHTML = TITLE;
+    }
+    
+    
+    let fullScreen = El("div", {cls: "full-screen"});
+    document.querySelector(".page.opening").before(fullScreen);
+    fullScreen.addEventListener("click", homePage);
+    
+    // מעבר בין עמוד הבית לעמוד הלמידה
+    let scrollingIcon = El("img", {attributes: {class:"scrolling_icon", src: "../assets/images/opening/scrolling_icon.svg"}});
+    document.querySelector(".page.opening .container-scrolling_icon").append(scrollingIcon); 
+    // הפעלה של האנימציה בלחיצה
+    document.querySelector(".page.opening  .expand").style.transition = "all 1s ease";
+}
+
+
+// מעבר לדף הבית
+/**
+* 
+* @param {Event} event 
+*/
+function homePage(event) {
+document.querySelector(".page.home").classList.add("active");
+document.querySelector(".full-screen").remove();
+document.querySelector(".main").removeEventListener("scroll", homePage, false);
+
+document.querySelector(".main").style.overflow = "hidden";
+document.querySelector(".page.home .books").style.display = "block";
+document.querySelector(".page.home .textArea").style.display = "block";
+document.querySelector(".page.opening").classList.add("scrolled");
+
+document.querySelector(".page.home .about").style.display = "block";
+document.querySelector(".page.home .about").addEventListener("click", aboutPage);
+
+let fullScreen = El("div", {cls: "full-screen"});
+document.querySelector(".page.opening").before(fullScreen);
+// מעבר לדף הבית
+setTimeout(function () {
+    document.querySelector(".full-screen").addEventListener("click", ()=> {
+        document.querySelector(".full-screen").remove();
+        document.querySelector(".page.opening").classList.remove("active");
+        document.querySelector(".page.home").classList.remove("active");
+        document.querySelector(".page.learning.subjects").classList.add("active");
+        learningSubjectsPage();
+    });
+}, 1000);
+}
+
+
+// מעבר לאודות
+function aboutPage(event) {
+document.querySelector(".full-screen").style.visibility = "hidden";
+document.querySelector(".page.opening").classList.remove("active");
+document.querySelector(".page.home").classList.remove("active");
+document.querySelector(".page.about").classList.add("active");
+// מעבר לדף הבית
+document.querySelector(".page.about .back-btn").addEventListener("click", () => {
+    document.querySelector(".full-screen").style.visibility = "visible";
+    document.querySelector(".page.opening").classList.add("active");
+    document.querySelector(".page.home").classList.add("active");
+    document.querySelector(".page.about").classList.remove("active");
+});
+}
+
+
+/* onClickSearch
+--------------------------------------------------------------
+Description: Adds search box and listener to input */
+const onClickSearch = () => {
+    // מראה את תיבת החיפוש
+    document.querySelector('.searchBoxHolder').classList.remove("hidden");
+    document.querySelector('.searchBox').classList.remove("hidden");
+    document.querySelector('.searchBox').focus();
+    // מעלים כותרת וכפתורים ומשנה גל
+    // הופך את המסך לשחור
+    document.querySelector('.searchScreen').classList.add("darkScreen");
+
+    document.querySelector('.darkScreen').addEventListener("click", hideSearchScreen);
+    document.querySelector('.searchBox').addEventListener('input', onSearch);
+}
+
+/* hideSearchScreen
+--------------------------------------------------------------
+Description:  */
+const hideSearchScreen = (event) => {
+    if (event.target.classList.contains('darkScreen') || event.target.classList.contains('hide-search')) {
+        // מעלים מסך חיפוש
+        document.querySelector('.darkScreen').removeEventListener("click", hideSearchScreen);
+        document.querySelector('.searchBoxHolder').classList.add("hidden");
+        document.querySelector('.searchBox').classList.add("hidden");
+        document.querySelector('.searchBox').value = '';
+        document.querySelector('.dropDown').classList.add("hidden");
+        document.querySelector('.searchScreen').classList.remove("darkScreen");
+    }
+}
+
+/* onSearch
+--------------------------------------------------------------
+Description: check for search match and creat dropdown accordingly */
+const onSearch = () => {
+    document.querySelector('.dropDown').style.pointerEvents = "all";
+    // Saves user input in a variable and resets the dropdown html.
+    let strUserInput = document.querySelector('.searchBox').value;
+    document.querySelector('.dropDown').innerHTML = "";
+    document.querySelector('.dropDown').style.zIndex = "2";
+    document.querySelector('.dropDown').classList.remove("hidden");
+    // Goes over the object to check for a search match.
+    for (const subject of Object.keys(DATA)){
+        for(const subSubject of Object.keys(DATA[subject].learningContent)){
+            for(const key of Object.keys(DATA[subject]['learningContent'][subSubject])){
+                //Push the current match to it.
+                if(key.includes(strUserInput) && strUserInput !== "" && key !== "description"){
+                    let div = document.createElement("div");
+                    div.innerHTML = `<p class='search-topic hide-search'> ${key} </p> <p class='search-subject hide-search'>נושא: ${subject}</p>`;
+                    div.classList.add("dropDownItem", "hide-search");
+                    div.dataset.subject = subject,
+                    div.dataset.subSubject = subSubject,
+                    div.dataset.topic = key,
+                div.addEventListener("click", goToSubj);
+                document.querySelector('.dropDown').append(div);
+                }
+            }
+        }
+    }
+}
+
+/* goToSubject
+--------------------------------------------------------------
+Description: go to the clicked card form search */
+const goToSubj = (event) => {
+    let subject = event.currentTarget.dataset.subject;
+    let subSubject = event.currentTarget.dataset.subSubject
+    let topic = event.currentTarget.dataset.topic
+    hideSearchScreen(event);
+    document.querySelector(".page.learning.subjects").classList.remove("active");
+    document.querySelector(".page.learning.content").classList.add("active");
+    subjectLearningPage(subject);
+
+    // ****** go for sub-subject ******
+    let placeInArr = Object.keys(DATA[subject].learningContent).indexOf(subSubject);
+    subTopicList = document.querySelectorAll(`.sub-topics-container`);
+    let counter = 0;
+
+    const _clickSub = () => {
+
+        if (counter < placeInArr) {
+            document.querySelector(`.sub-topics-container[data-subsubject="${subSubject}"]`).click();
+            counter++;
+        } else {
+            clearInterval(interval);
+            // ****** scroll to relevant card ******
+            setTimeout(() => {document.querySelector(`.card[data-topic='${topic}']`).scrollIntoView({behavior: "smooth"})}, 150 * placeInArr);
+        }
+    }
+
+    const interval = setInterval(_clickSub, 100 * placeInArr);
+
+}
+
 // -------------------------------------------------------------------------------------
 // אתחול עמוד הנושאים ללמידה
 function learningSubjectsPage() {
@@ -63,6 +222,8 @@ function learningSubjectsPage() {
     document.querySelector(".page.learning.subjects").classList.add("active"); //// מעכשיו 27/4
     //  הוספת כפתור חזרה למסך נושאי הלמידה
     let backBtn =
+    El("div", {
+        attributes: { class: "back-btn" },
     El("div", {
         attributes: { class: "back-btn" },
         listeners: {
@@ -85,7 +246,17 @@ function learningSubjectsPage() {
             }
         }
     });
-    backBtn.innerHTML = backBtnGeneralSvg;
+    backBtn.innerHTML =  "<svg data-src='../assets/images/general/back_btn.svg'></svg>";
+    
+    let search =
+    El("img", {
+        attributes: { class: "search", src: "../assets/images/general/search.svg" },
+        listeners: {
+            click: onClickSearch
+        }
+    });
+    
+    document.querySelector(".page.learning.subjects").append(search);
     document.querySelector(".page.learning.subjects").append(backBtn);
 
 
@@ -121,9 +292,10 @@ if (isExamQuestions && numOfAvailableQuestions !== 0) {
 // יצירת קלפים ללמידה
 function createStudyCards(currentSubject) {
     let iconType = DATA[currentSubject].icon.includes("<svg") ? 'div' : 'img';
+    let iconType = DATA[currentSubject].icon.includes("<svg") ? 'div' : 'img';
     let card =
         El("div", { cls: "learningCard" });
-    card.innerHTML = subject_btnSvg;
+    card.innerHTML ="<svg class='background-image learning-card-svg' data-src='../assets/images/learning/subject_btn.svg'></svg>";
     card.append(
         El(iconType, { attributes: { src: DATA[currentSubject].icon, class: "icon" } },),
             El("div", { cls: "subject" }, currentSubject))
@@ -152,13 +324,16 @@ function beforePractice() {
         El("div", { cls: "dark" },
             El("div", { cls: "beforePractice-popup" },
                 El("div", {
+                El("div", {
                     attributes: {
+                        class: "close-btn"
                         class: "close-btn"
                     }
                 }),
                 // כותרת
                 El("div", { cls: "title-popup" }, "בחר נושאי תרגול"),
                 El("div", { cls: "select-everything" },
+                    El("div", { classes: ["checkPlace-big", 'check-place']}),
                     El("div", { classes: ["checkPlace-big", 'check-place']}),
                     El("div", { cls: "" }, "בחר הכל")
                 ),
@@ -169,6 +344,7 @@ function beforePractice() {
                 El("div", { cls: "beforePractice-instruction-container" },
                     El("div", {},
                         El("div", { attributes: { class: "icon2",} }),
+                        El("div", { attributes: { class: "icon2",} }),
                         El("div", { cls: "text" },
                             El("b", {}, "דקה"),
                             El("br", {}),
@@ -177,6 +353,7 @@ function beforePractice() {
                     ),
                     El("div", {},
                         El("div", { cls: "icon1", id: "slide" }),
+                        El("div", { cls: "icon1", id: "slide" }),
                         El("div", { cls: "text" },
                             El("b", { cls: "italic" }, " הקליקו"),
                             El("br", {}),
@@ -184,6 +361,7 @@ function beforePractice() {
                         ),
                     ),
                     El("div", {},
+                        El("div", { cls: "icon1", id: 'blow' }),
                         El("div", { cls: "icon1", id: 'blow' }),
                         El("div", { cls: "text" },
                             El("b", {}, "תרגעו"),
@@ -198,12 +376,12 @@ function beforePractice() {
         );
 
     // insert SVGs
-    popup.querySelector(".practiceBTN-popup").innerHTML = choosePractice_btnSvg;
-    popup.querySelector(".close-btn").innerHTML = close_btnSvg;
-    popup.querySelector(".icon2").innerHTML = timer_iconSvg;
-    popup.querySelector("#blow").innerHTML = blow_iconSvg;
-    popup.querySelector(".check-place").innerHTML = nonSelectSMALLSvg;
-    popup.querySelector("#slide").innerHTML = slide_iconSvg;
+    popup.querySelector(".practiceBTN-popup").innerHTML ="<svg class='background-image' data-src='../assets/images/learning/choosePractice_popup/choosePractice_btn.svg'></svg>";
+    popup.querySelector(".close-btn").innerHTML ="<svg class='background-image' data-src='../assets/images/general/close_btn.svg'></svg>";
+    popup.querySelector(".icon2").innerHTML ="<svg class='background-image' data-src='../assets/images/exam/beforeExam_popup/timer_icon.svg'></svg>";
+    popup.querySelector("#blow").innerHTML ="<svg class='background-image' data-src='../assets/images/practice/beforePractice_popup/blow_icon.svg'></svg>";
+    popup.querySelector(".check-place").innerHTML = "../assets/images/learning/choosePractice_popup/nonSelectSMALL.svg'></svg>";
+    popup.querySelector("#slide").innerHTML ="<svg class='background-image' data-src='../assets/images/exam/beforeExam_popup/slide_icon.svg'></svg>";
     document.querySelector(".page.learning.subjects").append(popup);
 
     // מערך שבו רשום המיקום של הנושא לפי סדר ההופעה שלו בג'ייסון
@@ -218,7 +396,7 @@ function beforePractice() {
         // אם הכפתור היה לחוץ 
         if (selectAll.classList.contains("checked")) {
             document.querySelectorAll(".page.learning.subjects .subject-popup, .page.learning.subjects .select-everything").forEach((checkBox, i) => {
-                checkBox.querySelector(".check-place").innerHTML = nonSelectSMALLSvg;
+                checkBox.querySelector(".check-place").innerHTML = "../assets/images/learning/choosePractice_popup/nonSelectSMALL.svg'></svg>";
                 checkBox.classList.remove("checked-subjects");
             });
             selectAll.classList.remove("checked");
@@ -230,7 +408,7 @@ function beforePractice() {
         // הכפתור לא היה לחוץ, ולכן כל נושאי הלמידה יסומנו כעת
         else {
             document.querySelectorAll(".page.learning.subjects .subject-popup, .page.learning.subjects .select-everything").forEach((checkBox, i) => {
-                checkBox.querySelector(".check-place").innerHTML= selectedSMALLSvg;
+                checkBox.querySelector(".check-place").innerHTML="<svg class='background-image' data-src='../assets/images/learning/choosePractice_popup/selectedSMALL.svg'></svg>";
                 checkBox.classList.add("checked-subjects");
             });
             selectAll.classList.add("checked");
@@ -258,32 +436,33 @@ function beforePractice() {
         let subject =
             El("div", { cls: "subject-popup" },
                 El("div", { attributes: { class: "checkPlace check-place" } }),
+                El("div", { attributes: { class: "checkPlace check-place" } }),
                 El("div", { attributes: {} }, subjectsWithPractice[i])
             );
-        subject.querySelector(".check-place").innerHTML = nonSelectSMALLSvg;
+        subject.querySelector(".check-place").innerHTML = "../assets/images/learning/choosePractice_popup/nonSelectSMALL.svg'></svg>";
         document.querySelector(".page.learning.subjects .subjects").append(subject);
 
         // מאזין לחיצה לנושא אחד
         subject.addEventListener("click", () => {
             // אם הנושא הנלחץ כבר היה לחוץ
             if (subject.classList.contains("checked-subjects")) {
-                subject.querySelector(".check-place").innerHTML = nonSelectSMALLSvg;
+                subject.querySelector(".check-place").innerHTML = "../assets/images/learning/choosePractice_popup/nonSelectSMALL.svg'></svg>";
                 subject.classList.remove("checked-subjects");
                 selectedSubjects[i] = false;
-                selectAll.querySelector("check-place").innerHTML = nonSelectSMALLSvg;
+                selectAll.querySelector("check-place").innerHTML = "../assets/images/learning/choosePractice_popup/nonSelectSMALL.svg'></svg>";
                 selectAll.classList.remove("checked-subjects");
                 selectAll.classList.remove("checked");
             }
             // הנושא הנבחר לא היה לחוץ ולכן עכשיו יסומן
             else {
                 selectedSubjects[i] = true;
-                subject.querySelector(".check-place").innerHTML = selectedSMALLSvg;
+                subject.querySelector(".check-place").innerHTML ="<svg class='background-image' data-src='../assets/images/learning/choosePractice_popup/selectedSMALL.svg'></svg>";
                 subject.classList.add("checked-subjects");
                 let isNotChecked = document.querySelector(".page.learning.subjects .subject-popup:not(.checked-subjects)");
                 selectAll.classList.toggle("checked-subjects", !isNotChecked);
                 selectAll.classList.toggle("checked", !isNotChecked);
                 if (!isNotChecked)
-                    selectAll.querySelector("check-place").src = selectedSMALLSvg;
+                    selectAll.querySelector("check-place").src ="<svg class='background-image' data-src='../assets/images/learning/choosePractice_popup/selectedSMALL.svg'></svg>";
 
             }
             // במידה והמחלקה קיימת ויש ערך מסומן להתחלת התרגול - הכפתור תרגול יהיה לחיץ
@@ -410,6 +589,8 @@ function practicePage(event) {
     let backBtn =
         El("div", {
             attributes: { class: "back-btn" },
+        El("div", {
+            attributes: { class: "back-btn" },
             listeners: {
                 click: function () {
                     document.querySelector(".page.practice").classList.remove("active");
@@ -418,7 +599,7 @@ function practicePage(event) {
                 }
             }
         });
-    backBtn.innerHTML = backBtnGeneralSvg;
+    backBtn.innerHTML =  "<svg data-src='../assets/images/general/back_btn.svg'></svg>";
     document.querySelector(".page.practice").append(backBtn);
 }
 
@@ -453,6 +634,7 @@ function createMultipleCard(i = 2) {
             ),
             // תמונה של הקלף
             El("div", { cls: 'card-pic' }),
+            El("div", { cls: 'card-pic' }),
 
             El("div", { cls: "question-text" },
                 // השאלה
@@ -460,22 +642,27 @@ function createMultipleCard(i = 2) {
                 // התשובות
                 El("div", { classes: ["answer-container", "ans1"] },
                     El("div", {  cls: 'choose-question' }),
+                    El("div", {  cls: 'choose-question' }),
                     El("div", { cls: "ans" }, QUESTIONS[currentQuestion + i].ans1)
                 ),
                 El("div", { classes: ["answer-container", "ans2"] },
+                    El("div", {  cls: 'choose-question' }),
                     El("div", {  cls: 'choose-question' }),
                     El("div", { cls: "ans" }, QUESTIONS[currentQuestion + i].ans2)
                 ),
                 El("div", { classes: ["answer-container", "ans3"] },
                     El("div", { cls: 'choose-question' }),
+                    El("div", { cls: 'choose-question' }),
                     El("div", { cls: "ans" }, QUESTIONS[currentQuestion + i].ans3)
                 ),
                 El("div", { classes: ["answer-container", "ans4"] },
+                    El("div", {  cls: 'choose-question' }),
                     El("div", {  cls: 'choose-question' }),
                     El("div", { cls: "ans" }, QUESTIONS[currentQuestion + i].ans4)
                 )
             ),
             El("div", { cls: "next-btn" },
+                El("div", { cls: "forward-arrows" }),
                 El("div", { cls: "forward-arrows" }),
                 El("div", {cls: "curr-question"},
                     El("div", {cls:"curr-ques-text"}), 
@@ -486,9 +673,9 @@ function createMultipleCard(i = 2) {
         );
     
     card.querySelectorAll('.choose-question').forEach(el => {el.innerHTML = chooseQuestion_btn;})
-    card.querySelector('.forward-arrows').innerHTML = nextQuestionBtnArrowsSvg;
-    card.querySelector('.timer').innerHTML += timerPracticeSvg;
-    card.querySelector('.card-pic').innerHTML = exam2Svg;
+    card.querySelector('.forward-arrows').innerHTML = "<svg class='background-image' data-src='../assets/images/practice/nextQuestionBtnArrows.svg'></svg>";
+    card.querySelector('.timer').innerHTML += "<svg class='background-image' data-src='../assets/images/practice/timerPractice.svg'></svg>";
+    card.querySelector('.card-pic').innerHTML ="<svg class='background-image' data-src='../assets/images/exam/exam2.svg'></svg>";
     document.querySelector(".container-questions").append(card);
 }
 
@@ -503,6 +690,7 @@ function createBinaryCard(i = 2) {
             ),
             // תמונה של הקלף
             El("div", { cls: 'card-pic' }),
+            El("div", { cls: 'card-pic' }),
             // השאלה
             El("div", { cls: "question-text" },
                 El("div", { cls: "question" }, QUESTIONS[currentQuestion + i].sentence),
@@ -510,9 +698,12 @@ function createBinaryCard(i = 2) {
                 El("div", { cls: "ans-container" },
                     El("div", { cls: "wrong-ans" }), // לברר עם פלג אם ככה כותבים את הקלאס בנוסף לקישור תמונה
                     El("div", { cls: "right-ans" }),
+                    El("div", { cls: "wrong-ans" }), // לברר עם פלג אם ככה כותבים את הקלאס בנוסף לקישור תמונה
+                    El("div", { cls: "right-ans" }),
                 ),
             ),
             El("div", { cls: "next-btn" },
+                El("div", { cls: "forward-arrows" }),
                 El("div", { cls: "forward-arrows" }),
                 El("div", {cls: "curr-question"},
                     El("div", {cls:"curr-ques-text"}), 
@@ -522,11 +713,11 @@ function createBinaryCard(i = 2) {
             )
         );
 
-        card.querySelector('.card-pic').innerHTML = exam2Svg;
-        card.querySelector('.right-ans').innerHTML = right_btnSvg;
-        card.querySelector('.wrong-ans').innerHTML = wrong_btnSvg;
-        card.querySelector('.timer').innerHTML += timerPracticeSvg;
-        card.querySelector('.forward-arrows').innerHTML = nextQuestionBtnArrowsSvg;
+        card.querySelector('.card-pic').innerHTML ="<svg class='background-image' data-src='../assets/images/exam/exam2.svg'></svg>";
+        card.querySelector('.right-ans').innerHTML = "<svg class='background-image' data-src='../assets/images/general/right_btn.svg'></svg>";
+        card.querySelector('.wrong-ans').innerHTML ="<svg class='background-image' data-src='../assets/images/general/wrong_btn.svg'></svg>";
+        card.querySelector('.timer').innerHTML += "<svg class='background-image' data-src='../assets/images/practice/timerPractice.svg'></svg>";
+        card.querySelector('.forward-arrows').innerHTML = "<svg class='background-image' data-src='../assets/images/practice/nextQuestionBtnArrows.svg'></svg>";
 
     document.querySelector(".container-questions").append(card);
 }
@@ -554,9 +745,11 @@ function checkAnswerMultiple(event) {
     if (isComplete) return;
     document.querySelector(".page.practice .first-question .next-btn > :is(img, div.forward-arrows)").addEventListener("click", nextQuestionPractice);
     document.querySelector(".page.practice .first-question .next-btn > :is(img, div.forward-arrows)").style.opacity = "1";
+    document.querySelector(".page.practice .first-question .next-btn > :is(img, div.forward-arrows)").addEventListener("click", nextQuestionPractice);
+    document.querySelector(".page.practice .first-question .next-btn > :is(img, div.forward-arrows)").style.opacity = "1";
     clearInterval(timer);
 
-    event.currentTarget.querySelector(".choose-question").innerHTML = choosenQuestionSvg;
+    event.currentTarget.querySelector(".choose-question").innerHTML ="<svg class='background-image' data-src='../assets/images/general/choosenQuestion.svg'></svg>";
     let correctAns = QUESTIONS[currentQuestion].correctAns;
 
     // האם התשובה הנלחצת היא התשובה הנכונה
@@ -582,14 +775,16 @@ function checkAnswerBinary(selectedAnswer, event) {
     if (isComplete) return;
     document.querySelector(".page.practice .first-question .next-btn > :is(img, div.forward-arrows)").addEventListener("click", nextQuestionPractice);
     document.querySelector(".page.practice .first-question .next-btn > :is(img, div.forward-arrows)").style.opacity = "1";
+    document.querySelector(".page.practice .first-question .next-btn > :is(img, div.forward-arrows)").addEventListener("click", nextQuestionPractice);
+    document.querySelector(".page.practice .first-question .next-btn > :is(img, div.forward-arrows)").style.opacity = "1";
     clearInterval(timer);
 
     // משנה את התמונה לתמונה שנבחרה
     if (selectedAnswer === "right") {
-        event.currentTarget.innerHTML = rightSelected_btnSvg;
+        event.currentTarget.innerHTML ="<svg class='background-image' data-src='../assets/images/general/rightSelected_btn.svg'></svg>";
     }
     else {
-        event.currentTarget.innerHTML = wrongSelected_btnSvg;
+        event.currentTarget.innerHTML ="<svg class='background-image' data-src='../assets/images/general/wrongSelected_btn.svg'></svg>";
     }
     // בודק אם התשובה נכונה
     if (QUESTIONS[currentQuestion].trueOrFalse && selectedAnswer === "right" ||
@@ -690,6 +885,7 @@ function nextQuestionPractice() {
     // בודק האם להפעיל את כפתור החצי חצי
     halfHalfBTN_mode();
     document.querySelector(".page.practice .first-question .next-btn > :is(img, div.forward-arrows)").removeEventListener("click", nextQuestionPractice);
+    document.querySelector(".page.practice .first-question .next-btn > :is(img, div.forward-arrows)").removeEventListener("click", nextQuestionPractice);
 }
 
 // הפונקציה מוסיפה מאזיני לחיצה לתשובות
@@ -719,22 +915,24 @@ function endPractice() {
     avgTimeForQusetion = avgTimeForQusetion.toFixed(2);
 
     let svg, isPassTitle, isPassSubTitle;
+    let svg, isPassTitle, isPassSubTitle;
     // האם כמות התשובות הנכונות גדולה מחצי מהשאלות
     if (points > QUESTIONS.length / 2) {
         isPassTitle = "כל הכבוד!";
         isPassSubTitle = "עברת את התרגול בהצלחה";
-        svg = check_iconSvg
+        svg ="<svg class='background-image' data-src='../assets/images/general/finish_popup/check_icon.svg'></svg>"
     }
     else {
         isPassTitle = "אוי... לא נורא";
         isPassSubTitle = "בהצלחה בפעם הבאה...";
-        svg = x_iconSvg
+        svg ="<svg class='background-image' data-src='../assets/images/general/finish_popup/x_icon.svg'></svg>"
     }
 
     let finishPopup =
         El("div", { cls: "dark" },
             // כל הקלף
             El("div", { cls: "end-practice" },
+                El("div", { attributes: { class: "close-btn" } }),
                 El("div", { attributes: { class: "close-btn" } }),
                 // כותרות
                 El("div", { cls: "title-popup" }, isPassTitle),
@@ -750,6 +948,7 @@ function endPractice() {
                             El("div", {},
                                 points + " " + "תשובות נכונות"
                             ),
+                            El("div", { attributes: {class: "checkIcon-btn" } }),
                             El("div", { attributes: {class: "checkIcon-btn" } }),
                         ),
                         "מתוך " + QUESTIONS.length + " שאלות",
@@ -767,6 +966,7 @@ function endPractice() {
                                 avgTimeForQusetion + " שניות"
                             ),
                             El("div", { attributes: { class: "timeIcon-btn" } }),
+                            El("div", { attributes: { class: "timeIcon-btn" } }),
                         ),
                         "ממוצע לשאלה",
                     ),
@@ -777,13 +977,14 @@ function endPractice() {
 
                 El("div", { cls: "grey-line" }),
                 El("div", { cls: "backToHome-btn" })
+                El("div", { cls: "backToHome-btn" })
             )
         );
     // insert SVGs
     finishPopup.querySelector('.checkIcon-btn').innerHTML = svg;
-    finishPopup.querySelector('.close-btn').innerHTML = close_btnSvg;
-    finishPopup.querySelector('.backToHome-btn').innerHTML = home_btnSvg;
-    finishPopup.querySelector('.timeIcon-btn').innerHTML = timer_iconSvg;
+    finishPopup.querySelector('.close-btn').innerHTML ="<svg class='background-image' data-src='../assets/images/general/close_btn.svg'></svg>";
+    finishPopup.querySelector('.backToHome-btn').innerHTML ="<svg class='background-image' data-src='../assets/images/general/finish_popup/home_btn.svg'></svg>";
+    finishPopup.querySelector('.timeIcon-btn').innerHTML ="<svg class='background-image' data-src='../assets/images/exam/beforeExam_popup/timer_icon.svg'></svg>";
 
     document.querySelector(".page.practice").append(finishPopup);
     document.querySelector(".page.practice .progress-bar-right-answers").style.width = points / QUESTIONS.length * 100 + "%";
@@ -865,15 +1066,17 @@ function showAnswer() {
     clearInterval(timer);
     document.querySelector(".page.practice .first-question .next-btn > :is(img, div.forward-arrows)").addEventListener("click", nextQuestionPractice);
     document.querySelector(".page.practice .first-question .next-btn > :is(img, div.forward-arrows)").style.opacity = "1";
+    document.querySelector(".page.practice .first-question .next-btn > :is(img, div.forward-arrows)").addEventListener("click", nextQuestionPractice);
+    document.querySelector(".page.practice .first-question .next-btn > :is(img, div.forward-arrows)").style.opacity = "1";
 
     let rightAnswer;
     if (QUESTIONS[currentQuestion].type === "binary") {
         rightAnswer = QUESTIONS[currentQuestion].trueOrFalse;
         if (rightAnswer) {
-            document.querySelector(".page.practice .first-question .right-ans").innerHTML = rightSelected_btnSvg;
+            document.querySelector(".page.practice .first-question .right-ans").innerHTML ="<svg class='background-image' data-src='../assets/images/general/rightSelected_btn.svg'></svg>";
         }
         else {
-            document.querySelector(".page.practice .first-question .wrong-ans").innerHTML = wrongSelected_btnSvg;
+            document.querySelector(".page.practice .first-question .wrong-ans").innerHTML ="<svg class='background-image' data-src='../assets/images/general/wrongSelected_btn.svg'></svg>";
         }
 
         // green line
@@ -912,7 +1115,9 @@ function beforeExam() {
             // כל הקלף
             El("div", { cls: "exam-popup" },
                 El("div", {
+                El("div", {
                     attributes: {
+                        class: "close-btn"
                         class: "close-btn"
                     }, listeners: {
                         // // כפתור סגירה של הפופאפ
@@ -938,6 +1143,7 @@ function beforeExam() {
                             El("b", {}, "קליטה סבירה")
                         ),
                         El("div", { cls: "icon1"  }),
+                        El("div", { cls: "icon1"  }),
                     ),
                     El("div", { cls: "grey-line" }),
                     // בלוק 2
@@ -948,6 +1154,7 @@ function beforeExam() {
                             "מוגבל לכ-",
                             El("b", {}, `${EXAM_MINUTS} דקות`)
                         ),
+                        El("div", { attributes: { class: "icon2" } }),
                         El("div", { attributes: { class: "icon2" } }),
                     ),
                     El("div", { cls: "grey-line" }),
@@ -960,6 +1167,7 @@ function beforeExam() {
                             El("b", {}, " תרגלו עוד")
                         ),
                         El("div", { attributes: { class: "icon3" } }),
+                        El("div", { attributes: { class: "icon3" } }),
                     ),
                     El("div", { cls: "grey-line" }),
                     // בלוק 4
@@ -969,6 +1177,7 @@ function beforeExam() {
                             El("br", {}),
                             "למעבר בין שאלות"
                         ),
+                        El("div", { cls: "icon4" }),
                         El("div", { cls: "icon4" }),
                     ),
                     El("div", { cls: "grey-line" }),
@@ -981,10 +1190,13 @@ function beforeExam() {
                             "בכל עת ולחזור אליה"
                         ),
                         El("div", { cls: "icon5" }),
+                        El("div", { cls: "icon5" }),
                     ),
                 ),
                 El("div", {
+                El("div", {
                     attributes: {
+                        class: "start-btn"
                         class: "start-btn"
                     }, listeners: {
                         click: insertFullName_popup
@@ -993,13 +1205,13 @@ function beforeExam() {
             )
         );
     // insert SVGs
-    popup.querySelector(".icon3").innerHTML = practice_iconSvg;
-    popup.querySelector(".icon1").innerHTML = cellular_iconSvg;
-    popup.querySelector(".icon5").innerHTML = skip_iconSvg;
-    popup.querySelector(".icon4").innerHTML = slide_iconSvg;
-    popup.querySelector(".icon2").innerHTML = timer_iconSvg;
-    popup.querySelector(".start-btn").innerHTML = ok_btnSvg;
-    popup.querySelector(".close-btn").innerHTML = close_btnSvg;
+    popup.querySelector(".icon3").innerHTML ="<svg class='background-image' data-src='../assets/images/exam/beforeExam_popup/practice_icon.svg'></svg>";
+    popup.querySelector(".icon1").innerHTML ="<svg class='background-image' data-src='../assets/images/exam/beforeExam_popup/cellular_icon.svg'></svg>";
+    popup.querySelector(".icon5").innerHTML ="<svg class='background-image' data-src='../assets/images/exam/beforeExam_popup/skip_icon.svg'></svg>";
+    popup.querySelector(".icon4").innerHTML ="<svg class='background-image' data-src='../assets/images/exam/beforeExam_popup/slide_icon.svg'></svg>";
+    popup.querySelector(".icon2").innerHTML ="<svg class='background-image' data-src='../assets/images/exam/beforeExam_popup/timer_icon.svg'></svg>";
+    popup.querySelector(".start-btn").innerHTML ="<svg class='background-image' data-src='../assets/images/general/ok_btn.svg'></svg>";
+    popup.querySelector(".close-btn").innerHTML ="<svg class='background-image' data-src='../assets/images/general/close_btn.svg'></svg>";
 
     document.querySelector(".page.learning.subjects").append(popup);
 }
@@ -1096,7 +1308,7 @@ function insertFullName_popup() {
     document.querySelector(".page.learning.subjects .instructions").classList.add("insert-name");
     
     document.querySelector(".page.learning.subjects .start-btn").classList.add("insert-name");
-    document.querySelector(".page.learning.subjects .start-btn").innerHTML = toTheExamSvg;
+    document.querySelector(".page.learning.subjects .start-btn").innerHTML ="<svg class='background-image' data-src='../assets/images/general/toTheExam.svg'></svg>";
     document.querySelector(".page.learning.subjects .start-btn").addEventListener("click", () => {
          // כפתור מעבר למבחן מהפופאפ
         document.querySelector(".page.learning.subjects .title").style.filter = "unset";
@@ -1125,7 +1337,9 @@ function exit(page) {
                 El("div", { cls: "title-popup" }, "רוצים לוותר?"),
                 El("div", { cls: "sub-title-popup" }, "לא תרצו להמשיך לנסות?"),
                 El("div", {
+                El("div", {
                     attributes: {
+                        class: "close-btn"
                         class: "close-btn"
                     }, listeners: {
                         // // כפתור סגירה של הפופאפ
@@ -1142,7 +1356,10 @@ function exit(page) {
                 }),
                 El("div", { cls: "buttons-exit-popup" },
                     El("div", {
+                    El("div", {
                         attributes: {
+                            class: "button-popup",
+                            id: 'back'
                             class: "button-popup",
                             id: 'back'
                         }, listeners: {
@@ -1165,6 +1382,10 @@ function exit(page) {
                         cls: "button-popup",
                         id: 'exit',
                         listeners: {
+                    El("div", {
+                        cls: "button-popup",
+                        id: 'exit',
+                        listeners: {
                             click: function () {
                                 // חזרה למבחן או לתרגול
                                 document.querySelector(`.page.${page} .title`).style.filter = "unset";
@@ -1181,9 +1402,9 @@ function exit(page) {
 
         )
 
-    popup.querySelector("#exit").innerHTML = exitSvg;
-    popup.querySelector(".close-btn").innerHTML = close_btnSvg;
-    popup.querySelector(".button-popup").innerHTML = backSvg;
+    popup.querySelector("#exit").innerHTML ="<svg class='background-image' data-src='../assets/images/general/leavePracticeOrExam_popup/exit.svg'></svg>";
+    popup.querySelector(".close-btn").innerHTML ="<svg class='background-image' data-src='../assets/images/general/close_btn.svg'></svg>";
+    popup.querySelector(".button-popup").innerHTML ="<svg class='background-image' data-src='../assets/images/general/leavePracticeOrExam_popup/back.svg'></svg>";
 
     document.querySelector(`.page.${page}`).append(popup);
 }
@@ -1195,7 +1416,9 @@ function donePopup() {
                 El("div", { cls: "title-popup" }, "בטוח שתרצו להגיש?"),
                 El("div", { cls: "sub-title-popup" }, "לא ניתן לחזור אחורה"),
                 El("div", {
+                El("div", {
                     attributes: {
+                        class: "close-btn"
                         class: "close-btn"
                     }, listeners: {
                         // // כפתור סגירה של הפופאפ
@@ -1218,8 +1441,8 @@ function donePopup() {
 
         )
     // insert SVGs
-    popup.querySelector("#backToExam_btn").innerHTML = backToExam_btnSvg;
-    popup.querySelector("#popup-submit").innerHTML = toHand_btnSvg;
+    popup.querySelector("#backToExam_btn").innerHTML ="<svg class='background-image' data-src='../assets/images/exam/backToExam_btn.svg'></svg>";
+    popup.querySelector("#popup-submit").innerHTML ="<svg class='background-image' data-src='../assets/images/exam/toHand_btn.svg'></svg>";
 
     document.querySelector(`.page.exam`).append(popup);
 }
@@ -1273,6 +1496,8 @@ function examPage() {
     let backBtn =
         El("div", {
             attributes: { class: "back-btn" },
+        El("div", {
+            attributes: { class: "back-btn" },
             listeners: {
                 click: function () {
                     if (!document.querySelector(".page.exam .back-btn").parentElement.classList.contains("done"))
@@ -1284,7 +1509,7 @@ function examPage() {
                 }
             }
         });
-    backBtn.innerHTML = backBtnGeneralSvg;
+    backBtn.innerHTML =  "<svg data-src='../assets/images/general/back_btn.svg'></svg>";
     document.querySelector(".page.exam").append(backBtn);
 
     document.querySelector(".page.exam .timer-text").innerHTML = TIME_FOR_EXAM;
@@ -1314,9 +1539,10 @@ function examPage() {
                 }
             },
                 El("div", { cls: "number-img" }),
+                El("div", { cls: "number-img" }),
                 El("div", { cls: "number-text" }, i + 1)
             );
-        number.querySelector('.number-img').innerHTML = questionMap_btnSvg;
+        number.querySelector('.number-img').innerHTML ="<svg class='background-image' data-src='../assets/images/exam/questionMap_btn.svg'></svg>";
         document.querySelector(".page.exam .questions-number").append(number);
     }
 
@@ -1332,8 +1558,9 @@ function emptyCard() {
         El("div", { classes: ["card", "empty-card"] },
             // תמונה של הקלף
             El("div", { cls: "card-pic" })
+            El("div", { cls: "card-pic" })
         );
-    emptyCard.querySelector('.card-pic').innerHTML = exam2Svg;
+    emptyCard.querySelector('.card-pic').innerHTML ="<svg class='background-image' data-src='../assets/images/exam/exam2.svg'></svg>";
     document.querySelector(".page.exam .questions-container").append(emptyCard);
 }
 
@@ -1350,10 +1577,12 @@ function createQuestionExam() {
                 El("div", { cls: "ans-container" },
                     El("div", { cls: "wrong-ans" }),
                     El("div", { cls: "right-ans" }),
+                    El("div", { cls: "wrong-ans" }),
+                    El("div", { cls: "right-ans" }),
                 ),
             );
-            cardContent.querySelector(".right-ans").innerHTML = right_btnSvg;
-            cardContent.querySelector(".wrong-ans").innerHTML = wrong_btnSvg;
+            cardContent.querySelector(".right-ans").innerHTML = "<svg class='background-image' data-src='../assets/images/general/right_btn.svg'></svg>";
+            cardContent.querySelector(".wrong-ans").innerHTML ="<svg class='background-image' data-src='../assets/images/general/wrong_btn.svg'></svg>";
     }
     // השאלה היא אמריקאית
     else {
@@ -1364,22 +1593,27 @@ function createQuestionExam() {
                 // התשובות
                 El("div", { attributes: { class: "answer-container", id: "ans1" } },
                     El("div", { cls:'choose-question' }),
+                    El("div", { cls:'choose-question' }),
                     El("div", { cls: "ans" }, QUESTIONS[currentQuestionExam].ans1)
                 ),
                 El("div", { attributes: { class: "answer-container", id: "ans2" } },
+                    El("div", { cls:'choose-question' }),
                     El("div", { cls:'choose-question' }),
                     El("div", { cls: "ans" }, QUESTIONS[currentQuestionExam].ans2)
                 ),
                 El("div", { attributes: { class: "answer-container", id: "ans3" } },
                     El("div", { cls:'choose-question' }),
+                    El("div", { cls:'choose-question' }),
                     El("div", { cls: "ans" }, QUESTIONS[currentQuestionExam].ans3)
                 ),
                 El("div", { attributes: { class: "answer-container", id: "ans4" } },
+                    El("div", { cls:'choose-question' }),
                     El("div", { cls:'choose-question' }),
                     El("div", { cls: "ans" }, QUESTIONS[currentQuestionExam].ans4)
                 )
             );
     }
+    cardContent.querySelectorAll(".choose-question").forEach(el => { el.innerHTML = chooseQuestion_btn;})
     cardContent.querySelectorAll(".choose-question").forEach(el => { el.innerHTML = chooseQuestion_btn;})
     // הוספת כפתורי קדימה אחורה
     let buttons =
@@ -1387,10 +1621,12 @@ function createQuestionExam() {
             El("div", {cls:"arrows"},
                 El("div", { cls: "next" },),
                 El("div", { cls: "back" })
+                El("div", { cls: "next" },),
+                El("div", { cls: "back" })
             )
         );
-        buttons.querySelector(".next").innerHTML = next_btnSvg;
-        buttons.querySelector(".back").innerHTML = backBtnExamSvg;
+        buttons.querySelector(".next").innerHTML ="<svg class='background-image' data-src='../assets/images/exam/next_btn.svg'></svg>";
+        buttons.querySelector(".back").innerHTML = "<svg class='background-image' data-src='../assets/images/exam/back_btn.svg'></svg>";
     if (currentQuestionExam === QUESTIONS.length - 1)
         buttons.classList.add("last");
     else
@@ -1426,15 +1662,15 @@ function ifAnswer() {
         // שאלת נכון לא נכון
         if (QUESTIONS[currentQuestionExam].type === "binary") {
             if (examAnswers[currentQuestionExam]) {
-                document.querySelector(".page.exam .card:not(.transition) .right-ans").innerHTML = rightSelected_btnSvg;
+                document.querySelector(".page.exam .card:not(.transition) .right-ans").innerHTML ="<svg class='background-image' data-src='../assets/images/general/rightSelected_btn.svg'></svg>";
             } else {
-                document.querySelector(".page.exam .card:not(.transition) .wrong-ans").innerHTML = wrongSelected_btnSvg;
+                document.querySelector(".page.exam .card:not(.transition) .wrong-ans").innerHTML ="<svg class='background-image' data-src='../assets/images/general/wrongSelected_btn.svg'></svg>";
             }
         }
         // שאלה אמריקאית
         else {
             // מסמן את הכפתור המבוקש
-            document.querySelector(`.page.exam .card:not(.transition) #ans${examAnswers[currentQuestionExam] + 1} .choose-question`).innerHTML = choosenQuestionSvg;
+            document.querySelector(`.page.exam .card:not(.transition) #ans${examAnswers[currentQuestionExam] + 1} .choose-question`).innerHTML ="<svg class='background-image' data-src='../assets/images/general/choosenQuestion.svg'></svg>";
         }
     }
 }
@@ -1473,16 +1709,16 @@ function selectAns(event) {
     // נכון לא נכון
     if (QUESTIONS[currentQuestionExam].type === "binary") {
         // מחזיר את כל הכפתורים למצבם ההתחלתי
-        document.querySelector(".page.exam .first-card .right-ans").innerHTML = right_btnSvg;
-        document.querySelector(".page.exam .first-card .wrong-ans").innerHTML = wrong_btnSvg;
+        document.querySelector(".page.exam .first-card .right-ans").innerHTML = "<svg class='background-image' data-src='../assets/images/general/right_btn.svg'></svg>";
+        document.querySelector(".page.exam .first-card .wrong-ans").innerHTML ="<svg class='background-image' data-src='../assets/images/general/wrong_btn.svg'></svg>";
 
         // מסמן את הכפתור המבוקש
         if (event.currentTarget.classList.contains("wrong-ans")) {
-            event.currentTarget.innerHTML = wrongSelected_btnSvg;
+            event.currentTarget.innerHTML ="<svg class='background-image' data-src='../assets/images/general/wrongSelected_btn.svg'></svg>";
             finalAnswer = false;
         }
         else {
-            event.currentTarget.innerHTML = rightSelected_btnSvg;
+            event.currentTarget.innerHTML ="<svg class='background-image' data-src='../assets/images/general/rightSelected_btn.svg'></svg>";
             finalAnswer = true;
         }
 
@@ -1493,9 +1729,10 @@ function selectAns(event) {
         let selectedAns = document.querySelectorAll(".page.exam .first-card .answer-container");
         for (let countImg = 0; countImg < 4; countImg++) {
             selectedAns[countImg].querySelector(".choose-question").innerHTML = chooseQuestion_btn;
+            selectedAns[countImg].querySelector(".choose-question").innerHTML = chooseQuestion_btn;
         }
         // מסמן את הכפתור המבוקש
-        event.currentTarget.querySelector(".choose-question").innerHTML = choosenQuestionSvg;
+        event.currentTarget.querySelector(".choose-question").innerHTML ="<svg class='background-image' data-src='../assets/images/general/choosenQuestion.svg'></svg>";
 
         finalAnswer = Number(event.target.id.charAt(3)) - 1;
     }
@@ -1524,13 +1761,16 @@ function ifComplete() {
     if (isCompleteAnswers && !document.querySelector(".page.exam.done") && document.querySelector('.page .next-back-btn > :is(img, .forward-arrows)') === null) {
         let finishBtn = El("div", { 
             cls: "done-btn",
+    if (isCompleteAnswers && !document.querySelector(".page.exam.done") && document.querySelector('.page .next-back-btn > :is(img, .forward-arrows)') === null) {
+        let finishBtn = El("div", { 
+            cls: "done-btn",
             listeners: {
                 click: () => {
                     donePopup();
                 }
             }
         })
-        finishBtn.innerHTML = Done_btnSvg;
+        finishBtn.innerHTML ="<svg class='background-image' data-src='../assets/images/exam/Done_btn.svg'></svg>";
         if (!document.querySelector(".page.exam .next-back-btn>div.done-btn")) {
             document.querySelector(".page.exam .next-back-btn").style.justifyContent = "space-between";
             document.querySelector(".page.exam .next-back-btn").append(finishBtn);
@@ -1680,6 +1920,7 @@ function endExam(amountOfCorrectAnswers) {
     // הטקסט לכותרות לפי ההצלחה של המשתמש
     let name;
     let svg;
+    let svg;
     let date;
     let grade;
 
@@ -1691,15 +1932,16 @@ function endExam(amountOfCorrectAnswers) {
 
     // האם כמות התשובות הנכונות גדולה מחצי מהשאלות
     if (amountOfCorrectAnswers > QUESTIONS.length / 2) {
-        svg = check_iconSvg;
+        svg ="<svg class='background-image' data-src='../assets/images/general/finish_popup/check_icon.svg'></svg>";
     } else {
-        svg = x_iconSvg;                
+        svg ="<svg class='background-image' data-src='../assets/images/general/finish_popup/x_icon.svg'></svg>";                
     }
 
     let finishPopup =
         El("div", { cls: "dark" },
             // כל הקלף
             El("div", { cls: "end-exam" },
+                El("div", { cls: "close-btn" } ),
                 El("div", { cls: "close-btn" } ),
                 // כותרות
                 El("div", { cls: "title-popup" }, name),
@@ -1717,6 +1959,7 @@ function endExam(amountOfCorrectAnswers) {
                                     amountOfCorrectAnswers + " " + "תשובות נכונות"
                                 ),
                                 El("div", { cls: "checkIcon-btn" }),
+                                El("div", { cls: "checkIcon-btn" }),
                             ),
                             "מתוך " + QUESTIONS.length + " שאלות",
                         ),
@@ -1732,6 +1975,7 @@ function endExam(amountOfCorrectAnswers) {
                                 El("div", {},
                                     totalTimeExam + " דקות"
                                 ),
+                                El("div", { attributes: { class: "timeIcon-btn" } }),
                                 El("div", { attributes: { class: "timeIcon-btn" } }),
                             ),
                             "משך זמן המבחן",
@@ -1750,12 +1994,12 @@ function endExam(amountOfCorrectAnswers) {
                 )
             )
         );
-    finishPopup.querySelector(".title-popup").innerHTML += name_bgSvg;
-    finishPopup.querySelector(".close-btn").innerHTML = close_btnSvg;
+    finishPopup.querySelector(".title-popup").innerHTML +="<svg class='background-image' data-src='../assets/images/exam/name_bg.svg'></svg>";
+    finishPopup.querySelector(".close-btn").innerHTML ="<svg class='background-image' data-src='../assets/images/general/close_btn.svg'></svg>";
     finishPopup.querySelector(".checkIcon-btn").innerHTML = svg;
-    finishPopup.querySelector(".timeIcon-btn").innerHTML = timer_iconSvg;
-    finishPopup.querySelector(".backToExam-btn").innerHTML = showExam_btnSvg;
-    finishPopup.querySelector(".backToHome-btn").innerHTML = tohome_btnSvg;
+    finishPopup.querySelector(".timeIcon-btn").innerHTML ="<svg class='background-image' data-src='../assets/images/exam/beforeExam_popup/timer_icon.svg'></svg>";
+    finishPopup.querySelector(".backToExam-btn").innerHTML ="<svg class='background-image' data-src='../assets/images/general/finish_popup/showExam_btn.svg'></svg>";
+    finishPopup.querySelector(".backToHome-btn").innerHTML ="<svg class='background-image' data-src='../assets/images/general/finish_popup/tohome_btn.svg'></svg>";
 
     document.querySelector(".page.exam").append(finishPopup);
     document.querySelector(".page.exam .progress-bar-right-answers").style.width = amountOfCorrectAnswers / QUESTIONS.length * 100 + "%";
@@ -1921,6 +2165,8 @@ function subjectLearningPage(subject) {
     let backBtn =
         El("div", {
             attributes: { class: "back-btn" },
+        El("div", {
+            attributes: { class: "back-btn" },
             listeners: {
                 click: function () {
                     document.querySelector(".page.learning.subjects").classList.add("active");
@@ -1929,12 +2175,14 @@ function subjectLearningPage(subject) {
                 }
             } 
         });
-    backBtn.innerHTML = backBtnGeneralSvg;
+    backBtn.innerHTML =  "<svg data-src='../assets/images/general/back_btn.svg'></svg>";
     document.querySelector(".page.learning.content").append(backBtn);
 
     // הוספת כפתור תרגול
     if (DATA[subject].questionsPractice && DATA[subject].questionsPractice.length !== 0) {
         let practiceBtn =
+            El("div", {
+                attributes: { class: "practice-btn" },
             El("div", {
                 attributes: { class: "practice-btn" },
                 listeners: {
@@ -1943,7 +2191,7 @@ function subjectLearningPage(subject) {
                     }
                 }
             });
-        practiceBtn.innerHTML = practice_btnSvg;
+        practiceBtn.innerHTML ="<svg class='background-image' data-src='../assets/images/general/practice_btn.svg'></svg>";
         document.querySelector(".page.learning.content").append(practiceBtn);
     }
 
@@ -2027,7 +2275,7 @@ function subjectLearningPage(subject) {
         // יוצר אלמנט של קונטיינר לתוכן (כדי שתהיה גלילה יפה בתוך הכרטיסייה)
         let container = El("div", { cls: "content-container" });
         let card = El("div", { classes: ["card", getType(json[index].cardType)] });
-        card.innerHTML = learningSvg;
+        card.innerHTML ="<svg class='background-image' data-src='../assets/images/learning/learning.svg'></svg>";
         card.append(container);
         container.append(template.content.cloneNode(true));
         let cardType = CARD_TYPES[json[index].cardType]; 
@@ -2038,16 +2286,21 @@ function subjectLearningPage(subject) {
                 El("div", { cls: "next-back-btn" },
                     El("div", { cls: "next", listeners: { click: changeCard.bind(card, "next", json, index) } }),
                     El("div", { cls: "back", listeners: { click: changeCard.bind(card, "back", json, index) } })
+                    El("div", { cls: "next", listeners: { click: changeCard.bind(card, "next", json, index) } }),
+                    El("div", { cls: "back", listeners: { click: changeCard.bind(card, "back", json, index) } })
                 );
             if (index === 0) {
+            if (index === 0) {
                 buttons.classList.add("first");
+            }
+            if (index === json.length - 1) {
             }
             if (index === json.length - 1) {
                 buttons.classList.add("last");
             }
 
-            buttons.querySelector('.next').innerHTML = next_btnSvg;
-            buttons.querySelector('.back').innerHTML = backBtnExamSvg;
+            buttons.querySelector('.next').innerHTML ="<svg class='background-image' data-src='../assets/images/exam/next_btn.svg'></svg>";
+            buttons.querySelector('.back').innerHTML = "<svg class='background-image' data-src='../assets/images/exam/back_btn.svg'></svg>";
             card.append(buttons);
         }
         return card;
@@ -2191,7 +2444,9 @@ function practicePopup(subject) {
             // כל הקלף
             El("div", { cls: "before-practice-one-sub" },
                 El("div", {
+                El("div", {
                     attributes: {
+                        class: "close-btn"
                         class: "close-btn"
                     }, listeners: {
                         // // כפתור סגירה של הפופאפ
@@ -2215,6 +2470,7 @@ function practicePopup(subject) {
                             " לכל שאלה",
                         ),
                         El("div", { cls: "icon2", id: "timer" }),
+                        El("div", { cls: "icon2", id: "timer" }),
                     ),
                     El("div", { cls: "grey-line" }),
                     // בלוק 2
@@ -2223,6 +2479,7 @@ function practicePopup(subject) {
                             "זה רק",
                             El("b", {}, " תרגול")
                         ),
+                        El("div", { cls: "icon2", id: 'blow' }),
                         El("div", { cls: "icon2", id: 'blow' }),
                     ),
                     El("div", { cls: "grey-line" }),
@@ -2233,11 +2490,14 @@ function practicePopup(subject) {
                             " למעבר בין השאלות",
                         ),
                         El("div", { cls: "icon4"  }),
+                        El("div", { cls: "icon4"  }),
                     ),
                     El("div", { cls: "grey-line" }),
                 ),
                 El("div", {
+                El("div", {
                     attributes: {
+                        class: "start-btn"
                         class: "start-btn"
                     }, listeners: {
                         click: function () {
@@ -2259,13 +2519,14 @@ function practicePopup(subject) {
             )
         );
     // insert SVGs
-    popup.querySelector('.close-btn').innerHTML = close_btnSvg;
-    popup.querySelector('#blow').innerHTML = blow_iconSvg;
-    popup.querySelector('#timer').innerHTML = timer_iconSvg;
-    popup.querySelector('.icon4').innerHTML = slide_iconSvg;
-    popup.querySelector('.start-btn').innerHTML = ok_btnSvg;
+    popup.querySelector('.close-btn').innerHTML ="<svg class='background-image' data-src='../assets/images/general/close_btn.svg'></svg>";
+    popup.querySelector('#blow').innerHTML ="<svg class='background-image' data-src='../assets/images/practice/beforePractice_popup/blow_icon.svg'></svg>";
+    popup.querySelector('#timer').innerHTML ="<svg class='background-image' data-src='../assets/images/exam/beforeExam_popup/timer_icon.svg'></svg>";
+    popup.querySelector('.icon4').innerHTML ="<svg class='background-image' data-src='../assets/images/exam/beforeExam_popup/slide_icon.svg'></svg>";
+    popup.querySelector('.start-btn').innerHTML ="<svg class='background-image' data-src='../assets/images/general/ok_btn.svg'></svg>";
     
     document.querySelector(".page.learning.content").append(popup);
+    
     
 }
 function theChosenSub(subject) {
@@ -2319,7 +2580,10 @@ function timeOver(page) {
                     El("div", { cls: "buttons-exit-popup" },
                         // כפתור חזרה למסך הבית
                         El("div", {
+                        El("div", {
                             attributes: {
+                                class: "button-popup",
+                                id: "popup-back-btn"
                                 class: "button-popup",
                                 id: "popup-back-btn"
                             }, listeners: {
@@ -2353,7 +2617,9 @@ function timeOver(page) {
                         }),
                         // כפתור חזרה לניסיון נוסף לתרגול או המבחן
                         El("div", {
+                        El("div", {
                             attributes: {
+                                class: "button-popup", id: "popup-try-again"
                                 class: "button-popup", id: "popup-try-again"
                             }, listeners: {
                                 click: function () {
@@ -2394,8 +2660,8 @@ function timeOver(page) {
 
             )
         // insert SVGs
-        popup.querySelector('#popup-back-btn').innerHTML = backSvg;
-        popup.querySelector('#popup-try-again').innerHTML = tryAgainBtnSvg;
+        popup.querySelector('#popup-back-btn').innerHTML ="<svg class='background-image' data-src='../assets/images/general/leavePracticeOrExam_popup/back.svg'></svg>";
+        popup.querySelector('#popup-try-again').innerHTML ="<svg class='background-image' data-src='../assets/images/general/tryAgainBtn.svg'></svg>";
 
         document.querySelector(`.page.${page}`).append(popup);
     }

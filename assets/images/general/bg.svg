@@ -11,7 +11,7 @@
       }
 
       .cls-2 {
-        fill: #1aa3a3;
+        fill: var( --primary-color);
       }
 
       .cls-3 {

@@ -1,0 +1,63 @@
+@font-face {
+    font-family: Rubik;
+    src: url("../../assets/fonts/Rubik/Rubik-Regular.ttf");
+    font-weight: 500;
+  }
+
+  @font-face {
+    font-family: Narkis;
+    src: url("./NarkisBlockCon-Bold_MFW.woff");
+  }
+  
+
+* {
+    direction: rtl;
+    font-family: Rubik, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body,
+html {
+    height: 100%;
+    background-color: rgb(255, 249, 254);
+}
+
+body {
+    padding-right: 1rem;
+}
+
+.text {
+    /* text-align: center; */
+    font-size: 1.2rem;
+}
+
+.heading {
+    /* text-align: center; */
+    margin-top: 4rem;
+    margin-bottom: 1rem;
+    font-size: 4rem;
+    font-family: Narkis; 
+}
+
+ul {
+    font-size: 1rem;
+    list-style-type: circle;
+}
+
+li {
+    margin: 0.7rem 0;
+}
+
+.title {
+    margin-bottom: -1rem;
+    font-size: 1.2rem;
+    /* text-align: center; */
+    margin-top: 1rem;
+}
+
+a {
+    color: rgb(153, 5, 153)
+}
+
+a:visited {
+    color: black;
+}
