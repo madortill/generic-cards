@@ -7,7 +7,7 @@ $repoURL = git remote get-url --push origin
 
 if($repoURL -eq $null -or $repoURL -eq "")
 {
-    git remote add origin "https://github.com/madortill/$currRepo .git"
+    git remote add origin "https://github.com/madortill/$currRepo.git"
 }
 
 

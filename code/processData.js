@@ -22,7 +22,7 @@ let url = new URL(window.location.href)
 let dataPath = url.searchParams.get('path')
 
 if (!dataPath) {
-    location.href = "./404.html";
+    location.href = "./404/404.html";
 }
 
 fetch(`../data/${dataPath}/${dataPath}.json`)
@@ -39,12 +39,12 @@ fetch(`../data/${dataPath}/${dataPath}.json`)
              })
             .catch((err) => {
                 sessionStorage.setItem('dataFetchingErr', err.toString()); 
-                location.href = "./404.html";
+                location.href = "./404/404.html";
              });
     })
     .catch((err) => { 
         sessionStorage.setItem('dataFetchingErr', err.toString()); 
-        location.href = "./404.html";
+        location.href = "./404/404.html";
      });
 
 const changeColors = () => {

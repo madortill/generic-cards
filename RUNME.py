@@ -130,7 +130,7 @@ for file in allDataFiles:
 
 
 # run powershell code (upload to git + copy to clip board) and show results
-p = subprocess.run(["powershell.exe", "./copy.ps1", unique_id], capture_output=True)
+p = subprocess.run(["powershell.exe", "./uploadToGit.ps1", unique_id], capture_output=True)
 error = p.stderr.decode('utf-8')
 if error:
     message = 'הייתה בעיה בהעלאה לגיט. \n יש לעשות את ההעלאה באופן ידני. \n הסתכלו בטרמינל.'
