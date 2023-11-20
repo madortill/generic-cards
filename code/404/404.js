@@ -22,7 +22,7 @@ window.addEventListener('load', () => {
     }
     
     console.warn(messageToPrint);
-    const father = El('ul', {cls: 'lomdot-list'}, El("span", {cls: 'title'}, "רשימת הלומדות הקיימות: \n"))
+    const father = El('ul', {cls: 'lomdot-list'})
     for (const id of cardsList) {
         father.append(El('li', {cls: 'li', attributes: {"data-id": id}}, 
             El("a", {attributes: {href: `madortill.github.io/id-listgeneric-cards/code/?path=${id}`}}, 

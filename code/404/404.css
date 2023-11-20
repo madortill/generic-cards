@@ -1,13 +1,12 @@
 @font-face {
     font-family: Rubik;
-    src: url("../assets/fonts/Rubik/Rubik-Regular.ttf");
+    src: url("../../assets/fonts/Rubik/Rubik-Regular.ttf");
     font-weight: 500;
   }
-  
+
   @font-face {
-    font-family: Rubik;
-    src: url("../assets/fonts/Rubik/Rubik-Bold.ttf");
-    font-weight: 800;
+    font-family: Narkis;
+    src: url("./NarkisBlockCon-Bold_MFW.woff");
   }
   
 
@@ -19,29 +18,46 @@
 body,
 html {
     height: 100%;
-    /* background-color: rgb(240, 255, 254); */
+    background-color: rgb(255, 249, 254);
 }
 
-h1, div {
-    text-align: center;
+body {
+    padding-right: 1rem;
 }
 
-h1 {
-    margin-top: 8vh;
+.text {
+    /* text-align: center; */
+    font-size: 1.2rem;
 }
 
-div, ul {
-    font-size: larger;
-}
-
-li::marker {
-    text-align: center;
+.heading {
+    /* text-align: center; */
+    margin-top: 4rem;
+    margin-bottom: 1rem;
+    font-size: 4rem;
+    font-family: Narkis; 
 }
 
 ul {
+    font-size: 1rem;
     list-style-type: circle;
 }
 
+li {
+    margin: 0.7rem 0;
+}
+
 .title {
-    text-decoration: underline;
+    margin-bottom: -1rem;
+    font-size: 1.2rem;
+    /* text-align: center; */
+    margin-top: 1rem;
+}
+
+a {
+    color: rgb(153, 5, 153)
+}
+
+a:visited {
+    color: black;
 }
