@@ -2,7 +2,7 @@
 
 Param ($unique_id = $(throw "unique_id parameter is required."))
 $ErrorActionPreference = "Stop" 
-$currRepo = "generic-cards-lomdot"
+$currRepo = "id-listgeneric-cards"
 $repoURL = git remote get-url --push origin
 
 if($repoURL -eq $null -or $repoURL -eq "")

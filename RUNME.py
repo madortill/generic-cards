@@ -139,7 +139,7 @@ if error:
     print(error)
     msgBox('אוי! משהו השתבש.', message , 'error')
     input = input('press enter to continue')
-    msgBox('הקישור ללומדה', f"הקישור הועתק ללוח: \n madortill.github.io/generic-cards-lomdot/code/?path={unique_id}" , 'info')
+    msgBox('הקישור ללומדה', f"הקישור הועתק ללוח: \n madortill.github.io/id-listgeneric-cards/code/?path={unique_id}" , 'info')
 else:
     print('powershell output: \n' + p.stdout.decode('utf-8'))  
-    msgBox('לומדה חדשה נוצרה!', f'לחצו "אישור" כדי להעתיק את הקישור הבא ללוח: madortill.github.io/generic-cards-lomdot/code/?path={unique_id}', 'info')
+    msgBox('לומדה חדשה נוצרה!', f'לחצו "אישור" כדי להעתיק את הקישור הבא ללוח: madortill.github.io/id-listgeneric-cards/code/?path={unique_id}', 'info')
