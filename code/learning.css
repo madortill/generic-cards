@@ -147,12 +147,12 @@
   align-items: center;
 }
 
-.page.learning.subjects .subject-popup>img {
+.page.learning.subjects .subject-popup>div.check-place {
   width: 4vw;
   margin: 4% 0 5% 2%;
 }
 
-.page.learning.subjects .subject-popup>div {
+.page.learning.subjects .subject-popup>div:not(.check-place) {
   font-size: 1em;
   width: 100%;
 }
@@ -165,12 +165,12 @@
   font-weight: 800;
 }
 
-.page.learning.subjects .select-everything>img {
+.page.learning.subjects .select-everything>:is(img, div.check-place) {
   height: 6vw;
   margin: 3% 0 3% 2%;
 }
 
-.page.learning.subjects .select-everything>div {
+.page.learning.subjects .select-everything>div:not(.check-place) {
   width: 100%;
 }
 
@@ -415,6 +415,7 @@
 .page.learning.content .card.next {
   transform: rotateZ(4deg);
   opacity: 0.5;
+  z-index: -1;
 }
 
 .page.learning.content .next-back-btn {

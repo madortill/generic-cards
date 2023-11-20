@@ -10,6 +10,13 @@
   font-weight: 800;
 }
 
+/* set variables */
+:root {
+  --secondary-color: #67dfcb;
+  --text-color: #1f3e3e;
+  --gradient-color: #629191;
+}
+
 html,
 body {
   width: 100%;
