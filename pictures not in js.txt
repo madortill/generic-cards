@@ -1,1 +1,4 @@
 if time or amount of questions is zero, test button and practice button shouldn't appear
+
+
+להוסיף אופציה לשנות את תמונת הפתיחה בתוך ה json
