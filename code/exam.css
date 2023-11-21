@@ -522,19 +522,23 @@
 
 .page .icon1 {
   width: 7vw;
+  height: 8vw;
 }
 
 .page .icon3,
 .page .icon2 {
   width: 6vw;
+  /* height: 7vw; */
 }
 
 .page .icon4 {
   width: 8vw;
+  /* height: 9vw; */
 }
 
 .page .icon5 {
   width: 11vw;
+  /* height: 12vw; */
 }
 
 .page .instructions {

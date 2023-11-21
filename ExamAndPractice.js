@@ -55,12 +55,12 @@ function beforePractice() {
         );
 
     // insert SVGs
-    popup.querySelector(".practiceBTN-popup").innerHTML = choosePractice_btnSvg;
-    popup.querySelector(".close-btn").innerHTML = close_btnSvg;
-    popup.querySelector(".icon2").innerHTML = timer_iconSvg;
-    popup.querySelector("#blow").innerHTML = blow_iconSvg;
-    popup.querySelector(".check-place").innerHTML = nonSelectSMALLSvg;
-    popup.querySelector("#slide").innerHTML = slide_iconSvg;
+    popup.querySelector(".practiceBTN-popup").innerHTML ="<svg class='background-image' data-src='../assets/images/learning/choosePractice_popup/choosePractice_btn.svg'></svg>";
+    popup.querySelector(".close-btn").innerHTML ="<svg class='background-image' data-src='../assets/images/general/close_btn.svg'></svg>";
+    popup.querySelector(".icon2").innerHTML ="<svg class='background-image' data-src='../assets/images/exam/beforeExam_popup/timer_icon.svg'></svg>";
+    popup.querySelector("#blow").innerHTML ="<svg class='background-image' data-src='../assets/images/practice/beforePractice_popup/blow_icon.svg'></svg>";
+    popup.querySelector(".check-place").innerHTML = "../assets/images/learning/choosePractice_popup/nonSelectSMALL.svg'></svg>";
+    popup.querySelector("#slide").innerHTML ="<svg class='background-image' data-src='../assets/images/exam/beforeExam_popup/slide_icon.svg'></svg>";
     document.querySelector(".page.learning.subjects").append(popup);
 
     // מערך שבו רשום המיקום של הנושא לפי סדר ההופעה שלו בג'ייסון
@@ -1607,12 +1607,12 @@ function endExam(amountOfCorrectAnswers) {
                 )
             )
         );
-    finishPopup.querySelector(".title-popup").innerHTML += name_bgSvg;
-    finishPopup.querySelector(".close-btn").innerHTML = close_btnSvg;
-    finishPopup.querySelector(".checkIcon-btn").innerHTML = svg;
-    finishPopup.querySelector(".timeIcon-btn").innerHTML = timer_iconSvg;
-    finishPopup.querySelector(".backToExam-btn").innerHTML = showExam_btnSvg;
-    finishPopup.querySelector(".backToHome-btn").innerHTML = tohome_btnSvg;
+        finishPopup.querySelector(".title-popup").innerHTML +="<svg class='background-image' data-src='../assets/images/exam/name_bg.svg'></svg>";
+        finishPopup.querySelector(".close-btn").innerHTML ="<svg class='background-image' data-src='../assets/images/general/close_btn.svg'></svg>";
+        finishPopup.querySelector(".checkIcon-btn").innerHTML = svg;
+        finishPopup.querySelector(".timeIcon-btn").innerHTML ="<svg class='background-image' data-src='../assets/images/exam/beforeExam_popup/timer_icon.svg'></svg>";
+        finishPopup.querySelector(".backToExam-btn").innerHTML ="<svg class='background-image' data-src='../assets/images/general/finish_popup/showExam_btn.svg'></svg>";
+        finishPopup.querySelector(".backToHome-btn").innerHTML ="<svg class='background-image' data-src='../assets/images/general/finish_popup/tohome_btn.svg'></svg>";
 
     document.querySelector(".page.exam").append(finishPopup);
     document.querySelector(".page.exam .progress-bar-right-answers").style.width = amountOfCorrectAnswers / QUESTIONS.length * 100 + "%";

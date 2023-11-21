@@ -2,7 +2,7 @@
 
 Param ($unique_id = $(throw "unique_id parameter is required."))
 $ErrorActionPreference = "Stop" 
-$currRepo = "id-listgeneric-cards"
+$currRepo = "generic-cards"
 $repoURL = git remote get-url --push origin
 
 if($repoURL -eq $null -or $repoURL -eq "")
@@ -23,7 +23,7 @@ function Invoke-Utility {
 
 Set-Alias iu Invoke-Utility
 
-Set-Clipboard -Value "madortill.github.io/$currRepo/code/?path=$unique_id"
+Set-Clipboard -Value "https://madortill.github.io/$currRepo/code/?path=$unique_id"
 iu git add "./data/$unique_id/"
 git commit -m "adding data number $unique_id"
 iu git push

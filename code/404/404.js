@@ -25,8 +25,8 @@ window.addEventListener('load', () => {
     const father = El('ul', {cls: 'lomdot-list'})
     for (const id of cardsList) {
         father.append(El('li', {cls: 'li', attributes: {"data-id": id}}, 
-            El("a", {attributes: {href: `madortill.github.io/id-listgeneric-cards/code/?path=${id}`}}, 
-            `madortill.github.io/id-listgeneric-cards/code/?path=${id}`)
+            El("a", {attributes: {href: `https://madortill.github.io/generic-cards/code/?path=${id}`}}, 
+            `https://madortill.github.io/generic-cards/code/?path=${id}`)
         ))
     }
     document.querySelector('body').append(father);

@@ -149,6 +149,7 @@
 
 .page.learning.subjects .subject-popup>div.check-place {
   width: 4vw;
+  height: 4vw;
   margin: 4% 0 5% 2%;
 }
 
@@ -167,6 +168,7 @@
 
 .page.learning.subjects .select-everything>:is(img, div.check-place) {
   height: 6vw;
+  width: 6vw;
   margin: 3% 0 3% 2%;
 }
 
