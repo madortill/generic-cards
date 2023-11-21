@@ -43,16 +43,18 @@ def importData (unique_id):
 
 def convertBase64 (base64str, picOrvideo):
     global currImg 
-    fileExtension = re.search(r"(?<=data:.{5}/).*(?=;)", base64str).group(0)
-    newBase64str = re.sub(r'data:.*/.*;base64', '', base64str[0: 30]) +  base64str[30::]
-    contentToWrite = base64.urlsafe_b64decode(newBase64str)
-    filepath = ".\\" + str(picOrvideo) + str(currImg) + '.' + str(fileExtension)
-    filepathFromCode = os.path.join("..\\data", str(unique_id), str(picOrvideo) + str(currImg) + '.' + str(fileExtension))
-    imgFile =  open(filepath, 'wb')
-    imgFile.write(contentToWrite)
-    imgFile.close()
-    currImg += 1
-    return filepathFromCode
+    if re.search(r"(?<=data:.{5}/).*(?=;)", base64str) != None:
+        fileExtension = re.search(r"(?<=data:.{5}/).*(?=;)", base64str).group(0)
+        newBase64str = re.sub(r'data:.*/.*;base64', '', base64str[0: 30]) +  base64str[30::]
+        contentToWrite = base64.urlsafe_b64decode(newBase64str)
+        filepath = ".\\" + str(picOrvideo) + str(currImg) + '.' + str(fileExtension)
+        filepathFromCode = os.path.join("..\\data", str(unique_id), str(picOrvideo) + str(currImg) + '.' + str(fileExtension))
+        imgFile =  open(filepath, 'wb')
+        imgFile.write(contentToWrite)
+        imgFile.close()
+        currImg += 1
+        return filepathFromCode
+    
 
 # find all base64 files
 def findPic(json):
@@ -71,6 +73,7 @@ idList = []
 
 def findData(path):
     result = []
+    # files = [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]
     for root, dirs, files in os.walk(path):
         for name in files:
             if ('data' in name) and ('.json' in name):
@@ -103,6 +106,7 @@ allDataFiles = findData('.')
 
 unique_id = str(int(time.time()))[5:] #converting to int to round the float, then converting to str
 for file in allDataFiles:
+    unique_id = str(int(unique_id) + 1)
     print('unique_id ' + unique_id)
     #  check if dir exists and if not, creates new one
     if not os.path.exists(os.path.join(".\\data\\", str(unique_id))): 
@@ -116,8 +120,8 @@ for file in allDataFiles:
     os.chdir(f'.\\data\\{unique_id}')
     startConversion(unique_id)
     os.chdir('../..')
-    print(f"cwd: {os.getcwd()}")
 
+    print('adding id to id_list')
     idList.append(unique_id)
     # add id to list of all jsons
     with open("./data/id-list.json", "r") as jsonFile:
@@ -128,11 +132,10 @@ for file in allDataFiles:
     with open("./data/id-list.json", "w") as jsonFile:
         json.dump(data, jsonFile)
 
-
 # run powershell code (upload to git + copy to clip board) and show results
 p = subprocess.run(["powershell.exe", "./uploadToGit.ps1", unique_id], capture_output=True)
 error = p.stderr.decode('utf-8')
-if error:
+if p.returncode != 0:
     message = 'הייתה בעיה בהעלאה לגיט. \n יש לעשות את ההעלאה באופן ידני. \n הסתכלו בטרמינל.'
     if re.search(r'^fatal: (.+)', error) != None:
         message = 'הייתה בעיה בהעלאה לגיטהאב. \n יש לעשות את ההעלאה באופן ידני. הבעיה היא: \n' + re.search(r'^fatal: (.+)', error)[1]

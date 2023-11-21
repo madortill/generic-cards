@@ -10,12 +10,6 @@
   font-weight: 800;
 }
 
-/* set variables */
-:root {
-  --secondary-color: #67dfcb;
-  --text-color: #1f3e3e;
-  --gradient-color: #629191;
-}
 
 html,
 body {
@@ -26,17 +20,16 @@ body {
   font-family: "Rubik";
   direction: rtl;
   color: white;
-  /* background-image: url("../assets/images/general/bg.svg"); */
   background-size: 100% 100%;
   background-repeat: no-repeat;
   overflow: hidden;
 }
 
 :root {
-  --primary-color: #6c1aa3;
-  --secondary-color: rgb(103, 163, 223);
-  --text-color: #3e1f3e;
-  --gradient-color: #fffcfd;
+  --primary-color: #20c5f2;
+  --secondary-color: #1de8f7;
+  --text-color: #1c3f55;
+  --gradient-color: #27c5f2;
 }
 
 *:has(.absolute) {
@@ -46,7 +39,6 @@ body {
 .main {
   width: 100%;
   height: 100%;
-  /* overflow: auto; */
 }
 
 .page {
@@ -60,8 +52,6 @@ body {
 
   scroll-snap-align: start end;
   -webkit-scroll-snap-coordinate: 0 0;
-
-  /* scroll-behavior: smooth; */
   overflow: hidden;
 }
 

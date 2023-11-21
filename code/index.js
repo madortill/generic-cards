@@ -278,8 +278,8 @@ if (isPracticeQuestions) {
 } else {
     document.querySelector(".page.learning.subjects .practice-btn").remove();
 }
-
-if (isExamQuestions && numOfAvailableQuestions !== 0) {
+examTime();
+if (isExamQuestions && numOfAvailableQuestions !== 0 && (EXAM_SECONDS + EXAM_MINUTS) !== 0) {
     document.querySelector(".page.learning.subjects .exam-btn").addEventListener("click", beforeExam);
 } else {
     document.querySelector(".page.learning.subjects .exam-btn").remove();
@@ -1075,8 +1075,6 @@ function beforeExam() {
     document.querySelector(".page.learning.subjects .back-btn").style.filter = `blur(${blurAmount})`;
     document.querySelector(".page.learning.subjects .buttons").style.filter = `blur(${blurAmount})`;
 
-    examTime();
-
     let popup =
         El("div", { cls: "dark" },
             // כל הקלף
@@ -1177,7 +1175,7 @@ function beforeExam() {
 function examTime(){
     // איפוס זמן המבחן לפי בחירת מומחה התוכן
     EXAM_SECONDS = TIME_FOR_EXAM.slice(-2);
-    if (EXAM_SECONDS ===  "00")  {
+    if (EXAM_SECONDS === "00")  {
         EXAM_SECONDS = 0;
         if (TIME_FOR_EXAM.length > 4) 
             EXAM_MINUTS = Number(TIME_FOR_EXAM.slice(0,2));
@@ -1353,7 +1351,7 @@ function exit(page) {
 
     popup.querySelector("#exit").innerHTML ="<svg class='background-image absolute' data-src='../assets/images/general/leavePracticeOrExam_popup/exit.svg'></svg>";
     popup.querySelector(".close-btn").innerHTML ="<svg class='background-image absolute' data-src='../assets/images/general/close_btn.svg'></svg>";
-    popup.querySelector(".button-popup").innerHTML ="<svg class='background-image absolute' data-src='../assets/images/general/leavePracticeOrExam_popup/back.svg'></svg>";
+    popup.querySelector(".button-popup").innerHTML ="<svg class='background-image' data-src='../assets/images/general/leavePracticeOrExam_popup/back.svg'></svg>";
 
     document.querySelector(`.page.${page}`).append(popup);
 }
@@ -2563,6 +2561,8 @@ function timeOver(page) {
                                         document.querySelector(".page.exam .questions-container").innerHTML = "";
                                         document.querySelector(".page.exam .questions-number").innerHTML = "";
                                         document.querySelector(".page.exam .back-btn").remove();
+                                        examMinutes = EXAM_MINUTS;
+                                        examSeconds = EXAM_SECONDS;
                                         examPage();
                                     }
                                 }
@@ -2573,8 +2573,8 @@ function timeOver(page) {
 
             )
         // insert SVGs
-        popup.querySelector('#popup-back-btn').innerHTML ="<svg class='background-image absolute' data-src='../assets/images/general/leavePracticeOrExam_popup/back.svg'></svg>";
-        popup.querySelector('#popup-try-again').innerHTML ="<svg class='background-image absolute' data-src='../assets/images/general/tryAgainBtn.svg'></svg>";
+        popup.querySelector('#popup-back-btn').innerHTML ="<svg class='background-image' data-src='../assets/images/general/leavePracticeOrExam_popup/back.svg'></svg>";
+        popup.querySelector('#popup-try-again').innerHTML ="<svg class='background-image' data-src='../assets/images/general/tryAgainBtn.svg'></svg>";
 
         document.querySelector(`.page.${page}`).append(popup);
     }
