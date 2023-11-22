@@ -2,6 +2,7 @@
     "TITLE": "פק״ל שגרה - בה״ד 7",
     "AMOUNT_EXAM_QUESTIONS": 0,
     "TIME_FOR_EXAM": "10:00",
+    "OPENING_PICTURE": "../data/71424/images/homeGraphic_icon.svg",
     "DATA": {
         "כללי": {
             "amountOfQuestions": 0,

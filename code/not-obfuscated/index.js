@@ -48,6 +48,10 @@ var examAnswers = [];
 
 // פונקציית הטעינה של כל הלומדה
 const afterLoaded = () => {
+    // change opening image is present in data.json
+    if (OPENING_PICTURE != undefined) {
+        document.querySelector('.home .books').dataset.src = OPENING_PICTURE;
+    }
     SUBJECTS_TITLES = Object.keys(DATA);
     console.log('subject titles: ', SUBJECTS_TITLES)
     // כותרת ראשית ללומדה
@@ -201,12 +205,12 @@ const goToSubj = (event) => {
     const _clickSub = () => {
 
         if (counter < placeInArr) {
-            document.querySelector(`.sub-topics-container[data-subsubject="${subSubject}"]`).click();
+            document.querySelector(`.sub-topics-container[data-subsubject="${purifyText(subSubject)}"]`).click();
             counter++;
         } else {
             clearInterval(interval);
             // ****** scroll to relevant card ******
-            setTimeout(() => {document.querySelector(`.card[data-topic='${topic}']`).scrollIntoView({behavior: "smooth"})}, 150 * placeInArr);
+            setTimeout(() => {document.querySelector(`.card[data-topic='${purifyText(topic)}']`).scrollIntoView({behavior: "smooth"})}, 150 * placeInArr);
         }
     }
 
@@ -2143,7 +2147,7 @@ function subjectLearningPage(subject) {
 
         // יוצר תת נושא ואת כל תת תת הנושאים
         let subTopic =
-            El("div", { cls: "sub-topics-container" },
+            El("div", { cls: "sub-topics-container", attributes: {"data-subSubject": purifyText(sub)} },
                 El("div", { cls: "sub-topic" },
                     El("img", { attributes: { class: "arrow", src: "../assets/images/learning/openArrow_icon.svg" } }),
                     El("div", { cls: "sub-title" }, sub),
@@ -2203,7 +2207,7 @@ function subjectLearningPage(subject) {
         }
         // יוצר אלמנט של קונטיינר לתוכן (כדי שתהיה גלילה יפה בתוך הכרטיסייה)
         let container = El("div", { cls: "content-container" });
-        let card = El("div", { classes: ["card", getType(json[index].cardType)] });
+        let card = El("div", { classes: ["card", getType(json[index].cardType)], attributes: {"data-topic": purifyText(title)} });
         card.innerHTML ="<svg class='background-image absolute' data-src='../assets/images/learning/learning.svg'></svg>";
         card.append(container);
         container.append(template.content.cloneNode(true));
@@ -2605,3 +2609,14 @@ function shuffle(arr) {
     return arr;
 }
 
+const purifyText = (oldText) => {
+    newText = '';
+    for (char of oldText) {
+      if (/^[A-Za-z0-9\u0590-\u05FF]+$/i.test(char)) {
+        newText += char;
+      }
+    }
+    console.log(newText);
+    return newText;
+  }
+  
