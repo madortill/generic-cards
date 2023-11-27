@@ -48,6 +48,7 @@ var examAnswers = [];
 
 // פונקציית הטעינה של כל הלומדה
 const afterLoaded = () => {
+    document.title = TITLE;
     // change opening image is present in data.json
     if (OPENING_PICTURE != undefined) {
         document.querySelector('.home .books').dataset.src = OPENING_PICTURE;
