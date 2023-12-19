@@ -19,6 +19,7 @@ let TITLE;
 let TIME_FOR_EXAM;
 let AMOUNT_EXAM_QUESTIONS;
 let OPENING_PICTURE;
+let AUTHOR;
 
 //  Get json of data
 let url = new URL(window.location.href)
@@ -38,8 +39,9 @@ fetch(`../data/${dataPath}/${dataPath}.json`)
                 TIME_FOR_EXAM = result.TIME_FOR_EXAM;
                 OPENING_PICTURE = result.OPENING_PICTURE;
                 // Max number of question in exam. Make sure it isn't more than the number of questions we have!
-                AMOUNT_EXAM_QUESTIONS = result.AMOUNT_EXAM_QUESTIONS
+                AMOUNT_EXAM_QUESTIONS = result.AMOUNT_EXAM_QUESTIONS;
                 // determine colors
+                AUTHOR = result.AUTHOR;
                 changeColors();
 
                 afterLoaded();

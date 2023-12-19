@@ -941,6 +941,11 @@
             "icon": "../data/71424/images/bahahd7symbol.png"
         }
     },
+    "AUTHOER": {
+        "rank": "-",
+        "name": "-",
+        "role": "-"
+    },
     "THEME": {
         "name": "torquise",
         "hebrawName": "טורקיז",

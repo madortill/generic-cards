@@ -63,6 +63,8 @@ def findPic(json):
         if (index == 'pic' or index == 'video'):
             filepath = convertBase64(json[index], index)
             json[index] = str(filepath).replace('\\', '/')
+        elif (index == 'icon'):
+            json[index] = deafultIconPath
         elif (type(json[index]) == list or type(json[index]) == dict):
             findPic(json[index])
 
@@ -88,6 +90,13 @@ def findData(path):
 
 def startConversion (unique_id): 
     jsonData = importData(unique_id)
+    # save icon
+    global deafultIconPath
+    if (jsonData["DEAFULT_ICON"] == "../assets/images/learning/Artboard 4.svg"):
+        deafultIconPath = "../assets/images/learning/Artboard 4.svg"
+    else: 
+        deafultIconPath = convertBase64(jsonData["DEAFULT_ICON"], 'icon')
+    # find all base64 files (pic or video)
     if "DATA" in jsonData:
         findPic(jsonData["DATA"])
     else:

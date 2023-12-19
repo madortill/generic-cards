@@ -42,12 +42,20 @@
   font-size: 4.5vmin;
 }
 
+
 .page.learning.subjects .icon {
   width: 2em;
   position: relative;
   top: 3em;
   left: 0.4em;
 }
+ 
+/* make the defult icon invisible */
+.page.learning.subjects .icon[src="../assets/images/learning/Artboard 4.svg"], .page.learning.subjects .icon[src="null"] {
+  opacity: 0%;
+  aspect-ratio: 1 / 1;
+}
+
 
 .page.learning.subjects .subject {
   color: var(--text-color);

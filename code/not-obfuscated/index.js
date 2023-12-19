@@ -45,7 +45,6 @@ var midElement;
 /** @type {(boolean|number)[]} */
 var examAnswers = [];
 
-
 // פונקציית הטעינה של כל הלומדה
 const afterLoaded = () => {
     document.title = TITLE;
@@ -74,7 +73,6 @@ const afterLoaded = () => {
     // הפעלה של האנימציה בלחיצה
     document.querySelector(".page.opening  .expand").style.transition = "all 1s ease";
 }
-
 
 // מעבר לדף הבית
 /**
@@ -115,6 +113,12 @@ document.querySelector(".full-screen").style.visibility = "hidden";
 document.querySelector(".page.opening").classList.remove("active");
 document.querySelector(".page.home").classList.remove("active");
 document.querySelector(".page.about").classList.add("active");
+// הכנסת הפרטים לפי הג'ייסון
+if (AUTHOR.rank && AUTHOR.name && AUTHOR.role) {
+    document.getElementById("expert-name").innerText = `${AUTHOR.rank} ${AUTHOR.name}, ${AUTHOR.role}`
+} else {
+    document.getElementById("expert-name").innerText = '---'
+}
 // מעבר לדף הבית
 document.querySelector(".page.about .back-btn").addEventListener("click", () => {
     document.querySelector(".full-screen").style.visibility = "visible";
