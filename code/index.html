@@ -1,16 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
+
     <!-- Microbrowsers and meta tags -->
-   
-    <meta property="og:title" content='לומדה שנוצרה בעזרת מחולל הלומדות של מדור טי"ל' />
+
+    <!-- <meta property="og:title" content='לומדה שנוצרה בעזרת מחולל הלומדות של מדור טי"ל' />
     <meta name="twitter:title" content='לומדה שנוצרה בעזרת מחולל הלומדות של מדור טי"ל '>
     <meta property="og:image" content="../assets/till_logo.svg" />
-    <meta name="twitter:image:src" content="../assets/till_logo.svg">
+    <meta name="twitter:image:src" content="../assets/till_logo.svg"> -->
+    <!-- HTML Meta Tags -->
+    <title>לומדה שנוצרה בעזרת מחולל הלומדות של מדור טי"ל</title>
+    <meta name="description" content="">
+
+    <!-- Facebook Meta Tags -->
+    <meta property="og:url" content="https://madortill.github.io/generic-cards/code/?path=86879">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="לומדה שנוצרה בעזרת מחולל הלומדות של מדור טי" ל">
+    <meta property="og:description" content="">
+    <meta property="og:image"
+        content="https://opengraph.b-cdn.net/production/documents/2822c58c-b134-43d6-a795-e61c6363461e.svg?token=D6OAsRhiReIOo8Ghe-7sowNHSW3A1o4mRREZs_-p2Ag&height=150&width=187&expires=33240790223">
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="madortill.github.io">
+    <meta property="twitter:url" content="https://madortill.github.io/generic-cards/code/?path=86879">
+    <meta name="twitter:title" content="לומדה שנוצרה בעזרת מחולל הלומדות של מדור טי" ל">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:image"
+        content="https://opengraph.b-cdn.net/production/documents/2822c58c-b134-43d6-a795-e61c6363461e.svg?token=D6OAsRhiReIOo8Ghe-7sowNHSW3A1o4mRREZs_-p2Ag&height=150&width=187&expires=33240790223">
+
+    <!-- Meta Tags Generated via https://www.opengraph.xyz -->
 
 
     <!-- stylesheet -->
@@ -22,7 +45,7 @@
     <link rel="stylesheet" href="learning.css" type="text/css">
     <link rel="stylesheet" href="exam.css" type="text/css">
     <link rel="stylesheet" href="search.css" type="text/css">
-    
+
     <!-- javascript -->
     <script type="text/javascript" src="index.js"></script>
     <script type="text/javascript" src="../assets/libs/svg-loader.min.js" async></script>
@@ -32,22 +55,23 @@
 
     <title> לומדה שנוצרה בעזרת מחולל הלומדות של מדור טי"ל </title>
 </head>
+
 <body>
     <svg data-src="../assets/images/general/bg.svg" class="background-image absolute"></svg>
     <div class="main">
-        
+
         <!-- עמוד פתיחה -->
         <div class="page opening active">
             <div class="opaning-overlay">
                 <div class="expand">
-                        <img class="sub-title" src="../assets/images/opening/Balmas_txt.svg"/>
+                    <img class="sub-title" src="../assets/images/opening/Balmas_txt.svg" />
                 </div>
                 <div class="title">חכו בסבלנות...</div>
-                <div class="expand container-scrolling_icon"></div>   
+                <div class="expand container-scrolling_icon"></div>
                 <div class="sub-title">לחצו על המסך להמשך</div>
             </div>
         </div>
-        
+
         <!-- עמוד ראשי -->
         <div class="page home">
             <svg class="about" data-src="../assets/images/opening/about_btn.svg" alt="about"></svg>
@@ -61,7 +85,7 @@
         <div class="page about">
             <svg class="back-btn" data-src="../assets/images/general/back_btn.svg"></svg>
             <svg class="about_header" data-src="../assets/images/opening/about_header.svg"></svg>
-            
+
             <div class="card-container">
                 <svg class="card" data-src="../assets/images/learning/learning.svg"></svg>
                 <div class="text">
@@ -95,10 +119,10 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- <svg class="logo" data-src="../assets/images/opening/madorTill_header.svg"></svg> -->
         </div>
-        
+
         <!-- עמוד נושאי הלימוד -->
         <div class="page learning subjects ">
             <div class="title"></div>
@@ -106,11 +130,12 @@
             <div class="cards-container"></div>
             <div class="gradient"></div>
             <div class="buttons">
-                <svg data-src="../assets/images/general/practice-btn-homePage.svg" alt="practice_btn" class="button practice-btn"></svg>
+                <svg data-src="../assets/images/general/practice-btn-homePage.svg" alt="practice_btn"
+                    class="button practice-btn"></svg>
                 <svg data-src="../assets/images/general/exam_btn.svg" alt="exam_btn" class="button exam-btn"></svg>
             </div>
         </div>
-        
+
         <!-- עמוד תתי נושאי הלימוד -->
         <div class="page learning content">
             <div class="title"></div>
@@ -125,7 +150,7 @@
                 <!-- כרטיסייה עם כותרת, תמונה וטקסט -->
                 <template class="pic-and-text">
                     <div class="title"></div>
-                    <img class="pic"/>
+                    <img class="pic" />
                     <div class="content"></div>
                 </template>
                 <!-- כרטיסייה עם כותרת, סרטון וטקסט -->
@@ -134,10 +159,12 @@
                     <video class="video" controls></video>
                     <div class="content"></div>
                 </template>
-                 <!--  יוטיוב וידאו עם טקסט -->
+                <!--  יוטיוב וידאו עם טקסט -->
                 <template class="youtube">
                     <div class="title"></div>
-                    <iframe width="100%" class="youtubeIframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe width="100%" class="youtubeIframe" src="" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
                     <div class="content"></div>
                 </template>
                 <!-- כרטיסייה עם כותרת, תת כותרת ורשימה של שלושה בולטים-->
@@ -158,7 +185,7 @@
                 </template>
             </div>
         </div>
-        
+
         <!-- עמוד תרגול -->
         <div class="page practice">
             <svg class="title" data-src="../assets/images/practice/practice_header.svg" alt="title"></svg>
@@ -173,21 +200,23 @@
                     <div class="points-text">בסה"כ</div>
                 </div>
             </div>
-            
+
             <div class="container-questions"></div>
             <div class="buttons">
-                <svg class="btn half-half" data-src="../assets/images/practice/halfhalf_btn.svg" alt="halfhalf_btn"></svg>
+                <svg class="btn half-half" data-src="../assets/images/practice/halfhalf_btn.svg"
+                    alt="halfhalf_btn"></svg>
                 <svg class="btn show-answer" data-src="../assets/images/practice/show_btn.svg" alt="show_btn"></svg>
             </div>
         </div>
-        
+
         <!-- עמוד מבחן -->
         <div class="page exam">
             <div class="header">
                 <svg data-src="../assets/images/exam/exam_header.svg" class="title"></svg>
                 <div class="sub-titles">
                     <div class="questionNumber">
-                        <svg class="background-image absolute" data-src="../assets/images/exam/questionNumber.svg"></svg>
+                        <svg class="background-image absolute"
+                            data-src="../assets/images/exam/questionNumber.svg"></svg>
                         <div class="questionNumber-text"></div>
                     </div>
                     <div class="timer">
@@ -205,9 +234,11 @@
     <div class="searchScreen">
         <div class="searchBoxHolder hidden">
             <svg class="bg-img" data-src="../assets/images/general/search-box.svg" alt="search box container"></svg>
-            <input class="searchBox hidden" placeholder="הקלידו כדי לחפש" name="search-box" lang="he-il" type="text" autocomplete="off"/>
+            <input class="searchBox hidden" placeholder="הקלידו כדי לחפש" name="search-box" lang="he-il" type="text"
+                autocomplete="off" />
         </div>
         <div class="dropDown"></div>
     </div>
 </body>
+
 </html>
