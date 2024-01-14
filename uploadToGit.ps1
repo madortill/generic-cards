@@ -25,6 +25,7 @@ Set-Alias iu Invoke-Utility
 
 Set-Clipboard -Value "https://madortill.github.io/$currRepo/code/?path=$unique_id"
 iu git add "./data/$unique_id/"
+iu git add "./data/id-list.json"
 git commit -m "adding data number $unique_id"
 iu git push origin master
 echo ''
