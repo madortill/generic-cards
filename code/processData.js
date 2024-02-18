@@ -34,7 +34,7 @@ fetch(`../data/${dataPath}/${dataPath}.json`)
         response.json()
             .then((result) => { 
                 THEME = result.THEME;
-                TITLE = result.TITLE;
+                TITLE = result.TITLE.name;
                 DATA = result.DATA;
                 TIME_FOR_EXAM = result.TIME_FOR_EXAM;
                 OPENING_PICTURE = result.OPENING_PICTURE;
