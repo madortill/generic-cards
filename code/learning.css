@@ -208,11 +208,12 @@
   text-align: center;
   margin-top: 2vw;
   font-size: 6.5vw;
-  height: 15vw;
+  /* height: 15vw; */
   width: 78vw;
   padding-top: 9vw;
   min-height: 11vw;
-  max-height: 11vw;
+  padding-bottom: 1vw;
+  /* max-height: 11vw; */
   position: relative;
   scroll-snap-align: start;
 }
