@@ -504,13 +504,11 @@ function beforePractice() {
 function questionsToPractice() {
     let selectedQuestions = [];
     let subjects = subjectsWithPractice.filter((_, i) => selectedSubjects[i]);
-    console.log('subjects: ', subjects)
     // מקסימום כמות השאלות לכל נושא
     let maxQuestionAmountForTopic = AMOUNT_OF_TOTAL_QUESTIONS / subjects.length;
     // בוחר את השאלות מכל נושא
     for (let subject of subjects) {
         let subjectData = DATA[subject];
-        console.log(subject)
         // מספר השאלות לנושא
         let subjectQuestions = subjectData.questionsPractice.length;
         // בוחר את מספר השאלות
@@ -1295,6 +1293,10 @@ function exit(page) {
     document.querySelector(`.page.${page} .questions-container`).style.filter = `blur(${blurAmount})`;
     document.querySelector(`.page.${page} .back-btn`).style.filter = `blur(${blurAmount})`;
     document.querySelector(`.page.${page} .questions-number`).style.filter = `blur(${blurAmount})`;
+    // עצירת הזמן אם מדובר במבחן
+    if (page === 'exam') {
+        clearInterval(timerExam);
+    }
 
     let popup =
         El("div", { cls: "dark" },
@@ -1314,6 +1316,9 @@ function exit(page) {
                             document.querySelector(`.page.${page} .back-btn`).style.filter = "unset";
                             document.querySelector(`.page.${page} .questions-number`).style.filter = "unset";
                             document.querySelector(".page .dark").remove();
+                            if (page === 'exam') {
+                                timerExam =  setInterval(startTimerExam, 1000);
+                            }
                         }
                     }
                 }),
@@ -1350,6 +1355,10 @@ function exit(page) {
                                 document.querySelector(`.page.${page} .back-btn`).style.filter = "unset";
                                 document.querySelector(`.page.${page} .questions-number`).style.filter = "unset";
                                 document.querySelector(".page .dark").remove();
+                                // החזרת הזמן
+                                if (page === 'exam') {
+                                    timerExam =  setInterval(startTimerExam, 1000)
+                                }
                             }
                         }
                     })
@@ -1779,7 +1788,7 @@ function nextQuestionExam() {
 
 // פונקציה שסופרת לאחור את הסמן לסוף המבחן
 function startTimerExam() {
-
+    console.trace()
     // האם השניות הגיעו ל0
     if (examSeconds < 0) {
         // בודק האם הגיע לסוף הזמן
@@ -2190,6 +2199,7 @@ function subjectLearningPage(subject) {
         document.querySelector(".page.learning.content .cards-container").append(...arrCards);
         id++;
     }
+    document.querySelector(".page.learning.content .container-subjects").append(El("div", {cls: "after-space"}));
     document.querySelector(".page.learning.content .container-subjects").scrollLeft = document.querySelector(".page.learning.content .container-subjects").scrollWidth;
     // הפונקציה גוללת אל הכרטיסייה הנלחצת על ידי החניך 
     function relevantCard(cardTitle) {
@@ -2273,6 +2283,7 @@ function subjectLearningPage(subject) {
 
     // מאזין לגלילה של התתי נושאים, הופך את הנושאים שלא ממורכזים לבעלי שקיפות
     document.querySelector(".page.learning.content .container-subjects").addEventListener("scroll", function () {
+        console.log('scroll');
         let midPage = window.innerWidth / 2;
         let smallestDifference = 1000;
         let count = 0;
@@ -2317,7 +2328,8 @@ function subjectLearningPage(subject) {
         }
     }, { passive: true });
 
-    
+    // יוצר אירוע מלאכותי כדי לגרום לכרטיסיות להופיע עם כניסה ראשונה לנושא
+    document.querySelector(".page.learning.content .container-subjects").dispatchEvent(new Event('scroll'))
     // הוספת מאזין לחיצה בעבור כל תת נושא, ובלחיצה על נושא שאינו במרכז, הפונקציה תעבור אליו בצורה חלקה ויפהה
     document.querySelectorAll(".page.learning.content .sub-topics-container").forEach(el => {
         el.addEventListener("click",
@@ -2342,11 +2354,12 @@ function subjectLearningPage(subject) {
                     // parent.scrollLeft = scroll;
 
                     // האם מיקום האלמנט הנלחץ גדול ממיקום האלמנט המרכזי 
-                    if(this.offsetLeft > midElement.offsetLeft)
+                    if(this.offsetLeft > midElement.offsetLeft) {
                         parent.scrollLeft += this.offsetWidth;
-                    else
+                    } else {
                         parent.scrollLeft -= this.offsetWidth;
-
+                    }
+                    console.log('after scroll')
                     // האלמנט שנלחץ הוא כבר במרכז המסך
                 } else {
                     let opened = this.classList.toggle("open"); 
@@ -2621,7 +2634,6 @@ const purifyText = (oldText) => {
         newText += char;
       }
     }
-    console.log(newText);
     return newText;
   }
   
