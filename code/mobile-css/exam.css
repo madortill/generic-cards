@@ -253,7 +253,7 @@
   background-size: cover;
   position: relative;
   z-index: 1;
-  background-image: url(../assets/images/general/leavePracticeOrExam_popup/leavePracticeOrExam_popup.svg);
+  background-image: url(../../assets/images/general/leavePracticeOrExam_popup/leavePracticeOrExam_popup.svg);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -328,7 +328,7 @@
   background-size: cover;
   position: relative;
   z-index: 1;
-  background-image: url("../assets/images/practice/finishPractice_popup.svg");
+  background-image: url("../../assets/images/practice/finishPractice_popup.svg");
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -501,7 +501,7 @@
   background-size: cover;
   position: relative;
   z-index: 1;
-  background-image: url("../assets/images/exam/beforeExam_popup/beforeExam_popup.svg");
+  background-image: url("../../assets/images/exam/beforeExam_popup/beforeExam_popup.svg");
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -600,7 +600,7 @@
   background-size: cover;
   position: relative;
   z-index: 1;
-  background-image: url("../assets/images/general/leavePracticeOrExam_popup/leavePracticeOrExam_popup.svg");
+  background-image: url("../../assets/images/general/leavePracticeOrExam_popup/leavePracticeOrExam_popup.svg");
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -627,7 +627,7 @@
   background-size: cover;
   position: relative;
   z-index: 1;
-  background-image: url("../assets/images/learning/choosePractice_popup/choosePractice_popup.svg");
+  background-image: url("../../assets/images/learning/choosePractice_popup/choosePractice_popup.svg");
   display: flex;
   flex-direction: column;
   justify-content: space-between;

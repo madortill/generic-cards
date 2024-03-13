@@ -1,5 +1,5 @@
 .page.learning.subjects .title {
-  background-image: url(../assets/images/learning/home_header.svg);
+  background-image: url(../../assets/images/learning/home_header.svg);
   background-repeat: no-repeat;
   background-size: 100% 100%;
   color: var(--text-color);
@@ -31,7 +31,7 @@
 }
 
 .page.learning.subjects .learningCard {
-  /* background-image: url("../assets/images/learning/subject_btn.svg"); */
+  /* background-image: url("../../assets/images/learning/subject_btn.svg"); */
   background-repeat: no-repeat;
   background-size: 100% 100%;
   height: 12em;
@@ -116,7 +116,7 @@
   color: var(--text-color);
   position: relative;
   z-index: 1;
-  background-image: url("../assets/images/practice/beforePractice_popup/beforePractice_popup.svg");
+  background-image: url("../../assets/images/practice/beforePractice_popup/beforePractice_popup.svg");
   display: flex;
   flex-direction: column;
   /* justify-content: space-between; */
@@ -200,7 +200,7 @@
 }
 
 .page.learning.content>.title {
-  background-image: url(../assets/images/learning/home_header.svg);
+  background-image: url(../../assets/images/learning/home_header.svg);
   background-repeat: no-repeat;
   background-size: 100% 100%;
   color: var(--text-color);

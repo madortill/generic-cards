@@ -31,30 +31,30 @@
 
 
     <!-- stylesheet -->
-    <link rel="stylesheet" href="generalStyle.css" type="text/css" media="(pointer: coarse), (pointer: none)">
-    <link rel="stylesheet" href="generalStyleC.css" type="text/css" media="(any-pointer:fine), (min-width:1200px)">
+    <link rel="stylesheet" href="mobile-css/generalStyle.css" type="text/css" media="(pointer: coarse), (pointer: none)">
+    <link rel="stylesheet" href="computer-css/generalStyleC.css" type="text/css" media="(any-pointer:fine), (min-width:1200px)">
 
     <link rel="stylesheet" href="opening.css" type="text/css">
     <link rel="stylesheet" href="home.css" type="text/css">
 
-    <link rel="stylesheet" href="about.css" type="text/css" media="(pointer: coarse), (pointer: none)">
-    <link rel="stylesheet" href="aboutC.css" type="text/css" media="(any-pointer:fine)">
+    <link rel="stylesheet" href="mobile-css/about.css" type="text/css" media="(pointer: coarse), (pointer: none)">
+    <link rel="stylesheet" href="computer-css/aboutC.css" type="text/css" media="(any-pointer:fine)">
 
-    <link rel="stylesheet" href="practice.css" type="text/css">
-    <!-- <link rel="stylesheet" href="practiceC.css" type="text/css"> -->
+    <link rel="stylesheet" href="mobile-css/practice.css" type="text/css" media="(pointer: coarse), (pointer: none)">
+    <link rel="stylesheet" href="computer-css/practiceC.css" type="text/css" media="(any-pointer:fine)">
 
-    <link rel="stylesheet" href="learning.css" type="text/css" media="(pointer: coarse), (pointer: none)">
-    <link rel="stylesheet" href="learningC.css" type="text/css" media="(any-pointer:fine)">
+    <link rel="stylesheet" href="mobile-css/learning.css" type="text/css" media="(pointer: coarse), (pointer: none)">
+    <link rel="stylesheet" href="computer-css/learningC.css" type="text/css" media="(any-pointer:fine)">
 
-    <link rel="stylesheet" href="exam.css" type="text/css">
-    <!-- <link rel="stylesheet" href="examC.css" type="text/css"> -->
+    <link rel="stylesheet" href="mobile-css/exam.css" type="text/css" media="(pointer: coarse), (pointer: none)">
+    <link rel="stylesheet" href="computer-css/examC.css" type="text/css" media="(any-pointer:fine)">
 
-    <link rel="stylesheet" href="search.css" type="text/css"  media="(pointer: coarse), (pointer: none)">
-    <link rel="stylesheet" href="searchC.css" type="text/css"  media="(any-pointer:fine)">
+    <link rel="stylesheet" href="mobile-css/search.css" type="text/css"  media="(pointer: coarse), (pointer: none)">
+    <link rel="stylesheet" href="computer-css/searchC.css" type="text/css"  media="(any-pointer:fine)">
 
 
     <!-- javascript -->
-    <script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript" src="not-obfuscated/index.js"></script>
     <script type="text/javascript" src="../assets/libs/svg-loader.min.js" async></script>
     <script type="text/javascript" src="util.js"></script>
     <script type="text/javascript" src="processData.js"></script>
@@ -134,7 +134,7 @@
         <div class="page learning subjects ">
             <div class="title"></div>
             <div class="sub-title">בחרו נושא אותו תרצו ללמוד</div>
-            <div class="cards-container"></div>
+            <div class="cards-container scrollStyle"></div>
             <div class="gradient"></div>
             <div class="buttons">
                 <svg data-src="../assets/images/general/practice-btn-homePage.svg" alt="practice_btn"
@@ -146,7 +146,7 @@
         <!-- עמוד תתי נושאי הלימוד -->
         <div class="page learning content">
             <div class="title"></div>
-            <div class="cards-container"></div>
+            <div class="cards-container scrollStyle"></div>
             <div class="gradient"></div>
             <div class="templates">
                 <!-- כרטיסייה עם כותרת וטקסט -->
@@ -194,7 +194,7 @@
         </div>
 
         <!-- עמוד תרגול -->
-        <div class="page practice">
+        <div class="page practice scrollStyle">
             <svg class="title" data-src="../assets/images/practice/practice_header.svg" alt="title"></svg>
             <div class="score">
                 <svg class="background-image absolute" data-src="../assets/images/practice/questionLog.svg"></svg>
@@ -217,7 +217,7 @@
         </div>
 
         <!-- עמוד מבחן -->
-        <div class="page exam">
+        <div class="page exam scrollStyle">
             <div class="header">
                 <svg data-src="../assets/images/exam/exam_header.svg" class="title"></svg>
                 <div class="sub-titles">

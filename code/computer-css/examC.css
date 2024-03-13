@@ -1,0 +1,709 @@
+@keyframes focus {
+    0% {
+      transform: scale(1.2);
+    }
+  
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  .exam {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 5fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    overflow: auto;
+    justify-items: center;
+  }
+  
+  .page.exam .header {
+    margin-top: 1.6rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .page.exam .title {
+    height: 5.5rem;
+    width: 24rem;
+    /* margin-top: 0.5rem; */
+  }
+  
+  .page.exam .sub-titles {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+     
+  }
+  
+  .page.exam .questionNumber,
+  .page.exam .timer {
+    width: 12vw;
+  }
+  
+  .page.exam .questionNumber-text,
+  .page.exam .timer-text {
+    margin: 0 2.1rem;
+    font-weight: 800;
+    font-size: 1.3rem;
+    padding: 0.2vw 1vw;
+
+  }
+  
+  .page.exam .questions-container {
+    display: contents;
+  }
+  
+  .page.exam .questions-number {
+    display: flex;
+    width: 98%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 0.3rem;
+    z-index: 2;
+    gap: 0.9rem;
+    position: fixed;
+    bottom: 0.3rem;
+  }
+  
+
+  @supports not selector(::-webkit-scrollbar) {
+    .page.exam .questions-number {
+      scrollbar-color: #e5e5e5 darkgrey;
+      scrollbar-width: 11px;
+    }
+  }
+  
+  .questions-number::-webkit-scrollbar {
+    height: 7px;
+  }
+   
+  .questions-number::-webkit-scrollbar-track {
+    border-radius: 0.4rem;
+    background-color: rgba(211, 211, 211, 0.237);
+  }
+  
+   
+  .questions-number::-webkit-scrollbar-thumb {
+      background-color: #e5e5e5;
+      border-radius: 0.4rem;
+  }
+  
+  .questions-number::-webkit-scrollbar-thumb:hover {
+      background-color: rgba(136, 134, 134, 0.658); 
+  }
+  /* scrollStyle end */
+
+  .page.exam .number-img {
+    height: 3.5rem;
+
+  }
+  
+  .page.exam .number-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.3;
+    min-width: 3rem;
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+  
+  .page.exam .number-text {
+    opacity: 0.3;
+    position: absolute;
+    font-weight: 800;
+    font-size: 2rem;
+  }
+  
+  .page.exam .active-question {
+    opacity: 1;
+  
+  }
+  
+  .page.exam .card>:is(img, div.card-pic) {
+    max-width: 90vw;
+    /* width: 50vh; */
+  }
+  
+  .page.exam .card {
+    height: 35.2rem;
+    width: 25rem;
+    grid-area: 2/ 1/ 3/ 1;
+    max-height: 113vw;
+    max-width: 83vw;
+    font-size: 1.1rem;
+    position: relative;
+    transition: transform 1s ease
+  }
+  
+  .page.exam .empty-card {
+    transform: rotate(4deg) translate(1%, 2%);
+  }
+  
+  .page.exam .first-card {
+    z-index: 1;
+  }
+  
+  .page.exam .card.transition {
+    z-index: 2;
+  }
+  
+  .page.exam .next-back-btn {
+    display: flex;
+    align-items: center;
+    height: 2.9em;
+    direction: ltr;
+    position: relative;
+    bottom: 13%;
+    width: 83%;
+    right: 1.5em;
+    justify-content: flex-start;
+  }
+  
+  .page.exam .next-back-btn> :is(img, div) {
+    height: 2.9rem;
+    cursor: pointer;
+  }
+  
+  .page.exam .next-back-btn .arrows {
+    display: flex;
+    align-items: center;
+    gap: 1vh;
+  }
+  
+  .page.exam .next-back-btn.num1 .arrows .back {
+    visibility: hidden;
+    pointer-events: none;
+  }
+  
+  .page.exam .next-back-btn.last .arrows>:is(div.back, img.back) {
+    transform: translateX(-140%);
+  }
+  
+  .page.exam .next-back-btn.last .arrows .next {
+    visibility: hidden;
+    pointer-events: none;
+  }
+  
+  .page.exam .next-back-btn .arrows>:is(img, div) {
+    height: 2.9rem;
+    /* margin: 0 2vw; */
+  }
+  
+  .page.exam .answer-container {
+    display: flex;
+    margin-top: 2vh;
+    align-items: center;
+  }
+  
+
+  .page.exam .answer-container>:is(img, div) {
+    height: 1.7vh;
+    margin-left: 2%;
+    margin-bottom: 2%;
+    padding-bottom: 2%;
+    cursor: pointer;
+  }
+
+  .page.exam .answer-container>:is(img, div):active {
+    pointer-events: none;
+  }
+  
+  .page.exam .answer-container>.ans {
+    pointer-events: none;
+    display: inline;
+    padding-bottom: 3%;
+  }
+  
+  .page.practice .ans-container {
+    display: flex;
+  }
+  
+  .page.exam .number-container.active {
+    opacity: 1;
+  }
+  
+  
+  .page.exam .number-container.active>.number-text {
+    opacity: 1;
+  }
+  
+  .page.exam .buttons-popup {
+    display: flex;
+    width: 75%;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+  }
+  
+  .page.exam .buttons-popup>:is(img, div) {
+    width: 25vw;
+    margin-bottom: 11%;
+    cursor: pointer;
+  }
+  
+  .page.exam .circle {
+    position: absolute;
+    top: 3%;
+    right: 0%;
+    width: 14%;
+    height: 14.75%;
+    border-radius: 50%;
+    border: white .15em solid;
+    box-shadow: 0 0 1px 1px white;
+    background-color: var(--color);
+  }
+  
+  .page.exam .wrong,
+  .page.exam .timeFocus {
+    --color: rgb(227, 59, 78);
+  }
+  
+  .page.exam .correct {
+    --color: rgb(44, 191, 55);
+  }
+  
+  .timeFocus {
+    transition: all 1s ease-in-out;
+    color: var(--color);
+    animation: focus 1.2s ease;
+    -webkit-animation: focus 1.2s ease;
+  }
+  
+  .page.exam .done-exam-popup {
+    color: var(--text-color);
+    border-radius: 14px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    z-index: 1;
+    background-image: url("../../assets/images/general/leavePracticeOrExam_popup/leavePracticeOrExam_popup.svg");
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 25.9rem;
+    aspect-ratio: 31.7 / 26.4;
+  }
+  
+  .page.exam .done-exam-popup .buttons-exit-popup {
+    width: 88%;
+    margin-bottom: 11%;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 15%;
+    width: 65%;
+    gap: 2rem;
+  }
+  
+  .page.exam .done-exam-popup .title-popup {
+    margin-top: 2.6em;
+    margin-bottom: 0.3em;
+    width: 86%;
+  }
+  
+  .page.exam .done-exam-popup .sub-title-popup {
+    width: 70%;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  
+  .page.exam .done-exam-popup .buttons-exit-popup> :is(img, div) {
+    /* width: 7.2em; */
+  }
+  
+  /* practiceBtnHomePage */
+  .practiceBtnHomePage0 {
+    opacity: 0.2;
+    fill: var(--secondary-color);
+    enable-background: new;
+  }
+  
+  .practiceBtnHomePage1 {
+    fill: #FFFFFF;
+  }
+  
+  .practiceBtnHomePage2 {
+    enable-background: new;
+  }
+  
+  .practiceBtnHomePage3 {
+    fill: var(--text-color);
+  }
+  
+  /* Additions from generalStyle.css */
+  /* איקס סגירה להודעות קופצות */
+  .close-btn {
+    position: absolute;
+    height: 2rem;
+    width: 2rem;
+    right: 1.2em;
+    top: 3em;
+    cursor: pointer;
+  }
+  
+  /*פופאפ לסוף התרגול והמבחן*/
+  .page .dark {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.411);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .page .end-exam {
+    color: var(--text-color);
+    height: 78%;
+    width: auto;
+    aspect-ratio: 72/114;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    z-index: 1;
+    background-image: url("../../assets/images/practice/finishPractice_popup.svg");
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .page .title-popup {
+    font-weight: 800;
+    font-size: 2.2rem;
+    margin-top: 2.2em;
+    margin-bottom: 0vw;
+    width: 10em;
+    text-align: center;
+  }
+  
+  .page.exam .exit-popup .title-popup {
+    margin-top: 2.5em;
+  }
+  
+  .page.exam .end-exam .title-popup {
+    font-size: 2rem;
+  }
+  
+  .page.exam .title-popup {
+     height: 1.6em;
+     background-repeat: no-repeat;
+     background-size: 100% 100%;
+     border-radius: 1em;
+     width: 8.5em;
+     padding-top: 0.3em;
+  }
+  
+  .page .popup-sub-titles {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;    
+    height: 3em;
+    justify-content: space-around;
+  }
+  
+  .page .text1-popup {
+    font-weight: 800;
+    font-size: 1.3em;
+  }
+  
+  .page .text2-popup {
+    margin-top: 0.5rem;
+    font-size: 1.3em;
+  }
+  
+  .page .grey-line {
+    background-color: rgb(233, 232, 232);
+    width: 100%;
+    height: 0.3vmin;
+  }
+  
+  .page .backToHome-btn {
+    height: 10vmin;
+    margin-bottom: 15%;
+  }
+  
+  .page .container-resultes {
+    width: 100%;
+    color: rgb(188, 188, 188);
+    font-size: 1em;
+  }
+  
+  .page .titleAndIcon-container {
+    font-weight: 800;
+    font-size: 2rem;
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-color);
+    margin-bottom: 1%;
+    align-items: center;
+  }
+  
+  .page .checkIcon-btn {
+    height: 4.5vmin;
+  }
+  
+  .page .timeIcon-btn {
+    height: 7vmin;
+  }
+  
+  .page .progress-bar-container {
+    width: 100%;
+    height: 2vmin;
+    border-radius: 2rem;
+    margin-top: 4%;
+    background-color: hsl(0, 0%, 94%);
+  }
+  
+  .page .progress-bar-right-answers,
+  .page .progress-bar-time {
+    background-color: var(--secondary-color);
+    height: 2vmin;
+    border-radius: 2rem;
+    width: 0%;
+    margin-top: 4%;
+  }
+  
+  .page .card>:is(img, div) {
+    width: 100%;
+  }
+  
+  .page.exam .question-text {
+    position: absolute;
+    height: 66%;
+    width: 82%;
+    right: 8%;
+    top: 17%;
+    color: var(--text-color);
+    font-size: 1.1rem;
+  }
+  
+  .page.practice .question-text {
+    position: absolute;
+    height: 66%;
+    width: 82%;
+    right: 8%;
+    top: 17%;
+    color: var(--text-color);
+    font-size: 1rem;
+  }
+  
+  .page .question {
+    font-weight: 800;
+    font-size: 1.6rem;
+  }
+  
+  .page .right-ans,
+  .page .wrong-ans {
+    height: 2.9rem;
+    margin: 10% 0% 0% 10%;
+    cursor: pointer;
+  }
+  
+  .page .ans-container {
+    display: flex;
+  }
+  
+  .page .binary .line+.ans-container,
+  .page .line+.ans-container {
+    margin-top: -0.6em;
+  }
+  
+  .page .binary .line,
+  .page .line {
+    margin-top: 0.4em;
+    height: 0.2em;
+    display: block;
+    transform-origin: right;
+    animation: line-expand 0.25s ease-in-out;
+    width: 92%;
+  }
+  
+  /*לפני המבחן*/
+  .page .exam-popup {
+    color: var(--text-color);
+    height: 78%;
+    width: 28%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    z-index: 1;
+    background-image: url("../../assets/images/exam/beforeExam_popup/beforeExam_popup.svg");
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .page .exam-popup .text {
+    text-align: right;
+  }
+  
+  
+  .page .icon1 {
+    width: 3em
+  }
+  
+  .page .icon3,
+  .page .icon2 {
+    width: 2em;
+  }
+  
+  .page .icon4 {
+    width: 3.4em;
+  }
+  
+  .page .icon5 {
+    width: 5em;
+  }
+  
+  .page .instructions {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 65%;
+    width: 19em;
+  }
+  
+  .page .start-btn {
+    width: 30%;
+    margin-bottom: 1.9em;
+    margin-top: 1em;
+    cursor: pointer;
+  }
+  
+  .page .start-btn.insert-name {
+    filter: grayscale(100%) brightness(71%);
+    opacity: 0.3;
+    pointer-events: none;
+    transition: filter 0.5s ease-in-out;
+  }
+  
+  .page .start-btn.insert-name.done {
+    filter: grayscale(0%);
+    opacity: 1;
+    pointer-events: all;
+  }
+  
+  .page .text-fill-name {
+    text-align: center;
+  
+  }
+  .page .exam-popup-insert-name {
+    transition: all 0.4s ease-in-out;
+    height: 25.9rem;
+    width: 21.7rem;
+
+  } 
+  .page .input-text {
+    width: 11em;
+    height: 1.8em;
+    text-align: center;
+    font-family: Rubik;
+    border-radius: 8px;
+    font-size: inherit;
+    margin-top: -1em;
+  }
+  .page .instructions.insert-name{
+    align-items: center;
+    height: 10em;
+  }
+  
+  /* יציאה ממבחן או תרגול פופאפ */
+  .page .exit-popup {
+    color: var(--text-color);
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: 1;
+    background-image: url(../../assets/images/general/leavePracticeOrExam_popup/leavePracticeOrExam_popup.svg);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 25.9rem;
+    aspect-ratio: 31.7 / 26.4;
+  }
+  
+  .page .buttons-exit-popup {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 15%;
+    width: 58%;
+    gap: 2rem;;
+  }
+  
+  .page .button-popup {
+    cursor: pointer;
+  }
+  
+  /* פוופאפ מעבר לתרגול בתוך עמוד הלמידה רק על נושא אחד */
+  .page .before-practice-one-sub {
+    color: var(--text-color);
+    height: 35.2rem;
+    width: 25rem;
+    background-repeat: no-repeat;
+    /* background-size: cover; */
+    position: relative;
+    z-index: 1;
+    background-image: url("../../assets/images/learning/choosePractice_popup/choosePractice_popup.svg");
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .page .instructions-practice {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 49%;
+    width: 69%;
+  }
+  
+  .page .instruction-practice {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  /*  */
+  .page .beforePractice-instruction-container {
+    display: flex;
+    justify-content: space-between;
+    width: 76%;
+    box-sizing: border-box;
+    align-items: flex-end;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  .page .beforePractice-instruction-container>div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .italic {
+    font-style: italic;
+  }
+  
+
+  @keyframes line-expand {
+    0% {
+      transform: scaleX(0);
+    }
+  
+    100% {
+      transform: scaleX(1);
+    }
+  }
