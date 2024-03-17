@@ -456,7 +456,7 @@ html {
 .page.learning.content .cards-container {
   padding-bottom: 15vh;
   overflow: auto;
-  width: 100%;
+  width: 99%;
   scroll-snap-type: y mandatory;
   scroll-snap-align: start;
   flex: 1;
@@ -464,6 +464,8 @@ html {
   flex-wrap: wrap;
   justify-content: center;
   gap: 3rem;
+  direction: ltr;
+  flex-direction: row-reverse;
 }
 
 .page.learning.content .list {
@@ -500,6 +502,11 @@ html {
   width: 93%;
   margin-bottom: 1vh;
   gap: 0.1rem;
+  margin-left: auto;
+}
+
+.page.learning.content .next-back-btn .back, .page.learning.content .next-back-btn .next {
+  cursor: pointer;
 }
 
 /* back and forward arrows */

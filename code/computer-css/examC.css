@@ -314,10 +314,6 @@
     text-align: center;
   }
   
-  .page.exam .done-exam-popup .buttons-exit-popup> :is(img, div) {
-    /* width: 7.2em; */
-  }
-  
   /* practiceBtnHomePage */
   .practiceBtnHomePage0 {
     opacity: 0.2;

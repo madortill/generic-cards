@@ -1,0 +1,80 @@
+@keyframes show {
+    0% {
+      opacity: 0;
+    }
+  
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  .page.opening {
+    transition: 1s ease-in-out height;
+    overflow: hidden;
+    position: static;
+    /* margin-top: 8vw; */
+  }
+  
+  .page.opening .expand {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    /* height: 9vh; */
+  }
+  
+  .page.opening .sub-title {
+    height: 5vmin;
+    min-height: 1.4rem;
+    /* margin-top: auto; */
+    text-align: center;
+    font-size: 1.2rem;
+  }
+  
+  .page.opening .title {
+    font-size: 2.8em;
+    font-weight: 800;
+    position: absolute;
+    top: max(16vmin, 2.1rem);
+    text-align: center;
+    width: 100%;
+  }
+  
+  .page.opening .scrolling_icon {
+    height: 8vh;
+    flex: 1;
+    cursor: pointer;
+    pointer-events: all;
+    transition: 1s linear margin-bottom;
+    margin-bottom: 13vh;
+  }
+  
+  .page.opening .container-scrolling_icon {
+    transition: 1s ease-in-out min-height;
+    align-items: flex-end;
+    min-height: 40%;
+  }
+  
+  .page.opening .opaning-overlay {
+    pointer-events: none;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 6vh;
+    box-sizing: border-box;
+    padding-bottom: 10vh;
+  }
+  
+  .page.opening.scrolled {
+    height: 25%;
+  }
+  
+  .page.opening.scrolled .container-scrolling_icon {
+    min-height: 75%;
+  }
+  
+  .page.opening.scrolled .scrolling_icon {
+    margin-bottom: calc(2vh + 0.3rem);
+    max-height: 6vw;
+  }
