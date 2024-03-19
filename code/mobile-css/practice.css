@@ -152,7 +152,7 @@
   background-size: cover;
   position: relative;
   z-index: 1;
-  background-image: url("../assets/images/practice/finishPractice_popup.svg");
+  background-image: url("../../assets/images/practice/finishPractice_popup.svg");
   display: flex;
   flex-direction: column;
   justify-content: space-between;

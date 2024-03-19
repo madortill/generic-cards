@@ -356,6 +356,7 @@ html {
   padding-top: 10vw;
   padding-bottom: 30vw;
   margin-bottom: 5vw;
+  direction: rtl;
 }
 
 .page.learning.content .card {

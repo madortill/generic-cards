@@ -1793,7 +1793,6 @@ function nextQuestionExam() {
 
 // פונקציה שסופרת לאחור את הסמן לסוף המבחן
 function startTimerExam() {
-    console.trace()
     // האם השניות הגיעו ל0
     if (examSeconds < 0) {
         // בודק האם הגיע לסוף הזמן
@@ -2031,7 +2030,8 @@ function resetExamPage(examStatus) {
             clearInterval(timerExam);
 
             document.querySelector(".page.exam .back-btn").remove();
-
+            examMinutes = EXAM_MINUTS;
+            examSeconds = EXAM_SECONDS;
             document.querySelector(".page.exam").classList.remove("active");
             document.querySelector(".page.learning.subjects").classList.add("active");
             document.querySelector(".page.exam .questions-container").innerHTML = "";

@@ -162,23 +162,24 @@
 /* popup*/
 
 .page.practice .end-practice {
+  background-image: url("../../assets/images/practice/finishPractice_popup.svg");
   color: var(--text-color);
-  width: 72vw;
-  height: 127vw;
+  height: 36rem;
+  width: 25rem;
   background-repeat: no-repeat;
-  background-size: cover;
+  /* background-size: cover; */
   position: relative;
   z-index: 1;
-  background-image: url("../assets/images/practice/finishPractice_popup.svg");
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  max-height: 100vh;
 }
 
 .page.practice .title-popup {
   font-weight: 800;
-  font-size: 8vmin;
+  font-size: 2.2rem;
   margin-top: 18%;
 }
 
@@ -191,22 +192,25 @@
 
 .page.practice .text1-popup {
   font-weight: 800;
-  font-size: 4.5vmin;
+  font-size: 1.4rem;
 }
 
 .page.practice .text2-popup {
-  font-size: 4.5vmin;
+  font-size: 1.4rem;
+  margin-bottom: 0.7rem;
 }
 
 .page.practice .grey-line {
   background-color: rgb(233, 232, 232);
   width: 75%;
-  height: 0.3vmin;
+  height: 0.3%;
 }
 
 .page.practice .backToHome-btn {
-  height: 10vmin;
-  margin-bottom: 15%;
+  width: 30%;
+  margin-bottom: 5%;
+  margin-top: 5%;
+  cursor: pointer;
 }
 
 /*  */
@@ -214,12 +218,11 @@
 .page.practice .container-resultes {
   width: 75%;
   color: rgb(188, 188, 188);
-  font-size: 3.5vmin;
+  font-size: 1rem;
 }
 
 .page.practice .titleAndIcon-container {
   font-weight: 800;
-  font-size: 6vmin;
   display: flex;
   justify-content: space-between;
   color: var(--text-color);
