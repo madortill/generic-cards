@@ -55,7 +55,7 @@
     pointer-events: none;
     width: fit-content;
     height: 75vh;
-    overflow-y: scroll;
+    overflow-y: auto;
     direction: ltr;
     padding-inline: 1rem;
 }

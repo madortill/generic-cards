@@ -208,20 +208,6 @@ html {
 }
 
 .page.learning.content>.title {
-  /* background-image: url(../../assets/images/learning/home_header.svg);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  color: var(--text-color);
-  font-weight: 800;
-  text-align: center;
-  margin-top: 2vw;
-  font-size: 6.5vw;
-  height: 15vw;
-  width: 78vw;
-  padding-top: 9vw;
-  min-height: 11vw;
-  max-height: 11vw;
-  position: relative; */
   background-image: url(../../assets/images/learning/home_header.svg);
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -229,7 +215,7 @@ html {
   text-align: center;
   font-size: 1.7rem;
   font-weight: 800;
-  padding: 2.9rem 1.3rem 1.8rem 1.3rem;
+  padding: 2.9rem 1.3rem 1.5rem 1.3rem;
   height: fit-content;
   box-sizing: border-box;
   width: 24rem;
@@ -375,6 +361,7 @@ html {
   scroll-snap-align: center;
   transition: 0.4s ease-in-out;
   transition-property: opacity, transform;
+  direction: rtl;
 }
 
 .page.learning.content .content-container {
@@ -382,7 +369,7 @@ html {
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: 1rem 0.5rem 0.2rem;
+  padding: 1rem 0.5rem 0.2rem 0rem;
   box-sizing: border-box;
   border-radius: 3vw;
   flex: 1;
@@ -430,10 +417,11 @@ html {
 }
 
 .page.learning.content .card .pic {
-  border-radius: 3.5vw;
+  border-radius: 1rem;
   max-height: 80%;
   max-width: 100%;
   margin-bottom: 1rem;
+  padding: 0.5rem;
 }
 
 .page.learning.content .two-pics.card .pic {
@@ -545,4 +533,12 @@ html {
   display: flex;
   justify-content: center;
   white-space: normal;
+}
+
+
+.youtubeIframe {
+  max-width: 100%;
+  height: 50%;
+  padding: 0.5rem;
+  box-sizing: border-box;
 }
