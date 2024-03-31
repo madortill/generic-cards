@@ -83,14 +83,14 @@ CARD_TYPES.text = {
         if (!json.content) {
             throw new Error(`Missing content in cardType text`);
         }
-        card.querySelector(".content").innerHTML = json.content;
+        card.querySelector(".content").innerText = json.content;
     }
 }
 
 CARD_TYPES.picAndText = {
     init(card, json) {
         card.querySelector(".pic").src = json.pic;
-        card.querySelector(".content").innerHTML = json.content;
+        card.querySelector(".content").innerText = json.content;
         if (!json.content) {
             card.querySelector(".content").remove();
         }
@@ -100,7 +100,7 @@ CARD_TYPES.picAndText = {
 CARD_TYPES.videoAndText = {
     init(card, json) {
         card.querySelector(".video").src = json.video;
-        card.querySelector(".content").innerHTML = json.content;
+        card.querySelector(".content").innerText = json.content;
         if (!json.content) {
             card.querySelector(".content").remove();
         }
@@ -113,7 +113,7 @@ CARD_TYPES.youtube = {
             throw new Error("Make sure all youtube links are ment to be embedded and not watched");
         } else {
             card.querySelector(".youtubeIframe").src = json.youtube;
-            card.querySelector(".content").innerHTML = json.content;
+            card.querySelector(".content").innerText = json.content;
             if (!json.content) {
                 card.querySelector(".content").remove();
             }
@@ -123,15 +123,25 @@ CARD_TYPES.youtube = {
 
 CARD_TYPES.listDots = {
     init(card, json) {
+        if (typeof(json.numList) !== 'number' || json.numList < 1) {
+            console.error(`numList in ${json} is invalid!`);
+        }
+
         for (let num = 1; num <= Number(json.numList); num++) {
-            card.querySelector(".list").innerHTML += `<li>${json["li" + num]}</li>`;
+            let child = El('li', {} , new Text(json["li" + num]));
+            card.querySelector(".list").appendChild(child);
         }
     }
 }
 CARD_TYPES.listNumbers = {
     init(card, json) {
+        if (typeof(json.numList) !== 'number' || json.numList < 1) {
+            console.error(`numList in ${json} is invalid!`);
+        }
+
         for (let num = 1; num <= Number(json.numList); num++) {
-            card.querySelector(".list").innerHTML += `<li>${json["li" + num]}</li>`;
+            let child = El('li', {} , new Text(json["li" + num]));
+            card.querySelector(".list").appendChild(child);
         }
     }
 }
@@ -139,13 +149,7 @@ CARD_TYPES.listNumbers = {
 CARD_TYPES.freeForm = {
     init(card, json) {
         if (json.content) {
-            card.querySelector(".content").innerHTML += json.content
-        } else {
-            for (key in json) {
-                if (key !== "cardType") {
-                    card.querySelector(".content").innerHTML += `<${key}>${json[key]}</${key}>`
-                }
-            }
+            card.querySelector(".content").innerText += json.content
         }
     }
 }

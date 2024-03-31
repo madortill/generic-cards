@@ -188,6 +188,7 @@
   align-items: center;
   flex-direction: column;
   text-align: center;
+  flex-basis: fit-content;
 }
 
 .page.practice .text1-popup {
@@ -197,7 +198,6 @@
 
 .page.practice .text2-popup {
   font-size: 1.4rem;
-  margin-bottom: 0.7rem;
 }
 
 .page.practice .grey-line {

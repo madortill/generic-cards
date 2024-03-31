@@ -458,7 +458,8 @@ html {
 }
 
 .page.learning.content .list {
-  padding-right: 1em;
+  padding-right: 3em;
+  text-align: right;
 }
 
 .page.learning.content .content {
@@ -488,10 +489,10 @@ html {
   justify-self: flex-end;
   height: 3vw;
   direction: ltr;
-  width: 93%;
+  width: 96%;
   margin-bottom: 1vh;
   gap: 0.1rem;
-  margin-left: auto;
+  /* margin-left: auto; */
 }
 
 .page.learning.content .next-back-btn .back, .page.learning.content .next-back-btn .next {

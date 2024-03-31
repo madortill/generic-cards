@@ -55,8 +55,8 @@ const afterLoaded = () => {
     addTitle();
     // כותרת נושא הלומדה
     function addTitle() {
-        document.querySelector(".page.opening .title").innerHTML = TITLE;
-        document.querySelector(".page.learning .title").innerHTML = TITLE;
+        document.querySelector(".page.opening .title").innerText = TITLE;
+        document.querySelector(".page.learning .title").innerText = TITLE;
     }
 
 
@@ -166,7 +166,7 @@ const onSearch = () => {
     document.querySelector('.dropDown').style.pointerEvents = "all";
     // Saves user input in a variable and resets the dropdown html.
     let strUserInput = document.querySelector('.searchBox').value;
-    document.querySelector('.dropDown').innerHTML = "";
+    document.querySelector('.dropDown').innerText = "";
     document.querySelector('.dropDown').style.zIndex = "2";
     document.querySelector('.dropDown').classList.remove("hidden");
     // Goes over the object to check for a search match.
@@ -180,13 +180,15 @@ const onSearch = () => {
                 console.log(DATA[subjectIndex], subjectIndex)
                 //Push the current match to it.
                 if (topicName.includes(strUserInput) && strUserInput !== "" && topicName !== "description") {
-                    let div = document.createElement("div");
-                    div.innerHTML = `<p class='search-topic hide-search'> ${topicName} </p> <p class='search-subject hide-search'>נושא: ${DATA[subjectIndex].name}</p>`;
-                    div.classList.add("dropDownItem", "hide-search");
+                    let div = El("div", {classes: ["dropDownItem", "hide-search"], listeners: {click: goToSubj}},
+                        El("p", {classes: ["search-topic", "hide-search"]}, String(topicName)),
+                        El("p", {classes: ['search-subject', 'hide-search']}, `נושא: ${String(DATA[subjectIndex].name)}`)
+                    );
+
+
                     div.dataset.subject = subjectIndex,
                         div.dataset.subSubject = subSubjectIndex,
                         div.dataset.topic = keyIndex,
-                        div.addEventListener("click", goToSubj);
                     document.querySelector('.dropDown').append(div);
                 }
             }
@@ -238,7 +240,7 @@ function learningSubjectsPage() {
             attributes: { class: "back-btn" },
             listeners: {
                 click: function () {
-                    document.querySelector(".page.learning.subjects  .cards-container").innerHTML = "";
+                    document.querySelector(".page.learning.subjects  .cards-container").innerText = "";
                     document.querySelector(".page.learning.subjects").classList.remove("active");
                     document.querySelector(".page.learning.subjects .back-btn").remove();
                     document.querySelector(".page.opening").classList.add("active");
@@ -311,18 +313,12 @@ function learningSubjectsPage() {
 
 // יצירת קלפים ללמידה
 function createStudyCards(currentSubject) {
-    let iconType = currentSubject.icon.includes("<svg") ? 'div' : 'img';
     let card =
         El("div", { cls: "learningCard" });
     card.innerHTML = "<svg class='background-image absolute learning-card-svg' data-src='../assets/images/learning/subject_btn.svg'></svg>";
     card.append(
-        El(iconType, { attributes: { src: currentSubject.icon, class: "icon" } },),
+        El('img', { attributes: { src: currentSubject.icon, class: "icon" } },),
         El("div", { cls: "subject" }, currentSubject.name))
-
-    // if icon is svg code, add inline svg as innerHTML 
-    if (iconType === 'div') {
-        card.querySelector('.icon').innerHTML = currentSubject.icon;
-    }
 
     document.querySelector(".page.learning.subjects .cards-container").append(card);
     card.addEventListener("click", () => {
@@ -541,8 +537,8 @@ function practicePage() {
     points = 0;
 
     // איפוס הבר הכחול למעלה
-    document.querySelector(".page.practice .right-answers > .points").innerHTML = 0;
-    document.querySelector(".page.practice .sum-answers > .points").innerHTML = QUESTIONS.length;
+    document.querySelector(".page.practice .right-answers > .points").innerText = 0;
+    document.querySelector(".page.practice .sum-answers > .points").innerText = QUESTIONS.length;
 
     console.log('reset question')
     // אתחול 2 הכרטיסים הראשונים על המסך
@@ -574,7 +570,7 @@ function practicePage() {
 
 
     // מוסיף לכרטיסייה הראשונה את מספר הכרטיסייה הנוכחית
-    document.querySelector(".page.practice .first-question .curr-question > .curr-ques-text").innerHTML = currCardCount;
+    document.querySelector(".page.practice .first-question .curr-question > .curr-ques-text").innerText = currCardCount;
 
     // התחלת הספירה לאחור
     timer = setInterval(startTimer, 1000);
@@ -717,7 +713,7 @@ function createBinaryCard(i = 2) {
 function startTimer() {
     // כדי שהשעון יראה קודם 1:00 ולא 60
     if (practiceSeconds < AMOUNT_OF_TIME_TO_QUESTION) {
-        document.querySelector(".page.practice .first-question .timeLeft").innerHTML = practiceSeconds;
+        document.querySelector(".page.practice .first-question .timeLeft").innerText = practiceSeconds;
     }
 
     // ספירה לאחור
@@ -746,7 +742,7 @@ function checkAnswerMultiple(event) {
         document.querySelector(".page.practice .answer-container." + correctAns + "> .ans").style.borderBottom = "2px solid rgb(44, 191, 55)"; //green
         document.querySelector(".page.practice .answer-container." + correctAns + "> .ans").style.paddingBottom = "2%"; //
         points++;
-        document.querySelector(".points").innerHTML = points;
+        document.querySelector(".points").innerText = points;
     }
     // התשובה הנלחצת אינה נכונה
     else {
@@ -780,7 +776,7 @@ function checkAnswerBinary(selectedAnswer, event) {
         let greenLine = El("img", { attributes: { src: "../assets/images/general/rightAnswer.svg" }, cls: "line" });/////////////
         document.querySelector(".question").after(greenLine);
         points++;
-        document.querySelector(".points").innerHTML = points;
+        document.querySelector(".points").innerText = points;
     }
     else {
         // red line
@@ -809,7 +805,7 @@ function nextQuestionPractice() {
         }
 
         // מוסיף לכרטיסייה האחורית את מספר הכרטיסייה הנוכחית
-        document.querySelector(".page.practice .second-question .curr-question > .curr-ques-text").innerHTML = currCardCount;
+        document.querySelector(".page.practice .second-question .curr-question > .curr-ques-text").innerText = currCardCount;
 
         document.querySelector(".page.practice .first-question").classList.add("transition");
         let firstCard = document.querySelector(".page.practice .transition");
@@ -839,7 +835,7 @@ function nextQuestionPractice() {
     // 2 הכרטיסיות האחרונות
     else if (currentQuestion + 2 === QUESTIONS.length) {
         // מוסיף לכרטיסייה האחורית את מספר הכרטיסייה הנוכחית
-        document.querySelector(".page.practice .second-question .curr-question > .curr-ques-text").innerHTML = currCardCount;
+        document.querySelector(".page.practice .second-question .curr-question > .curr-ques-text").innerText = currCardCount;
 
         document.querySelector(".page.practice .first-question").style.transform = "translateX(108vw)";
         document.querySelector(".page.practice .first-question").style.transition = "all 0.7s ease";
@@ -991,11 +987,11 @@ function resetPrecticePage(finishPractice = false) {
     // האם התרגול לא נגמר
     if (!finishPractice) {
         clearInterval(timer);
-        document.querySelector(".page.practice .container-questions").innerHTML = "";
+        document.querySelector(".page.practice .container-questions").innerText = "";
     }
     else {
         document.querySelector(".page.practice .container-questions").style.display = "none";
-        document.querySelector(".page.practice .container-questions").innerHTML = "";
+        document.querySelector(".page.practice .container-questions").innerText = "";
         document.querySelector(".page.practice .buttons").style.display = "none";
 
         document.querySelector(".page.practice .container-questions").style.display = "flex";
@@ -1221,7 +1217,7 @@ function insertFullName_popup() {
     let countValLastName = 0;
 
     // מחיקת התוכן מהפופאפ
-    document.querySelector(".page.learning.subjects .instructions").innerHTML = "";
+    document.querySelector(".page.learning.subjects .instructions").innerText = "";
 
     // הוספת שינוי צורה לפופאפ
     document.querySelector(".page.learning.subjects .exam-popup").classList.add("exam-popup-insert-name");
@@ -1487,8 +1483,8 @@ function examPage() {
     backBtn.innerHTML = "<svg data-src='../assets/images/general/back_btn.svg'></svg>";
     document.querySelector(".page.exam").append(backBtn);
 
-    document.querySelector(".page.exam .timer-text").innerHTML = TIME_FOR_EXAM;
-    document.querySelector(".page.exam .questionNumber-text").innerHTML = "0" + "/" + QUESTIONS.length;
+    document.querySelector(".page.exam .timer-text").innerText = TIME_FOR_EXAM;
+    document.querySelector(".page.exam .questionNumber-text").innerText = "0" + "/" + QUESTIONS.length;
     timerExam = setInterval(startTimerExam, 1000);
 
     // איפוס המערך של התשובות
@@ -1666,7 +1662,7 @@ function selectAns(event) {
     // עדכון מספר השאלות שנענו
     if (examAnswers[currentQuestionExam] === null) {
         answeredQuestions++;
-        document.querySelector(".page.exam .questionNumber-text").innerHTML = answeredQuestions + "/" + QUESTIONS.length;
+        document.querySelector(".page.exam .questionNumber-text").innerText = String(answeredQuestions) + "/" + String(QUESTIONS.length);
     }
 
     finalAnswer = true;
@@ -1815,11 +1811,11 @@ function startTimerExam() {
     }
     // מדפיס את הספרה 0 לפני חד ספרות 
     if (examSeconds < 10) {
-        document.querySelector(".page.exam .timer-text").innerHTML = examMinutes + ":0" + examSeconds;
+        document.querySelector(".page.exam .timer-text").innerText = String(examMinutes) + ":0" + String(examSeconds);
     }
     // להדפיס את השניות והדקות
     else if (examSeconds < AMOUNT_OF_TIME_TO_QUESTION) {
-        document.querySelector(".page.exam .timer-text").innerHTML = examMinutes + ":" + examSeconds;
+        document.querySelector(".page.exam .timer-text").innerText = String(examMinutes) + ":" + String(examSeconds);
     }
     examSeconds--;
 }
@@ -1980,7 +1976,7 @@ function endExam(amountOfCorrectAnswers) {
         document.querySelector(".page.exam .dark").remove();
 
         // יצירת השאלה הראשונה וכרטיסייה ריקה
-        document.querySelector(".page.exam .questions-container").innerHTML = "";
+        document.querySelector(".page.exam .questions-container").innerText = "";
         emptyCard();
         createQuestionExam();
         addEvantListenersNextBackBTN();
@@ -2020,8 +2016,8 @@ function resetExamPage(examStatus) {
             document.querySelector(".page.exam .end-exam").remove();
             document.querySelector(".page.exam .dark").remove();
             clearInterval(timer);
-            document.querySelector(".page.exam .questions-container").innerHTML = "";
-            document.querySelector(".page.exam .questions-number").innerHTML = "";
+            document.querySelector(".page.exam .questions-container").innerText = "";
+            document.querySelector(".page.exam .questions-number").innerText = "";
             break;
         }
         // החניך יצא באמצע המבחן
@@ -2034,8 +2030,8 @@ function resetExamPage(examStatus) {
             examSeconds = EXAM_SECONDS;
             document.querySelector(".page.exam").classList.remove("active");
             document.querySelector(".page.learning.subjects").classList.add("active");
-            document.querySelector(".page.exam .questions-container").innerHTML = "";
-            document.querySelector(".page.exam .questions-number").innerHTML = "";
+            document.querySelector(".page.exam .questions-container").innerText = "";
+            document.querySelector(".page.exam .questions-number").innerText = "";
             if (document.querySelector(".page.exam.done"))
                 document.querySelector(".page.exam.done").classList.remove("done");
             break;
@@ -2148,7 +2144,7 @@ function subjectLearningPage(subject) {
     }
 
     // הוספת כותרת
-    document.querySelector(".page.learning.content .title").innerHTML = subject.name;
+    document.querySelector(".page.learning.content .title").innerText = subject.name;
     // הוספת תתי נושאים לכותרת
     let subjects = El("div", { cls: "container-subjects" });
     document.querySelector(".page.learning.content .title").after(subjects);
@@ -2233,7 +2229,7 @@ function subjectLearningPage(subject) {
         container.append(template.content.cloneNode(true));
         let cardType = CARD_TYPES[json[index].cardType];
         cardType.init(card, json[index]);
-        card.querySelector(".title").innerHTML = title;
+        card.querySelector(".title").innerText = title;
         if (json.length > 1) {
             let buttons =
                 El("div", { cls: "next-back-btn" },
@@ -2261,7 +2257,7 @@ function subjectLearningPage(subject) {
         coolDown = setTimeout(() => coolDown = -1, timeToTransition(this, "transform") + 100);
         if (direction === "back") {
             let next = this.parentElement.querySelector(".card.next");
-            let card = generateCard(json, this.querySelector(".title").innerHTML, index - 1);
+            let card = generateCard(json, this.querySelector(".title").innerText, index - 1);
             card.classList.add("prev");
             this.parentElement.append(card);
             void card.clientWidth;
@@ -2273,7 +2269,7 @@ function subjectLearningPage(subject) {
             this.classList.add("prev");
             this.parentElement.querySelector(".card.next").classList.remove("next");
             if (json.length - 2 > index) {
-                let card = generateCard(json, this.querySelector(".title").innerHTML, index + 2);
+                let card = generateCard(json, this.querySelector(".title").innerText, index + 2);
                 card.classList.add("next");
                 this.parentElement.prepend(card);
             }
