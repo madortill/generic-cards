@@ -23,4 +23,5 @@ IMPORTANT! DO NOT delete the .ps1 file, the python (.py) file uses it.
 - להוסיף אייקון שונה לכל נושא
 - לשנות את תמונת הפתיחה (לשנות אותה באילוסטרטור ואז להוסיף קישור לחדשה בתוך OPENING_PICTURE)
 - לשנות זמן למבחן
-- AMOUNT_EXAM_QUESTIONS לא באמת עושה משהו כרגע 
+- AMOUNT_EXAM_QUESTIONS לא באמת עושה משהו כרגע
+- יש ענפים של גרסאות יותר ישנות של הלה!
