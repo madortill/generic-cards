@@ -1,0 +1,290 @@
+
+.page.practice {
+  overflow: auto;
+}
+
+.page.practice .card>:where(img, div) {
+  width: 100%;
+  height: 100%;
+}
+
+.page.practice .title {
+  width: 8em;
+  max-width: 9em;
+  margin-top: 1em;
+  min-height: 3.6rem;
+}
+
+.page.practice .score {
+  width: 11em;
+  max-width: 11em;
+  margin-top: 1em;
+  height: 2em;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.page.practice .right-answers,
+.page.practice .sum-answers {
+  display: flex;
+  width: 50%;
+  justify-content: center;
+  font-size: 0.8em;
+}
+
+.page.practice .points {
+  font-weight: 800;
+}
+
+.page.practice .points,
+.page.practice .points-text {
+  margin: 3%;
+}
+
+.page.practice .card {
+  position: absolute;
+}
+
+.page.practice .card.transition {
+  z-index: 3;
+}
+
+.page.practice .second-question,
+.page.practice .third-question {
+  transform: rotate(4deg) translate(1%, 3%);
+}
+
+.page.practice .first-question {
+  z-index: 2;
+  position: unset;
+}
+
+.page.practice .second-question {
+  z-index: 1;
+  width:  25rem;
+  height: 32rem;
+}
+
+.page.practice .third-question {
+  z-index: 0;
+}
+
+.page.practice .container-questions {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.2em;
+  margin-bottom: 0.1em;
+  position: relative;
+  font-size: 1.9rem;
+  width: 25rem;
+  height: 32rem;
+}
+
+.page.practice .buttons {
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  width: 94vw;
+  z-index: 2;
+  gap: 2rem;
+}
+
+.page.practice .btn {
+  cursor: pointer;
+  height: 3.2rem;
+}
+
+.page.practice .answer-container {
+  display: flex;
+  margin-top: 2vh;
+  align-items: center;
+}
+
+.page.practice .first-question .answer-container {
+  z-index: 2;
+}
+
+.page.practice .answer-container>:is(img, div.choose-question) {
+  height: 1.7vh;
+  margin-left: 2%;
+  pointer-events: none;
+  padding-bottom: 5%;
+
+}
+
+.page.practice .answer-container>.ans {
+  pointer-events: none;
+  display: inline;
+  padding-bottom: 3%;
+}
+
+.page.practice .timer {
+  height: 1.6em;
+  width: 3.9em;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 1.8em;
+  right: 1.5em;
+  z-index: 1;
+  font-size: 1.4rem;
+}
+
+.page.practice .timeLeft {
+  margin-right: 10%;
+  font-weight: 800;
+  /* font-size: 0.8em; */
+}
+
+.page.practice .next-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 2.9em;
+  direction: ltr;
+  position: relative;
+  bottom: 18%;
+  width: 83%;
+  right: 1em;
+}
+
+.page.practice .next-btn>:is(img, div.forward-arrows) {
+  opacity: 0.4;
+  height: 2.9rem;
+  cursor: pointer;
+}
+
+/*      */
+/*      */
+/*      */
+/* popup*/
+
+.page.practice .end-practice {
+  background-image: url("../../images/practice/finishPractice_popup.svg");
+  color: var(--text-color);
+  height: 36rem;
+  width: 25rem;
+  background-repeat: no-repeat;
+  /* background-size: cover; */
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  max-height: 100vh;
+}
+
+.page.practice .title-popup {
+  font-weight: 800;
+  font-size: 2.2rem;
+  margin-top: 18%;
+}
+
+.page.practice .popup-sub-titles {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  flex-basis: fit-content;
+}
+
+.page.practice .text1-popup {
+  font-weight: 800;
+  font-size: 1.4rem;
+}
+
+.page.practice .text2-popup {
+  font-size: 1.4rem;
+}
+
+.page.practice .grey-line {
+  background-color: rgb(233, 232, 232);
+  width: 75%;
+  height: 0.3%;
+}
+
+.page.practice .backToHome-btn {
+  width: 30%;
+  margin-bottom: 5%;
+  margin-top: 5%;
+  cursor: pointer;
+}
+
+/*  */
+/*  */
+.page.practice .container-resultes {
+  width: 75%;
+  color: rgb(188, 188, 188);
+  font-size: 1rem;
+}
+
+.page.practice .titleAndIcon-container {
+  font-weight: 800;
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-color);
+  margin-bottom: 1%;
+  align-items: center;
+}
+
+.page.practice .checkIcon-btn {
+  height: 4.5vmin;
+}
+
+.page.practice .timeIcon-btn {
+  height: 7vmin;
+}
+
+.page.practice .progress-bar-container {
+  width: 100%;
+  height: 2vmin;
+  border-radius: 2rem;
+  margin-top: 4%;
+  background-color: hsl(0, 0%, 94%);
+}
+
+.page.practice .progress-bar-right-answers,
+.page.practice .progress-bar-time {
+  background-color: var(--secondary-color);
+  height: 2vmin;
+  border-radius: 2rem;
+  width: 0%;
+  margin-top: 4%;
+}
+
+.page.practice .curr-question{
+  display: flex;
+  font-weight: 500;
+  color: var(--text-color);
+  font-size: 0.7em;
+}
+
+.page.practice .ans-container {
+  display: flex;
+}
+
+.page.practice .question-text {
+  position: absolute;
+  height: 66%;
+  width: 82%;
+  right: 8%;
+  top: 17%;
+  color: var(--text-color);
+  font-size: 1rem;
+}
+
+
+
+
+@keyframes line-expand {
+  0% {
+    transform: scaleX(0);
+  }
+
+  100% {
+    transform: scaleX(1);
+  }
+}

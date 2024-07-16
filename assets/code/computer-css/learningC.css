@@ -1,0 +1,546 @@
+html {
+  font-size: calc(10px + 0.5vw);
+}
+
+.page.learning.subjects .title {
+  background-image: url(../../images/learning/home_header.svg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  color: var(--text-color);
+  text-align: center;
+  font-size: 1.7rem;
+  font-weight: 800;
+  padding: 2.9rem 1.3rem 1.8rem 1.3rem;
+  height: fit-content;
+  box-sizing: border-box;
+  width: 24rem;
+  margin-top: 0.5rem;
+  border-radius: 0.8rem;
+  box-sizing: border-box;
+}
+
+.page.learning.subjects .sub-title {
+  font-size: 1.5rem;
+  margin-block: 0.5rem;
+  text-align: center;
+}
+
+.page.learning.subjects .cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    align-content: flex-start;
+    width: 94.4%;
+    max-height: 78%;
+    gap: 1rem;
+    overflow-y: auto;
+}
+
+.page.learning.subjects .learningCard {
+    height: 16rem;
+    width: 24rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    font-size: 2rem;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+}
+
+
+.page.learning.subjects .icon {
+  max-width: 2em;
+  height: auto;
+  max-height: 2em;
+  border-radius: 0.5rem;
+}
+ 
+/* make the defult icon invisible */
+.page.learning.subjects .icon[src="../assets/images/learning/Artboard 4.svg"], .page.learning.subjects .icon[src="deafult"] {
+  opacity: 0%;
+  aspect-ratio: 1 / 1;
+  display: none;
+}
+
+
+.page.learning.subjects .subject {
+  color: var(--text-color);
+  max-width: 10.2em;
+  font-size: 0.8em;
+}
+
+.page.learning.subjects .learningCard:active {
+  transform: scale(0.95);
+}
+
+.page.learning .gradient {
+  position: fixed;
+  width: 100%;
+  height: 14vh;
+  bottom: 0;
+  background-image: linear-gradient(0deg, var(--gradient-color) -30%, rgba(255, 255, 255, 0));
+  pointer-events: none;
+  z-index: 1;
+}
+
+.page.learning.subjects .buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  width: 100%;
+  height: 12vw;
+  max-height: 3.2rem;
+  position: fixed;
+  bottom: 4vh;
+  z-index: 2;
+  cursor: pointer;
+}
+
+.page.learning.subjects .button {
+  display: flex;
+  justify-content: space-around;
+  height: 100%;
+  z-index: 2;
+}
+
+.page.learning.subjects .button:active {
+  transform: scale(0.95);
+}
+
+.page.learning.subjects .beforePractice-popup {
+  color: var(--text-color);
+  height: 35.2rem;
+  width: 25rem;
+  background-repeat: no-repeat;
+  /* background-size: cover; */
+  position: relative;
+  z-index: 1;
+  background-image: url(../../images/learning/choosePractice_popup/choosePractice_popup.svg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  max-height: 100vh;
+}
+
+.page.learning.subjects .practiceBTN-popup {
+  width: 30%;
+  /* margin-top: 0em; */
+  cursor: pointer;
+  /* width: 24vw; */
+  margin: 1rem 0;
+  opacity: 0.2;
+  filter: grayscale(1);
+  pointer-events: none;
+}
+
+.page.learning.subjects .practiceBTN-popup.avalible {
+  opacity: 1;
+  filter: unset;
+  pointer-events: unset;
+}
+
+.page.learning.subjects .subjects-container {
+  width: 71%;
+  display: flex;
+  max-height: 33%;
+  margin-bottom: auto;
+}
+
+.page.learning.subjects .subjects {
+  overflow: auto;
+  width: 100%;
+  padding-right: 0.1em;
+}
+
+.page.learning.subjects .subject-popup {
+  display: flex;
+  align-items: center;
+}
+
+.page.learning.subjects .subject-popup>div.check-place {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 4% 0 5% 2%;
+  cursor: pointer;
+}
+
+.page.learning.subjects .subject-popup>div:not(.check-place) {
+  font-size: 1em;
+  width: 100%;
+}
+
+.page.learning.subjects .select-everything {
+  display: flex;
+  align-items: center;
+  width: 79%;
+  font-size: 1.2em;
+  font-weight: 800;
+}
+
+.page.learning.subjects .select-everything>:is(img, div.check-place) {
+  height: 2rem;
+  width: 2rem;
+  margin: 3% 0 3% 2%;
+  cursor: pointer;
+}
+
+.page.learning.subjects .select-everything>div:not(.check-place) {
+  width: 100%;
+}
+
+.page.learning.subjects .group-line {
+  height: 90%;
+  width: 0.2rem;
+  background-color: rgba(230, 230, 230, 0.568);
+  margin: 0 0 0 3vw;
+  border-radius: 5vw;
+  /* transform: translateY(3vw); */
+}
+
+/*  עמוד למידת הנושאים עצמם  */
+.page.learning.content {
+  scroll-snap-type: y mandatory;
+  scroll-snap-type: mandatory;
+}
+
+.page.learning.content>.title {
+  background-image: url(../../images/learning/home_header.svg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  color: var(--text-color);
+  text-align: center;
+  font-size: 1.7rem;
+  font-weight: 800;
+  padding: 2.9rem 1.3rem 1.5rem 1.3rem;
+  height: fit-content;
+  box-sizing: border-box;
+  width: 24rem;
+  margin-top: 0.5rem;
+  border-radius: 0.8rem;
+  box-sizing: border-box;
+  scroll-snap-align: start;
+}
+
+.page.learning.content .container-subjects {
+  display: flex;
+  width: 100vw;
+  white-space: nowrap;
+  overflow: scroll;
+  box-sizing: border-box;
+  scroll-snap-type: x mandatory;
+  scroll-snap-type: mandatory;
+  -webkit-scroll-snap-type: mandatory;
+  scroll-snap-destination: 0 0;
+  scroll-snap-points-y: repeat(100vh);
+  -webkit-scroll-snap-points-y: repeat(100vh);
+  min-height: min-content;
+  min-height: -webkit-min-content;
+  min-height: -moz-min-content;
+  scroll-behavior: smooth;
+  margin-top: -1vh;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+}
+
+.page.learning.content .container-subjects::-webkit-scrollbar {
+  display: none;
+}
+
+/* זה בשביל התת כותרות מתחת לכותרת */
+.page.learning.content .sub-title {
+  font-size: 1.2em;
+}
+
+.page.learning.content .sub-topic {
+  display: flex;
+  margin-bottom: 1em;
+  align-items: center;
+  justify-content: center;
+}
+
+.page.learning.content .container-subjects .arrow {
+  width: .35em;
+  margin-left: 1.5vw;
+  transition: transform 0.1s ease-in-out;
+}
+
+.page.learning.content .container-subjects>:last-child::after {
+  width: 50vw;
+  display: block;
+}
+
+.page.learning.content .sub-topics-container {
+  padding: 1em 0.2em;
+  white-space: nowrap;
+  scroll-snap-align: center;
+  max-height: 1em;
+  min-width: min-content;
+  min-width: -webkit-min-content;
+  min-width: -moz-min-content;
+  transition: max-height .25s ease-in-out;
+  overflow: hidden;
+  text-align: center;
+  cursor: pointer;
+}
+
+.page.learning.content .sub-topics-container.open {
+  max-height: 100vh;
+}
+
+.opacity {
+  opacity: 0.6;
+}
+/* 
+.page.learning.content .container-subjects::before {
+  display: block;
+  content: "";
+  padding-left: 50vw;
+} */
+
+.page.learning.content .container-subjects .space {
+  display: block;
+  margin-right: 42vw;
+} 
+
+.page.learning.content .container-subjects .after-space {
+  display: block;
+  margin-left: 42vw;
+} 
+
+
+.page.learning.content .container-subjects::after {
+  display: block;
+  content: "";
+  padding-right: 32vw;
+}
+
+.page.learning.content .practice-btn {
+  width: auto;
+  height: 3rem;
+  margin-top: 1rem;
+  z-index: 1;
+  position: fixed;
+  bottom: 2rem;
+  box-shadow: 0px -11px 20px -15px rgba(1, 4, 5, 0.432);
+  cursor: pointer;
+}
+
+.page.learning.content .open .arrow {
+  transform: rotate(-90deg);
+}
+
+.page.learning.content .card-container {
+  align-items: center;
+  border-radius: 5vw 5vw 0 0;
+  flex: 1;
+  overflow: auto;
+  padding-top: 10vw;
+  padding-bottom: 30vw;
+  margin-bottom: 5vw;
+  direction: rtl;
+}
+
+.page.learning.content .card {
+  position: absolute;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  box-sizing: border-box;
+  height: 100%;
+  width: 25rem;
+  font-size: 1.1rem;
+  text-align: center;
+  padding-left: 3%;
+  padding-top: 2em;
+  color: black;
+  scroll-snap-align: center;
+  transition: 0.4s ease-in-out;
+  transition-property: opacity, transform;
+  direction: rtl;
+}
+
+.page.learning.content .content-container {
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1rem 0.5rem 0.2rem 0rem;
+  box-sizing: border-box;
+  border-radius: 3vw;
+  flex: 1;
+  display: flex;
+  max-width: 97%;
+}
+
+/* card scroll style */
+@supports not selector(::-webkit-scrollbar) {
+  .page.learning.content .content-container {
+    scrollbar-color: #e5e5e5 darkgrey;
+    scrollbar-width: 11px;
+  }
+}
+
+.page.learning.content .content-container::-webkit-scrollbar {
+  width: 10px;
+}
+ 
+.page.learning.content .content-container::-webkit-scrollbar-track {
+  border-radius: 0.1rem;
+  background-color: rgba(211, 211, 211, 0.458);
+}
+
+ 
+.page.learning.content .content-container::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);
+    background-color: rgba(136, 134, 134, 0.658);
+    opacity: 10%;
+    border-radius: 0.4rem;
+}
+
+.page.learning.content .content-container::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(136, 134, 134, 0.975);
+}
+
+.page.learning.content .card .title {
+  color: var(--text-color);
+  font-weight: 800;
+  font-size: 1.6rem;
+  text-align: right;
+  margin-bottom: 0.9em;
+  margin-top: 0.5em;
+  margin-right: 1em;
+}
+
+.page.learning.content .card .pic {
+  border-radius: 1rem;
+  max-height: 80%;
+  max-width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+}
+
+.page.learning.content .two-pics.card .pic {
+  border-radius: 3.5vw;
+  margin-top: 1em;
+  margin-bottom: 0;
+}
+
+/* זה בשביל התת כותרות שנמצאות בתוך הכרטיסיות למידה */
+.page.learning.content .card .sub-title {
+  font-size: 1.1em;
+  color: var(--text-color);
+  font-weight: 800;
+}
+
+.page.learning.content .card video {
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+.page.learning.content .cards-container {
+  padding-bottom: 15vh;
+  overflow: auto;
+  width: 99%;
+  scroll-snap-type: y mandatory;
+  scroll-snap-align: start;
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3rem;
+  direction: ltr;
+  flex-direction: row-reverse;
+}
+
+.page.learning.content .list {
+  padding-right: 3em;
+  text-align: right;
+}
+
+.page.learning.content .content {
+  padding-inline: 1.8rem;
+  margin-bottom: 1em;
+  text-align: right;
+}
+
+.page.learning.content .card-group {
+  display: none;
+  position: relative;
+  height: 35.2rem;
+  width: 25rem;
+  max-height: 113vw;
+  max-width: 83vw;
+  margin-bottom: 1rem;
+}
+
+.page.learning.content .card.next {
+  transform: rotateZ(4deg);
+  opacity: 0.5;
+  z-index: -1;
+}
+
+.page.learning.content .next-back-btn {
+  display: flex;
+  justify-self: flex-end;
+  height: 3vw;
+  direction: ltr;
+  width: 96%;
+  margin-bottom: 1vh;
+  gap: 0.1rem;
+  /* margin-left: auto; */
+}
+
+.page.learning.content .next-back-btn .back, .page.learning.content .next-back-btn .next {
+  cursor: pointer;
+}
+
+/* back and forward arrows */
+.page.learning.content .next-back-btn svg {
+  max-height: 100%;
+  width: 2.2rem;
+}
+
+.page.learning.content .next-back-btn.first .back {
+  visibility: hidden;
+  pointer-events: none;
+}
+/* transform: translateX(-140%); */
+
+.page.learning.content .next-back-btn.last .next {
+  visibility: hidden;
+  pointer-events: none;
+}
+.page.learning.content .next-back-btn.last .back {
+  transform: translateX(-140%);
+}
+
+.page.learning.content .card.prev {
+  transform: translateX(50vw);
+}
+
+.page.learning.content .block {
+  display: block;
+}
+
+.page.learning.content .sub-sub-topic{
+  min-width: 10em;
+  margin-bottom: 0.6em;
+  overflow: initial;
+  display: flex;
+  justify-content: center;
+  white-space: normal;
+}
+
+
+.youtubeIframe {
+  max-width: 100%;
+  height: 50%;
+  padding: 0.5rem;
+  box-sizing: border-box;
+}

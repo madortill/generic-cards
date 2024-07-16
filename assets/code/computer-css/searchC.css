@@ -1,0 +1,106 @@
+/* חיפוש */
+.searchScreen {
+    display: none;
+    flex-direction: column;
+    gap: 1vh;
+    align-items: center;
+    padding-top: 4vh;
+    height: fit-content;
+}
+
+.searchBoxHolder {
+    /* min-width: 40vw; */
+    z-index: 2;
+    position: relative;
+    display: flex;
+    align-items: center;
+    aspect-ratio: 150/37;
+    padding-right: 2.1vw;
+    box-sizing: border-box;
+    padding-block: 1.8vw;
+    max-height: 16vh;
+}
+
+.searchBox {
+    width: 73%;
+    border-radius: 1.9rem;
+    top: 9.7vh;
+    left: 32vw;
+    border: none;
+    background-color: #f4f4f4;
+    padding-bottom: 0.7em;
+    padding-top: 0.7em;
+    text-align: center;
+    z-index: 2;
+    outline: none;
+    font-size: 1.2em;
+    height: clamp(40%, 2vh, 60%);
+}
+
+.searchBox:focus {
+   outline: 3px black solid; 
+}
+
+.bg-img {
+    /* width: 52vw; */
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.dropDown{
+    pointer-events: none;
+    width: fit-content;
+    height: 75vh;
+    overflow-y: auto;
+    direction: ltr;
+    padding-inline: 1rem;
+}
+
+.dropDownItem {
+    width: 23rem;
+    border: solid 2px var(--secondary-color);
+    border-radius: 5vw;
+    text-align: center;
+    margin-top: 0.7em;
+    background-color: #f4f4f4;
+    color: var(--text-color);
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 1.1em;
+    padding: 3%;
+    cursor: pointer;
+}
+
+.dropDownItem p {
+    margin: 0;
+}
+
+.dropDownItem :first-child {
+    margin-top: 1%;
+}
+
+.darkScreen {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    background-color: rgb(0 0 0 / 65%);
+    z-index: 2;
+    top: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+.search-subject {
+    font-size: 1em;
+}
+
+.search-topic {
+    font-weight: 600;
+}
