@@ -14,11 +14,303 @@ let AMOUNT_EXAM_QUESTIONS;
 let OPENING_PICTURE;
 let AUTHOR;
 
-//  Get json of data
-let url = new URL(window.location.href)
-let dataPath = url.pathname.split("/")[url.pathname.split("/").length - 1];
-console.log(dataPath)
+const lomdaData = {
+"TITLE": {
+"name": "fa"
+},
+"AMOUNT_EXAM_QUESTIONS": 2,
+"TIME_FOR_EXAM": "10:00",
+"AUTHOR": {
+"name": "תמר",
+"rank": "סמל",
+"role": "מפתחת לומדה"
+},
+"DEAFULT_ICON": "../assets/images/learning/Artboard 4.svg",
+"THEME": {
+"name": "ballet-pink",
+"hebrawName": "ורוד-בלט",
+"primaryColor": "#f97394",
+"secondaryColor": "#ffb3c6",
+"textColor": "#3a1820",
+"gradient": "#ff8fab",
+"buttonsColor": "#3a1820"
+},
+"DATA": [
+{
+    "name": "נושא 1",
+    "amountOfQuestions": 2,
+    "learningContent": [
+        {
+            "name": "תת נושא",
+            "topics": [
+                {
+                    "name": "כרטיסיה 1",
+                    "pageArray": [
+                        {
+                            "cardType": "listDots",
+                            "numList": 2,
+                            "li1": "hi",
+                            "li2": "<b>Tamar</b>"
+                        },
+                        {
+                            "cardType": "listDots",
+                            "numList": 2,
+                            "li1": "hfdasfsdafsadfi",
+                            "li2": "<b>Tamafdsafsadr</b>"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "icon": "deafult",
+    "questionsExam": [
+        {
+            "type": "multiple",
+            "question": "דוגמה לשאלה אמריקאית מתרגלת שיש לה 4 תשובות?",
+            "ans1": "תשובה ראשונה ולא נכונה",
+            "ans2": "תשובה שנייה נכונה!",
+            "ans3": "תשובה שלישית ולא נכונה",
+            "ans4": "תשובה רביעית לא נכונה",
+            "correctAns": "ans2"
+        },
+        {
+            "type": "binary",
+            "sentence": "דוגמה לשאלה מתרגלת נכונה של נכון או לא נכון",
+            "trueOrFalse": true
+        },
+        {
+            "type": "multiple",
+            "question": "דוגמה לשאלה אמריקאית בוחנת שיש לה 4 תשובות?",
+            "ans1": "תשובה ראשונה ולא נכונה",
+            "ans2": "תשובה שנייה נכונה!",
+            "ans3": "תשובה שלישית ולא נכונה",
+            "ans4": "תשובה רביעית לא נכונה",
+            "correctAns": "ans2"
+        },
+        {
+            "type": "binary",
+            "sentence": "דוגמה לשאלה בוחנת נכונה של נכון או לא נכון",
+            "trueOrFalse": true
+        },
+        {
+            "type": "multiple",
+            "question": "דוגמה לשאלה אמריקאית בוחנת שיש לה 4 תשובות?",
+            "ans1": "תשובה ראשונה ולא נכונה",
+            "ans2": "תשובה שנייה נכונה!",
+            "ans3": "תשובה שלישית ולא נכונה",
+            "ans4": "תשובה רביעית לא נכונה",
+            "correctAns": "ans2"
+        },
+        {
+            "type": "binary",
+            "sentence": "דוגמה לשאלה בוחנת נכונה של נכון או לא נכון",
+            "trueOrFalse": true
+        },
+        {
+            "type": "multiple",
+            "question": "דוגמה לשאלה אמריקאית בוחנת שיש לה 4 תשובות?",
+            "ans1": "תשובה ראשונה ולא נכונה",
+            "ans2": "תשובה שנייה נכונה!",
+            "ans3": "תשובה שלישית ולא נכונה",
+            "ans4": "תשובה רביעית לא נכונה",
+            "correctAns": "ans2"
+        },
+        {
+            "type": "binary",
+            "sentence": "דוגמה לשאלה בוחנת נכונה של נכון או לא נכון",
+            "trueOrFalse": true
+        },
+        {
+            "type": "multiple",
+            "question": "דוגמה לשאלה אמריקאית בוחנת שיש לה 4 תשובות?",
+            "ans1": "תשובה ראשונה ולא נכונה",
+            "ans2": "תשובה שנייה נכונה!",
+            "ans3": "תשובה שלישית ולא נכונה",
+            "ans4": "תשובה רביעית לא נכונה",
+            "correctAns": "ans2"
+        },
+        {
+            "type": "binary",
+            "sentence": "דוגמה לשאלה בוחנת נכונה של נכון או לא נכון",
+            "trueOrFalse": true
+        },
+        {
+            "type": "multiple",
+            "question": "דוגמה לשאלה אמריקאית בוחנת שיש לה 4 תשובות?",
+            "ans1": "תשובה ראשונה ולא נכונה",
+            "ans2": "תשובה שנייה נכונה!",
+            "ans3": "תשובה שלישית ולא נכונה",
+            "ans4": "תשובה רביעית לא נכונה",
+            "correctAns": "ans2"
+        },
+        {
+            "type": "binary",
+            "sentence": "דוגמה לשאלה בוחנת נכונה של נכון או לא נכון",
+            "trueOrFalse": true
+        },
+        {
+            "type": "multiple",
+            "question": "דוגמה לשאלה אמריקאית בוחנת שיש לה 4 תשובות?",
+            "ans1": "תשובה ראשונה ולא נכונה",
+            "ans2": "תשובה שנייה נכונה!",
+            "ans3": "תשובה שלישית ולא נכונה",
+            "ans4": "תשובה רביעית לא נכונה",
+            "correctAns": "ans2"
+        },
+        {
+            "type": "binary",
+            "sentence": "דוגמה לשאלה בוחנת נכונה של נכון או לא נכון",
+            "trueOrFalse": true
+        },
+        {
+            "type": "multiple",
+            "question": "דוגמה לשאלה אמריקאית בוחנת שיש לה 4 תשובות?",
+            "ans1": "תשובה ראשונה ולא נכונה",
+            "ans2": "תשובה שנייה נכונה!",
+            "ans3": "תשובה שלישית ולא נכונה",
+            "ans4": "תשובה רביעית לא נכונה",
+            "correctAns": "ans2"
+        },
+        {
+            "type": "binary",
+            "sentence": "דוגמה לשאלה בוחנת נכונה של נכון או לא נכון",
+            "trueOrFalse": true
+        },
+        {
+            "type": "multiple",
+            "question": "דוגמה לשאלה אמריקאית בוחנת שיש לה 4 תשובות?",
+            "ans1": "תשובה ראשונה ולא נכונה",
+            "ans2": "תשובה שנייה נכונה!",
+            "ans3": "תשובה שלישית ולא נכונה",
+            "ans4": "תשובה רביעית לא נכונה",
+            "correctAns": "ans2"
+        },
+        {
+            "type": "binary",
+            "sentence": "דוגמה לשאלה בוחנת נכונה של נכון או לא נכון",
+            "trueOrFalse": true
+        },
+        {
+            "type": "multiple",
+            "question": "דוגמה לשאלה אמריקאית בוחנת שיש לה 4 תשובות?",
+            "ans1": "תשובה ראשונה ולא נכונה",
+            "ans2": "תשובה שנייה נכונה!",
+            "ans3": "תשובה שלישית ולא נכונה",
+            "ans4": "תשובה רביעית לא נכונה",
+            "correctAns": "ans2"
+        },
+        {
+            "type": "binary",
+            "sentence": "דוגמה לשאלה בוחנת נכונה של נכון או לא נכון",
+            "trueOrFalse": true
+        },
+        {
+            "type": "multiple",
+            "question": "דוגמה לשאלה אמריקאית בוחנת שיש לה 4 תשובות?",
+            "ans1": "תשובה ראשונה ולא נכונה",
+            "ans2": "תשובה שנייה נכונה!",
+            "ans3": "תשובה שלישית ולא נכונה",
+            "ans4": "תשובה רביעית לא נכונה",
+            "correctAns": "ans2"
+        },
+        {
+            "type": "binary",
+            "sentence": "דוגמה לשאלה בוחנת נכונה של נכון או לא נכון",
+            "trueOrFalse": true
+        },
+        {
+            "type": "multiple",
+            "question": "דוגמה לשאלה אמריקאית בוחנת שיש לה 4 תשובות?",
+            "ans1": "תשובה ראשונה ולא נכונה",
+            "ans2": "תשובה שנייה נכונה!",
+            "ans3": "תשובה שלישית ולא נכונה",
+            "ans4": "תשובה רביעית לא נכונה",
+            "correctAns": "ans2"
+        },
+        {
+            "type": "binary",
+            "sentence": "דוגמה לשאלה בוחנת נכונה של נכון או לא נכון",
+            "trueOrFalse": true
+        },
+        {
+            "type": "multiple",
+            "question": "דוגמה לשאלה אמריקאית בוחנת שיש לה 4 תשובות?",
+            "ans1": "תשובה ראשונה ולא נכונה",
+            "ans2": "תשובה שנייה נכונה!",
+            "ans3": "תשובה שלישית ולא נכונה",
+            "ans4": "תשובה רביעית לא נכונה",
+            "correctAns": "ans2"
+        },
+        {
+            "type": "binary",
+            "sentence": "דוגמה לשאלה בוחנת נכונה של נכון או לא נכון",
+            "trueOrFalse": true
+        },
+        {
+            "type": "multiple",
+            "question": "דוגמה לשאלה אמריקאית בוחנת שיש לה 4 תשובות?",
+            "ans1": "תשובה ראשונה ולא נכונה",
+            "ans2": "תשובה שנייה נכונה!",
+            "ans3": "תשובה שלישית ולא נכונה",
+            "ans4": "תשובה רביעית לא נכונה",
+            "correctAns": "ans2"
+        },
+        {
+            "type": "binary",
+            "sentence": "דוגמה לשאלה בוחנת נכונה של נכון או לא נכון",
+            "trueOrFalse": true
+        },
+        {
+            "type": "multiple",
+            "question": "דוגמה לשאלה אמריקאית בוחנת שיש לה 4 תשובות?",
+            "ans1": "תשובה ראשונה ולא נכונה",
+            "ans2": "תשובה שנייה נכונה!",
+            "ans3": "תשובה שלישית ולא נכונה",
+            "ans4": "תשובה רביעית לא נכונה",
+            "correctAns": "ans2"
+        },
+        {
+            "type": "binary",
+            "sentence": "דוגמה לשאלה בוחנת נכונה של נכון או לא נכון",
+            "trueOrFalse": true
+        },
+        {
+            "type": "multiple",
+            "question": "דוגמה לשאלה אמריקאית בוחנת שיש לה 4 תשובות?",
+            "ans1": "תשובה ראשונה ולא נכונה",
+            "ans2": "תשובה שנייה נכונה!",
+            "ans3": "תשובה שלישית ולא נכונה",
+            "ans4": "תשובה רביעית לא נכונה",
+            "correctAns": "ans2"
+        },
+        {
+            "type": "binary",
+            "sentence": "דוגמה לשאלה בוחנת נכונה של נכון או לא נכון",
+            "trueOrFalse": true
+        }
+    ],
+    "questionsPractice": [
+        {
+            "type": "multiple",
+            "question": "דוגמה לשאלה אמריקאית בוחנת שיש לה 4 תשובות?",
+            "ans1": "תשובה ראשונה ולא נכונה",
+            "ans2": "תשובה שנייה נכונה!",
+            "ans3": "תשובה שלישית ולא נכונה",
+            "ans4": "תשובה רביעית לא נכונה",
+            "correctAns": "ans2"
+        },
+        {
+            "type": "binary",
+            "sentence": "דוגמה לשאלה בוחנת נכונה של נכון או לא נכון",
+            "trueOrFalse": true
+        }
+    ]
+}
+]
+};
 
+console.log(lomdaData)
 
 function purifyJSON(json) {
     for (const key in json) {
@@ -30,12 +322,6 @@ function purifyJSON(json) {
     }
 }
 
-//  sanitize data from the server
-console.time('sanitize');
-purifyJSON(lomdaData)
-console.timeEnd('sanitize');
-console.log(lomdaData);
-
 THEME = lomdaData.THEME;
 TITLE = lomdaData.TITLE.name;
 DATA = lomdaData.DATA;
@@ -45,6 +331,8 @@ OPENING_PICTURE = lomdaData.OPENING_PICTURE;
 AMOUNT_EXAM_QUESTIONS = lomdaData.AMOUNT_EXAM_QUESTIONS;
 // determine colors
 AUTHOR = lomdaData.AUTHOR;
+
+console.log(AUTHOR)
 
 window.addEventListener("load", () => {
     changeColors();
