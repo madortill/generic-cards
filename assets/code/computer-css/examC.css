@@ -127,7 +127,7 @@
   
   }
   
-  .page.exam .card>:is(img, div.card-pic) {
+  .page.exam .card>img, .page.exam .card>div.card-pic {
     max-width: 90vw;
     /* width: 50vh; */
   }
@@ -167,7 +167,7 @@
     justify-content: flex-start;
   }
   
-  .page.exam .next-back-btn> :is(img, div) {
+  .page.exam .next-back-btn>img, .page.exam .next-back-btn>div {
     height: 2.9rem;
     cursor: pointer;
   }
@@ -183,7 +183,7 @@
     pointer-events: none;
   }
   
-  .page.exam .next-back-btn.last .arrows>:is(div.back, img.back) {
+  .page.exam .next-back-btn.last .arrows>div.back, .page.exam .next-back-btn.last .arrows>img.back {
     transform: translateX(-140%);
   }
   
@@ -192,7 +192,7 @@
     pointer-events: none;
   }
   
-  .page.exam .next-back-btn .arrows>:is(img, div) {
+  .page.exam .next-back-btn .arrows>img, .page.exam .next-back-btn .arrows>div {
     height: 2.9rem;
     /* margin: 0 2vw; */
   }
@@ -204,7 +204,7 @@
   }
   
 
-  .page.exam .answer-container>:is(img, div) {
+  .page.exam .answer-container>img,  .page.exam .answer-container>div {
     height: 1.7vh;
     margin-left: 2%;
     margin-bottom: 2%;
@@ -212,7 +212,7 @@
     cursor: pointer;
   }
 
-  .page.exam .answer-container>:is(img, div):active {
+  .page.exam .answer-container>img:active,  .page.exam .answer-container>div:active {
     pointer-events: none;
   }
   
@@ -472,7 +472,7 @@
     margin-top: 4%;
   }
   
-  .page .card>:is(img, div) {
+  .page .card>img, .page .card>div {
     width: 100%;
   }
   

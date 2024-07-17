@@ -107,7 +107,7 @@
   z-index: 2;
 }
 
-.page.practice .answer-container>:is(img, div.choose-question) {
+.page.practice .answer-container>img, .page.practice .answer-container>div.choose-question {
   height: 1.7vh;
   margin-left: 2%;
   pointer-events: none;
@@ -151,7 +151,7 @@
   right: 1em;
 }
 
-.page.practice .next-btn>:is(img, div.forward-arrows) {
+.page.practice .next-btn>img, .page.practice .next-btn>div.forward-arrows {
   opacity: 0.4;
   height: 2.9rem;
   cursor: pointer;
