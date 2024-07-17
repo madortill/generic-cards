@@ -1,0 +1,92 @@
+@supports not ((gap: 0.2rem) and (display:flex)) {
+
+    /* examC.css */
+    .number-container {
+        margin-right: 0.45rem;
+        margin-left: 0.45rem;
+    }
+
+    .practice-btn {
+        margin-right: 3vw;
+        margin-left: 3vw;
+    }
+
+
+    .page.exam .next-back-btn .arrows .next,
+    .page.exam .next-back-btn .arrows .back {
+        margin: 0.5vh;
+    }
+
+    .page .buttons-exit-popup .button-popup {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+
+    }
+
+    .page.exam .buttons-popup .backToExam-btn,
+    .page.exam .buttons-popup .backToHome-btn {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+    }
+
+    /* learningC.css */
+    .page.learning.subjects .cards-container .learningCard {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .page.learning.subjects .learningCard .icon {
+        margin-bottom: 0.3rem;
+    }
+
+    .page.learning.content .cards-container .card-group {
+        margin-left: 1.5rem;
+        margin-right: 1.5rem;
+        margin-bottom: 3rem;
+
+    }
+
+    .page.learning.content .next-back-btn .back,
+    .page.learning.content .next-back-btn .next {
+        margin-left: 0.2rem;
+        margin-right: 0.2rem;
+    }
+
+    /* practiceC.css */
+    .page.practice .buttons .btn:first-of-type {
+        margin-left: 2rem;
+    }
+
+    /* searchC.css */
+    .searchBoxHolder {
+        margin-bottom: 1vh;
+    }
+}
+
+@supports not (padding-inline: 1rem) {
+
+    /* learningC.css */
+    .page.learning.content .content {
+        padding-left: 1.8rem;
+        padding-right: 1.8rem;
+    }
+
+    .page.learning.subjects .sub-title {
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    /* searchC.css */
+    .dropDown {
+        padding-right: 1rem;
+        padding-left: 1rem;
+    }
+}
+
+@supports not (padding-block: 1.8vw) {
+    .searchBoxHolder {
+        padding-top: 1.8vw;
+        padding-bottom: 1.8vw;
+    }
+}
