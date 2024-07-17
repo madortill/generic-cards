@@ -14,7 +14,10 @@
       }
     }
 
-@supports not ((gap: 0.2rem) and (display:flex)) {
+/* To support gap in flexbox, we need chrome version of 84 or higher. We can't test support for this, but we can test
+ support for revert value which chrome 84 is the first version to support 
+ (meaning, every version of chrome that supports revert also supports gap in flexbox*/
+@supports not (font-weight: revert) {
 
     /* examC.css */
     .number-container {
