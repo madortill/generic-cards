@@ -1,3 +1,19 @@
+@supports not (top: max(1rem, 2vmin)) {
+    /* openingC.css */
+    .page.opening .title {
+        top: 16vmin;
+      }
+
+      /* aboutC.css */
+      .page.about .container-titles :first-child {
+        font-size: 1.3em;
+      }
+      
+      .page.about .container-titles :last-child {
+        font-size: 1em;
+      }
+    }
+
 @supports not ((gap: 0.2rem) and (display:flex)) {
 
     /* examC.css */
@@ -53,6 +69,10 @@
         margin-right: 0.2rem;
     }
 
+    .page.learning.subjects .buttons .button:first-of-type {
+        margin-left: 2rem;
+    }
+
     /* practiceC.css */
     .page.practice .buttons .btn:first-of-type {
         margin-left: 2rem;
@@ -61,32 +81,5 @@
     /* searchC.css */
     .searchBoxHolder {
         margin-bottom: 1vh;
-    }
-}
-
-@supports not (padding-inline: 1rem) {
-
-    /* learningC.css */
-    .page.learning.content .content {
-        padding-left: 1.8rem;
-        padding-right: 1.8rem;
-    }
-
-    .page.learning.subjects .sub-title {
-        margin-top: 0.5rem;
-        margin-bottom: 0.5rem;
-    }
-
-    /* searchC.css */
-    .dropDown {
-        padding-right: 1rem;
-        padding-left: 1rem;
-    }
-}
-
-@supports not (padding-block: 1.8vw) {
-    .searchBoxHolder {
-        padding-top: 1.8vw;
-        padding-bottom: 1.8vw;
     }
 }

@@ -47,6 +47,7 @@
   width: 27vw;
   margin: 0 2vw;
   font-weight: 800;
+  position: relative;
 }
 
 .page.exam .questionNumber-text,
@@ -211,9 +212,10 @@
   align-items: center;
 }
 
-.page.exam .buttons-popup>:is(img, div) {
+.page.exam .buttons-popup>img, .page.exam .buttons-popup>div {
   width: 25vw;
   margin-bottom: 15%;
+  position: relative;
 }
 
 .page.exam .circle {
@@ -350,6 +352,7 @@
 
 .page.exam .end-exam .title-popup {
   font-size: 6vmin;
+  position: relative;
 }
 
 .page.exam .title-popup {

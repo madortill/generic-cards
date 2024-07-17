@@ -17,7 +17,8 @@
     aspect-ratio: 150/37;
     padding-right: 2.1vw;
     box-sizing: border-box;
-    padding-block: 1.8vw;
+    padding-top: 1.8vw;
+    padding-bottom: 1.8vw;
     max-height: 16vh;
 }
 
@@ -57,7 +58,8 @@
     height: 75vh;
     overflow-y: auto;
     direction: ltr;
-    padding-inline: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
 .dropDownItem {

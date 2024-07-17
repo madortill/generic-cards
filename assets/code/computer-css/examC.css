@@ -43,6 +43,7 @@
   .page.exam .questionNumber,
   .page.exam .timer {
     width: 12vw;
+    position: relative;
   }
   
   .page.exam .questionNumber-text,
@@ -242,10 +243,11 @@
     gap: 2rem;
   }
   
-  .page.exam .buttons-popup>:is(img, div) {
+  .page.exam .buttons-popup>img, .page.exam .buttons-popup>div {
     width: 25vw;
     margin-bottom: 11%;
     cursor: pointer;
+    position: relative;
   }
   
   .page.exam .circle {
@@ -387,6 +389,7 @@
   
   .page.exam .end-exam .title-popup {
     font-size: 2rem;
+    position: relative;
   }
   
   .page.exam .title-popup {

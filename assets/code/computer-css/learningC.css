@@ -21,7 +21,8 @@ html {
 
 .page.learning.subjects .sub-title {
   font-size: 1.5rem;
-  margin-block: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   text-align: center;
 }
 
@@ -167,6 +168,10 @@ html {
   height: 1.5rem;
   margin: 4% 0 5% 2%;
   cursor: pointer;
+}
+
+.check-place {
+  position: relative;
 }
 
 .page.learning.subjects .subject-popup>div:not(.check-place) {
@@ -464,7 +469,8 @@ html {
 }
 
 .page.learning.content .content {
-  padding-inline: 1.8rem;
+  padding-left: 1.8rem;
+  padding-right: 1.8rem;
   margin-bottom: 1em;
   text-align: right;
 }

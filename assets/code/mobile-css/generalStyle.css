@@ -33,7 +33,7 @@ body {
 }
 
 *:has(.absolute) {
-  position: relative;
+  /* position: relative; */
 }
 
 .main {
@@ -406,6 +406,7 @@ body {
 
 .page .button-popup {
   width: 23vw;
+  position: relative;
 }
 
 /* פוופאפ מעבר לתרגול בתוך עמוד הלמידה רק על נושא אחד */

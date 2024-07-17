@@ -40,6 +40,7 @@
   flex-direction: column;
   align-items: center;
   font-size: 4.5vmin;
+  position: relative;
 }
 
 
@@ -51,9 +52,10 @@
 }
  
 /* make the defult icon invisible */
-.page.learning.subjects .icon[src="../assets/images/learning/Artboard 4.svg"], .page.learning.subjects .icon[src="default"] {
+.page.learning.subjects .icon[src="../assets/images/learning/Artboard 4.svg"], .page.learning.subjects .icon[src="deafult"] {
   opacity: 0%;
   aspect-ratio: 1 / 1;
+  visibility: hidden;
 }
 
 
@@ -153,6 +155,10 @@
 .page.learning.subjects .subject-popup {
   display: flex;
   align-items: center;
+}
+
+.check-place {
+  position: relative;
 }
 
 .page.learning.subjects .subject-popup>div.check-place {
