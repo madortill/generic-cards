@@ -18,7 +18,6 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Rubik";
-  direction: rtl;
   color: white;
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -472,3 +471,41 @@ body {
 .absolute {
   position: absolute;
 }
+
+/* הדביקי את זה בסוף הקובץ */
+:root[dir="rtl"] body { direction: rtl; }
+:root[dir="ltr"] body { direction: ltr; }
+
+/* יישור טקסט לוגי (במקום left/right) */
+.page .title-popup,
+.page .text,
+.page .question,
+.page .question-text { text-align: start; }
+
+/* מיקום כפתורים מתהפך לפי כיוון */
+:root[dir="rtl"] .page .back-btn { right: 2vw; left: auto; }
+:root[dir="rtl"] .page .search  { left: 3vw; right: auto; }
+
+:root[dir="ltr"] .page .back-btn { left: 2vw;  right: auto; }
+:root[dir="ltr"] .page .search  { right: 3vw; left:  auto; }
+
+/* מיקום טקסט השאלה */
+:root[dir="rtl"] .page.exam .question-text,
+:root[dir="rtl"] .page.practice .question-text { right: 8%; left: auto; }
+
+:root[dir="ltr"] .page.exam .question-text,
+:root[dir="ltr"] .page.practice .question-text { left: 8%; right: auto; }
+
+/* כיוון קו האנימציה */
+:root[dir="rtl"] .page .binary .line,
+:root[dir="rtl"] .page .line { transform-origin: right; }
+
+:root[dir="ltr"] .page .binary .line,
+:root[dir="ltr"] .page .line { transform-origin: left; }
+
+/* מרווחי תשובות – לוגיים */
+:root[dir="rtl"] .page .right-ans,
+:root[dir="rtl"] .page .wrong-ans { margin: 10% 0 0 10%; }
+
+:root[dir="ltr"] .page .right-ans,
+:root[dir="ltr"] .page .wrong-ans { margin: 10% 10% 0 0; }

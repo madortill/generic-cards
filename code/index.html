@@ -15,8 +15,7 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content='לומדה שנוצרה בעזרת מחולל הלומדות של מדור טי"ל'>
     <meta property="og:description" content="">
-    <meta property="og:image"
-        content="https://madortill.github.io/generic-cards/assets/till_logo.svg">
+    <meta property="og:image" content="https://madortill.github.io/generic-cards/assets/till_logo.svg">
 
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
@@ -24,18 +23,20 @@
     <meta property="twitter:url" content="https://madortill.github.io/generic-cards/code/">
     <meta name="twitter:title" content='לומדה שנוצרה בעזרת מחולל הלומדות של מדור טי"ל'>
     <meta name="twitter:description" content="">
-    <meta name="twitter:image"
-        content="https://madortill.github.io/generic-cards/assets/till_logo.svg">
+    <meta name="twitter:image" content="https://madortill.github.io/generic-cards/assets/till_logo.svg">
 
     <!-- Meta Tags Generated via https://www.opengraph.xyz -->
 
 
     <!-- stylesheet -->
-    <link rel="stylesheet" href="mobile-css/generalStyle.css" type="text/css" media="(pointer: coarse), (pointer: none)">
-    <link rel="stylesheet" href="computer-css/generalStyleC.css" type="text/css" media="(any-pointer:fine), (min-width:1200px)">
+    <link rel="stylesheet" href="mobile-css/generalStyle.css" type="text/css"
+        media="(pointer: coarse), (pointer: none)">
+    <link rel="stylesheet" href="computer-css/generalStyleC.css" type="text/css"
+        media="(any-pointer:fine), (min-width:1200px)">
 
     <link rel="stylesheet" href="mobile-css/opening.css" type="text/css" media="(pointer: coarse), (pointer: none)">
-    <link rel="stylesheet" href="computer-css/openingC.css" type="text/css" media="(any-pointer:fine), (min-width:1200px)">
+    <link rel="stylesheet" href="computer-css/openingC.css" type="text/css"
+        media="(any-pointer:fine), (min-width:1200px)">
 
 
     <link rel="stylesheet" href="mobile-css/home.css" type="text/css" media="(pointer: coarse), (pointer: none)">
@@ -53,16 +54,125 @@
     <link rel="stylesheet" href="mobile-css/exam.css" type="text/css" media="(pointer: coarse), (pointer: none)">
     <link rel="stylesheet" href="computer-css/examC.css" type="text/css" media="(any-pointer:fine)">
 
-    <link rel="stylesheet" href="mobile-css/search.css" type="text/css"  media="(pointer: coarse), (pointer: none)">
-    <link rel="stylesheet" href="computer-css/searchC.css" type="text/css"  media="(any-pointer:fine)">
+    <link rel="stylesheet" href="mobile-css/search.css" type="text/css" media="(pointer: coarse), (pointer: none)">
+    <link rel="stylesheet" href="computer-css/searchC.css" type="text/css" media="(any-pointer:fine)">
+    <script>
+        (function () {
+            // 1) לאפשר כפייה ידנית לבדיקה: ?lang=he/en/ru/ar/fa/ur
+            const url = new URL(location.href);
+            const force = (url.searchParams.get('lang') || '').toLowerCase();
+            const rtlSet = new Set(['he', 'ar', 'fa', 'ur']);
+            if (force) {
+                document.documentElement.lang = force;
+                document.documentElement.dir = rtlSet.has(force) ? 'rtl' : 'ltr';
+                return;
+            }
 
+            // 2) משערך מתוך ה-JSON עצמו (בלי לשנות את הפורמט)
+            const path = url.searchParams.get('path');
+            if (!path) return; // אם אין נתיב ל-JSON, אין מה לעשות כאן
+
+            // קובעים זמנית LTR כדי למנוע "קפיצה" – יוחלף אחרי הפאץ'
+            if (!document.documentElement.hasAttribute('dir')) {
+                document.documentElement.setAttribute('dir', 'ltr');
+            }
+
+            fetch(`../data/${path}/${path}.json`)
+                .then(r => r.json())
+                .then(d => {
+                    // אוספים טקסטים רלוונטיים לזיהוי
+                    const parts = [];
+                    if (d?.TITLE?.name) parts.push(d.TITLE.name);
+                    // אם DATA גדול, מספיק דגימה קצרה:
+                    const sample = JSON.stringify(d?.DATA || '').slice(0, 4000);
+                    parts.push(sample);
+                    const text = parts.join(' ');
+
+                    // זיהוי דטרמיניסטי לפי תווי כתיבה
+                    const hasHeb = /[\u0590-\u05FF]/.test(text);                    // עברית
+                    const hasArab = /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF]/.test(text); // ערבית/פרסית/אורדו
+                    const hasCyr = /[\u0400-\u04FF\u0500-\u052F]/.test(text);       // קירילי
+
+                    let lang = 'en';
+                    if (hasHeb) lang = 'he';
+                    else if (hasArab) {
+                        // הבחנה בסיסית בין ערבית/פרסית/אורדו (אופציונלי)
+                        if (/[\u067E\u0686\u0698\u06AF\u06A9\u06CC]/.test(text)) lang = 'fa';
+                        else if (/[\u0679\u0688\u0691\u06BA\u06D2\u06C1]/.test(text)) lang = 'ur';
+                        else lang = 'ar';
+                    } else if (hasCyr) lang = 'ru';
+
+                    document.documentElement.lang = lang;
+                    document.documentElement.dir = rtlSet.has(lang) ? 'rtl' : 'ltr';
+                })
+                .catch(() => { /* מתעלמים – נשאר LTR */ });
+        })();
+    </script>
+
+    <script>
+        // --- מילון תרגומים ---
+        const I18N = {
+            he: {
+                "opening.wait": "חכו בסבלנות...",
+                "opening.tap": "לחצו על המסך להמשך",
+                "home.learn": "למדו את נושאי השיעור השונים",
+                "search.placeholder": "הקלידו כדי לחפש",
+                "practice.correct": "נכונות",
+                "practice.total": "בסה\"כ"
+            },
+            en: {
+                "opening.wait": "Please wait...",
+                "opening.tap": "Tap to continue",
+                "home.learn": "Learn the lesson topics",
+                "search.placeholder": "Type to search",
+                "practice.correct": "Correct",
+                "practice.total": "Total"
+            },
+            ru: {
+                "opening.wait": "Пожалуйста, подождите...",
+                "opening.tap": "Нажмите, чтобы продолжить",
+                "home.learn": "Изучайте темы урока",
+                "search.placeholder": "Введите для поиска",
+                "practice.correct": "Верные",
+                "practice.total": "Всего"
+            },
+            ar: {
+                "opening.wait": "يرجى الانتظار...",
+                "opening.tap": "اضغط للمتابعة",
+                "home.learn": "تعرّفوا على مواضيع الدرس",
+                "search.placeholder": "اكتب للبحث",
+                "practice.correct": "صحيح",
+                "practice.total": "المجموع"
+            }
+        };
+
+        function applyI18n(lang) {
+            const dict = I18N[lang] || I18N.en;
+
+            // מחליף טקסטים לפי data-i18n
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (dict[key]) el.textContent = dict[key];
+            });
+
+            // מחליף Attributes (כמו placeholder)
+            document.querySelectorAll('[data-i18n-attr]').forEach(el => {
+                const pairs = el.getAttribute('data-i18n-attr').split(',').map(s => s.trim());
+                pairs.forEach(p => {
+                    const [attr, key] = p.split(':');
+                    if (attr && key && dict[key]) el.setAttribute(attr.trim(), dict[key]);
+                });
+            });
+        }
+    </script>
 
     <!-- javascript -->
-    <script type="text/javascript" src="index.js"></script>
-    <script type="text/javascript" src="../assets/libs/svg-loader.min.js" async></script>
-    <script type="text/javascript" src="util.js"></script>
-    <script type="text/javascript" src="processData.js"></script>
-    <script type="text/javascript" src="animateDims.js"></script>
+    <script src="index.js" defer></script>
+    <script src="../assets/libs/svg-loader.min.js" defer></script>
+    <script src="util.js" defer></script>
+    <script src="processData.js" defer></script>
+    <script src="animateDims.js" defer></script>
+
 
     <title> לומדה שנוצרה בעזרת מחולל הלומדות של מדור טי"ל </title>
 </head>
@@ -101,33 +211,40 @@
                 <svg class="card" data-src="../assets/images/learning/learning.svg"></svg>
                 <div class="text">
                     <div class="container-titles">
-                        <div> ראש מדור טי"ל</div>
-                        <div> רס"ן מיגל לויתן</div>
+                        <div data-i18n="about.headOfDept">ראש מדור טי"ל</div>
+                        <div>רס"ן מיגל לויתן</div>
                     </div>
+
                     <div class="container-titles">
-                        <div>ראש תחום מו"פ וחדשנות בלמידה</div>
+                        <div data-i18n="about.innovationLead">ראש תחום מו"פ וחדשנות בלמידה</div>
                         <div>סמ"ר גל גנסין</div>
                     </div>
-                    <div class="container-titles">
-                        <div>מפתחת לומדה</div>
+
+                    <div class="container-tiles">
+                        <div data-i18n="about.developer">מפתחת לומדה</div>
                         <div>סמל הלה צביון</div>
                     </div>
+
                     <div class="container-titles">
-                        <div>מעצב UX & UI</div>
+                        <div data-i18n="about.uxui">מעצב UX & UI</div>
                         <div>סמל דור סגיב</div>
                     </div>
+
                     <div class="container-titles">
-                        <div>מומחה תוכן</div>
+                        <div data-i18n="about.sme">מומחה תוכן</div>
                         <div id="expert-name">---</div>
                     </div>
+
                     <div class="container-titles">
-                        <div>יוצרת המחולל:</div>
+                        <div data-i18n="about.generatorAuthor">יוצרת המחולל:</div>
                         <div>סמל תמר סטופ</div>
                     </div>
+
                     <div class="container-titles">
-                        <div>צור קשר:</div>
+                        <div data-i18n="about.contact">צור קשר:</div>
                         <a href="mailto:madortill@gmail.com">madortill@gmail.com</a>
                     </div>
+
                 </div>
             </div>
 
@@ -252,4 +369,4 @@
     </div>
 </body>
 
-</html
+</html>
