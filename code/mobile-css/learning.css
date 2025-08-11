@@ -472,3 +472,55 @@
   justify-content: center;
   white-space: normal;
 }
+
+/* כותרות – במקום right/left השתמשי ב-start */
+.page.learning.content .card .title {
+  text-align: start;
+}
+
+/* טקסט גוף */
+.page.learning.content .content {
+  text-align: start;
+}
+
+/* רשימות – במקום padding-right */
+.page.learning.content .list {
+  padding-inline-start: 1em;
+}
+
+/* מרווחי חיצים/אלמנטים – במקום margin-left/right */
+.page.learning.content .container-subjects .arrow {
+  margin-inline-start: 1.5vw;
+}
+
+/* כפתורי ניווט – כיוון הכלי עצמו */
+html[dir="rtl"] .page.learning.content .next-back-btn { direction: rtl; }
+html[dir="ltr"] .page.learning.content .next-back-btn { direction: ltr; }
+
+/* “הכרטיס הקודם” מוזז לצד הנכון לפי הכיוון */
+html[dir="rtl"] .page.learning.content .card.prev { transform: translateX(-100vw); }
+html[dir="ltr"] .page.learning.content .card.prev { transform: translateX(100vw); }
+
+/* תיבות/קונטיינרים – החלפת padding ימין/שמאל ל-inline */
+.page.learning.content .content-container {
+  /* היה: padding: 0.5em 2em 1em 3em;  (top right bottom left) */
+  padding-block: 0.5em 1em;
+  padding-inline: 3em 2em;  /* start end – יתהפך אוטומטית לפי dir */
+}
+
+/* כותרות עמוד “נושאים” – אין תלות בכיוון, אך אם יש טקסט פנימי מיושר: */
+.page.learning.subjects .subject {
+  text-align: center; /* נשאר מרכז – לא תלוי כיוון */
+}
+
+/* איפה שיש margin-left/right – להמיר ל-inline-start/end */
+.page.learning.content .container-subjects .space { margin-inline-end: 35vw; }
+.page.learning.content .container-subjects::after  { padding-inline-start: 32vw; }
+
+/* דוגמה לעוד המרות שימושיות אם מופיעות אצלך בקבצים נוספים: */
+/* margin-right: X   -> margin-inline-end: X; */
+/* margin-left: X    -> margin-inline-start: X; */
+/* padding-right: X  -> padding-inline-end: X; */
+/* padding-left: X   -> padding-inline-start: X; */
+/* text-align: right -> text-align: start; */
+/* text-align: left  -> text-align: end;  (בד"כ תרצי start) */
