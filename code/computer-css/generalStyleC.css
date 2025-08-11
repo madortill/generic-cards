@@ -18,7 +18,7 @@
     margin: 0;
     padding: 0;
     font-family: "Rubik";
-    direction: rtl;
+    /* direction: rtl; */
     color: white;
     background-size: 100% 100%;
     background-repeat: no-repeat;
@@ -517,3 +517,50 @@
     position: absolute;
   }
   
+  /* === RTL/LTR SWITCH (Paste at the very end) === */
+
+/* שליטה בכיוון לפי <html dir="..."> */
+:root[dir="rtl"] body { direction: rtl; }
+:root[dir="ltr"] body { direction: ltr; }
+
+/* יישור טקסט לוגי (במקום left/right קשיח) */
+.title, .text, .content, .list, .question, .question-text,
+.title-popup, .popup-sub-titles, .instructions, .instruction,
+.text-fill-name, .instruction-practice {
+  text-align: start;
+}
+
+/* מיקום כפתורי back/search */
+:root[dir="rtl"] .page .back-btn { right: 2rem; left: auto; }
+:root[dir="rtl"] .page .search  { left:  2rem; right: auto; }
+
+:root[dir="ltr"] .page .back-btn { left:  2rem; right: auto; }
+:root[dir="ltr"] .page .search  { right: 2rem; left:  auto; }
+
+/* מיקום טקסט השאלה */
+:root[dir="rtl"] .page.exam .question-text,
+:root[dir="rtl"] .page.practice .question-text { right: 8%; left: auto; }
+
+:root[dir="ltr"] .page.exam .question-text,
+:root[dir="ltr"] .page.practice .question-text { left: 8%; right: auto; }
+
+/* כיוון קו האנימציה */
+:root[dir="rtl"] .page .binary .line,
+:root[dir="rtl"] .page .line { transform-origin: right; }
+
+:root[dir="ltr"] .page .binary .line,
+:root[dir="ltr"] .page .line { transform-origin: left; }
+
+/* מרווח תשובות (במקום margin-left קשיח) */
+:root[dir="rtl"] .page .right-ans,
+:root[dir="rtl"] .page .wrong-ans { margin: 10% 0 0 10%; }
+
+:root[dir="ltr"] .page .right-ans,
+:root[dir="ltr"] .page .wrong-ans { margin: 10% 10% 0 0; }
+
+/* להפוך אייקון "חזרה" אם החץ מצויר לימין (אופציונלי) */
+:root[dir="ltr"] .page .back-btn { transform: scaleX(-1); }
+:root[dir="ltr"] .page .back-btn:active { transform: scaleX(-1) scale(0.95); }
+
+/* לבטל יישור ידני ימני שהיה במודאלים */
+.page .exam-popup .text { text-align: start; }
