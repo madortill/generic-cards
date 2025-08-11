@@ -80,6 +80,7 @@
             fetch(`../data/${path}/${path}.json`)
                 .then(r => r.json())
                 .then(d => {
+
                     // אוספים טקסטים רלוונטיים לזיהוי
                     const parts = [];
                     if (d?.TITLE?.name) parts.push(d.TITLE.name);
@@ -103,6 +104,7 @@
                     } else if (hasCyr) lang = 'ru';
 
                     document.documentElement.lang = lang;
+                    window.__LANG_DECIDED = lang; // <<< כאן שומרים את השפה שנבחרה
                     document.documentElement.dir = rtlSet.has(lang) ? 'rtl' : 'ltr';
                 })
                 .catch(() => { /* מתעלמים – נשאר LTR */ });
