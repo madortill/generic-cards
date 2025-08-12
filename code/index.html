@@ -57,81 +57,6 @@
     <link rel="stylesheet" href="mobile-css/search.css" type="text/css" media="(pointer: coarse), (pointer: none)">
     <link rel="stylesheet" href="computer-css/searchC.css" type="text/css" media="(any-pointer:fine)">
     <script>
-        // מחכים להחלטת השפה (כולל כפייה ידנית)
-        window.langReady = new Promise((resolve) => {
-            let resolved = false;
-            function done() {
-                if (!resolved) {
-                    resolved = true;
-                    resolve(document.documentElement.lang || 'en');
-                }
-            }
-            // פותח אופציה להזניק מבחוץ
-            window.__notifyLangReady = done;
-            // fallback אם משהו השתבש
-            setTimeout(done, 600);
-        });
-    </script>
-    <script>
-        (function () {
-            const url = new URL(location.href);
-            const force = (url.searchParams.get('lang') || '').toLowerCase();
-            const rtlSet = new Set(['he', 'ar', 'fa', 'ur']);
-
-            if (force) {
-                document.documentElement.lang = force;
-                document.documentElement.dir = rtlSet.has(force) ? 'rtl' : 'ltr';
-                window.__LANG_DECIDED = force;
-                // חשוב: להודיע שהשפה נקבעה גם בכפייה
-                window.__notifyLangReady && window.__notifyLangReady();
-                return;
-            }
-
-            const path = url.searchParams.get('path');
-            if (!path) {
-                // אין JSON – בכל זאת נריץ i18n על ברירת מחדל
-                window.__notifyLangReady && window.__notifyLangReady();
-                return;
-            }
-
-            if (!document.documentElement.hasAttribute('dir')) {
-                document.documentElement.setAttribute('dir', 'ltr');
-            }
-
-            fetch(`../data/${path}/${path}.json`)
-                .then(r => r.json())
-                .then(d => {
-                    const parts = [];
-                    if (d?.TITLE?.name) parts.push(d.TITLE.name);
-                    const sample = JSON.stringify(d?.DATA || '').slice(0, 4000);
-                    parts.push(sample);
-                    const text = parts.join(' ');
-
-                    const hasHeb = /[\u0590-\u05FF]/.test(text);
-                    const hasArab = /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF]/.test(text);
-                    const hasCyr = /[\u0400-\u04FF\u0500-\u052F]/.test(text);
-
-                    let lang = 'en';
-                    if (hasHeb) lang = 'he';
-                    else if (hasArab) {
-                        if (/[\u067E\u0686\u0698\u06AF\u06A9\u06CC]/.test(text)) lang = 'fa';
-                        else if (/[\u0679\u0688\u0691\u06BA\u06D2\u06C1]/.test(text)) lang = 'ur';
-                        else lang = 'ar';
-                    } else if (hasCyr) lang = 'ru';
-
-                    document.documentElement.lang = lang;
-                    document.documentElement.dir = rtlSet.has(lang) ? 'rtl' : 'ltr';
-                    window.__LANG_DECIDED = lang;
-                    // חשוב: להודיע שהשפה נקבעה
-                    window.__notifyLangReady && window.__notifyLangReady();
-                })
-                .catch(() => {
-                    // עדיין מריצים i18n על ברירת מחדל
-                    window.__notifyLangReady && window.__notifyLangReady();
-                });
-        })();
-    </script>
-    <script>
         const I18N = {
             he: {
                 "opening.wait": "חכו בסבלנות...",
@@ -199,7 +124,7 @@
             }
         };
         function applyI18n(lang) {
-            const dict = (window.I18N && I18N[lang]) || (window.I18N && I18N.en) || {};
+            const dict = (I18N && (I18N[lang] || I18N.en)) || {};
             // תרגום טקסטים לפי data-i18n
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
@@ -214,18 +139,43 @@
                 });
             });
         }
+    </script>
+    <script>
+        // מריץ applyI18n מיד כשנקבעת שפה, וברגע שה-DOM מוכן
+        window.__i18nAfterLang = function () {
+            const run = () => {
+                const lang = document.documentElement.lang || 'en';
+                if (typeof applyI18n !== 'function') { setTimeout(run, 0); return; }
+
+                // תרגום טקסטים
+                applyI18n(lang);
+
+                // כיתות עזר לפי כיוון
+                const isRTL = document.documentElement.dir === 'rtl';
+                document.body.classList.toggle('rtl', isRTL);
+                document.body.classList.toggle('ltr', !isRTL);
+
+                // כיוון/שפה לשדות קלט
+                document.querySelectorAll('input, textarea, [contenteditable="true"]').forEach(el => {
+                    el.setAttribute('dir', document.documentElement.dir);
+                    el.setAttribute('lang', lang);
+                });
+            };
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', run, { once: true });
+            } else {
+                run();
+            }
+        };
+    </script>
+    <script>
         document.addEventListener('DOMContentLoaded', async () => {
             const lang = await window.langReady;
 
-            // תרגום טקסטים ו־attributes
+            // ריצה ראשונית
             applyI18n(lang);
 
-            // מחלקות עזר לכיוון
-            const isRTL = document.documentElement.dir === 'rtl';
-            document.body.classList.toggle('rtl', isRTL);
-            document.body.classList.toggle('ltr', !isRTL);
-
-            // להחיל dir/lang גם על שדות קלט / אזורים ניתנים לעריכה
             const setDirOnControls = () => {
                 document.querySelectorAll('input, textarea, [contenteditable="true"]').forEach(el => {
                     el.setAttribute('dir', document.documentElement.dir);
@@ -234,10 +184,98 @@
             };
             setDirOnControls();
 
-            // אם את מזריקה תוכן דינמי אחרי טעינה – אפשר לעקוב ולעדכן:
-            const mo = new MutationObserver(() => setDirOnControls());
-            mo.observe(document.body, { childList: true, subtree: true });
+            // חדש: לרענן תרגום כשנוספים/משתנים אלמנטים
+            let rafPending = false;
+            const mo = new MutationObserver(() => {
+                if (rafPending) return;
+                rafPending = true;
+                requestAnimationFrame(() => {
+                    applyI18n(lang);    // מתרגם אלמנטים שנוספו/הוחלפו
+                    setDirOnControls(); // משלים dir/lang לשדות חדשים
+                    rafPending = false;
+                });
+            });
+            mo.observe(document.body, { childList: true, subtree: true, characterData: true });
         });
+    </script>
+    <script>
+        // מחכים להחלטת השפה (כולל כפייה ידנית)
+        window.langReady = new Promise((resolve) => {
+            let resolved = false;
+            function done() {
+                if (!resolved) {
+                    resolved = true;
+                    resolve(document.documentElement.lang || 'en');
+                }
+            }
+            // פותח אופציה להזניק מבחוץ
+            window.__notifyLangReady = done;
+            // fallback אם משהו השתבש
+            setTimeout(done, 600);
+        });
+    </script>
+    <script>
+        (function () {
+            const url = new URL(location.href);
+            const force = (url.searchParams.get('lang') || '').toLowerCase();
+            const rtlSet = new Set(['he', 'ar', 'fa', 'ur']);
+
+            if (force) {
+                document.documentElement.lang = force;
+                document.documentElement.dir = rtlSet.has(force) ? 'rtl' : 'ltr';
+                window.__LANG_DECIDED = force;
+                // חשוב: להודיע שהשפה נקבעה גם בכפייה
+                window.__notifyLangReady && window.__notifyLangReady();
+                window.__i18nAfterLang && window.__i18nAfterLang();
+                return;
+            }
+
+            const path = url.searchParams.get('path');
+            if (!path) {
+                // אין JSON – בכל זאת נריץ i18n על ברירת מחדל
+                window.__notifyLangReady && window.__notifyLangReady();
+                window.__i18nAfterLang && window.__i18nAfterLang();
+                return;
+            }
+
+            if (!document.documentElement.hasAttribute('dir')) {
+                document.documentElement.setAttribute('dir', 'ltr');
+            }
+
+            fetch(`../data/${path}/${path}.json`)
+                .then(r => r.json())
+                .then(d => {
+                    const parts = [];
+                    if (d?.TITLE?.name) parts.push(d.TITLE.name);
+                    const sample = JSON.stringify(d?.DATA || '').slice(0, 4000);
+                    parts.push(sample);
+                    const text = parts.join(' ');
+
+                    const hasHeb = /[\u0590-\u05FF]/.test(text);
+                    const hasArab = /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF]/.test(text);
+                    const hasCyr = /[\u0400-\u04FF\u0500-\u052F]/.test(text);
+
+                    let lang = 'en';
+                    if (hasHeb) lang = 'he';
+                    else if (hasArab) {
+                        if (/[\u067E\u0686\u0698\u06AF\u06A9\u06CC]/.test(text)) lang = 'fa';
+                        else if (/[\u0679\u0688\u0691\u06BA\u06D2\u06C1]/.test(text)) lang = 'ur';
+                        else lang = 'ar';
+                    } else if (hasCyr) lang = 'ru';
+
+                    document.documentElement.lang = lang;
+                    document.documentElement.dir = rtlSet.has(lang) ? 'rtl' : 'ltr';
+                    window.__LANG_DECIDED = lang;
+                    // חשוב: להודיע שהשפה נקבעה
+                    window.__notifyLangReady && window.__notifyLangReady();
+                    window.__i18nAfterLang && window.__i18nAfterLang();
+                })
+                .catch(() => {
+                    // עדיין מריצים i18n על ברירת מחדל
+                    window.__notifyLangReady && window.__notifyLangReady();
+                    window.__i18nAfterLang && window.__i18nAfterLang();
+                });
+        })();
     </script>
 
     <!-- javascript -->
