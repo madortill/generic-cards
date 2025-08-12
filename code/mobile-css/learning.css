@@ -23,11 +23,11 @@
 
 .page.learning.subjects .cards-container {
   margin-top: 1em;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding-bottom: 8em;
-    overflow: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-bottom: 8em;
+  overflow: auto;
 }
 
 .page.learning.subjects .learningCard {
@@ -49,9 +49,10 @@
   top: 3em;
   left: 0.4em;
 }
- 
+
 /* make the defult icon invisible */
-.page.learning.subjects .icon[src="../assets/images/learning/Artboard 4.svg"], .page.learning.subjects .icon[src="null"] {
+.page.learning.subjects .icon[src="../assets/images/learning/Artboard 4.svg"],
+.page.learning.subjects .icon[src="null"] {
   opacity: 0%;
   aspect-ratio: 1 / 1;
 }
@@ -81,7 +82,7 @@
   height: 17vw;
   bottom: 0;
   background-image: linear-gradient(0deg,
-    var(--gradient-color),
+      var(--gradient-color),
       rgba(255, 255, 255, 0));
   pointer-events: none;
   z-index: 1;
@@ -286,6 +287,7 @@
 .opacity {
   opacity: 0.6;
 }
+
 /* 
 .page.learning.content .container-subjects::before {
   display: block;
@@ -296,7 +298,7 @@
 .page.learning.content .container-subjects .space {
   display: block;
   margin-right: 35vw;
-} 
+}
 
 
 .page.learning.content .container-subjects::after {
@@ -311,7 +313,7 @@
   bottom: 4vw;
   z-index: 1;
   position: fixed;
-  box-shadow: 0px -11px 20px -15px  rgba(25, 155, 191, 0.432);
+  box-shadow: 0px -11px 20px -15px rgba(25, 155, 191, 0.432);
 }
 
 .page.learning.content .open .arrow {
@@ -363,8 +365,6 @@
   color: var(--text-color);
   font-weight: 800;
   font-size: 1.4em;
-  text-align: right;
-  margin-bottom: 0.5em;
 }
 
 .page.learning.content .card .pic {
@@ -446,12 +446,14 @@
   visibility: hidden;
   pointer-events: none;
 }
+
 /* transform: translateX(-140%); */
 
 .page.learning.content .next-back-btn.last .next {
   visibility: hidden;
   pointer-events: none;
 }
+
 .page.learning.content .next-back-btn.last .back {
   transform: translateX(-140%);
 }
@@ -464,7 +466,7 @@
   display: block;
 }
 
-.page.learning.content .sub-sub-topic{
+.page.learning.content .sub-sub-topic {
   min-width: 10em;
   margin-bottom: 0.6em;
   overflow: initial;
@@ -494,28 +496,45 @@
 }
 
 /* כפתורי ניווט – כיוון הכלי עצמו */
-html[dir="rtl"] .page.learning.content .next-back-btn { direction: rtl; }
-html[dir="ltr"] .page.learning.content .next-back-btn { direction: ltr; }
+html[dir="rtl"] .page.learning.content .next-back-btn {
+  direction: rtl;
+}
+
+html[dir="ltr"] .page.learning.content .next-back-btn {
+  direction: ltr;
+}
 
 /* “הכרטיס הקודם” מוזז לצד הנכון לפי הכיוון */
-html[dir="rtl"] .page.learning.content .card.prev { transform: translateX(-100vw); }
-html[dir="ltr"] .page.learning.content .card.prev { transform: translateX(100vw); }
+html[dir="rtl"] .page.learning.content .card.prev {
+  transform: translateX(-100vw);
+}
+
+html[dir="ltr"] .page.learning.content .card.prev {
+  transform: translateX(100vw);
+}
 
 /* תיבות/קונטיינרים – החלפת padding ימין/שמאל ל-inline */
 .page.learning.content .content-container {
   /* היה: padding: 0.5em 2em 1em 3em;  (top right bottom left) */
   padding-block: 0.5em 1em;
-  padding-inline: 3em 2em;  /* start end – יתהפך אוטומטית לפי dir */
+  padding-inline: 3em 2em;
+  /* start end – יתהפך אוטומטית לפי dir */
 }
 
 /* כותרות עמוד “נושאים” – אין תלות בכיוון, אך אם יש טקסט פנימי מיושר: */
 .page.learning.subjects .subject {
-  text-align: center; /* נשאר מרכז – לא תלוי כיוון */
+  text-align: center;
+  /* נשאר מרכז – לא תלוי כיוון */
 }
 
 /* איפה שיש margin-left/right – להמיר ל-inline-start/end */
-.page.learning.content .container-subjects .space { margin-inline-end: 35vw; }
-.page.learning.content .container-subjects::after  { padding-inline-start: 32vw; }
+.page.learning.content .container-subjects .space {
+  margin-inline-end: 35vw;
+}
+
+.page.learning.content .container-subjects::after {
+  padding-inline-start: 32vw;
+}
 
 /* דוגמה לעוד המרות שימושיות אם מופיעות אצלך בקבצים נוספים: */
 /* margin-right: X   -> margin-inline-end: X; */

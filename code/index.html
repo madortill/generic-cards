@@ -57,22 +57,43 @@
     <link rel="stylesheet" href="mobile-css/search.css" type="text/css" media="(pointer: coarse), (pointer: none)">
     <link rel="stylesheet" href="computer-css/searchC.css" type="text/css" media="(any-pointer:fine)">
     <script>
+        // מחכים להחלטת השפה (כולל כפייה ידנית)
+        window.langReady = new Promise((resolve) => {
+            let resolved = false;
+            function done() {
+                if (!resolved) {
+                    resolved = true;
+                    resolve(document.documentElement.lang || 'en');
+                }
+            }
+            // פותח אופציה להזניק מבחוץ
+            window.__notifyLangReady = done;
+            // fallback אם משהו השתבש
+            setTimeout(done, 600);
+        });
+    </script>
+    <script>
         (function () {
-            // 1) לאפשר כפייה ידנית לבדיקה: ?lang=he/en/ru/ar/fa/ur
             const url = new URL(location.href);
             const force = (url.searchParams.get('lang') || '').toLowerCase();
             const rtlSet = new Set(['he', 'ar', 'fa', 'ur']);
+
             if (force) {
                 document.documentElement.lang = force;
                 document.documentElement.dir = rtlSet.has(force) ? 'rtl' : 'ltr';
+                window.__LANG_DECIDED = force;
+                // חשוב: להודיע שהשפה נקבעה גם בכפייה
+                window.__notifyLangReady && window.__notifyLangReady();
                 return;
             }
 
-            // 2) משערך מתוך ה-JSON עצמו (בלי לשנות את הפורמט)
             const path = url.searchParams.get('path');
-            if (!path) return; // אם אין נתיב ל-JSON, אין מה לעשות כאן
+            if (!path) {
+                // אין JSON – בכל זאת נריץ i18n על ברירת מחדל
+                window.__notifyLangReady && window.__notifyLangReady();
+                return;
+            }
 
-            // קובעים זמנית LTR כדי למנוע "קפיצה" – יוחלף אחרי הפאץ'
             if (!document.documentElement.hasAttribute('dir')) {
                 document.documentElement.setAttribute('dir', 'ltr');
             }
@@ -80,39 +101,37 @@
             fetch(`../data/${path}/${path}.json`)
                 .then(r => r.json())
                 .then(d => {
-
-                    // אוספים טקסטים רלוונטיים לזיהוי
                     const parts = [];
                     if (d?.TITLE?.name) parts.push(d.TITLE.name);
-                    // אם DATA גדול, מספיק דגימה קצרה:
                     const sample = JSON.stringify(d?.DATA || '').slice(0, 4000);
                     parts.push(sample);
                     const text = parts.join(' ');
 
-                    // זיהוי דטרמיניסטי לפי תווי כתיבה
-                    const hasHeb = /[\u0590-\u05FF]/.test(text);                    // עברית
-                    const hasArab = /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF]/.test(text); // ערבית/פרסית/אורדו
-                    const hasCyr = /[\u0400-\u04FF\u0500-\u052F]/.test(text);       // קירילי
+                    const hasHeb = /[\u0590-\u05FF]/.test(text);
+                    const hasArab = /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF]/.test(text);
+                    const hasCyr = /[\u0400-\u04FF\u0500-\u052F]/.test(text);
 
                     let lang = 'en';
                     if (hasHeb) lang = 'he';
                     else if (hasArab) {
-                        // הבחנה בסיסית בין ערבית/פרסית/אורדו (אופציונלי)
                         if (/[\u067E\u0686\u0698\u06AF\u06A9\u06CC]/.test(text)) lang = 'fa';
                         else if (/[\u0679\u0688\u0691\u06BA\u06D2\u06C1]/.test(text)) lang = 'ur';
                         else lang = 'ar';
                     } else if (hasCyr) lang = 'ru';
 
                     document.documentElement.lang = lang;
-                    window.__LANG_DECIDED = lang; // <<< כאן שומרים את השפה שנבחרה
                     document.documentElement.dir = rtlSet.has(lang) ? 'rtl' : 'ltr';
+                    window.__LANG_DECIDED = lang;
+                    // חשוב: להודיע שהשפה נקבעה
+                    window.__notifyLangReady && window.__notifyLangReady();
                 })
-                .catch(() => { /* מתעלמים – נשאר LTR */ });
+                .catch(() => {
+                    // עדיין מריצים i18n על ברירת מחדל
+                    window.__notifyLangReady && window.__notifyLangReady();
+                });
         })();
     </script>
-
     <script>
-        // --- מילון תרגומים ---
         const I18N = {
             he: {
                 "opening.wait": "חכו בסבלנות...",
@@ -120,7 +139,15 @@
                 "home.learn": "למדו את נושאי השיעור השונים",
                 "search.placeholder": "הקלידו כדי לחפש",
                 "practice.correct": "נכונות",
-                "practice.total": "בסה\"כ"
+                "practice.total": "בסה\"כ",
+                "subjects.choose": "בחרו נושא אותו תרצו ללמוד",
+                "about.headOfDept": "ראש מדור טי\"ל",
+                "about.innovationLead": "ראש תחום מו\"פ וחדשנות בלמידה",
+                "about.developer": "מפתחת לומדה",
+                "about.uxui": "מעצב UX & UI",
+                "about.sme": "מומחה תוכן",
+                "about.generatorAuthor": "יוצרת המחולל:",
+                "about.contact": "צור קשר:"
             },
             en: {
                 "opening.wait": "Please wait...",
@@ -128,7 +155,15 @@
                 "home.learn": "Learn the lesson topics",
                 "search.placeholder": "Type to search",
                 "practice.correct": "Correct",
-                "practice.total": "Total"
+                "practice.total": "Total",
+                "subjects.choose": "Choose a topic to learn",
+                "about.headOfDept": "Head of TIL Department",
+                "about.innovationLead": "Head of R&D & Learning Innovation",
+                "about.developer": "Courseware Developer",
+                "about.uxui": "UX & UI Designer",
+                "about.sme": "Subject Matter Expert",
+                "about.generatorAuthor": "Generator author:",
+                "about.contact": "Contact:"
             },
             ru: {
                 "opening.wait": "Пожалуйста, подождите...",
@@ -136,7 +171,15 @@
                 "home.learn": "Изучайте темы урока",
                 "search.placeholder": "Введите для поиска",
                 "practice.correct": "Верные",
-                "practice.total": "Всего"
+                "practice.total": "Всего",
+                "subjects.choose": "Выберите тему для изучения",
+                "about.headOfDept": "Руководитель отдела TIL",
+                "about.innovationLead": "Руководитель R&D и инноваций в обучении",
+                "about.developer": "Разработчик учебных материалов",
+                "about.uxui": "Дизайнер UX & UI",
+                "about.sme": "Эксперт по предмету",
+                "about.generatorAuthor": "Автор генератора:",
+                "about.contact": "Контакты:"
             },
             ar: {
                 "opening.wait": "يرجى الانتظار...",
@@ -144,20 +187,25 @@
                 "home.learn": "تعرّفوا على مواضيع الدرس",
                 "search.placeholder": "اكتب للبحث",
                 "practice.correct": "صحيح",
-                "practice.total": "المجموع"
+                "practice.total": "المجموع",
+                "subjects.choose": "اختاروا موضوعًا للتعلم",
+                "about.headOfDept": "رئيس قسم TIL",
+                "about.innovationLead": "رئيس البحث والتطوير وابتكار التعلم",
+                "about.developer": "مطوّر مواد تعليمية",
+                "about.uxui": "مصمّم UX وUI",
+                "about.sme": "خبير محتوى",
+                "about.generatorAuthor": "منشئ المُولّد:",
+                "about.contact": "تواصل:"
             }
         };
-
         function applyI18n(lang) {
-            const dict = I18N[lang] || I18N.en;
-
-            // מחליף טקסטים לפי data-i18n
+            const dict = (window.I18N && I18N[lang]) || (window.I18N && I18N.en) || {};
+            // תרגום טקסטים לפי data-i18n
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (dict[key]) el.textContent = dict[key];
             });
-
-            // מחליף Attributes (כמו placeholder)
+            // תרגום Attributes (למשל placeholder)
             document.querySelectorAll('[data-i18n-attr]').forEach(el => {
                 const pairs = el.getAttribute('data-i18n-attr').split(',').map(s => s.trim());
                 pairs.forEach(p => {
@@ -166,6 +214,30 @@
                 });
             });
         }
+        document.addEventListener('DOMContentLoaded', async () => {
+            const lang = await window.langReady;
+
+            // תרגום טקסטים ו־attributes
+            applyI18n(lang);
+
+            // מחלקות עזר לכיוון
+            const isRTL = document.documentElement.dir === 'rtl';
+            document.body.classList.toggle('rtl', isRTL);
+            document.body.classList.toggle('ltr', !isRTL);
+
+            // להחיל dir/lang גם על שדות קלט / אזורים ניתנים לעריכה
+            const setDirOnControls = () => {
+                document.querySelectorAll('input, textarea, [contenteditable="true"]').forEach(el => {
+                    el.setAttribute('dir', document.documentElement.dir);
+                    el.setAttribute('lang', lang);
+                });
+            };
+            setDirOnControls();
+
+            // אם את מזריקה תוכן דינמי אחרי טעינה – אפשר לעקוב ולעדכן:
+            const mo = new MutationObserver(() => setDirOnControls());
+            mo.observe(document.body, { childList: true, subtree: true });
+        });
     </script>
 
     <!-- javascript -->
@@ -189,9 +261,9 @@
                 <div class="expand">
                     <img class="sub-title" src="../assets/images/opening/Balmas_txt.svg" />
                 </div>
-              <div class="title" data-i18n="opening.wait">חכו בסבלנות...</div>
+                <div class="title" data-i18n="opening.wait">חכו בסבלנות...</div>
                 <div class="expand container-scrolling_icon"></div>
-             <div class="sub-title" data-i18n="opening.tap">לחצו על המסך להמשך</div>
+                <div class="sub-title" data-i18n="opening.tap">לחצו על המסך להמשך</div>
             </div>
         </div>
 
@@ -200,7 +272,7 @@
             <svg class="about" data-src="../assets/images/opening/about_btn.svg" alt="about"></svg>
             <svg class="books" data-src="../assets/images/opening/homeGraphic_icon.svg" alt="homeGraphic_icon"></svg>
             <div class="textArea">
-                <div class="text">למדו את נושאי השיעור השונים</div>
+                <div class="text" data-i18n="home.learn">למדו את נושאי השיעור השונים</div>
             </div>
         </div>
 
@@ -256,7 +328,7 @@
         <!-- עמוד נושאי הלימוד -->
         <div class="page learning subjects ">
             <div class="title"></div>
-          <div class="sub-title" data-i18n="subjects.choose">בחרו נושא אותו תרצו ללמוד</div>
+            <div class="sub-title" data-i18n="subjects.choose">בחרו נושא אותו תרצו ללמוד</div>
             <div class="cards-container scrollStyle"></div>
             <div class="gradient"></div>
             <div class="buttons">
@@ -274,44 +346,45 @@
             <div class="templates">
                 <!-- כרטיסייה עם כותרת וטקסט -->
                 <template class="text">
-                    <div class="title"></div>
-                    <div class="content"></div>
+                    <div class="title" dir="auto"></div>
+                    <div class="content" dir="auto"></div>
                 </template>
                 <!-- כרטיסייה עם כותרת, תמונה וטקסט -->
                 <template class="pic-and-text">
-                    <div class="title"></div>
+                    <div class="title" dir="auto"></div>
                     <img class="pic" />
-                    <div class="content"></div>
+                    <div class="content" dir="auto"></div>
                 </template>
                 <!-- כרטיסייה עם כותרת, סרטון וטקסט -->
                 <template class="video-and-text">
-                    <div class="title"></div>
+                    <div class="title" dir="auto"></div>
                     <video class="video" controls></video>
-                    <div class="content"></div>
+                    <div class="content" dir="auto"></div>
+
                 </template>
                 <!--  יוטיוב וידאו עם טקסט -->
                 <template class="youtube">
-                    <div class="title"></div>
+                    <div class="title" dir="auto"></div>
                     <iframe width="100%" class="youtubeIframe" src="" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
-                    <div class="content"></div>
+                    <div class="content" dir="auto"></div>
                 </template>
                 <!-- כרטיסייה עם כותרת, תת כותרת ורשימה של שלושה בולטים-->
                 <template class="list-dots">
-                    <div class="title"></div>
+                    <div class="title" dir="auto"></div>
                     <ul class="list">
                     </ul>
                 </template>
                 <!-- כרטיסייה עם כותרת, תת כותרת ורשימה של שלושה בולטים-->
                 <template class="list-numbers">
-                    <div class="title"></div>
+                    <div class="title" dir="auto"></div>
                     <ol class="list">
                     </ol>
                 </template>
                 <template class="free-form">
-                    <div class="title"></div>
-                    <div class="content"></div>
+                    <div class="title" dir="auto"></div>
+                    <div class="content" dir="auto"></div>
                 </template>
             </div>
         </div>
@@ -323,11 +396,11 @@
                 <svg class="background-image absolute" data-src="../assets/images/practice/questionLog.svg"></svg>
                 <div class="right-answers">
                     <div class="points">0</div>
-                    <div class="points-text">נכונות</div>
+                    <div class="points-text" data-i18n="practice.correct">נכונות</div>
                 </div>
                 <div class="sum-answers">
                     <div class="points"></div>
-                    <div class="points-text">בסה"כ</div>
+                    <div class="points-text" data-i18n="practice.total">בסה"כ</div>
                 </div>
             </div>
 
@@ -364,8 +437,8 @@
     <div class="searchScreen">
         <div class="searchBoxHolder hidden">
             <svg class="bg-img" data-src="../assets/images/general/search-box.svg" alt="search box container"></svg>
-            <input class="searchBox hidden" placeholder="הקלידו כדי לחפש" name="search-box" lang="he-il" type="text"
-                autocomplete="off" />
+            <input class="searchBox hidden" data-i18n-attr="placeholder:search.placeholder"
+                placeholder="הקלידו כדי לחפש" name="search-box" type="text" autocomplete="off" />
         </div>
         <div class="dropDown scrollStyle"></div>
     </div>
