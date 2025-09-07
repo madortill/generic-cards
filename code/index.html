@@ -27,48 +27,6 @@
 
     <!-- Meta Tags Generated via https://www.opengraph.xyz -->
 
-<style>
-  /* Reset קטן */
-  *,*::before,*::after{ box-sizing:border-box; }
-  html,body{ margin:0; padding:0; -webkit-text-size-adjust:100%; }
-
-  /* גובה מסך אמיתי בנייד */
-  .page, .main { min-height: 100svh; }
-
-  /* טיפוגרפיה יציבה בין מכשירים */
-  :root{
-    --fs-title: clamp(18px, 4.2vw, 28px);
-    --fs-sub:   clamp(14px, 3.6vw, 20px);
-    --fs-body:  clamp(13px, 3.2vw, 18px);
-  }
-  .page.learning.subjects .title,
-  .page.learning.content .title,
-  .page.home .textArea .text { font-size: var(--fs-title); }
-  .page.learning.subjects .sub-title,
-  .page.practice .points-text,
-  .page.exam .timer-text { font-size: var(--fs-sub); }
-  body { font-size: var(--fs-body); }
-
-  /* תמונות/SVG ריספונסיביות */
-  img, svg { max-width: 100%; height: auto; display: block; }
-  .background-image { width:100%; height:auto; }
-
-  /* כרטיסים וקונטיינרים – בלי גבהים קשיחים */
-  .page.learning.subjects .cards-container,
-  .page.learning.content .cards-container{
-    display:flex; flex-wrap:wrap; gap:.8rem; align-items:stretch;
-  }
-  .page.learning.subjects .learningCard,
-  .page.learning.content .card { width: min(100%, 520px); }
-
-  /* RTL/LTR שיפורים קטנים */
-  body.rtl [dir="auto"] { text-align:right; }
-  body.ltr [dir="auto"] { text-align:left; }
-
-  /* חצים/אייקונים שמתבצעים RTL */
-  body.rtl .back-btn { transform: scaleX(-1); transform-origin:center; }
-</style>
-
     <!-- stylesheet -->
     <!-- Mobile as default -->
     <link rel="stylesheet" href="mobile-css/generalStyle.css" type="text/css">
@@ -80,43 +38,34 @@
     <link rel="stylesheet" href="mobile-css/exam.css" type="text/css">
     <link rel="stylesheet" href="mobile-css/search.css" type="text/css">
 
-    <!-- Desktop overrides only when רחב -->
-    <link rel="stylesheet" href="computer-css/generalStyleC.css" type="text/css" media="(min-width: 1200px)">
-    <link rel="stylesheet" href="computer-css/openingC.css" type="text/css" media="(min-width: 1200px)">
-    <link rel="stylesheet" href="computer-css/homeC.css" type="text/css" media="(min-width: 1200px)">
-    <link rel="stylesheet" href="computer-css/aboutC.css" type="text/css" media="(min-width: 1200px)">
-    <link rel="stylesheet" href="computer-css/practiceC.css" type="text/css" media="(min-width: 1200px)">
-    <link rel="stylesheet" href="computer-css/learningC.css" type="text/css" media="(min-width: 1200px)">
-    <link rel="stylesheet" href="computer-css/examC.css" type="text/css" media="(min-width: 1200px)">
-    <link rel="stylesheet" href="computer-css/searchC.css" type="text/css" media="(min-width: 1200px)">
-
+ 
     <!-- <link rel="stylesheet" href="mobile-css/generalStyle.css" type="text/css"
-        media="(pointer: coarse), (pointer: none)">
+        media="(pointer: coarse), (pointer: none)"> -->
     <link rel="stylesheet" href="computer-css/generalStyleC.css" type="text/css"
         media="(any-pointer:fine), (min-width:1200px)">
 
-    <link rel="stylesheet" href="mobile-css/opening.css" type="text/css" media="(pointer: coarse), (pointer: none)">
+    <!-- <link rel="stylesheet" href="mobile-css/opening.css" type="text/css" media="(pointer: coarse), (pointer: none)"> -->
     <link rel="stylesheet" href="computer-css/openingC.css" type="text/css"
         media="(any-pointer:fine), (min-width:1200px)">
 
 
-    <link rel="stylesheet" href="mobile-css/home.css" type="text/css" media="(pointer: coarse), (pointer: none)">
+    <!-- <link rel="stylesheet" href="mobile-css/home.css" type="text/css" media="(pointer: coarse), (pointer: none)"> -->
     <link rel="stylesheet" href="computer-css/homeC.css" type="text/css" media="(any-pointer:fine), (min-width:1200px)">
 
-    <link rel="stylesheet" href="mobile-css/about.css" type="text/css" media="(pointer: coarse), (pointer: none)">
+    <!-- <link rel="stylesheet" href="mobile-css/about.css" type="text/css" media="(pointer: coarse), (pointer: none)"> -->
     <link rel="stylesheet" href="computer-css/aboutC.css" type="text/css" media="(any-pointer:fine)">
 
-    <link rel="stylesheet" href="mobile-css/practice.css" type="text/css" media="(pointer: coarse), (pointer: none)">
+    <!-- <link rel="stylesheet" href="mobile-css/practice.css" type="text/css" media="(pointer: coarse), (pointer: none)"> -->
     <link rel="stylesheet" href="computer-css/practiceC.css" type="text/css" media="(any-pointer:fine)">
 
-    <link rel="stylesheet" href="mobile-css/learning.css" type="text/css" media="(pointer: coarse), (pointer: none)">
+    <!-- <link rel="stylesheet" href="mobile-css/learning.css" type="text/css" media="(pointer: coarse), (pointer: none)"> -->
     <link rel="stylesheet" href="computer-css/learningC.css" type="text/css" media="(any-pointer:fine)">
 
-    <link rel="stylesheet" href="mobile-css/exam.css" type="text/css" media="(pointer: coarse), (pointer: none)">
+    <!-- <link rel="stylesheet" href="mobile-css/exam.css" type="text/css" media="(pointer: coarse), (pointer: none)"> -->
     <link rel="stylesheet" href="computer-css/examC.css" type="text/css" media="(any-pointer:fine)">
 
-    <link rel="stylesheet" href="mobile-css/search.css" type="text/css" media="(pointer: coarse), (pointer: none)">
-    <link rel="stylesheet" href="computer-css/searchC.css" type="text/css" media="(any-pointer:fine)"> -->
+    <!-- <link rel="stylesheet" href="mobile-css/search.css" type="text/css" media="(pointer: coarse), (pointer: none)"> -->
+    <link rel="stylesheet" href="computer-css/searchC.css" type="text/css" media="(any-pointer:fine)">
     <script>
         const I18N = {
             he: {
