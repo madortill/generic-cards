@@ -1,1 +1,153 @@
-{"TITLE": {"name": "תיק כניסה לתפקיד"}, "AMOUNT_EXAM_QUESTIONS": 0, "DESCRIPTION": "תיק כניסה לתפקיד - קצין רכב", "TIME_FOR_EXAM": "00:00", "AUTHOR": {"name": "אייל כהן", "rank": "רסם", "role": "קצין רכב", "bhd": "מפקדה", "otherBhd": ""}, "DEAFULT_ICON": "../assets/images/learning/Artboard 4.svg", "THEME": {"name": "brown", "hebrawName": "חום", "primaryColor": "#a7603b", "secondaryColor": "#5c321c", "textColor": "#361d10", "gradient": "#602003", "buttonsColor": "#361d10"}, "DATA": [{"name": "תיאור התפקיד", "amountOfQuestions": 0, "learningContent": [{"name": "תיאור התפקיד - קצין רכב", "topics": [{"name": "תיאור התפקיד", "pageArray": [{"cardType": "text", "content": "שם התפקיד: קצין רכב.\nענף:לוגיסטיקה.\nתיאור תפקיד: מענה בתחום הרכב.\n"}]}]}], "icon": "../assets/images/learning/Artboard 4.svg"}, {"name": "סדר יום", "amountOfQuestions": 0, "learningContent": [{"name": "סדר יום", "topics": [{"name": "סדר יום", "pageArray": [{"cardType": "text", "content": "1.כשירות רכבים.\n\n2.מענה לבהדים בתחום הרכב. \n\n3.משימות מתוכננות.\n\n4.משימות מתפרצות."}]}]}], "icon": "../assets/images/learning/Artboard 4.svg"}, {"name": "שותפים לדרך", "amountOfQuestions": 0, "learningContent": [{"name": "שותפים לדרך", "topics": [{"name": "שותפים לדרך", "pageArray": [{"cardType": "text", "content": "1. זכיין.\n\n2. רתח אחזקת רכב.\n\n3. נציג של כל בהד."}]}]}], "icon": "../assets/images/learning/Artboard 4.svg"}, {"name": "מבנה היררכי", "amountOfQuestions": 0, "learningContent": [{"name": "מבנה היררכי", "topics": [{"name": "מבנה היררכי", "pageArray": [{"cardType": "text", "content": "1.רען לוגסטיקה\n2.רמד לוגסטיקה\n3.ק.רכב\n4.חיילים"}]}]}], "icon": "../assets/images/learning/Artboard 4.svg"}, {"name": "מנגנונים אל מול היחידות", "amountOfQuestions": 0, "learningContent": [{"name": "מנגנונים אל מול היחידות", "topics": [{"name": "מנגנונים אל מול היחידות", "pageArray": [{"cardType": "text", "content": "1.טבלת דרישות שבועיים קדימה.\n\n2.מדיניות סדר עדיפות.\n\n3.דרישה מסודרת.\n\n4.דיוק בזמני משיכה /זיכוי."}]}]}], "icon": "../assets/images/learning/Artboard 4.svg"}, {"name": "המלצות ותובנות להמשך", "amountOfQuestions": 0, "learningContent": [{"name": "המלצות ותובנות להמשך", "topics": [{"name": "המלצות ותובנות להמשך", "pageArray": [{"cardType": "text", "content": "1.תכנון נכון של המשימות.\n \n2.כשירות רכב גבוה.\n\n3.גמישות."}]}]}], "icon": "../assets/images/learning/Artboard 4.svg"}]}
+{
+    "TITLE": {
+        "name": "תיק כניסה לתפקיד"
+    },
+    "AMOUNT_EXAM_QUESTIONS": 0,
+    "DESCRIPTION": "תיק כניסה לתפקיד - קצין רכב",
+    "TIME_FOR_EXAM": "00:00",
+    "AUTHOR": {
+        "name": "אייל כהן",
+        "rank": "רסם",
+        "role": "קצין רכב",
+        "bhd": "מפקדה",
+        "otherBhd": ""
+    },
+    "DEAFULT_ICON": "../assets/images/learning/Artboard 4.svg",
+    "THEME": {
+        "name": "brown",
+        "hebrawName": "חום",
+        "primaryColor": "#a7603b",
+        "secondaryColor": "#5c321c",
+        "textColor": "#361d10",
+        "gradient": "#602003",
+        "buttonsColor": "#361d10"
+    },
+    "DATA": [
+        {
+            "name": "תיאור התפקיד",
+            "amountOfQuestions": 0,
+            "learningContent": [
+                {
+                    "name": "תיאור התפקיד - קצין רכב",
+                    "topics": [
+                        {
+                            "name": "תיאור התפקיד",
+                            "pageArray": [
+                                {
+                                    "cardType": "text",
+                                    "content": "שם התפקיד: קצין רכב.\nענף:לוגיסטיקה.\nתיאור תפקיד: מענה בתחום הרכב.\n"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "icon": "..\\data\\54952\\icon0.png"
+        },
+        {
+            "name": "סדר יום",
+            "amountOfQuestions": 0,
+            "learningContent": [
+                {
+                    "name": "סדר יום",
+                    "topics": [
+                        {
+                            "name": "סדר יום",
+                            "pageArray": [
+                                {
+                                    "cardType": "text",
+                                    "content": "1.כשירות רכבים.\n\n2.מענה לבהדים בתחום הרכב. \n\n3.משימות מתוכננות.\n\n4.משימות מתפרצות."
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "icon": "..\\data\\54952\\icon0.png"
+        },
+        {
+            "name": "שותפים לדרך",
+            "amountOfQuestions": 0,
+            "learningContent": [
+                {
+                    "name": "שותפים לדרך",
+                    "topics": [
+                        {
+                            "name": "שותפים לדרך",
+                            "pageArray": [
+                                {
+                                    "cardType": "text",
+                                    "content": "1. זכיין.\n\n2. רתח אחזקת רכב.\n\n3. נציג של כל בהד."
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "icon": "..\\data\\54952\\icon0.png"
+        },
+        {
+            "name": "מבנה היררכי",
+            "amountOfQuestions": 0,
+            "learningContent": [
+                {
+                    "name": "מבנה היררכי",
+                    "topics": [
+                        {
+                            "name": "מבנה היררכי",
+                            "pageArray": [
+                                {
+                                    "cardType": "text",
+                                    "content": "1.רען לוגסטיקה\n2.רמד לוגסטיקה\n3.ק.רכב\n4.חיילים"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "icon": "../assets/images/learning/Artboard 4.svg"
+        },
+        {
+            "name": "מנגנונים אל מול היחידות",
+            "amountOfQuestions": 0,
+            "learningContent": [
+                {
+                    "name": "מנגנונים אל מול היחידות",
+                    "topics": [
+                        {
+                            "name": "מנגנונים אל מול היחידות",
+                            "pageArray": [
+                                {
+                                    "cardType": "text",
+                                    "content": "1.טבלת דרישות שבועיים קדימה.\n\n2.מדיניות סדר עדיפות.\n\n3.דרישה מסודרת.\n\n4.דיוק בזמני משיכה /זיכוי."
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "icon": "..\\data\\54952\\icon0.png"
+        },
+        {
+            "name": "המלצות ותובנות להמשך",
+            "amountOfQuestions": 0,
+            "learningContent": [
+                {
+                    "name": "המלצות ותובנות להמשך",
+                    "topics": [
+                        {
+                            "name": "המלצות ותובנות להמשך",
+                            "pageArray": [
+                                {
+                                    "cardType": "text",
+                                    "content": "1.תכנון נכון של המשימות.\n \n2.כשירות רכב גבוה.\n\n3.גמישות."
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "icon": "..\\data\\54952\\icon0.png"
+        }
+    ]
+}
