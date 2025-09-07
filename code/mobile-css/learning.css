@@ -1,8 +1,8 @@
 .page.learning.subjects .title {
-  background-image: url(../assets/images/learning/home_header.svg);
+  background-image: url(../../assets/images/learning/home_header.svg);
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  color: rgb(28, 63, 85);
+  color: var(--text-color);
   font-weight: 800;
   text-align: center;
   margin-top: 4vw;
@@ -31,7 +31,7 @@
 }
 
 .page.learning.subjects .learningCard {
-  background-image: url("../assets/images/learning/subject_btn.svg");
+  /* background-image: url("../../assets/images/learning/subject_btn.svg"); */
   background-repeat: no-repeat;
   background-size: 100% 100%;
   height: 12em;
@@ -42,15 +42,23 @@
   font-size: 4.5vmin;
 }
 
+
 .page.learning.subjects .icon {
-  width: 3em;
+  width: 2em;
   position: relative;
   top: 3em;
   left: 0.4em;
 }
+ 
+/* make the defult icon invisible */
+.page.learning.subjects .icon[src="../assets/images/learning/Artboard 4.svg"], .page.learning.subjects .icon[src="null"] {
+  opacity: 0%;
+  aspect-ratio: 1 / 1;
+}
+
 
 .page.learning.subjects .subject {
-  color: hsl(203, 50%, 22%);
+  color: var(--text-color);
   font-size: 1.4em;
   display: flex;
   justify-content: center;
@@ -73,7 +81,7 @@
   height: 17vw;
   bottom: 0;
   background-image: linear-gradient(0deg,
-      rgba(25, 155, 191, 0.432),
+    var(--gradient-color),
       rgba(255, 255, 255, 0));
   pointer-events: none;
   z-index: 1;
@@ -105,10 +113,10 @@
   height: 120vw;
   background-repeat: no-repeat;
   background-size: cover;
-  color: rgb(27, 62, 84);
+  color: var(--text-color);
   position: relative;
   z-index: 1;
-  background-image: url("../assets/images/practice/beforePractice_popup/beforePractice_popup.svg");
+  background-image: url("../../assets/images/practice/beforePractice_popup/beforePractice_popup.svg");
   display: flex;
   flex-direction: column;
   /* justify-content: space-between; */
@@ -147,12 +155,13 @@
   align-items: center;
 }
 
-.page.learning.subjects .subject-popup>img {
+.page.learning.subjects .subject-popup>div.check-place {
   width: 4vw;
+  height: 4vw;
   margin: 4% 0 5% 2%;
 }
 
-.page.learning.subjects .subject-popup>div {
+.page.learning.subjects .subject-popup>div:not(.check-place) {
   font-size: 1em;
   width: 100%;
 }
@@ -165,12 +174,13 @@
   font-weight: 800;
 }
 
-.page.learning.subjects .select-everything>img {
+.page.learning.subjects .select-everything>:is(img, div.check-place) {
   height: 6vw;
+  width: 6vw;
   margin: 3% 0 3% 2%;
 }
 
-.page.learning.subjects .select-everything>div {
+.page.learning.subjects .select-everything>div:not(.check-place) {
   width: 100%;
 }
 
@@ -190,10 +200,10 @@
 }
 
 .page.learning.content>.title {
-  background-image: url(../assets/images/learning/home_header.svg);
+  background-image: url(../../assets/images/learning/home_header.svg);
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  color: rgb(28, 63, 85);
+  color: var(--text-color);
   font-weight: 800;
   text-align: center;
   margin-top: 2vw;
@@ -257,7 +267,7 @@
 }
 
 .page.learning.content .sub-topics-container {
-  padding: 1em;
+  padding: 1em 0.2em;
   white-space: nowrap;
   scroll-snap-align: center;
   max-height: 1em;
@@ -271,6 +281,10 @@
 
 .page.learning.content .sub-topics-container.open {
   max-height: 100vh;
+}
+
+.opacity {
+  opacity: 0.6;
 }
 /* 
 .page.learning.content .container-subjects::before {
@@ -318,7 +332,7 @@
   display: flex;
   flex-direction: column;
   position: absolute;
-  background-image: url("../assets/images/learning/learning.svg");
+
   background-repeat: no-repeat;
   background-size: cover;
   height: 100%;
@@ -346,7 +360,7 @@
 }
 
 .page.learning.content .card .title {
-  color: rgb(28, 63, 85);
+  color: var(--text-color);
   font-weight: 800;
   font-size: 1.4em;
   text-align: right;
@@ -354,7 +368,7 @@
 }
 
 .page.learning.content .card .pic {
-  /* border-radius: 3.5vw; */
+  border-radius: 3.5vw;
   margin-top: 1em;
   margin-bottom: 1em;
   width: 100%;
@@ -369,7 +383,7 @@
 /* זה בשביל התת כותרות שנמצאות בתוך הכרטיסיות למידה */
 .page.learning.content .card .sub-title {
   font-size: 1.1em;
-  color: rgb(28, 63, 85);
+  color: var(--text-color);
   font-weight: 800;
 }
 
@@ -387,6 +401,10 @@
   flex: 1;
 }
 
+.page.learning.content .list {
+  padding-right: 1em;
+}
+
 .page.learning.content .content {
   margin-bottom: 1em;
   text-align: right;
@@ -401,16 +419,13 @@
   max-width: 83vw;
   margin-right: 50%;
   transform: translate(50%);
-  margin-bottom: 1em;
-}
-
-.page.learning.content .list {
-  padding-right: 1em;
+  margin-bottom: 1rem;
 }
 
 .page.learning.content .card.next {
   transform: rotateZ(4deg);
   opacity: 0.5;
+  z-index: -1;
 }
 
 .page.learning.content .next-back-btn {
