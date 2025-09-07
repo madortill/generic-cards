@@ -1,8 +1,8 @@
 .page.learning.subjects .title {
-  background-image: url(../../assets/images/learning/home_header.svg);
+  background-image: url(../assets/images/learning/home_header.svg);
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  color: var(--text-color);
+  color: rgb(28, 63, 85);
   font-weight: 800;
   text-align: center;
   margin-top: 4vw;
@@ -23,15 +23,15 @@
 
 .page.learning.subjects .cards-container {
   margin-top: 1em;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding-bottom: 8em;
-  overflow: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-bottom: 8em;
+    overflow: auto;
 }
 
 .page.learning.subjects .learningCard {
-  /* background-image: url("../../assets/images/learning/subject_btn.svg"); */
+  background-image: url("../assets/images/learning/subject_btn.svg");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   height: 12em;
@@ -42,24 +42,15 @@
   font-size: 4.5vmin;
 }
 
-
 .page.learning.subjects .icon {
-  width: 2em;
+  width: 3em;
   position: relative;
   top: 3em;
   left: 0.4em;
 }
 
-/* make the defult icon invisible */
-.page.learning.subjects .icon[src="../assets/images/learning/Artboard 4.svg"],
-.page.learning.subjects .icon[src="null"] {
-  opacity: 0%;
-  aspect-ratio: 1 / 1;
-}
-
-
 .page.learning.subjects .subject {
-  color: var(--text-color);
+  color: hsl(203, 50%, 22%);
   font-size: 1.4em;
   display: flex;
   justify-content: center;
@@ -82,7 +73,7 @@
   height: 17vw;
   bottom: 0;
   background-image: linear-gradient(0deg,
-      var(--gradient-color),
+      rgba(25, 155, 191, 0.432),
       rgba(255, 255, 255, 0));
   pointer-events: none;
   z-index: 1;
@@ -114,10 +105,10 @@
   height: 120vw;
   background-repeat: no-repeat;
   background-size: cover;
-  color: var(--text-color);
+  color: rgb(27, 62, 84);
   position: relative;
   z-index: 1;
-  background-image: url("../../assets/images/practice/beforePractice_popup/beforePractice_popup.svg");
+  background-image: url("../assets/images/practice/beforePractice_popup/beforePractice_popup.svg");
   display: flex;
   flex-direction: column;
   /* justify-content: space-between; */
@@ -156,13 +147,12 @@
   align-items: center;
 }
 
-.page.learning.subjects .subject-popup>div.check-place {
+.page.learning.subjects .subject-popup>img {
   width: 4vw;
-  height: 4vw;
   margin: 4% 0 5% 2%;
 }
 
-.page.learning.subjects .subject-popup>div:not(.check-place) {
+.page.learning.subjects .subject-popup>div {
   font-size: 1em;
   width: 100%;
 }
@@ -175,13 +165,12 @@
   font-weight: 800;
 }
 
-.page.learning.subjects .select-everything>:is(img, div.check-place) {
+.page.learning.subjects .select-everything>img {
   height: 6vw;
-  width: 6vw;
   margin: 3% 0 3% 2%;
 }
 
-.page.learning.subjects .select-everything>div:not(.check-place) {
+.page.learning.subjects .select-everything>div {
   width: 100%;
 }
 
@@ -201,10 +190,10 @@
 }
 
 .page.learning.content>.title {
-  background-image: url(../../assets/images/learning/home_header.svg);
+  background-image: url(../assets/images/learning/home_header.svg);
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  color: var(--text-color);
+  color: rgb(28, 63, 85);
   font-weight: 800;
   text-align: center;
   margin-top: 2vw;
@@ -268,7 +257,7 @@
 }
 
 .page.learning.content .sub-topics-container {
-  padding: 1em 0.2em;
+  padding: 1em;
   white-space: nowrap;
   scroll-snap-align: center;
   max-height: 1em;
@@ -283,11 +272,6 @@
 .page.learning.content .sub-topics-container.open {
   max-height: 100vh;
 }
-
-.opacity {
-  opacity: 0.6;
-}
-
 /* 
 .page.learning.content .container-subjects::before {
   display: block;
@@ -298,7 +282,7 @@
 .page.learning.content .container-subjects .space {
   display: block;
   margin-right: 35vw;
-}
+} 
 
 
 .page.learning.content .container-subjects::after {
@@ -313,7 +297,7 @@
   bottom: 4vw;
   z-index: 1;
   position: fixed;
-  box-shadow: 0px -11px 20px -15px rgba(25, 155, 191, 0.432);
+  box-shadow: 0px -11px 20px -15px  rgba(25, 155, 191, 0.432);
 }
 
 .page.learning.content .open .arrow {
@@ -334,7 +318,7 @@
   display: flex;
   flex-direction: column;
   position: absolute;
-
+  background-image: url("../assets/images/learning/learning.svg");
   background-repeat: no-repeat;
   background-size: cover;
   height: 100%;
@@ -362,18 +346,15 @@
 }
 
 .page.learning.content .card .title {
-  color: var(--text-color);
+  color: rgb(28, 63, 85);
   font-weight: 800;
   font-size: 1.4em;
-  width: 100%;
-  text-align: center;
-  margin: 0 0 0.9em 0;
-  /* במקום margin-right: 1em */
-  align-self: center;
+  text-align: right;
+  margin-bottom: 0.5em;
 }
 
 .page.learning.content .card .pic {
-  border-radius: 3.5vw;
+  /* border-radius: 3.5vw; */
   margin-top: 1em;
   margin-bottom: 1em;
   width: 100%;
@@ -388,12 +369,8 @@
 /* זה בשביל התת כותרות שנמצאות בתוך הכרטיסיות למידה */
 .page.learning.content .card .sub-title {
   font-size: 1.1em;
-  color: var(--text-color);
+  color: rgb(28, 63, 85);
   font-weight: 800;
-  width: 100%;
-  text-align: center;
-  align-self: center;
-  margin: 0.5em 0;
 }
 
 .page.learning.content .card video {
@@ -410,10 +387,6 @@
   flex: 1;
 }
 
-.page.learning.content .list {
-  padding-right: 1em;
-}
-
 .page.learning.content .content {
   margin-bottom: 1em;
   text-align: right;
@@ -428,13 +401,16 @@
   max-width: 83vw;
   margin-right: 50%;
   transform: translate(50%);
-  margin-bottom: 1rem;
+  margin-bottom: 1em;
+}
+
+.page.learning.content .list {
+  padding-right: 1em;
 }
 
 .page.learning.content .card.next {
   transform: rotateZ(4deg);
   opacity: 0.5;
-  z-index: -1;
 }
 
 .page.learning.content .next-back-btn {
@@ -455,14 +431,12 @@
   visibility: hidden;
   pointer-events: none;
 }
-
 /* transform: translateX(-140%); */
 
 .page.learning.content .next-back-btn.last .next {
   visibility: hidden;
   pointer-events: none;
 }
-
 .page.learning.content .next-back-btn.last .back {
   transform: translateX(-140%);
 }
@@ -475,7 +449,7 @@
   display: block;
 }
 
-.page.learning.content .sub-sub-topic {
+.page.learning.content .sub-sub-topic{
   min-width: 10em;
   margin-bottom: 0.6em;
   overflow: initial;
@@ -483,72 +457,3 @@
   justify-content: center;
   white-space: normal;
 }
-
-/* כותרות – במקום right/left השתמשי ב-start */
-.page.learning.content .card .title {
-  text-align: start;
-}
-
-/* טקסט גוף */
-.page.learning.content .content {
-  text-align: start;
-}
-
-/* רשימות – במקום padding-right */
-.page.learning.content .list {
-  padding-inline-start: 1em;
-}
-
-/* מרווחי חיצים/אלמנטים – במקום margin-left/right */
-.page.learning.content .container-subjects .arrow {
-  margin-inline-start: 1.5vw;
-}
-
-/* כפתורי ניווט – כיוון הכלי עצמו */
-html[dir="rtl"] .page.learning.content .next-back-btn {
-  direction: rtl;
-}
-
-html[dir="ltr"] .page.learning.content .next-back-btn {
-  direction: ltr;
-}
-
-/* “הכרטיס הקודם” מוזז לצד הנכון לפי הכיוון */
-html[dir="rtl"] .page.learning.content .card.prev {
-  transform: translateX(-100vw);
-}
-
-html[dir="ltr"] .page.learning.content .card.prev {
-  transform: translateX(100vw);
-}
-
-/* תיבות/קונטיינרים – החלפת padding ימין/שמאל ל-inline */
-.page.learning.content .content-container {
-  /* היה: padding: 0.5em 2em 1em 3em;  (top right bottom left) */
-  padding-block: 0.5em 1em;
-  padding-inline: 3em 2em;
-  /* start end – יתהפך אוטומטית לפי dir */
-}
-
-/* כותרות עמוד “נושאים” – אין תלות בכיוון, אך אם יש טקסט פנימי מיושר: */
-.page.learning.subjects .subject {
-  text-align: center;
-  /* נשאר מרכז – לא תלוי כיוון */
-}
-
-/* איפה שיש margin-left/right – להמיר ל-inline-start/end */
-.page.learning.content .container-subjects .space {
-  margin-inline-end: 35vw;
-}
-
-.page.learning.content .container-subjects::after {
-  padding-inline-start: 32vw;
-}
-
-/* דוגמה לעוד המרות שימושיות אם מופיעות אצלך בקבצים נוספים: */
-/* margin-right: X   -> margin-inline-end: X; */
-/* margin-left: X    -> margin-inline-start: X; */
-/* padding-right: X  -> padding-inline-end: X; */
-/* padding-left: X   -> padding-inline-start: X; */
-/* text-align: right -> text-align: start; */
-/* text-align: left  -> text-align: end;  (בד"כ תרצי start) */

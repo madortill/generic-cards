@@ -1,15 +1,14 @@
 @font-face {
   font-family: Rubik;
-  src: url("../../assets/fonts/Rubik/Rubik-Regular.ttf");
+  src: url("../assets/fonts/Rubik/Rubik-Regular.ttf");
   font-weight: 500;
 }
 
 @font-face {
   font-family: Rubik;
-  src: url("../../assets/fonts/Rubik/Rubik-Bold.ttf");
+  src: url("../assets/fonts/Rubik/Rubik-Bold.ttf");
   font-weight: 800;
 }
-
 
 html,
 body {
@@ -18,26 +17,18 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Rubik";
+  direction: rtl;
   color: white;
+  background-image: url("../assets/images/general/bg.svg");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   overflow: hidden;
 }
 
-:root {
-  --primary-color: #20c5f2;
-  --secondary-color: #1de8f7;
-  --text-color: #1c3f55;
-  --gradient-color: #27c5f2;
-}
-
-*:has(.absolute) {
-  position: relative;
-}
-
 .main {
   width: 100%;
   height: 100%;
+  /* overflow: auto; */
 }
 
 .page {
@@ -51,6 +42,8 @@ body {
 
   scroll-snap-align: start end;
   -webkit-scroll-snap-coordinate: 0 0;
+
+  /* scroll-behavior: smooth; */
   overflow: hidden;
 }
 
@@ -76,22 +69,10 @@ body {
   transform: scale(0.95);
 }
 
-.page .search {
-  width: 7vw;
-  left: 3vw;
-  top: 2vw;
-  position: fixed;
-}
-
-.page .search:active {
-  transform: scale(0.95);
-}
-
 /* איקס סגירה להודעות קופצות */
 .close-btn {
   position: absolute;
   height: 4vw;
-  width: 4vw;
   right: 1em;
   top: 2.2em;
 }
@@ -109,14 +90,14 @@ body {
 }
 
 .page .end-exam {
-  color: var(--text-color);
+  color: rgb(27, 62, 84);
   width: 72vw;
   height: 114vw;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
   z-index: 1;
-  background-image: url("../../assets/images/practice/finishPractice_popup.svg");
+  background-image: url("../assets/images/practice/finishPractice_popup.svg");
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -133,38 +114,25 @@ body {
 }
 
 .page.exam .exit-popup .title-popup {
-  margin-top: 2.5em;
-}
-
-.page.exam .end-exam .title-popup {
-  font-size: 6vmin;
-}
-
-.page.exam .title-popup {
-   height: 1.6em;
-   background-repeat: no-repeat;
-   background-size: 100% 100%;
-   border-radius: 1em;
-   width: 8.5em;
-   padding-top: 0.3em;
+   margin-top: 2.5em;
 }
 
 .page .popup-sub-titles {
   display: flex;
   align-items: center;
   flex-direction: column;
-  text-align: center;    
-  height: 3em;
-  justify-content: space-around;
+  text-align: center;
 }
 
 .page .text1-popup {
   font-weight: 800;
   font-size: 1em;
+  width: 100%;
 }
 
 .page .text2-popup {
   font-size: 1em;
+  width: 100%;
 }
 
 .page .grey-line {
@@ -189,7 +157,7 @@ body {
   font-size: 6vmin;
   display: flex;
   justify-content: space-between;
-  color: var(--text-color);
+  color: rgb(28, 63, 85);
   margin-bottom: 1%;
   align-items: center;
 }
@@ -212,7 +180,7 @@ body {
 
 .page .progress-bar-right-answers,
 .page .progress-bar-time {
-  background-color: var(--secondary-color);
+  background-color: rgb(43, 232, 247);
   height: 2vmin;
   border-radius: 2rem;
   width: 0%;
@@ -235,8 +203,8 @@ body {
   width: 82%;
   right: 8%;
   top: 17%;
-  color: var(--text-color);
-  font-size: 4.3vmin;
+  color: rgb(28, 63, 85);
+  font-size: 4.2vmin;
 }
 
 .page.practice .question-text {
@@ -245,7 +213,7 @@ body {
   width: 82%;
   right: 8%;
   top: 17%;
-  color: var(--text-color);
+  color: rgb(28, 63, 85);
   font-size: 4.2vmin;
 }
 
@@ -282,14 +250,14 @@ body {
 
 /*לפני המבחן*/
 .page .exam-popup {
-  color: var(--text-color);
+  color: rgb(27, 62, 84);
   width: 18em;
   height: 32em;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
   z-index: 1;
-  background-image: url("../../assets/images/exam/beforeExam_popup/beforeExam_popup.svg");
+  background-image: url("../assets/images/exam/beforeExam_popup/beforeExam_popup.svg");
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -310,7 +278,6 @@ body {
 .page .exam-popup .text {
   text-align: right;
 }
-
 
 .page .icon1 {
   width: 7vw;
@@ -343,52 +310,16 @@ body {
   margin-top: 0.5em;
 }
 
-.page .start-btn.insert-name {
-  filter: grayscale(100%) brightness(71%);
-  opacity: 0.3;
-  pointer-events: none;
-  transition: filter 0.5s ease-in-out;
-}
-
-.page .start-btn.insert-name.done {
-  filter: grayscale(0%);
-  opacity: 1;
-  pointer-events: all;
-}
-
-.page .text-fill-name {
-  text-align: center;
-
-}
-.page .exam-popup-insert-name {
-  transition: all 0.4s ease-in-out;
-  height: 22em;
-  width: 16em;
-} 
-.page .input-text {
-  width: 11em;
-  height: 1.8em;
-  text-align: center;
-  font-family: Rubik;
-  border-radius: 8px;
-  font-size: inherit;
-  margin-top: -1em;
-}
-.page .instructions.insert-name{
-  align-items: center;
-  height: 10em;
-}
-
 /* יציאה ממבחן או תרגול פופאפ */
 .page .exit-popup {
-  color: var(--text-color);
+  color: rgb(27, 62, 84);
   width: 78vw;
   height: 65vw;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
   z-index: 1;
-  background-image: url("../../assets/images/general/leavePracticeOrExam_popup/leavePracticeOrExam_popup.svg");
+  background-image: url("../assets/images/general/leavePracticeOrExam_popup/leavePracticeOrExam_popup.svg");
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -399,8 +330,7 @@ body {
   display: flex;
   justify-content: space-around;
   margin-bottom: 15%;
-  width: 58%;
-  gap: 2rem;
+  width: 65%;
 }
 
 .page .button-popup {
@@ -409,14 +339,14 @@ body {
 
 /* פוופאפ מעבר לתרגול בתוך עמוד הלמידה רק על נושא אחד */
 .page .before-practice-one-sub {
-  color: var(--text-color);
+  color: rgb(27, 62, 84);
   width: 72vw;
   height: 94.5vw;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
   z-index: 1;
-  background-image: url("../../assets/images/learning/choosePractice_popup/choosePractice_popup.svg");
+  background-image: url("../assets/images/learning/choosePractice_popup/choosePractice_popup.svg");
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -438,7 +368,7 @@ body {
   width: 100%;
 }
 
-/*  */
+
 .page .beforePractice-instruction-container {
   display: flex;
   justify-content: space-between;
@@ -458,54 +388,3 @@ body {
 .italic {
   font-style: italic;
 }
-
-.background-image {
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  top: 0;
-  left: 0;
-  z-index: -1;
-}
-
-.absolute {
-  position: absolute;
-}
-
-/* הדביקי את זה בסוף הקובץ */
-:root[dir="rtl"] body { direction: rtl; }
-:root[dir="ltr"] body { direction: ltr; }
-
-/* יישור טקסט לוגי (במקום left/right) */
-.page .title-popup,
-.page .text,
-.page .question,
-.page .question-text { text-align: start; }
-
-/* מיקום כפתורים מתהפך לפי כיוון */
-:root[dir="rtl"] .page .back-btn { right: 2vw; left: auto; }
-:root[dir="rtl"] .page .search  { left: 3vw; right: auto; }
-
-:root[dir="ltr"] .page .back-btn { left: 2vw;  right: auto; }
-:root[dir="ltr"] .page .search  { right: 3vw; left:  auto; }
-
-/* מיקום טקסט השאלה */
-:root[dir="rtl"] .page.exam .question-text,
-:root[dir="rtl"] .page.practice .question-text { right: 8%; left: auto; }
-
-:root[dir="ltr"] .page.exam .question-text,
-:root[dir="ltr"] .page.practice .question-text { left: 8%; right: auto; }
-
-/* כיוון קו האנימציה */
-:root[dir="rtl"] .page .binary .line,
-:root[dir="rtl"] .page .line { transform-origin: right; }
-
-:root[dir="ltr"] .page .binary .line,
-:root[dir="ltr"] .page .line { transform-origin: left; }
-
-/* מרווחי תשובות – לוגיים */
-:root[dir="rtl"] .page .right-ans,
-:root[dir="rtl"] .page .wrong-ans { margin: 10% 0 0 10%; }
-
-:root[dir="ltr"] .page .right-ans,
-:root[dir="ltr"] .page .wrong-ans { margin: 10% 10% 0 0; }
