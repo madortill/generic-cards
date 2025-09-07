@@ -132,7 +132,7 @@
             });
             // תרגום Attributes (למשל placeholder)
             document.querySelectorAll('[data-i18n-attr]').forEach(el => {
-                const pairs = el.getAttribute('data-i18n-attr').split(',').map(s => s.trim());
+                const pairs = el.getAttribute(' data-i18n-attr').split(',').map(s => s.trim());
                 pairs.forEach(p => {
                     const [attr, key] = p.split(':');
                     if (attr && key && dict[key]) el.setAttribute(attr.trim(), dict[key]);
